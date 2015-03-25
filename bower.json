@@ -38,5 +38,8 @@
     "bower_components",
     "test",
     "tests"
+  ],
+  "dependencies": [
+    "angular-cookie": "~4.0.6"
   ]
 }
