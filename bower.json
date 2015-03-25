@@ -39,7 +39,7 @@
     "test",
     "tests"
   ],
-  "dependencies": [
+  "dependencies": {
     "angular-cookie": "~4.0.6"
-  ]
+  }
 }
