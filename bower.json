@@ -19,7 +19,7 @@
   	"lib/resources/taxonomyTermResource.js",
   	"lib/resources/taxonomyVocabularyResource.js",
   	"lib/resources/ viewsResource.js",
-  	"lib/resources/apiAuthService.js",
+  	"lib/resources/apiAuthService.js"
   ],
   "keywords": [
     "Drupal",
@@ -38,8 +38,5 @@
     "bower_components",
     "test",
     "tests"
-  ],
-  "dependencies": [
-    "angular-cookie": "~4.0.6",
   ]
 }
