@@ -1,4 +1,4 @@
-# AngularJS for you Headless Drupal 
+# AngularJS for your Headless Drupal 
 
 You want to do Headles or Decoupled Drupal? Useing AngularJS??
 This is what you need to make your live easyer!
