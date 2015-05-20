@@ -13,6 +13,6 @@ Test it in https://github.com/BioPhoton/ng-drupal-ionic-tests
 CORS settings:
 api/v1*|<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|true
 
-All resources can be tested in the following project: [test the whole functionality](https://github.com/BioPhoton/ng-drupal-ionic-tests)
+All resources can be tested in the following project: [ng-drupal-services-tests-with-ionic](https://github.com/BioPhoton/ng-drupal-services-tests-with-ionic)
 
 A live demo and showcases can be found here: [Ionic-Headless-Drupal-Demo](https://github.com/BioPhoton/Ionic-Drupal-Client-Demo)
