@@ -1,14 +1,12 @@
 # AngularJS for your Headless Drupal 
 
-You want to do Headles or Decoupled Drupal? Useing AngularJS??
+You want to create an app or custon frontend for your headles or decoupled Drupal? Using AngularJS??
 This is what you need to make your live easyer!
 
 # ng-drupal 7-services
-A api client for Drupal 7 Services 3.x designed to work with Ionic also!
+An api client for Drupal 7 Services 3.x designed to work with Ionic also!
 
-Implement this files into any angular project. and us the full stack drupal services implementation in AngularJS
-
-Test it in https://github.com/BioPhoton/ng-drupal-ionic-tests
+Implement this files into any angular project work with the drupal services implementation in AngularJS
 
 CORS settings:
 api/v1*|<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|true
@@ -16,3 +14,18 @@ api/v1*|<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|tru
 All resources can be tested in the following project: [ng-drupal-services-tests-with-ionic](https://github.com/BioPhoton/ng-drupal-services-tests-with-ionic)
 
 A live demo and showcases can be found here: [Ionic-Headless-Drupal-Demo](https://github.com/BioPhoton/Ionic-Drupal-Client-Demo)
+
+
+# API Endpoints
+
+## CommentResource
+
+### Retrieve
+
+Retrieve a comment
+
+Method: GET 
+Url: http://drupal_instance/api_endpoint/comment/{CID}
+Headers: Content-Type:application/json
+@param {Integer} cid The cid of the comment to retrieve., required:true, source:path
+@return 	{Promise}
