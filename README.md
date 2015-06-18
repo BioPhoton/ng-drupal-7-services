@@ -20,12 +20,7 @@ A live demo and showcases can be found here: [Ionic-Headless-Drupal-Demo](https:
 
 ## CommentResource
 
-### Retrieve
+- Retrieve
+- - Retrieve
+- - Retrieve
 
-Retrieve a comment
-
-Method: GET 
-Url: http://drupal_instance/api_endpoint/comment/{CID}
-Headers: Content-Type:application/json
-@param {Integer} cid The cid of the comment to retrieve., required:true, source:path
-@return 	{Promise}
