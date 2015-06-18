@@ -118,8 +118,6 @@ A live demo and showcases can be found here: [Ionic-Headless-Drupal-Demo](https:
 ##Views Resource
 - Retrieve
 
-many more wil follow...
-
 # Services
 
 ## Authentication service
