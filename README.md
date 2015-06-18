@@ -15,12 +15,145 @@ All resources can be tested in the following project: [ng-drupal-services-tests-
 
 A live demo and showcases can be found here: [Ionic-Headless-Drupal-Demo](https://github.com/BioPhoton/Ionic-Drupal-Client-Demo)
 
+#Confiurables
+
+- drupal_instance	
+- api_endpoint
+- session_expiration_time
+- session_expiration_unite 
+- publicFilePath
+- privateFilePath
 
 # API Endpoints
 
-## CommentResource
-
+## Comment Resource
 - Retrieve
-- - Retrieve
-- - Retrieve
+- Create
+- Update
+- Delete 
+- Index
+- CountAll
+- CountNew
+- Retrieve
+- Retrieve
 
+## EntityNode Resource
+- Retrieve
+- Create
+- Update
+- Delete
+- Index
+- Files
+- Comments
+- Attach_file
+
+## TaxonomyTerm Resource
+- Retrieve
+- Create
+- Update
+- Delete
+- Index
+- SelectNodes
+
+## File Resource
+- Retrieve
+- Create
+- Delete
+- Index
+- Create_raw
+
+## Menu Resource
+- Retrieve
+
+## Node Resource
+- Retrieve
+- Create
+- Update
+- Delete
+- Index
+- Files
+- Comments
+- Attach_file
+
+## SearchNode Resource 
+- Retrieve
+
+## System Resource
+- Connect
+- Get_variable
+- Set_variable
+- Del_variable
+
+## TaxonomyTerm Resource
+- Retrieve
+- Create
+- Update
+- Delete
+- Index
+- SelectNodes
+
+## TaxonomyVocabulary Resource
+- Retrieve
+- Create
+- Update
+- Delete
+- Index
+- GetTree
+
+## User Resource 
+- Retrieve
+- Create
+- Update
+- Delete
+- Index
+- Login
+- Logout
+- Token 
+- Request_new_password
+- Register
+- Cancel
+- Password_reset
+- Resend_welcome_email
+
+##Views Resource
+- Retrieve
+
+many more wil follow...
+
+# Services
+
+## Authentication service
+- storeTokenData
+- deleteTokenData
+- refreshToken
+- storeSessionData
+- deleteSessionData
+- getConnectionState
+- setConnectionState
+- getCurrentUser
+-	setCurrentUser
+- refreshConnection
+- getLastConnectTime
+
+# Helper
+
+## localstorageServices 
+- setItem
+- getItem
+- removeItem
+- setObject
+- getObject
+- removeObject
+- clearAll
+
+## AccessControl
+
+### Configurables
+- roles
+- accessLevels 
+
+### Methods
+- authorize 
+
+### Directives
+- accessLevel => show hide elem based on role and acessLevel
