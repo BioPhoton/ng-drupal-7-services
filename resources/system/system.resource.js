@@ -19,7 +19,6 @@
 
 
 /** @ngInject */
-
 function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, SystemChannel) { 
 	/*
 	 * connect
