@@ -225,7 +225,7 @@ function SystemResource($http, $q, drupalApiConstant, SystemResourceConstant, Sy
 	};
 
 };
-
-SystemResource.$inject = ['$http', '$q', 'drupalApiConstant', 'SystemResourceConstant', 'SystemChannel' ];
+ 
+SystemResource.$inject = ['$http', '$q', 'drupalApiConstant', 'SystemResourceConstant', 'SystemChannel'];
 
 })();
