@@ -1,14 +1,7 @@
 (function() {
     'use strict';
 
-	/**
-	 * System Channle Constant
-	 */
-	angular
-	    .module('ngDrupal7Services-3_x.resources.system.channleConstant', ['ngDrupal7Services-3_x.commons.configurations'])
-	    .constant("SystemChannleConstant", SystemChannleConstant);
-	
-	/**
+    /**
 	 *  Constants for SystemChannle
 	 */
 	var SystemChannleConstant =  {
@@ -32,5 +25,12 @@
 	 		system_delVariableFailed  	: 'event:drupal-system-delVariableFailed',
 	 		
 	};
+    
+	/**
+	 * System Channle Constant
+	 */
+	angular
+	    .module('ngDrupal7Services-3_x.resources.system.channleConstant', ['ngDrupal7Services-3_x.commons.configurations'])
+	    .constant("SystemChannleConstant", SystemChannleConstant);
 
 })();
