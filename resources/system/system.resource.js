@@ -5,7 +5,7 @@
 	 * System Resource Modules
 	**/
     angular
-    .module('ngDrupal7Services-3_x.resources.system.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.system.resourceConstant', 'ngDrupal7Services-3_x.resources.SystemChannel'])
+    .module('ngDrupal7Services-3_x.resources.system.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.system.resourceConstant', 'ngDrupal7Services-3_x.resources.system.channel'])
     
     /**
 	 * SystemResource
@@ -226,6 +226,6 @@ function SystemResource($http, $q, drupalApiConstant, SystemResourceConstant, Sy
 
 };
 
-SystemResource.$inject = ['$http', '$q', 'drupalApiConstant', 'SystemResourceConstant', 'SystemResourceChannel' ];
+SystemResource.$inject = ['$http', '$q', 'drupalApiConstant', 'SystemResourceConstant', 'SystemChannel' ];
 
 })();
