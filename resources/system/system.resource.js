@@ -46,13 +46,13 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		};
 		
 		$http(requestConfig)
-		.success(function(data, status, headers, config){
-			SystemChannel.publishSystemConnectConfirmed(data);
-			defer.resolve(data);
+		.success(function(responseData, status, headers, config){
+			SystemChannel.publishSystemConnectConfirmed(responseData);
+			defer.resolve(responseData);
 		})
-		.error(function(data, status, headers, config){
-			SystemChannel.publishSystemConnectFailed(data);
-			defer.reject(data);
+		.error(function(responseData, status, headers, config){
+			SystemChannel.publishSystemConnectFailed(responseData);
+			defer.reject(responseData);
 		});
 		
 		return defer.promise;
@@ -106,13 +106,13 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		}
 		
 		$http(requestConfig)
-		.success(function(value, status, headers, config){
-			SystemChannel.publishSystemGetVariableConfirmed(value);
-			defer.resolve(data);
+		.success(function(responseData, status, headers, config){
+			SystemChannel.publishSystemGetVariableConfirmed(responseData);
+			defer.resolve(responseData);
 		})
-		.error(function(data, status, headers, config){
-			SystemChannel.publishSystemGetVariableFailed(data);
-			defer.reject(data);
+		.error(function(responseData, status, headers, config){
+			SystemChannel.publishSystemGetVariableFailed(responseData);
+			defer.reject(responseData);
 		});
 		
 		return defer.promise;
@@ -160,13 +160,13 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		
 		
 		$http(requestConfig)
-		.success(function(data, status, headers, config){
-			SystemChannel.publishSystemSetVariableConfirmed({name: name, value: value});
-			defer.resolve(data);
+		.success(function(responseData, status, headers, config){
+			SystemChannel.publishSystemSetVariableConfirmed(responseData);
+			defer.resolve(responseData);
 		})
-		.error(function(data, status, headers, config){
-			SystemChannel.publishSystemSetVariableFailed({name: name, value: value});
-			defer.reject(data);
+		.error(function(responseData, status, headers, config){
+			SystemChannel.publishSystemSetVariableFailed(responseData);
+			defer.reject(responseData);
 		});
 		
 		return defer.promise;
@@ -212,13 +212,13 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		}
 		
 		$http(requestConfig)
-		.success(function(data, status, headers, config){
-			SystemChannel.publishSystemDelVariableConfirmed(name);
-			defer.resolve(data);
+		.success(function(responseData, status, headers, config){
+			SystemChannel.publishSystemDelVariableConfirmed(responseData);
+			defer.resolve(responseData);
 		})
-		.error(function(data, status, headers, config){
-			SystemChannel.publishSystemDelVariableFailed(data);
-			defer.reject(data);
+		.error(function(responseData, status, headers, config){
+			SystemChannel.publishSystemDelVariableFailed(responseData);
+			defer.reject(responseData);
 		});
 		
 		return defer.promise;
