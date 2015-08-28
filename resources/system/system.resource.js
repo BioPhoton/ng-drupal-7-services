@@ -85,12 +85,12 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 				},
 				data 	: {
 					name : data.name,
-					default : data._default
+					default : data.default
 				}
 		},
 		errors = [];
 		
-		if(!data._default) {
+		if(!data.default) {
 			delete requestConfig.data.default;
 		}
 		
