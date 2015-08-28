@@ -1,19 +1,26 @@
-/**
- * System Resource Modules
- */
-var systemResource = angular.module('ngDrupal7Services-3_x.resources.systemResource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.system.channleConstant', 'ngDrupal7Services-3_x.resources.system.resourceConstant']);
+(function() {
+    'use strict';
 
-/**
- * SystemResource
- * 
- * This service mirrors the Drupal system resource of the services 3.x module.
- * To use this you have to set following line in your Drupal CORS module settings
- * your_api_endpoint/system/*|<mirror>|POST|Content-Type,Authorization|true
- * 
-**/
-systemResource.service('SystemResource', [ 'drupalApiConstant', 'SystemResourceConstant', 'SystemChannelConstant', 'SystemResourceChannel', '$http', '$q', 
-                              function(drupalApiConstant,   SystemResourceConfig,   SystemResourceChannel,   $http,   $q) {
-	
+	/**
+	 * System Resource Modules
+	**/
+    angular
+    .module('ngDrupal7Services-3_x.resources.system.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.system.resourceConstant', 'ngDrupal7Services-3_x.resources.SystemChannel'])
+    
+    /**
+	 * SystemResource
+	 * 
+	 * This service mirrors the Drupal system resource of the services 3.x module.
+	 * To use this you have to set following line in your Drupal CORS module settings
+	 * your_api_endpoint/system/*|<mirror>|POST|Content-Type,Authorization|true
+	 * 
+	**/
+    .service('SystemResource', SystemResource);
+
+
+/** @ngInject */
+
+function SystemResource($http, $q, drupalApiConstant, SystemResourceConstant, SystemChannel) { 
 	/*
 	 * connect
 	 * 
@@ -28,7 +35,7 @@ systemResource.service('SystemResource', [ 'drupalApiConstant', 'SystemResourceC
 	 */
 	var connect = function() {
 		
-		var connectPath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConfig.resourcePath + '/' + SystemResourceConfig.actions.connect,
+		var connectPath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
 		defer = $q.defer(),
 		requestConfig = {
 				method :'POST',
@@ -68,7 +75,7 @@ systemResource.service('SystemResource', [ 'drupalApiConstant', 'SystemResourceC
 	 */
 	var get_variable = function(name, _default){
 		
-		var getVariablePath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConfig.resourcePath + '/' + SystemResourceConfig.actions.get_variable,
+		var getVariablePath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
 		defer = $q.defer(),
 		requestConfig = {
 				method 	:'POST',
@@ -120,7 +127,7 @@ systemResource.service('SystemResource', [ 'drupalApiConstant', 'SystemResourceC
 	 * 
 	 */
 	var set_variable = function(name, value){
-		var setVariablePath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConfig.resourcePath + '/' + SystemResourceConfig.actions.set_variable,
+		var setVariablePath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
 		defer = $q.defer(),
 		requestConfig = {
 				method 	:'POST',
@@ -172,7 +179,7 @@ systemResource.service('SystemResource', [ 'drupalApiConstant', 'SystemResourceC
 	 * 
 	 */
 	var del_variable = function(name){
-		var delVariablePath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConfig.resourcePath + '/' + SystemResourceConfig.actions.del_variable,
+		var delVariablePath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
 		defer = $q.defer(),
 		requestConfig = {
 				method 	:'POST',
@@ -217,4 +224,8 @@ systemResource.service('SystemResource', [ 'drupalApiConstant', 'SystemResourceC
 		del_variable 	: del_variable
 	};
 
-}]);
+};
+
+SystemResource.$inject = ['$http', '$q', 'drupalApiConstant', 'SystemResourceConstant', 'SystemResourceChannel' ];
+
+})();
