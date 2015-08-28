@@ -2,9 +2,9 @@
     'use strict';
 
     /**
-	 *  Constants for SystemChannle
+	 *  Constants for SystemChannel
 	 */
-	var SystemChannleConstant =  {
+	var SystemChannelConstant =  {
 	 		//
 	 		// Constants for SystemResourceChannel
 	 		//
@@ -27,10 +27,10 @@
 	};
     
 	/**
-	 * System Channle Constant
+	 * System Channel Constant
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.system.channleConstant', ['ngDrupal7Services-3_x.commons.configurations'])
-	    .constant("SystemChannleConstant", SystemChannleConstant);
+	    .module('ngDrupal7Services-3_x.resources.system.channelConstant', ['ngDrupal7Services-3_x.commons.configurations'])
+	    .constant("SystemChannelConstant", SystemChannelConstant);
 
 })();
