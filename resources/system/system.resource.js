@@ -73,7 +73,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 	 * @return 	{Promise}
 	 *
 	 */
-	var get_variable = function(name, _default){
+	var get_variable = function(data){
 		
 		var getVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
 		defer = $q.defer(),
@@ -84,12 +84,18 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 					"Content-Type"	: "application/json",
 				},
 				data 	: {
-					name : name
+					name : data.name,
+					default : data._default
 				}
 		},
 		errors = [];
 		
-		if(!name) { 
+		if(!data._default) {
+			delete requestConfig.data.default;
+		}
+		
+		//basic validation
+		if(!data.name) { 
 			errors.push('Param name is required.');
 		}
 		
@@ -126,7 +132,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 	 * @return 	{Promise}
 	 * 
 	 */
-	var set_variable = function(name, value){
+	var set_variable = function(data){
 		var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
 		defer = $q.defer(),
 		requestConfig = {
@@ -136,15 +142,16 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 					"Content-Type"	: "application/json",
 				},
 				data 	: {
-					name 	: name,
-					value 	: value
+					name 	: data.name,
+					value 	: data.value
 				}
 		},
 		errors = [];
-
-		if(!value) { errors.push('Param value is required.');}
-		if(!name) { errors.push('Param name is required.'); }
 		
+		//basic validation
+		if(!data.name) { errors.push('Param name is required.'); }
+		if(!data.value) { errors.push('Param value is required.');}
+				
 		if(errors.length != 0) {
 			SystemChannel.publishSystemSetVariableFailed({data: errors});
 			defer.reject(errors); 
@@ -178,7 +185,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 	 * @return 	{Promise}
 	 * 
 	 */
-	var del_variable = function(name){
+	var del_variable = function(data){
 		var delVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
 		defer = $q.defer(),
 		requestConfig = {
@@ -188,12 +195,13 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 					"Content-Type"	: "application/json",
 				},
 				data 	: {
-					name : name
+					name : data.name
 				}
 		},
 		errors = [];
 		
-		if(!name) { 
+		//basic validation
+		if(!data.name) { 
 			errors.push('Param name is required.');
 		}
 		
