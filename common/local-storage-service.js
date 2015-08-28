@@ -1,4 +1,4 @@
-var localstorageServices = angular.module('common.localstorage', []);
+var localstorageServices = angular.module('ngDrupal7Services-3_x.commons.localstorage', []);
 
 localstorageServices.factory('$localstorage', ['$window',
   function ($window) {

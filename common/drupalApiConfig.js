@@ -1,10 +1,10 @@
 /**
  * 
  */
-var drupalApiConfigurations = angular.module('drupal.configurations', []);
+var drupalApiConfigurations = angular.module('ngDrupal7Services-3_x.commons.configurations', []);
 
 /* Constants for drupalApiService */
-drupalApiConfigurations.constant("drupalApiConfig", {
+drupalApiConfigurations.constant("drupalApiConstant", {
       //					   
       // Drupal depending settings
       //
