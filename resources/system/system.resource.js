@@ -20,7 +20,7 @@
 
 /** @ngInject */
 
-function SystemResource($http, $q, drupalApiConstant, SystemResourceConstant, SystemChannel) { 
+function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, SystemChannel) { 
 	/*
 	 * connect
 	 * 
@@ -35,7 +35,7 @@ function SystemResource($http, $q, drupalApiConstant, SystemResourceConstant, Sy
 	 */
 	var connect = function() {
 		
-		var connectPath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
+		var connectPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
 		defer = $q.defer(),
 		requestConfig = {
 				method :'POST',
@@ -75,7 +75,7 @@ function SystemResource($http, $q, drupalApiConstant, SystemResourceConstant, Sy
 	 */
 	var get_variable = function(name, _default){
 		
-		var getVariablePath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
+		var getVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
 		defer = $q.defer(),
 		requestConfig = {
 				method 	:'POST',
@@ -127,7 +127,7 @@ function SystemResource($http, $q, drupalApiConstant, SystemResourceConstant, Sy
 	 * 
 	 */
 	var set_variable = function(name, value){
-		var setVariablePath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
+		var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
 		defer = $q.defer(),
 		requestConfig = {
 				method 	:'POST',
@@ -179,7 +179,7 @@ function SystemResource($http, $q, drupalApiConstant, SystemResourceConstant, Sy
 	 * 
 	 */
 	var del_variable = function(name){
-		var delVariablePath = drupalApiConstant.drupal_instance + drupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
+		var delVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
 		defer = $q.defer(),
 		requestConfig = {
 				method 	:'POST',
@@ -226,6 +226,6 @@ function SystemResource($http, $q, drupalApiConstant, SystemResourceConstant, Sy
 
 };
  
-SystemResource.$inject = ['$http', '$q', 'drupalApiConstant', 'SystemResourceConstant', 'SystemChannel'];
+SystemResource.$inject = ['$http', '$q', 'DrupalApiConstant', 'SystemResourceConstant', 'SystemChannel'];
 
 })();
