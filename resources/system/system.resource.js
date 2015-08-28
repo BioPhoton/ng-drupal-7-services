@@ -15,7 +15,7 @@
 	 * your_api_endpoint/system/*|<mirror>|POST|Content-Type,Authorization|true
 	 * 
 	**/
-    .service('SystemResource', SystemResource);
+    .factory('SystemResource', SystemResource);
 
 
 /** @ngInject */

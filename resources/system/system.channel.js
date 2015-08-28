@@ -5,7 +5,7 @@
 	 * System Channel Module
 	 */
 	angular.module('ngDrupal7Services-3_x.resources.system.channel', ['ngDrupal7Services-3_x.resources.system.channelConstant' ])
-		   .service('SystemChannel', SystemChannel);
+		   .factory('SystemChannel', SystemChannel);
 
 	/**
 	 * Notification channel for system resource 
