@@ -47,11 +47,11 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		
 		$http(requestConfig)
 		.success(function(data, status, headers, config){
-			SystemResourceChannel.publishSystemConnectConfirmed(data);
+			SystemChannel.publishSystemConnectConfirmed(data);
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
-			SystemResourceChannel.publishSystemConnectFailed(data);
+			SystemChannel.publishSystemConnectFailed(data);
 			defer.reject(data);
 		});
 		
@@ -94,18 +94,18 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		}
 		
 		if(errors.length != 0) {
-			SystemResourceChannel.publishSystemGetVariableFailed(errors);
+			SystemChannel.publishSystemGetVariableFailed(errors);
 			defer.reject(errors); 
 			return defer.promise;
 		}
 		
 		$http(requestConfig)
 		.success(function(value, status, headers, config){
-			SystemResourceChannel.publishSystemGetVariableConfirmed(value);
+			SystemChannel.publishSystemGetVariableConfirmed(value);
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
-			SystemResourceChannel.publishSystemGetVariableFailed(data);
+			SystemChannel.publishSystemGetVariableFailed(data);
 			defer.reject(data);
 		});
 		
@@ -146,7 +146,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		if(!name) { errors.push('Param name is required.'); }
 		
 		if(errors.length != 0) {
-			SystemResourceChannel.publishSystemSetVariableFailed({data: errors});
+			SystemChannel.publishSystemSetVariableFailed({data: errors});
 			defer.reject(errors); 
 			return defer.promise;
 		}
@@ -154,11 +154,11 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		
 		$http(requestConfig)
 		.success(function(data, status, headers, config){
-			SystemResourceChannel.publishSystemSetVariableConfirmed({name: name, value: value});
+			SystemChannel.publishSystemSetVariableConfirmed({name: name, value: value});
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
-			SystemResourceChannel.publishSystemSetVariableFailed({name: name, value: value});
+			SystemChannel.publishSystemSetVariableFailed({name: name, value: value});
 			defer.reject(data);
 		});
 		
@@ -198,18 +198,18 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		}
 		
 		if(errors.length != 0) {
-			SystemResourceChannel.publishSystemDelVariableFailed(errors);
+			SystemChannel.publishSystemDelVariableFailed(errors);
 			defer.reject(errors); 
 			return defer.promise;
 		}
 		
 		$http(requestConfig)
 		.success(function(data, status, headers, config){
-			SystemResourceChannel.publishSystemDelVariableConfirmed(name);
+			SystemChannel.publishSystemDelVariableConfirmed(name);
 			defer.resolve(data);
 		})
 		.error(function(data, status, headers, config){
-			SystemResourceChannel.publishSystemDelVariableFailed(data);
+			SystemChannel.publishSystemDelVariableFailed(data);
 			defer.reject(data);
 		});
 		
