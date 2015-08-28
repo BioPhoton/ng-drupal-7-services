@@ -4,7 +4,7 @@
 	/**
 	 * System Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.resources.system.channle', ['ngDrupal7Services-3_x.resources.system.channelConstant' ])
+	angular.module('ngDrupal7Services-3_x.resources.system.channel', ['ngDrupal7Services-3_x.resources.system.channelConstant' ])
 		   .service('SystemChannel', SystemChannel);
 
 	/**
