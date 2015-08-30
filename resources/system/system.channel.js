@@ -42,11 +42,9 @@
 		 * 
 		**/
     	function pubSystemConnectConfirmed(args) {
-    		//prepare args
     		var args = {user: args};
-    		console.log('in pubSystemConnectConfirmed'); 
-    		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectConfirmed, args);
     		
+    		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectConfirmed, args);
     	};
     	
     	 /**
@@ -54,28 +52,24 @@
 		 * 
 		 * subscribe for the SystemConnectConfirmed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subscribe function
-		 * @param 	{function} scopeHandler The callback handler normally defined in the $scopes controller or directive or service
+		 * @param 	{Object} _Scope The scope that calls the channels subSystemConnectConfirmed function
+		 * @param 	{function} scopeHandler The callback handler for SystemConnectConfirmed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
     	function subSystemConnectConfirmed(_Scope, scopeHandler) {
-    		console.log('in subSystemConnectConfirmed');
-    		//prepares the arguments for the subRootEmit
+
     		var prepArgs = function (args) { 
-    			return args.user; 
+    			return { data: args.user }; 
     		};
     		
-    		//subscribe with rootScope to event and cache unsubscribe function
     		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_connectConfirmed, _Scope, scopeHandler, prepArgs);
     		
-    		//return the unsubscribe function from the BaseChannel.subRootEmit() call
     		return unsubsSopeHandler;
-    		
     	};
     	
-    	//___________________________________________________________________________________________________________________________________
+    	//________________________________________________________________________________________________________________________________________
     	
 
 	};
