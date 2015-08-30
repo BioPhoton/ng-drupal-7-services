@@ -19,11 +19,13 @@
 	 **/
 	/** @ngInject */
 	function SystemChannel(BaseChannel, SystemChannelConstant) {
-		console.log('in SystemChannel', BaseChannel);
+	
 		//setup and return service            	
         var service = {
     		pubSystemConnectConfirmed 	: pubSystemConnectConfirmed,
-    		subSystemConnectConfirmed	: subSystemConnectConfirmed
+    		subSystemConnectConfirmed	: subSystemConnectConfirmed,
+    		pubSystemConnectFailed 	: pubSystemConnectFailed,
+    		subSystemConnectFailed	: subSystemConnectFailed
         };
         
         return service;
@@ -42,7 +44,7 @@
 		 * 
 		**/
     	function pubSystemConnectConfirmed(args) {
-    		var args = {user: args};
+    		var args = {connectionState: args};
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectConfirmed, args);
     	};
@@ -59,9 +61,9 @@
 		 * 
 		**/
     	function subSystemConnectConfirmed(_Scope, scopeHandler) {
-
-    		var prepArgs = function (args) { 
-    			return { data: args.user }; 
+  
+    		var prepArgs = function (args) {
+    			return args; 
     		};
     		
     		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_connectConfirmed, _Scope, scopeHandler, prepArgs);
@@ -71,6 +73,49 @@
     	
     	//________________________________________________________________________________________________________________________________________
     	
+        //System connect request functions
+        
+        /**
+		 * pubSystemConnectConfirmed
+		 * 
+		 * Publish the SystemConnectConfirmed event with giver args 
+	     *
+		 * @param 	{Object} args The events arguments 
+		 * 
+		 * 
+		**/
+    	function pubSystemConnectFailed(args) {
+    		var args = {errors: args};
+
+    		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectFailed, args);
+    	};
+    	
+    	/**
+		 * subSystemConnectFailed
+		 * 
+		 * subscribe for the SystemConnectFailed event
+	     *
+		 * @param 	{Object} _Scope The scope that calls the channels subSystemConnectFailed function
+		 * @param 	{function} scopeHandler The callback handler for SystemConnectFailed event
+		 * 
+		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+		 * 
+		**/
+    	function subSystemConnectFailed(_Scope, scopeHandler) {
+
+    		var prepArgs = function (args) { 
+    			return args; 
+    		};
+    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_connectFailed, _Scope, scopeHandler, prepArgs);
+    		
+    		return unsubsSopeHandler;
+    	};
+    	
+    	//________________________________________________________________________________________________________________________________________
+    	
+    	
+    
 
 	};
 
