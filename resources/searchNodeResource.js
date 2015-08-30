@@ -118,6 +118,7 @@ SearchNodeResourceModules.service('SearchNodeResource', [ '$rootScope','drupalAp
 	 * 
 	 */
 	var retrieve = function(options){
+		console.log(options); 
 		var retrievePath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + SearchNodeResourceConfig.resourcePath + '/';
 		retrievePath +=  (Object.getOwnPropertyNames(options).length > 0)?'?':'';
 		retrievePath += prepareSearchNodeGetParams(options);

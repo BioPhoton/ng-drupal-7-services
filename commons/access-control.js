@@ -2,7 +2,7 @@
  * AccessControlModule
  * 
  */
-var accessControlModule = angular.module('common.accesss-control', ['ApiAuthModules']);
+var accessControlModule = angular.module('ngDrupal7Services-3_x.commons.accesss-control', ['ApiAuthModules']);
 
 /**
  * AccessControlConfig
