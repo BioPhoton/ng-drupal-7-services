@@ -1,3 +1,4 @@
+//https://medium.com/opinionated-angularjs/angular-model-objects-with-javascript-classes-2e6a067c73bc
 (function() {
 	'use strict';
 	
@@ -8,7 +9,7 @@
 	 * 
 	**/
 	angular.module('ngDrupal7Services-3_x.resources.system.channel', ['ngDrupal7Services-3_x.commons.baseChannel', 'ngDrupal7Services-3_x.resources.system.channelConstant'])
-	    .config(SystemChannelConfig);
+	  	   .config(SystemChannelConfig);
 	
 	SystemChannelConfig.$inject = ['$provide'];
 	
@@ -20,14 +21,15 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	 **/
-	SystemChannel.$inject = [ 'baseChannel', 'SystemChannelConstant' ];
+	SystemChannel.$inject = [ 'BaseChannel', 'SystemChannelConstant' ];
 	
 	/**
 	 * Notification channel for system resource 
-	**/
+	 **/
 	/** @ngInject */
-	function SystemChannel(baseChannel, SystemChannelConstant) {
+	function SystemChannel(BaseChannel, SystemChannelConstant) {
 		
+		console.log('in SystemChannel');
 		//setup and return service            	
         var service = {
     		pubSystemConnectConfirmed 	: pubSystemConnectConfirmed,
@@ -49,11 +51,11 @@
 		 * 
 		 * 
 		**/
-    	var pubSystemConnectConfirmed = function(args) {
+    	function pubSystemConnectConfirmed(args) {
     		//prepare args
     		var args = {user: args};
-
-    		baseChannel.pubRootEmit(SystemChannelConstant.system_connectConfirmed, args);
+    		console.log('in pubSystemConnectConfirmed'); 
+    		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectConfirmed, args);
     		
     	};
     	
@@ -68,22 +70,22 @@
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	var subSystemConnectConfirmed = function($scope, handler) {
-    		
+    	function subSystemConnectConfirmed(_Scope, scopeHandler) {
+    		console.log('in subSystemConnectConfirmed');
     		//prepares the arguments for the subRootEmit
     		var prepArgs = function (args) { 
     			return args.user; 
     		};
     		
     		//subscribe with rootScope to event and cache unsubscribe function
-    		var unsubsSopeHandler = baseChannel.subRootEmit( SystemChannelConstant.system_connectConfirmed, $scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_connectConfirmed, _Scope, scopeHandler, prepArgs);
     		
-    		//return the unsubscribe function from the baseChannel.subRootEmit() call
+    		//return the unsubscribe function from the BaseChannel.subRootEmit() call
     		return unsubsSopeHandler;
     		
     	};
     	
-    	//___________________________________________________________________________________________________________________________________
+    		//___________________________________________________________________________________________________________________________________
     	
 	}; //end of systemChannelHandler
 

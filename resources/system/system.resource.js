@@ -20,7 +20,8 @@
 
 /** @ngInject */
 function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, SystemChannel) { 
-	/*
+	
+	/**
 	 * connect
 	 * 
 	 * Returns the details of currently logged in user.
@@ -31,7 +32,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 	 * 
 	 * @return 	{Promise}
 	 * 
-	 */
+	**/
 	var connect = function() {
 		
 		var connectPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
@@ -46,11 +47,11 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		
 		$http(requestConfig)
 		.success(function(responseData, status, headers, config){
-			SystemChannel.publishSystemConnectConfirmed(responseData);
+			SystemChannel.pubSystemConnectConfirmed(responseData);
 			defer.resolve(responseData);
 		})
 		.error(function(responseData, status, headers, config){
-			SystemChannel.publishSystemConnectFailed(responseData);
+			SystemChannel.pubSystemConnectFailed(responseData);
 			defer.reject(responseData);
 		});
 		
@@ -58,7 +59,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 
 	};
 	
-	/*
+	/**
 	 * get_variable
 	 * 
 	 * Returns the value of a system variable using variable_get().
@@ -71,7 +72,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 	 * 
 	 * @return 	{Promise}
 	 *
-	 */
+	**/
 	var get_variable = function(data){
 		
 		var getVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
@@ -99,25 +100,25 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		}
 		
 		if(errors.length != 0) {
-			SystemChannel.publishSystemGetVariableFailed(errors);
+			SystemChannel.pubSystemGetVariableFailed(errors);
 			defer.reject(errors); 
 			return defer.promise;
 		}
 		
 		$http(requestConfig)
 		.success(function(responseData, status, headers, config){
-			SystemChannel.publishSystemGetVariableConfirmed(responseData);
+			SystemChannel.pubSystemGetVariableConfirmed(responseData);
 			defer.resolve(responseData);
 		})
 		.error(function(responseData, status, headers, config){
-			SystemChannel.publishSystemGetVariableFailed(responseData);
+			SystemChannel.pubSystemGetVariableFailed(responseData);
 			defer.reject(responseData);
 		});
 		
 		return defer.promise;
 	};
 	
-	/*
+	/**
 	 * set_variable
 	 * 
 	 * Returns the value of a system variable using variable_get().
@@ -130,7 +131,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 	 * 
 	 * @return 	{Promise}
 	 * 
-	 */
+	**/
 	var set_variable = function(data){
 		var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
 		defer = $q.defer(),
@@ -152,7 +153,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		if(!data.value) { errors.push('Param value is required.');}
 				
 		if(errors.length != 0) {
-			SystemChannel.publishSystemSetVariableFailed({data: errors});
+			SystemChannel.pubSystemSetVariableFailed({data: errors});
 			defer.reject(errors); 
 			return defer.promise;
 		}
@@ -160,18 +161,18 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		
 		$http(requestConfig)
 		.success(function(responseData, status, headers, config){
-			SystemChannel.publishSystemSetVariableConfirmed(responseData);
+			SystemChannel.pubSystemSetVariableConfirmed(responseData);
 			defer.resolve(responseData);
 		})
 		.error(function(responseData, status, headers, config){
-			SystemChannel.publishSystemSetVariableFailed(responseData);
+			SystemChannel.pubSystemSetVariableFailed(responseData);
 			defer.reject(responseData);
 		});
 		
 		return defer.promise;
 	};
 	
-	/*
+	/**
 	 * del_variable
 	 * 
 	 * Deletes a system variable using variable_del().
@@ -183,7 +184,7 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 	 * 
 	 * @return 	{Promise}
 	 * 
-	 */
+	**/
 	var del_variable = function(data){
 		var delVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
 		defer = $q.defer(),
@@ -205,18 +206,18 @@ function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, Sy
 		}
 		
 		if(errors.length != 0) {
-			SystemChannel.publishSystemDelVariableFailed(errors);
+			SystemChannel.pubSystemDelVariableFailed(errors);
 			defer.reject(errors); 
 			return defer.promise;
 		}
 		
 		$http(requestConfig)
 		.success(function(responseData, status, headers, config){
-			SystemChannel.publishSystemDelVariableConfirmed(responseData);
+			SystemChannel.pubSystemDelVariableConfirmed(responseData);
 			defer.resolve(responseData);
 		})
 		.error(function(responseData, status, headers, config){
-			SystemChannel.publishSystemDelVariableFailed(responseData);
+			SystemChannel.pubSystemDelVariableFailed(responseData);
 			defer.reject(responseData);
 		});
 		

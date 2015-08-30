@@ -5,28 +5,28 @@
 	 * System Channel Module
 	 */
 	angular.module('ngDrupal7Services-3_x.commons.baseChannel', [])
-		   .factory('baseChannel', baseChannel);
+		   .factory('BaseChannel', BaseChannel);
 
 	
 	/**
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	 **/
-	baseChannel.$inject = [ '$rootScope' ];
+	BaseChannel.$inject = [ '$rootScope' ];
 	
 	/**
 	 * The channels basic publish and subscribe functions
 	 * 
 	 **/
 	/** @ngInject */
-	function baseChannel($rootScope) {
-		//setup and return service            	
-        var service = {
-    		pubRootEmit 	: pubRootEmit,
-        	subRootEmit		: subRootEmit
-        };
-        
-        return service;
+	function BaseChannel($rootScope) {
+		
+		var baseChannelService = {
+				pubRootEmit : pubRootEmit,
+        		subRootEmit	: subRootEmit
+		};
+       
+        return baseChannelService;
 
         ////////////
 
@@ -43,20 +43,21 @@
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-     	var subRootEmit = function(eventName, _Scope, scopeHandler, mapArgs) {
-     		
+     	function subRootEmit(eventName, _Scope, scopeHandler, mapArgs) {
+     		console.log('in subRootEmit');
      		//subscribe with rootScope to event and cache unsubscribe function
      		var unsubsSopeHandler = $rootScope.$on(eventName, function(event, args) {
-     			scopeHandler(mapArgs(args));
-     		 });
+	     			scopeHandler(mapArgs(args));
+	     		});
      		 
      		//unsubscribe rootScope listener after scope destruction
-     		$scope.$on('$destroy', function() {
-     			unsubScopeHandler();
+     		_Scope.$on('$destroy', function() {
+     			console.log('in pubRootEmit _Scope.$on($destroy)');
+     			unsubsSopeHandler();
      		});
      		
      		//return he unsubscribe function from the $rootScope.on() call
-     		return unsubscopeHandler;
+     		return unsubsSopeHandler;
      	};
      	
      	/**
@@ -68,8 +69,9 @@
 		 * @param 	{object} args The events arguments 
 		 * 
 		**/
-     	var pubRootEmit = function(eventName, args) {
-     		 $rootScope.$emit(event, args);
+     	function pubRootEmit(eventName, args) {
+     		 console.log('in pubRootEmit');
+     		 $rootScope.$emit(eventName, args);
      	};
      	
 	};
