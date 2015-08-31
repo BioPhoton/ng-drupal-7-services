@@ -9,7 +9,11 @@
 	var UserChannelConstant =  {
 			// Retrieve action
 	 		user_connectConfirmed	: 'event:drupal-user-connectConfirmed',
-	 		user_connectFailed  	: 'event:drupal-user-connectFailed'
+	 		user_connectFailed  	: 'event:drupal-user-connectFailed',
+	 		
+	 		// Retrieve action
+	 		user_loginConfirmed	: 'event:drupal-user-loginConfirmed',
+	 		user_loginFailed  	: 'event:drupal-user-loginFailed'
 	 		
 	};
     
