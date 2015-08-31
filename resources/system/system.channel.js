@@ -16,7 +16,7 @@
 	
 	/**
 	 * Notification channel for system resource 
-	 **/
+	**/
 	/** @ngInject */
 	function SystemChannel(BaseChannel, SystemChannelConstant) {
 	

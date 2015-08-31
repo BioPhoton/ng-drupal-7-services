@@ -45,32 +45,41 @@
 		 * 
 		 * Method: POST 
 		 * Url: http://drupal_instance/api_endpoint/system/connect
-		 * Headers: Content-Type:application/json
 		 * 
 		 * @return 	{Promise}
 		 * 
 		**/
 		function connect() {
 			
+			//undefined check
+	    	//data = (data)?data:{};
+	    	
+			//validation of params
+	    	var errors = [],
+			defer = $q.defer();	
+	    
+	    	if(errors.length != 0) {
+	    		SystemChannel.pubSystemConnectFailed(errors);
+	    		defer.reject(errors); 
+	    		return defer.promise;
+	    	};
+	    	
+			
 			var connectPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
-			defer = $q.defer(),
-			requestConfig = {
-					method :'POST',
-					url : connectPath,
-					headers : {
-						"Content-Type"	: "application/json",
-					}
-			};
+				requestConfig = {
+						method :'POST',
+						url : connectPath
+				};
 			
 			$http(requestConfig)
-			.success(function(responseData, status, headers, config){
-				SystemChannel.pubSystemConnectConfirmed(responseData);
-				defer.resolve(responseData);
-			})
-			.error(function(responseData, status, headers, config){
-				SystemChannel.pubSystemConnectFailed(responseData);
-				defer.reject(responseData);
-			});
+				.success(function(responseData, status, headers, config){
+					SystemChannel.pubSystemConnectConfirmed(responseData);
+					defer.resolve(responseData);
+				})
+				.error(function(responseData, status, headers, config){
+					SystemChannel.pubSystemConnectFailed(responseData);
+					defer.reject(responseData);
+				});
 			
 			return defer.promise;
 	
@@ -83,7 +92,6 @@
 		 * 
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/system/get_variable
-		 * Headers: Content-Type:application/json
 		 * 
 		 * @params  {Object} data the requests data
 		 * 			@key 	{String} name The name of the variable to return, required:true, source:post body
@@ -94,25 +102,13 @@
 		**/
 		function get_variable(data){
 			
-			var getVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
-			defer = $q.defer(),
-			requestConfig = {
-					method 	:'POST',
-					url 	: getVariablePath,
-					headers : {
-						"Content-Type"	: "application/json",
-					},
-					data 	: {
-						name : data.name,
-						default : data.default
-					}
-			},
-			errors = [];
-			
-			if(!data.default) {
-				delete requestConfig.data.default;
-			}
-			
+			//undefined check
+	    	data = (data)?data:{};
+	    	
+			//validation of params
+	    	var errors = [],
+			defer = $q.defer();	
+
 			//basic validation
 			if(!data.name) { 
 				errors.push('Param name is required.');
@@ -124,15 +120,29 @@
 				return defer.promise;
 			}
 			
+			var getVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
+				requestConfig = {
+						method 	:'POST',
+						url 	: getVariablePath,
+						data 	: {
+							name : data.name,
+						}
+				};
+			
+			//set default if given
+			if(data.default) {
+				requestConfig.data['default'] = data.default;
+			}
+
 			$http(requestConfig)
-			.success(function(responseData, status, headers, config){
-				SystemChannel.pubSystemGetVariableConfirmed(responseData);
-				defer.resolve(responseData);
-			})
-			.error(function(responseData, status, headers, config){
-				SystemChannel.pubSystemGetVariableFailed(responseData);
-				defer.reject(responseData);
-			});
+				.success(function(responseData, status, headers, config){
+					SystemChannel.pubSystemGetVariableConfirmed(responseData);
+					defer.resolve(responseData);
+				})
+				.error(function(responseData, status, headers, config){
+					SystemChannel.pubSystemGetVariableFailed(responseData);
+					defer.reject(responseData);
+				});
 			
 			return defer.promise;
 		};
@@ -143,7 +153,6 @@
 		 * Returns the value of a system variable using variable_get().
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/system/get_variable
-		 * Headers: Content-Type:application/json
 		 * 
 		 * @params  {Object} data the requests data
 		 * 			@key 	{String} name The name of the variable to set, required:true, source:post body
@@ -153,23 +162,16 @@
 		 * 
 		**/
 		function set_variable(data){
-			var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
-			defer = $q.defer(),
-			requestConfig = {
-					method 	:'POST',
-					url 	: setVariablePath,
-					headers : {
-						"Content-Type"	: "application/json",
-					},
-					data 	: {
-						name 	: data.name,
-						value 	: data.value
-					}
-			},
-			errors = [];
 			
+			//undefined check
+	    	data = (data)?data:{};
+	    	
+			//validation of params
+	    	var errors = [],
+			defer = $q.defer();	
+
 			//basic validation
-			if(!data.name) { errors.push('Param name is required.'); }
+	    	if(!data.name) { errors.push('Param name is required.'); }
 			if(!data.value) { errors.push('Param value is required.');}
 					
 			if(errors.length != 0) {
@@ -178,16 +180,26 @@
 				return defer.promise;
 			}
 			
-			
+			var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
+				defer = $q.defer(),
+				requestConfig = {
+						method 	:'POST',
+						url 	: setVariablePath,
+						data 	: {
+							name 	: data.name,
+							value 	: data.value
+						}
+				};
+
 			$http(requestConfig)
-			.success(function(responseData, status, headers, config){
-				SystemChannel.pubSystemSetVariableConfirmed(responseData);
-				defer.resolve(responseData);
-			})
-			.error(function(responseData, status, headers, config){
-				SystemChannel.pubSystemSetVariableFailed(responseData);
-				defer.reject(responseData);
-			});
+				.success(function(responseData, status, headers, config){
+					SystemChannel.pubSystemSetVariableConfirmed(responseData);
+					defer.resolve(responseData);
+				})
+				.error(function(responseData, status, headers, config){
+					SystemChannel.pubSystemSetVariableFailed(responseData);
+					defer.reject(responseData);
+				});
 			
 			return defer.promise;
 		};
@@ -198,7 +210,6 @@
 		 * Deletes a system variable using variable_del().
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/system/get_variable
-		 * Headers: Content-Type:application/json
 		 * 
 		 * @params  {Object} data the requests data
 		 * 			@key 	{String} name The name of the variable to delete, required:true, source:post body
@@ -207,21 +218,15 @@
 		 * 
 		**/
 		function del_variable(data){
-			var delVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
-			defer = $q.defer(),
-			requestConfig = {
-					method 	:'POST',
-					url 	: delVariablePath,
-					headers : {
-						"Content-Type"	: "application/json",
-					},
-					data 	: {
-						name : data.name
-					}
-			},
-			errors = [];
 			
-			//basic validation
+			//undefined check
+	    	data = (data)?data:{};
+	    	
+			//validation of params
+	    	var errors = [],
+			defer = $q.defer();	
+
+	    	//basic validation
 			if(!data.name) { 
 				errors.push('Param name is required.');
 			}
@@ -232,15 +237,24 @@
 				return defer.promise;
 			}
 			
+			var delVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
+				requestConfig = {
+						method 	:'POST',
+						url 	: delVariablePath,
+						data 	: {
+							name : data.name
+						}
+				};
+			
 			$http(requestConfig)
-			.success(function(responseData, status, headers, config){
-				SystemChannel.pubSystemDelVariableConfirmed(responseData);
-				defer.resolve(responseData);
-			})
-			.error(function(responseData, status, headers, config){
-				SystemChannel.pubSystemDelVariableFailed(responseData);
-				defer.reject(responseData);
-			});
+				.success(function(responseData, status, headers, config){
+					SystemChannel.pubSystemDelVariableConfirmed(responseData);
+					defer.resolve(responseData);
+				})
+				.error(function(responseData, status, headers, config){
+					SystemChannel.pubSystemDelVariableFailed(responseData);
+					defer.reject(responseData);
+				});
 			
 			return defer.promise;
 		};

@@ -28,7 +28,9 @@
 		//setup and return service            	
         var userResourceService = {
         	retrieve 	: retrieve,
-        	login 		: login
+        	login 		: login,
+        	logout 		: logout,
+        	token		: token
         };
         
         return userResourceService;
@@ -50,14 +52,11 @@
 		 * 
 		**/
     	function retrieve( data ) {
-    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/'+data.uid,
-    		defer = $q.defer(),
-    		requestConfig = {
-    			method :'GET',
-    			url : retrievePath
-    		},
-    		errors = [];
-	    		
+    		//undefined check
+	    	data = (data)?data:{};
+	    	var errors = [],
+			defer = $q.defer();		
+	    	
 	    	//if not given
 	    	if(!data.uid) { errors.push('Param uid is required.'); }
 	    	
@@ -66,11 +65,17 @@
 	    		defer.reject(errors); 
 	    		return defer.promise;
 	    	};
+			
+    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/'+data.uid,
+	    		requestConfig = {
+    				url 	: retrievePath,
+	    			method 	:'GET'
+	    		};
 	    	
 	    	$http(requestConfig)
-		    	.success(function(user, status, headers, config){
-		    		UserChannel.pubUserRetrieveConfirmed(user);
-		    		defer.resolve(user);
+		    	.success(function(responseData, status, headers, config){
+		    		UserChannel.pubUserRetrieveConfirmed(responseData);
+		    		defer.resolve(responseData);
 		    	})
 		    	.error(function(data, status, headers, config){
 		    		UserChannel.pubUserRetrieveFailed(data);
@@ -86,7 +91,6 @@
 		 * Login a user for a new session
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/user/login
-		 * Headers: Content-Type:application/json
 		 * 
 		 * @params  {Object} data The requests data
 		 * 			@key 	{String} username A valid username, required:true, source:post body
@@ -96,20 +100,13 @@
 		 * 
 		**/	
 	    function login( data ) {
-						
-			var pathToLogin = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.login;
-				requestConfig = {
-						method :'POST',
-						url : pathToLogin,
-						data : {
-								"username" : data.username,
-								"password" : data.password
-						},
-				},
-				defer = $q.defer(),
-				errors = [];
-	    		
-	    	//if not given
+			//undefined check
+	    	data = (data)?data:{};
+	   
+			var errors = [],
+				defer = $q.defer();		
+			
+			//if not given
 	    	if(!data.username) { errors.push('Param username is required.'); }
 	    	if(!data.password) { errors.push('Param password is required.'); }
 	    	
@@ -117,15 +114,26 @@
 	    		UserChannel.pubUserLoginFailed(errors);
 	    		defer.reject(errors); 
 	    		return defer.promise;
-	    	};
-				
+	    	};	
+						
+	    	
+			var pathToLogin = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.login,
+				requestConfig = {
+						url : pathToLogin,
+						method :'POST',
+						data : {
+								"username" : data.username,
+								"password" : data.password
+						},
+				};
+	    						
 			$http(requestConfig)
-				.success(function (data, status, headers, config) {
-					 UserResourceChannel.publishUserLoginConfirmed(data);
-		             defer.resolve(data);
+				.success(function (responseData, status, headers, config) {
+					 UserChannel.pubUserLoginConfirmed(responseData);
+		             defer.resolve(responseData);
 		         })
 		         .error(function (data, status, headers, config) {
-		        	 UserResourceChannel.publishUserLoginFailed(data);
+		        	 UserChannel.pubUserLoginFailed(data);
 		        	 defer.reject(data);
 		         });
 			
@@ -138,30 +146,63 @@
 		 * Logout a user session
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/user/logout
-		 * Headers: Content-Type:application/json
 		 * 
 		 * @return 	{Promise}
 		 * 
 		**/	
 		function logout() {
-			 var pathToLogout = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.logout;
-			 	 requestConfig = {
-			 			method: 'POST',
-						url : pathToLogout
+			 
+			var pathToLogout = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.logout,
+			 	requestConfig = {
+			 			url 	: pathToLogout,
+			 			method	: 'POST'
 				},
 				defer = $q.defer();
 			 
 			 $http(requestConfig)
-	         .success(function (data, status, headers, config) {
-	           UserResourceChannel.publishUserLogoutConfirmed(data);
-	           defer.resolve(data);
+	         .success(function (responseData, status, headers, config) {
+	           UserChannel.pubUserLogoutConfirmed(responseData);
+	           defer.resolve(responseData);
 	         })
 	         .error(function (data, status, headers, config) {
-	           UserResourceChannel.publishUserLogoutFailed(data);
+	           UserChannel.pubUserLogoutFailed(data);
 	           defer.reject(data);
 	         });
 	         
 	         return defer.promise;
+		};
+		
+		/**
+		 * token
+		 * 
+		 * Returns the CSRF token of the current session.
+		 * 
+		 * Method: POST
+		 * Url: http://drupal_instance/api_endpoint/user/token
+		 * 
+		 * @return 	{Promise}
+		 * 
+		**/
+		function token() {
+			
+			var  defer = $q.defer(),
+		         pathToToken = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.token,
+				 requestConfig = {
+			     	url		: pathToToken,
+			     	method	: 'POST'
+				};
+				
+		    $http(requestConfig)
+		         .success(function (responseData) {
+		        	 UserChannel.pubUserTokenConfirmed(responseData);
+		        	 defer.resolve(responseData);
+		         })
+		         .error(function (data) {
+		        	 UserChannel.pubUserTokenFailed(data);
+		        	 defer.reject(data);
+		         });
+
+		    return defer.promise;
 		};
 					
 	};
