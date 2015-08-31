@@ -3,20 +3,19 @@
     
     /**
 	 *  Constants for SystemResourceModules 
+	 *  
+	 *  NOTE: if you want to change this constant do this in your app.js config section
 	 */
 	var SystemResourceConstant =  {
-	 	   //					   
-	 	   // Drupal depending settings
-	 	   //
-	 		
-	 		// NOTE: if you set custom aliases for your recources in [your.domain.org]/admin/structure/services/list/[machinereadable_name_of_endpoint]/resources do this in your app.js config section
+
+	 		// NOTE: This is the default alias aliases for your system resources defined in Drupal
 	 		resourcePath : 'system',
 	 		//actions of system resource
 	 		actions : {
 	 			connect 	 : 'connect',
 	 			get_variable : 'get_variable',
 	 			set_variable : 'set_variable',
-	 			del_variable : 'del_variable',
+	 			del_variable : 'del_variable'
 	 		}
 
 	};
