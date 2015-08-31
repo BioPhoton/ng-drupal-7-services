@@ -63,7 +63,24 @@
 		
 		//setup and return service            	
         var authenticationService = {
-        		
+        		storeTokenData	: storeTokenData,
+    			deleteTokenData	: deleteTokenData,
+    			refreshToken	: refreshToken,
+    			
+    			storeSessionData	: storeSessionData,
+    			deleteSessionData	: deleteSessionData,
+    			
+    			getConnectionState	: getConnectionState,
+    			setConnectionState	: setConnectionState,
+    			
+    			getCurrentUser	: getCurrentUser,
+    			setCurrentUser	: setCurrentUser,
+    			
+    			refreshConnection	: refreshConnection,
+    			getLastConnectTime	: getLastConnectTime,
+    			
+    			login	: login,
+    			logout	: logout
         };
         
         return authenticationService;
@@ -381,22 +398,27 @@
 		 * 
 		**/
 		function login(loginData) {
+			var defer = $q.defer();
 			
 			UserResource
 				.login(loginData)
 					.then(
 							//success
-							function () {
-								storeTokenData(data.token);
-								storeSessionData(data);
+							function (responseData) {
+								storeTokenData(responseData.token);
+								storeSessionData(responseData);
 								setConnectionState(true);
-								setCurrentUser(data.user);
+								setCurrentUser(responseData.user);
+								
+								defer.resolve(responseData); 
 							},
 							//error
-							function () {
-								
+							function (errors) {
+								defer.reject(errors); 
 							}
 					);
+			
+			return defer.promise();
 			
 		};
 		
@@ -406,13 +428,14 @@
 		 * Uses the logout request of the user resource and deletes session data on success
 		 * 
 		**/
-		function login(loginData) {
+		function logout() {
+			var defer = $q.defer();
 			
 			UserResource
-				.login(loginData)
+				.logout(loginData)
 					.then(
 							//success
-							function () {
+							function (responseData) {
 								deleteTokenData();
 								deleteSessionData();
 								setConnectionState(false);
@@ -421,10 +444,12 @@
 								refreshConnection();
 							},
 							//error
-							function () {
-								
+							function (errors) {
+								reject(errors);
 							}
 					);
+		
+			return defer.promise();
 			
 		};
         
