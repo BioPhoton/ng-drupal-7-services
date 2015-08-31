@@ -61,18 +61,18 @@
 	    	if(!data.uid) { errors.push('Param uid is required.'); }
 	    	
 	    	if(errors.length != 0) {
-	    		UserChannel.publishUserRetrieveFailed(errors);
+	    		UserChannel.pubUserRetrieveFailed(errors);
 	    		defer.reject(errors); 
 	    		return defer.promise;
 	    	};
 	    	
 	    	$http(requestConfig)
 	    	.success(function(user, status, headers, config){
-	    		UserChannel.publishUserRetrieveConfirmed(user);
+	    		UserChannel.pubUserRetrieveConfirmed(user);
 	    		defer.resolve(user);
 	    	})
 	    	.error(function(data, status, headers, config){
-	    		UserChannel.publishUserRetrieveFailed(data);
+	    		UserChannel.pubUserRetrieveFailed(data);
 	    		defer.reject(data);
 	    	});
 	
