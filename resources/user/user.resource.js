@@ -95,18 +95,13 @@
 		 * @return 	{Promise} 
 		 * 
 		**/	
-		 var login = function( data ) {
+	    function login( data ) {
 						
 			var pathToLogin = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.login;
 				requestConfig = {
 						method :'POST',
 						url : pathToLogin,
-						 headers: {
-							//@TODO use the format of DrupalApiConstant
-							"Accept" 		: "application/json",
-							"Content-Type"	: "application/json",
-						 },
-						 data : {
+						data : {
 								"username" : data.username,
 								"password" : data.password
 						},
@@ -135,6 +130,38 @@
 		         });
 			
 			return defer.promise;
+		};
+		
+		/**
+		 * logout
+		 * 
+		 * Logout a user session
+		 * Method: POST
+		 * Url: http://drupal_instance/api_endpoint/user/logout
+		 * Headers: Content-Type:application/json
+		 * 
+		 * @return 	{Promise}
+		 * 
+		**/	
+		function logout() {
+			 var pathToLogout = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.logout;
+			 	 requestConfig = {
+			 			method: 'POST',
+						url : pathToLogout
+				},
+				defer = $q.defer();
+			 
+			 $http(requestConfig)
+	         .success(function (data, status, headers, config) {
+	           UserResourceChannel.publishUserLogoutConfirmed(data);
+	           defer.resolve(data);
+	         })
+	         .error(function (data, status, headers, config) {
+	           UserResourceChannel.publishUserLogoutFailed(data);
+	           defer.reject(data);
+	         });
+	         
+	         return defer.promise;
 		};
 					
 	};

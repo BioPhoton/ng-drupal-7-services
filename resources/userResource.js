@@ -9,7 +9,7 @@ var UserResourceModules = angular.module('UserResourceModules', ['drupal.configu
 /**
  *  Constants for UserResourceModules 
  */
-UserResourceModules.constant("UserResourceConfig", {
+UserResourceModules.constant("UserResourceConstant", {
    //					   
    // Drupal depending settings
    //
@@ -83,29 +83,29 @@ UserResourceModules.constant("UserResourceConfig", {
  * Notification channel for the user resource 
  * 
  */
-UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceConfig',
-                                           function ($rootScope,   UserResourceConfig) {	
+UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceConstant',
+                                           function ($rootScope,   UserResourceConstant) {	
 	
 	// Retrieve action
 
 	// Publish retrieve token confirmed event
     var publishUserRetrieveConfirmed = function (user) {
-        $rootScope.$broadcast(UserResourceConfig.user_retrieveConfirmed, {user: user});
+        $rootScope.$broadcast(UserResourceConstant.user_retrieveConfirmed, {user: user});
     };
     // Subscribe to user token confirmed event
     var onUserRetrieveConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_retrieveConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_retrieveConfirmed, function(event, args) {
     		handler(args.user);
 	   });	
     };
     
     // Publish user recieve failed event
     var publishUserRetrieveFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_retrieveFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_retrieveFailed, {error: error});
     };
     // Subscribe to user token failed event
     var onUserRetrieveFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_retrieveFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_retrieveFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -114,22 +114,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
 	
 	// Publish user create confirmed event
     var publishUserCreateConfirmed = function (user) {
-        $rootScope.$broadcast(UserResourceConfig.user_createConfirmed, {user: user});
+        $rootScope.$broadcast(UserResourceConstant.user_createConfirmed, {user: user});
     };
     // Subscribe to user create confirmed event
     var onUserCreateConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_createConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_createConfirmed, function(event, args) {
 	    handler(args.user);
 	   });	
     };
   
 	// Publish create create failed event
     var publishUserCreateFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_createFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_createFailed, {error: error});
     };
     // Subscribe to user create failed event
     var onUserCreateFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_createFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_createFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -138,22 +138,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
     
 	// Publish user update confirmed event
     var publishUserUpdateConfirmed = function (user) {
-        $rootScope.$broadcast(UserResourceConfig.user_updateConfirmed, {user: user});
+        $rootScope.$broadcast(UserResourceConstant.user_updateConfirmed, {user: user});
     };
     // Subscribe to user update confirmed event
     var onUserUpdateConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_updateConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_updateConfirmed, function(event, args) {
 	    handler(args.user);
 	   });	
     };
     
 	// Publish user update failed event
     var publishUserUpdateFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_updateFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_updateFailed, {error: error});
     };
     // Subscribe to user update failed event
     var onUserUpdateFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_updateFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_updateFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -162,22 +162,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
     
 	// Publish user delete confirmed event
     var publishUserDeleteConfirmed = function (user) {
-        $rootScope.$broadcast(UserResourceConfig.user_deleteConfirmed, {user: user});
+        $rootScope.$broadcast(UserResourceConstant.user_deleteConfirmed, {user: user});
     };
     // Subscribe to user delete confirmed event
     var onUserDeleteConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_deleteConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_deleteConfirmed, function(event, args) {
 	    handler(args.user);
 	   });	
     };
     
 	// Publish user delete failed event
     var publishUserDeleteFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_deleteFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_deleteFailed, {error: error});
     };
     // Subscribe to user delete failed event
     var onUserDeleteFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_deleteFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_deleteFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -187,21 +187,21 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
 
 	// Publish retrieve index confirmed event
     var publishUserIndexConfirmed = function (data) {
-        $rootScope.$broadcast(UserResourceConfig.user_indexConfirmed, {data: data});
+        $rootScope.$broadcast(UserResourceConstant.user_indexConfirmed, {data: data});
     };
     // Subscribe to user index confirmed event
     var onUserIndexConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_indexConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_indexConfirmed, function(event, args) {
     		handler(args.data);
 	   });	
     };
     // Publish user index failed event
     var publishUserIndexFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_indexFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_indexFailed, {error: error});
     };
     // Subscribe to user token failed event
     var onUserIndexFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_indexFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_indexFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -211,22 +211,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
 
 	// Publish user token confirmed event
     var publishUserTokenConfirmed = function (token) {
-        $rootScope.$broadcast(UserResourceConfig.user_tokenConfirmed, {token: token});
+        $rootScope.$broadcast(UserResourceConstant.user_tokenConfirmed, {token: token});
     };
     // Subscribe to user token confirmed event
     var onUserTokenConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_tokenConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_tokenConfirmed, function(event, args) {
     		handler(args.token);
 	   });	
     };
     
     // Publish user token failed event
     var publishUserTokenFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_tokenFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_tokenFailed, {error: error});
     };
     // Subscribe to user token failed event
     var onUserTokenFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_tokenFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_tokenFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -235,22 +235,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
 
 	// Publish user register confirmed event
     var publishUserRegisterConfirmed = function (respons) {
-        $rootScope.$broadcast(UserResourceConfig.user_registerConfirmed, {respons: respons});
+        $rootScope.$broadcast(UserResourceConstant.user_registerConfirmed, {respons: respons});
     };
     // Subscribe to user register confirmed event
     var onUserRegisterConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_registerConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_registerConfirmed, function(event, args) {
 	    handler(args.respons);
 	   });	
     };
     
     // Publish user register failed event
     var publishUserRegisterFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_registerFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_registerFailed, {error: error});
     };
     // Subscribe to user register failed event
     var onUserRegisterFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_registerFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_registerFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -259,22 +259,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
     
 	// Publish user login confirmed event
     var publishUserLoginConfirmed = function (data) {
-        $rootScope.$broadcast(UserResourceConfig.user_loginConfirmed, {data: data});
+        $rootScope.$broadcast(UserResourceConstant.user_loginConfirmed, {data: data});
     };
     // Subscribe to user login confirmed event
     var onUserLoginConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_loginConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_loginConfirmed, function(event, args) {
 	    handler(args.data);
 	   });	
     };
     
     // Publish user login failed event
     var publishUserLoginFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_loginFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_loginFailed, {error: error});
     };
     // Subscribe to user login failed event
     var onUserLoginFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_loginFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_loginFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -283,22 +283,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
     
 	// Publish user login confirmed event
     var publishUserLogoutConfirmed = function (respons) {
-        $rootScope.$broadcast(UserResourceConfig.user_logoutConfirmed, {respons: respons});
+        $rootScope.$broadcast(UserResourceConstant.user_logoutConfirmed, {respons: respons});
     };
     // Subscribe to user login confirmed event
     var onUserLogoutConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_logoutConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_logoutConfirmed, function(event, args) {
 	    handler(args.respons);
 	   });	
     };
     
     // Publish user login failed event
     var publishUserLogoutFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_logoutFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_logoutFailed, {error: error});
     };
     // Subscribe to user login failed event
     var onUserLogoutFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_logoutFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_logoutFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -307,22 +307,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
         
 	// Publish user requestNewPassword confirmed event
     var publishUserRequestNewPasswordConfirmed = function (respons) {
-        $rootScope.$broadcast(UserResourceConfig.user_requestNewPasswordConfirmed, {respons: respons});
+        $rootScope.$broadcast(UserResourceConstant.user_requestNewPasswordConfirmed, {respons: respons});
     };
     // Subscribe to user requestNewPassword confirmed event
     var onUserRequestNewPasswordConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_requestNewPasswordConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_requestNewPasswordConfirmed, function(event, args) {
 	    handler(args.respons);
 	   });	
     };
     
     // Publish user requestNewPassword failed event
     var publishUserRequestNewPasswordFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_requestNewPasswordFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_requestNewPasswordFailed, {error: error});
     };
     // Subscribe to user requestNewPassword failed event
     var onUserRequestNewPasswordFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_requestNewPasswordFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_requestNewPasswordFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -331,22 +331,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
 
 	// Publish user cancel confirmed event
     var publishUserCancelConfirmed = function (respons) {
-        $rootScope.$broadcast(UserResourceConfig.user_cancelConfirmed, {respons: respons});
+        $rootScope.$broadcast(UserResourceConstant.user_cancelConfirmed, {respons: respons});
     };
     // Subscribe to user cancel confirmed event
     var onUserCancelConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_cancelConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_cancelConfirmed, function(event, args) {
 	    handler(args.respons);
 	   });	
     };
     
     // Publish user cancel failed event
     var publishUserCancelFailed = function (error) { 
-        $rootScope.$broadcast(UserResourceConfig.user_cancelFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_cancelFailed, {error: error});
     };
     // Subscribe to user cancel failed event
     var onUserCancelFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_cancelFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_cancelFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
@@ -355,22 +355,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
     
     // Publish user login failed event
     var publishUserPasswordResetFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_passwordResetFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_passwordResetFailed, {error: error});
     };
     // Subscribe to user login failed event
     var onUserPasswordResetFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_passwordResetFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_passwordResetFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
     
 	// Publish user password_reset confirmed event
     var publishUserPasswordResetConfirmed = function (respons) {
-        $rootScope.$broadcast(UserResourceConfig.user_passwordResetConfirmed, {respons: respons});
+        $rootScope.$broadcast(UserResourceConstant.user_passwordResetConfirmed, {respons: respons});
     };
     // Subscribe to user password_reset confirmed event
     var onUserPasswordResetConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_passwordResetConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_passwordResetConfirmed, function(event, args) {
 	    handler(args.respons);
 	   });	
     };
@@ -380,22 +380,22 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
     
     // Publish user ResendWelcomeEmail failed event
     var publishUserResendWelcomeEmailFailed = function (error) {
-        $rootScope.$broadcast(UserResourceConfig.user_resendWelcomeEmailFailed, {error: error});
+        $rootScope.$broadcast(UserResourceConstant.user_resendWelcomeEmailFailed, {error: error});
     };
     // Subscribe to user ResendWelcomeEmail failed event
     var onUserResendWelcomeEmailFailed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_resendWelcomeEmailFailed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_resendWelcomeEmailFailed, function(event, args) {
 	    handler(args.error);
 	   });	
     };
     
 	// Publish user ResendWelcomeEmail confirmed event
     var publishUserResendWelcomeEmailConfirmed = function (respons) {
-        $rootScope.$broadcast(UserResourceConfig.user_resendWelcomeEmailConfirmed, {respons: respons});
+        $rootScope.$broadcast(UserResourceConstant.user_resendWelcomeEmailConfirmed, {respons: respons});
     };
     // Subscribe to user ResendWelcomeEmail confirmed event
     var onUserResendWelcomeEmailConfirmed = function($scope, handler) {
-    	$scope.$on(UserResourceConfig.user_resendWelcomeEmailConfirmed, function(event, args) {
+    	$scope.$on(UserResourceConstant.user_resendWelcomeEmailConfirmed, function(event, args) {
 	    handler(args.respons);
 	   });	
     };	
@@ -479,8 +479,8 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
  * your_api_endpoint/user/*|<mirror>|GET, PUT, POST, DELETE|Content-Type,Authorization
  * 
 **/
-UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource', 'UserResourceConfig', 'UserResourceChannel', '$http', '$q', 
-                                      function(DrupalApiConstant,   BaseResource,   UserResourceConfig,   UserResourceChannel,   $http,   $q) {
+UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource', 'UserResourceConstant', 'UserResourceChannel', '$http', '$q', 
+                                      function(DrupalApiConstant,   BaseResource,   UserResourceConstant,   UserResourceChannel,   $http,   $q) {
 	
 	// define a new internal private method for this object
     function prepareIndexGetParams(options) {
@@ -516,7 +516,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 * 
 	 */
 	var retrieve = function( uid ) {
-		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/'+uid,
+		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/'+uid,
 		defer = $q.defer(),
 		requestConfig = {
 			method :'GET',
@@ -560,7 +560,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 * 
 	 */
 	var create = function( account ) {
-		var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath,
+		var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath,
 		defer = $q.defer(),
 		requestConfig = {
 			method :'POST',
@@ -611,7 +611,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 * 
 	 */
 	var update = function( uid, data ) {
-		var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid,
+		var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + uid,
 		defer = $q.defer(),
 		requestConfig = {
 			method :'PUT',
@@ -662,7 +662,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 * 
 	 */
 	var _delete = function( uid ) {
-		var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid,
+		var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + uid,
 		defer = $q.defer(),
 		requestConfig = {
 			method :'DELETE',
@@ -712,7 +712,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 */
 	var index = function( options ) {
 		
-		var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath;
+		var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath;
 		if(options) {
 			indexPath += (Object.getOwnPropertyNames(options).length > 0)?'?':'';
 			indexPath += prepareIndexGetParams(options);
@@ -754,7 +754,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 */	
 	 var login = function( username, password ) {
 					
-		var pathToLogin = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.login;
+		var pathToLogin = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.login;
 			requestConfig = {
 					method :'POST',
 					url : pathToLogin,
@@ -795,7 +795,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 * 
 	 */
 	var logout = function() {
-		 var pathToLogout = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.logout;
+		 var pathToLogout = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.logout;
 		 	 requestConfig = {
 		 			method: 'POST',
 					url : pathToLogout,
@@ -835,7 +835,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 */
 	var token = function() {
 		 var defer = $q.defer(),
-         pathToToken = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.token,
+         pathToToken = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.token,
 		 requestConfig = {
 			       url: pathToToken,
 			       method: 'POST'
@@ -869,7 +869,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 */
 	var request_new_password = function(name) {
 		var defer = $q.defer(),
-        pathToRequestNewPassword = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.request_new_password,
+        pathToRequestNewPassword = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.request_new_password,
         requestConfig = {
 			       url: pathToRequestNewPassword,
 			       method: 'POST',
@@ -914,7 +914,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 */
 	var register = function(account){
 		
-		 var pathToRegister = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.register;
+		 var pathToRegister = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.register;
 	 	 	 requestConfig = {
 	 			method: 'POST',
 				url : pathToRegister,
@@ -954,7 +954,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 */
 	var cancel = function(uid) {
 		var defer = $q.defer(),
-        pathToCancel = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid + '/' + UserResourceConfig.actions.cancel,
+        pathToCancel = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + uid + '/' + UserResourceConstant.actions.cancel,
         requestConfig = {
 			       url: pathToCancel,
 			       method: 'POST'
@@ -999,7 +999,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 */
 	var password_reset = function(uid) {
 		var defer = $q.defer(),
-        pathToPasswordReset = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid + '/' + UserResourceConfig.actions.password_reset,
+        pathToPasswordReset = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + uid + '/' + UserResourceConstant.actions.password_reset,
         requestConfig = {
 			       url: pathToPasswordReset,
 			       method: 'POST'
@@ -1044,7 +1044,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 */
 	var resend_welcome_email = function(uid) {
 		var defer = $q.defer(),
-        pathToResendWelcomeEmail = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid + '/' + UserResourceConfig.actions.resend_welcome_email,
+        pathToResendWelcomeEmail = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + uid + '/' + UserResourceConstant.actions.resend_welcome_email,
         requestConfig = {
 			       url: pathToResendWelcomeEmail,
 			       method: 'POST'
