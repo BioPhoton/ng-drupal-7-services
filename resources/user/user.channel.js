@@ -57,7 +57,7 @@
     		BaseChannel.pubRootEmit(UserChannelConstant.user_retrieveConfirmed, args);
     	};
     	
-    	 /**
+    	/**
 		 * subUserRetrieveConfirmed
 		 * 
 		 * subscribe for the UserRetrieveConfirmed event
@@ -134,7 +134,7 @@
 		**/
     	function pubUserLoginConfirmed(args) {
     		var args = {loginionState: args};
-    		console.log('channel pubUserLoginConfirmed'); 
+    		 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_loginConfirmed, args);
     	};
     	
@@ -173,7 +173,7 @@
 		**/
     	function pubUserLoginFailed(args) {
     		var args = {errors: args};
-    		console.log('channel pubUserLoginFailed'); 
+    		
     		BaseChannel.pubRootEmit(UserChannelConstant.user_loginFailed, args);
     	};
     	

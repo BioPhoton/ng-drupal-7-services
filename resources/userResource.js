@@ -886,15 +886,15 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 			return defer.promise;
 		};
 		
-	     $http(requestConfig)
-        .success(function (data) {
-          UserResourceChannel.publishUserRequestNewPasswordConfirmed(data);
-          defer.resolve(data);
-        })
-        .error(function (data) {
-          UserResourceChannel.publishUserRequestNewPasswordFailed(data);
-          defer.reject(data);
-        });
+	    $http(requestConfig)
+	        .success(function (data) {
+	          UserResourceChannel.publishUserRequestNewPasswordConfirmed(data);
+	          defer.resolve(data);
+	        })
+	        .error(function (data) {
+	          UserResourceChannel.publishUserRequestNewPasswordFailed(data);
+	          defer.reject(data);
+	        });
 
 	     return defer.promise;
 	};

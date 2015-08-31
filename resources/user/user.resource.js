@@ -27,7 +27,8 @@
 		
 		//setup and return service            	
         var userResourceService = {
-        	retrieve 		: retrieve
+        	retrieve 	: retrieve,
+        	login 		: login
         };
         
         return userResourceService;
@@ -42,7 +43,7 @@
 		 * Method: POST 
 		 * Url: http://drupal_instance/api_endpoint/user/{UID}
 		 * 
-		 * @params  {Object} data the requests data
+		 * @params  {Object} data The requests data
 		 * 			@key 	{Integer} uid The uid of the user you want to retrieve, required:true, source:post body
 		 * 
 		 * @return 	{Promise}
@@ -78,6 +79,63 @@
 	
 	    	return defer.promise;
 	    };
+	    
+		/**
+		 * login
+		 * 
+		 * Login a user for a new session
+		 * Method: POST
+		 * Url: http://drupal_instance/api_endpoint/user/login
+		 * Headers: Content-Type:application/json
+		 * 
+		 * @params  {Object} data The requests data
+		 * 			@key 	{String} username A valid username, required:true, source:post body
+		 * 			@key 	{String} password A valid password, required:true, source:post body
+		 * 
+		 * @return 	{Promise} 
+		 * 
+		**/	
+		 var login = function( data ) {
+						
+			var pathToLogin = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.login;
+				requestConfig = {
+						method :'POST',
+						url : pathToLogin,
+						 headers: {
+							//@TODO use the format of DrupalApiConstant
+							"Accept" 		: "application/json",
+							"Content-Type"	: "application/json",
+						 },
+						 data : {
+								"username" : data.username,
+								"password" : data.password
+						},
+				},
+				defer = $q.defer(),
+				errors = [];
+	    		
+	    	//if not given
+	    	if(!data.username) { errors.push('Param username is required.'); }
+	    	if(!data.password) { errors.push('Param password is required.'); }
+	    	
+	    	if(errors.length != 0) {
+	    		UserChannel.pubUserLoginFailed(errors);
+	    		defer.reject(errors); 
+	    		return defer.promise;
+	    	};
+				
+			$http(requestConfig)
+				.success(function (data, status, headers, config) {
+					 UserResourceChannel.publishUserLoginConfirmed(data);
+		             defer.resolve(data);
+		         })
+		         .error(function (data, status, headers, config) {
+		        	 UserResourceChannel.publishUserLoginFailed(data);
+		        	 defer.reject(data);
+		         });
+			
+			return defer.promise;
+		};
 					
 	};
 
