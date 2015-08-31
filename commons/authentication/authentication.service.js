@@ -5,12 +5,13 @@
      * Drupal API authentication service
     **/
     angular.module('ngDrupal7Services-3_x.commons.authentication.service', 
-    		[ 'ngDrupal7Services-3_x.commons.configurations', 
-    		  'ngDrupal7Services-3_x.commons.authentication.serviceConstant', 
-    		  'ngDrupal7Services-3_x.commons.authentication.channel',
-    		  'ngDrupal7Services-3_x.resources.system.resource',
-    		  'ngDrupal7Services-3_x.resources.user.resource',
-    		  'common.localstorage', 'ipCookie'
+    		[ 'ngDrupal7Services-3_x.commons.configurations'
+    		  ,'ngDrupal7Services-3_x.commons.authentication.serviceConstant'
+    		  ,'ngDrupal7Services-3_x.commons.authentication.channel'
+    		  ,'ngDrupal7Services-3_x.resources.system.resource'
+    		  ,'ngDrupal7Services-3_x.resources.user.resource'
+    		  ,'ngDrupal7Services-3_x.commons.localstorage'
+    		  ,'ipCookie'
     		 ])
     
     /**
@@ -27,7 +28,17 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    AuthenticationService.$inject = ['$rootScope', 'DrupalApiConstant', 'AuthenticationConstant', 'AuthenticationChannel', 'SystemResource', 'UserResource', '$localstorage', 'ipCookie', '$http', '$q'];
+    AuthenticationService.$inject = ['$rootScope'
+                                     , 'DrupalApiConstant'
+                                     , 'AuthenticationServiceConstant'
+                                     , 'AuthenticationChannel'
+                                     , 'SystemResource'
+                                     , 'UserResource'
+                                     , '$localstorage'
+                                     , 'ipCookie'
+                                     , '$http'
+                                    , '$q'
+                                     ];
     
     /**
      * ApiAuthService
@@ -38,33 +49,26 @@
      * 
     **/
 	/** @ngInject */
-	function AuthenticationService(  $rootScope,    DrupalApiConstant,   AuthenticationConstant,   AuthenticationChannel,   SystemResource,   UserResource,   $localstorage,   ipCookie,   $http,   $q) { 
+	function AuthenticationService(  $rootScope,    
+			DrupalApiConstant
+			 ,   AuthenticationServiceConstant
+			 ,   AuthenticationChannel
+			 ,   SystemResource
+			 ,   UserResource
+			 ,   $localstorage
+			 ,   ipCookie
+			 ,   $http
+			 ,   $q
+			 ) { 
 		
 		//setup and return service            	
         var authenticationService = {
-        		storeTokenData	: storeTokenData,
-    			deleteTokenData	: deleteTokenData,
-    			refreshToken	: refreshToken,
-    			
-    			storeSessionData	: storeSessionData,
-    			deleteSessionData	: deleteSessionData,
-    			
-    			getConnectionState	: getConnectionState,
-    			setConnectionState	: setConnectionState,
-    			
-    			getCurrentUser	: getCurrentUser,
-    			setCurrentUser	: setCurrentUser,
-    			
-    			refreshConnection	: refreshConnection,
-    			getLastConnectTime	: getLastConnectTime,
-    			
-    			login	: login,
-    			logout	: logout
+        		
         };
         
         return authenticationService;
 
-        ////////////
+////////////
         
 		//needed to use the $on method in the authentications channel
 		//http://stackoverflow.com/questions/16477123/how-do-i-use-on-in-a-service-in-angular
@@ -423,6 +427,9 @@
 					);
 			
 		};
+        
+        
+		
         
 	};
 

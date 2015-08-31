@@ -1,5 +1,5 @@
 /**
- * Base functionality of drupay services
+ * Base functionality of Drupal services
  */
 var drupalBaseModules = angular.module('drupalBaseModules', ['drupal.configurations']);
 
