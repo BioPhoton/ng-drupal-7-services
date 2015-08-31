@@ -48,7 +48,7 @@
 		**/
     	function pubUserRetrieveConfirmed(args) {
     		var args = {retrieveionState: args};
-    		
+    		console.log('channel pubUserRetrieveConfirmed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_retrieveConfirmed, args);
     	};
     	
@@ -87,7 +87,7 @@
 		**/
     	function pubUserRetrieveFailed(args) {
     		var args = {errors: args};
-
+    		console.log('channel pubUserRetrieveFailed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_retrieveFailed, args);
     	};
     	

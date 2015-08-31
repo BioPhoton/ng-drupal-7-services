@@ -45,9 +45,10 @@ http://angular-tips.com/blog/2013/08/understanding-service-types/
 		 * 
 		**/
      	function subRootEmit(eventName, _Scope, scopeHandler, mapArgs) {
-     		console.log('in subRootEmit');
+     		
      		//subscribe with rootScope to event and cache unsubscribe function
      		var unsubsSopeHandler = $rootScope.$on(eventName, function(event, args) {
+     				console.log('in subRootEmit publish event: ' + eventName + ' with args: ' + JSON.stringify(mapArgs(args)));
 	     			scopeHandler(mapArgs(args));
 	     		});
      		 
@@ -71,7 +72,7 @@ http://angular-tips.com/blog/2013/08/understanding-service-types/
 		 * 
 		**/
      	function pubRootEmit(eventName, args) {
-     		 console.log('in pubRootEmit');
+     		 console.log('in pubRootEmit publish event: ' + eventName + ' with args: ' + JSON.stringify(args));
      		 $rootScope.$emit(eventName, args);
      	};
      	

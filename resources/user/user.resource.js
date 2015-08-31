@@ -67,14 +67,14 @@
 	    	};
 	    	
 	    	$http(requestConfig)
-	    	.success(function(user, status, headers, config){
-	    		UserChannel.pubUserRetrieveConfirmed(user);
-	    		defer.resolve(user);
-	    	})
-	    	.error(function(data, status, headers, config){
-	    		UserChannel.pubUserRetrieveFailed(data);
-	    		defer.reject(data);
-	    	});
+		    	.success(function(user, status, headers, config){
+		    		UserChannel.pubUserRetrieveConfirmed(user);
+		    		defer.resolve(user);
+		    	})
+		    	.error(function(data, status, headers, config){
+		    		UserChannel.pubUserRetrieveFailed(data);
+		    		defer.reject(data);
+		    	});
 	
 	    	return defer.promise;
 	    };
