@@ -479,8 +479,8 @@ UserResourceModules.service('UserResourceChannel', ['$rootScope', 'UserResourceC
  * your_api_endpoint/user/*|<mirror>|GET, PUT, POST, DELETE|Content-Type,Authorization
  * 
 **/
-UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource', 'UserResourceConfig', 'UserResourceChannel', '$http', '$q', 
-                                      function(drupalApiConfig,   BaseResource,   UserResourceConfig,   UserResourceChannel,   $http,   $q) {
+UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource', 'UserResourceConfig', 'UserResourceChannel', '$http', '$q', 
+                                      function(DrupalApiConstant,   BaseResource,   UserResourceConfig,   UserResourceChannel,   $http,   $q) {
 	
 	// define a new internal private method for this object
     function prepareIndexGetParams(options) {
@@ -516,7 +516,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 * 
 	 */
 	var retrieve = function( uid ) {
-		var retrievePath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/'+uid,
+		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/'+uid,
 		defer = $q.defer(),
 		requestConfig = {
 			method :'GET',
@@ -560,7 +560,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 * 
 	 */
 	var create = function( account ) {
-		var createPath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath,
+		var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath,
 		defer = $q.defer(),
 		requestConfig = {
 			method :'POST',
@@ -611,7 +611,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 * 
 	 */
 	var update = function( uid, data ) {
-		var createPath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + uid,
+		var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid,
 		defer = $q.defer(),
 		requestConfig = {
 			method :'PUT',
@@ -662,7 +662,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 * 
 	 */
 	var _delete = function( uid ) {
-		var createPath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + uid,
+		var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid,
 		defer = $q.defer(),
 		requestConfig = {
 			method :'DELETE',
@@ -712,7 +712,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 */
 	var index = function( options ) {
 		
-		var indexPath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath;
+		var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath;
 		if(options) {
 			indexPath += (Object.getOwnPropertyNames(options).length > 0)?'?':'';
 			indexPath += prepareIndexGetParams(options);
@@ -754,12 +754,12 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 */	
 	 var login = function( username, password ) {
 					
-		var pathToLogin = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.login;
+		var pathToLogin = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.login;
 			requestConfig = {
 					method :'POST',
 					url : pathToLogin,
 					 headers: {
-						//@TODO use the format of drupalApiConfig
+						//@TODO use the format of DrupalApiConstant
 						"Accept" 		: "application/json",
 						"Content-Type"	: "application/json",
 					 },
@@ -795,12 +795,12 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 * 
 	 */
 	var logout = function() {
-		 var pathToLogout = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.logout;
+		 var pathToLogout = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.logout;
 		 	 requestConfig = {
 		 			method: 'POST',
 					url : pathToLogout,
 					headers: {
-						//@TODO use the format of drupalApiConfig
+						//@TODO use the format of DrupalApiConstant
 						"Accept" 		: "application/json",
 						"Content-Type"	: "application/json",
 					},
@@ -835,7 +835,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 */
 	var token = function() {
 		 var defer = $q.defer(),
-         pathToToken = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.token,
+         pathToToken = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.token,
 		 requestConfig = {
 			       url: pathToToken,
 			       method: 'POST'
@@ -869,7 +869,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 */
 	var request_new_password = function(name) {
 		var defer = $q.defer(),
-        pathToRequestNewPassword = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.request_new_password,
+        pathToRequestNewPassword = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.request_new_password,
         requestConfig = {
 			       url: pathToRequestNewPassword,
 			       method: 'POST',
@@ -914,7 +914,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 */
 	var register = function(account){
 		
-		 var pathToRegister = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.register;
+		 var pathToRegister = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + UserResourceConfig.actions.register;
 	 	 	 requestConfig = {
 	 			method: 'POST',
 				url : pathToRegister,
@@ -954,7 +954,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 */
 	var cancel = function(uid) {
 		var defer = $q.defer(),
-        pathToCancel = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + uid + '/' + UserResourceConfig.actions.cancel,
+        pathToCancel = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid + '/' + UserResourceConfig.actions.cancel,
         requestConfig = {
 			       url: pathToCancel,
 			       method: 'POST'
@@ -999,7 +999,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 */
 	var password_reset = function(uid) {
 		var defer = $q.defer(),
-        pathToPasswordReset = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + uid + '/' + UserResourceConfig.actions.password_reset,
+        pathToPasswordReset = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid + '/' + UserResourceConfig.actions.password_reset,
         requestConfig = {
 			       url: pathToPasswordReset,
 			       method: 'POST'
@@ -1044,7 +1044,7 @@ UserResourceModules.service('UserResource', [ 'drupalApiConfig', 'BaseResource',
 	 */
 	var resend_welcome_email = function(uid) {
 		var defer = $q.defer(),
-        pathToResendWelcomeEmail = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/' + uid + '/' + UserResourceConfig.actions.resend_welcome_email,
+        pathToResendWelcomeEmail = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConfig.resourcePath + '/' + uid + '/' + UserResourceConfig.actions.resend_welcome_email,
         requestConfig = {
 			       url: pathToResendWelcomeEmail,
 			       method: 'POST'

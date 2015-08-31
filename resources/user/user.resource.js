@@ -40,30 +40,16 @@
 		 * Returns the user fetched by uid
 		 * 
 		 * Method: POST 
-		 * Url: http://drupal_instance/api_endpoint/user/connect
-		 * Headers: Content-Type:application/json
+		 * Url: http://drupal_instance/api_endpoint/user/{UID}
 		 * 
 		 * @params  {Object} data the requests data
-		 * 			@key 	{String} uid The uid of the user you want to retrieve, required:true, source:post body
+		 * 			@key 	{Integer} uid The uid of the user you want to retrieve, required:true, source:post body
 		 * 
 		 * @return 	{Promise}
 		 * 
 		**/
-        /*
-    	 * 
-    	 * 
-    	 * Retrieve a user
-    	 * Method: GET
-    	 * Url: http://drupal_instance/api_endpoint/user/{UID}
-    	 * Headers: Content-Type:application/json
-    	 * 
-    	 * @param 	{Integer} uid The uid of the user to retrieve., required:true, source:path
-    	 * 
-    	 * @return 	{Promise} 
-    	 * 
-    	 */
     	function retrieve( data ) {
-    		var retrievePath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + UserResourceConfig.resourcePath + '/'+data.uid,
+    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/'+data.uid,
     		defer = $q.defer(),
     		requestConfig = {
     			method :'GET',
