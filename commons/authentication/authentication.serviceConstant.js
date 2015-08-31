@@ -6,7 +6,7 @@
 	 *  
 	 *  NOTE: if you want to change this constant do this in your app.js config section
 	**/
-	var AuthenticationConstant =  {
+	var AuthenticationServiceConstant =  {
 		//the drupals guest user obj
 		anonymousUser : {
 				"uid"		: 0,
@@ -23,6 +23,6 @@
 	**/
 	angular
 	    .module('ngDrupal7Services-3_x.commons.authentication.serviceConstant', [])
-	    .constant("AuthenticationConstant", AuthenticationConstant);
+	    .constant("AuthenticationServiceConstant", AuthenticationServiceConstant);
 
 })();

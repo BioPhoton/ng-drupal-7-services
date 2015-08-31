@@ -12,7 +12,7 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	 **/
-	hTTPConfigurations.$inject = [ $httpProvider ];
+	hTTPConfigurations.$inject = [ '$httpProvider' ];
 	
 	
 	/**
@@ -28,7 +28,7 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	 **/
-	runFunction.$inject = [ $http ];
+	runFunction.$inject = [ '$http' ];
 	
 	function runFunction($http) {
 		console.log( $http.defaults.headers.common); 
