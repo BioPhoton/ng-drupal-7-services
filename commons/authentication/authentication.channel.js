@@ -23,11 +23,17 @@
 		//setup and return service            	
         var authenticationChannelService = {
         		
-        	//Connection state updated
+    		//Authentication login request
+    		pubAuthenticationLoginConfirmed 	: pubAuthenticationLoginConfirmed,
+    		subAuthenticationLoginConfirmed		: subAuthenticationLoginConfirmed,
+    		pubAuthenticationLoginFailed 		: pubAuthenticationLoginFailed,
+    		subAuthenticationLoginFailed		: subAuthenticationLoginFailed,	
+        		
+        	// Connection state updated
     		pubAuthenticationConnectionStateUpdated 	: pubAuthenticationConnectionStateUpdated,
     		subAuthenticationConnectionStateUpdated		: subAuthenticationConnectionStateUpdated,
     		
-    		// Current User Updated
+    		// Current user updated
     		pubAuthenticationCurrentUserUpdated		: pubAuthenticationCurrentUserUpdated,
     		subAuthenticationCurrentUserUpdated		: subAuthenticationCurrentUserUpdated,
         };
@@ -35,6 +41,165 @@
         return authenticationChannelService;
 
         ////////////
+        
+        //Authentication login request functions
+        
+        /**
+		 * pubAuthenticationLoginConfirmed
+		 * 
+		 * Publish the AuthenticationLoginConfirmed event with giver args 
+	     *
+		 * @param 	{Object} args The events arguments 
+		 * 
+		 * 
+		**/
+    	function pubAuthenticationLoginConfirmed(args) {
+    		var args = {loginionState: args};
+    		 
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.user_loginConfirmed, args);
+    	};
+    	
+    	 /**
+		 * subAuthenticationLoginConfirmed
+		 * 
+		 * subscribe for the AuthenticationLoginConfirmed event
+	     *
+		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationLoginConfirmed function
+		 * @param 	{function} scopeHandler The callback handler for AuthenticationLoginConfirmed event
+		 * 
+		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+		 * 
+		**/
+    	function subAuthenticationLoginConfirmed(_Scope, scopeHandler) {
+    		var prepArgs = function (args) {
+    			return args; 
+    		};
+    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.user_loginConfirmed, _Scope, scopeHandler, prepArgs);
+    		
+    		return unsubsSopeHandler;
+    	};
+    	
+    	//###############
+    	
+        
+        /**
+		 * pubAuthenticationLoginFailed
+		 * 
+		 * Publish the AuthenticationLoginConfirmed event with giver args 
+	     *
+		 * @param 	{Object} args The events arguments 
+		 * 
+		 * 
+		**/
+    	function pubAuthenticationLoginFailed(args) {
+    		var args = {errors: args};
+    		
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.user_loginFailed, args);
+    	};
+    	
+    	/**
+		 * subAuthenticationLoginFailed
+		 * 
+		 * subscribe for the AuthenticationLoginFailed event
+	     *
+		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationLoginFailed function
+		 * @param 	{function} scopeHandler The callback handler for AuthenticationLoginFailed event
+		 * 
+		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+		 * 
+		**/
+    	function subAuthenticationLoginFailed(_Scope, scopeHandler) {
+    		var prepArgs = function (args) { 
+    			return args; 
+    		};
+    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.user_loginFailed, _Scope, scopeHandler, prepArgs);
+    		
+    		return unsubsSopeHandler;
+    	};
+
+    	//________________________________________________________________________________________________________________________________________
+
+    	//Authentication logout request functions
+
+    	/**
+    	 * pubAuthenticationLogoutConfirmed
+    	 * 
+    	 * Publish the AuthenticationLogoutConfirmed event with giver args 
+    	 *
+    	 * @param 	{Object} args The events arguments 
+    	 * 
+    	 * 
+    	**/
+    	function pubAuthenticationLogoutConfirmed(args) {
+    		var args = args;
+    		console.log('channel pubAuthenticationLogoutConfirmed'); 
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.user_logoutConfirmed, args);
+    	};
+
+    	/**
+    	 * subAuthenticationLogoutConfirmed
+    	 * 
+    	 * subscribe for the AuthenticationLogoutConfirmed event
+    	 *
+    	 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationLogoutConfirmed function
+    	 * @param 	{function} scopeHandler The callback handler for AuthenticationLogoutConfirmed event
+    	 * 
+    	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+    	 * 
+    	**/
+    	function subAuthenticationLogoutConfirmed(_Scope, scopeHandler) {
+    		var prepArgs = function (args) {
+    			return args; 
+    		};
+    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.user_logoutConfirmed, _Scope, scopeHandler, prepArgs);
+    		
+    		return unsubsSopeHandler;
+    	};
+
+    	//###############
+
+
+    	/**
+    	 * pubAuthenticationLogoutFailed
+    	 * 
+    	 * Publish the AuthenticationLogoutConfirmed event with giver args 
+    	 *
+    	 * @param 	{Object} args The events arguments 
+    	 * 
+    	 * 
+    	**/
+    	function pubAuthenticationLogoutFailed(args) {
+    		var args = {errors: args};
+    		console.log('channel pubAuthenticationLogoutFailed'); 
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.user_logoutFailed, args);
+    	};
+
+    	/**
+    	 * subAuthenticationLogoutFailed
+    	 * 
+    	 * subscribe for the AuthenticationLogoutFailed event
+    	 *
+    	 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationLogoutFailed function
+    	 * @param 	{function} scopeHandler The callback handler for AuthenticationLogoutFailed event
+    	 * 
+    	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+    	 * 
+    	**/
+    	function subAuthenticationLogoutFailed(_Scope, scopeHandler) {
+    		var prepArgs = function (args) { 
+    			return args; 
+    		};
+    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_logoutFailed, _Scope, scopeHandler, prepArgs);
+    		
+    		return unsubsSopeHandler;
+    	};
+    	
+    	//__________________________________________________________________________________________________________________________________________
+    	
         
         /**
 		 * pubAuthenticationConnectionStateUpdated

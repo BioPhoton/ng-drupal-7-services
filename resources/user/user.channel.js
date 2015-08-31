@@ -174,7 +174,7 @@
     	
         
         /**
-		 * pubUserLoginConfirmed
+		 * pubUserLoginFailed
 		 * 
 		 * Publish the UserLoginConfirmed event with giver args 
 	     *
@@ -253,7 +253,7 @@
 
 
     	/**
-    	 * pubUserLogoutConfirmed
+    	 * pubUserLogoutFailed
     	 * 
     	 * Publish the UserLogoutConfirmed event with giver args 
     	 *
