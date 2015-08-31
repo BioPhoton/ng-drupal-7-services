@@ -27,10 +27,7 @@
 		
 		//setup and return service            	
         var userResourceService = {
-			connect 		: connect,
-			get_variable 	: get_variable,
-			set_variable 	: set_variable,
-			del_variable 	: del_variable
+        	retrieve 		: retrieve
         };
         
         return userResourceService;
