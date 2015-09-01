@@ -152,7 +152,7 @@
 		**/
 		function getLastConnectTime() {
 			return lastConnectTime;
-		}
+		};
 		
 		/**
 		 * setLastConnectTime
@@ -164,7 +164,7 @@
 			var newTimeInMs = parseInt(newTimeInMs);
 			if(newTimeInMs === NaN || newTimeInMs < 0) return;
 			lastConnectTime = newTimeInMs;
-		}
+		};
 		
 		/**
 		 * getCurrentUser
@@ -176,7 +176,7 @@
 		**/
 		function getCurrentUser() {
 			return currentUser;
-		}
+		};
 
 		/**
 		 * setCurrentUser
@@ -249,7 +249,7 @@
 			else { defer.resolve(localStorageToken); }
 			
 			return defer.promise;
-		}
+		};
 		
 		/**
 		 * refreshTokenFromLocalStorage
@@ -462,10 +462,7 @@
 			return defer.promise;
 			
 		};
-        
-        
-		
-        
+  
 	};
 
 })();
