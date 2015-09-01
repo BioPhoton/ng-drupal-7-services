@@ -23,12 +23,18 @@
 		//setup and return service            	
         var authenticationChannelService = {
         		
-    		//Authentication login request
+    		// login request
     		pubAuthenticationLoginConfirmed 	: pubAuthenticationLoginConfirmed,
     		subAuthenticationLoginConfirmed		: subAuthenticationLoginConfirmed,
     		pubAuthenticationLoginFailed 		: pubAuthenticationLoginFailed,
     		subAuthenticationLoginFailed		: subAuthenticationLoginFailed,	
-        		
+        	
+    		// logout request
+    		pubAuthenticationLogoutConfirmed 	: pubAuthenticationLogoutConfirmed,
+        	subAuthenticationLogoutConfirmed	: subAuthenticationLogoutConfirmed,
+        	pubAuthenticationLogoutFailed 		: pubAuthenticationLogoutFailed,
+        	subAuthenticationLogoutFailed		: subAuthenticationLogoutFailed,
+    		
         	// Connection state updated
     		pubAuthenticationConnectionStateUpdated 	: pubAuthenticationConnectionStateUpdated,
     		subAuthenticationConnectionStateUpdated		: subAuthenticationConnectionStateUpdated,
@@ -56,7 +62,7 @@
     	function pubAuthenticationLoginConfirmed(args) {
     		var args = {loginionState: args};
     		 
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.user_loginConfirmed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_loginConfirmed, args);
     	};
     	
     	 /**
@@ -75,7 +81,7 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.user_loginConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_loginConfirmed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -95,7 +101,7 @@
     	function pubAuthenticationLoginFailed(args) {
     		var args = {errors: args};
     		
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.user_loginFailed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_loginFailed, args);
     	};
     	
     	/**
@@ -114,7 +120,7 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.user_loginFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_loginFailed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -135,7 +141,7 @@
     	function pubAuthenticationLogoutConfirmed(args) {
     		var args = args;
     		console.log('channel pubAuthenticationLogoutConfirmed'); 
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.user_logoutConfirmed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_logoutConfirmed, args);
     	};
 
     	/**
@@ -154,7 +160,7 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.user_logoutConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_logoutConfirmed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -174,7 +180,7 @@
     	function pubAuthenticationLogoutFailed(args) {
     		var args = {errors: args};
     		console.log('channel pubAuthenticationLogoutFailed'); 
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.user_logoutFailed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_logoutFailed, args);
     	};
 
     	/**
@@ -193,7 +199,7 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_logoutFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_logoutFailed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};

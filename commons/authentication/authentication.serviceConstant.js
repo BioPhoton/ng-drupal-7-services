@@ -16,7 +16,10 @@
 				"cache"		: 0,
 				"timestamp"	: Date.now()
 		}
+			
 	};
+	
+	
     
 	/**
 	 * API authentication service constant

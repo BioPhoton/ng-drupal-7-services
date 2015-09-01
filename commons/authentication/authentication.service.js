@@ -61,7 +61,23 @@
 			 ,   $q
 			 ) { 
 		
-		//setup and return service            	
+		//needed to use the $on method in the authentications channel
+		//http://stackoverflow.com/questions/16477123/how-do-i-use-on-in-a-service-in-angular
+		var scope = $rootScope.$new(); // or $new(true) if you want an isolate scope
+		
+		var userIsConected = false,
+			currentUser	 = AuthenticationServiceConstant.anonymousUser,
+			// time of last successful connection in ms
+			lastConnectTime  = 0,
+			sessionCookieOptions =  { 	
+				domain 			: DrupalApiConstant.drupal_instance,
+				path			: '/',
+				expires			: DrupalApiConstant.session_expiration_time,
+				expirationUnit 	: DrupalApiConstant.session_expiration_unite,
+			};
+		
+		
+		//setup and return service        
         var authenticationService = {
         		storeTokenData	: storeTokenData,
     			deleteTokenData	: deleteTokenData,
@@ -86,21 +102,7 @@
         return authenticationService;
 
 ////////////
-        
-		//needed to use the $on method in the authentications channel
-		//http://stackoverflow.com/questions/16477123/how-do-i-use-on-in-a-service-in-angular
-		var scope = $rootScope.$new(); // or $new(true) if you want an isolate scope
-		
-		var userIsConected = false,
-			currentUser	 = AuthenticationConstant.anonymousUser,
-			// time of last successful connection in ms
-			lastConnectTime  = 0,
-			sessionCookieOptions = { 	domain 			: DrupalApiConstant.drupal_instance,
-										path			: '/',
-										expires			: DrupalApiConstant.session_expiration_time,
-										expirationUnit 	: DrupalApiConstant.session_expiration_unite,
-								   };
-		
+      
 		/**
 		 * storeTokenData
 		 * 
@@ -186,7 +188,7 @@
 			if(currentUser != newUser) {
 			 
 	        	currentUser = newUser;
-	      	    AuthenticationChannel.publishCurrentUserUpdated(newUser);
+	      	    AuthenticationChannel.pubAuthenticationCurrentUserUpdated(newUser);
 	        }
 		};
 		
@@ -211,7 +213,7 @@
 		function setConnectionState(newState) {
 	        if(newState != userIsConected) {
 	          userIsConected = newState;
-	      	  AuthenticationChannel.publishConnectionStateUpdated(userIsConected);
+	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
 	        }
 		};
 		
@@ -382,6 +384,7 @@
 		 *  
 		**/
 		function deleteSessionData() {
+			console.log(sessionCookieOptions); 
 			//delete session cookies
 			ipCookie.remove($localstorage.getItem('session_name'), sessionCookieOptions.path);
 			//remove headers
@@ -410,15 +413,17 @@
 								setConnectionState(true);
 								setCurrentUser(responseData.user);
 								
+								AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData);
 								defer.resolve(responseData); 
 							},
 							//error
 							function (errors) {
+								AuthenticationChannel.pubAuthenticationLoginFailed(errors);
 								defer.reject(errors); 
 							}
 					);
 			
-			return defer.promise();
+			return defer.promise;
 			
 		};
 		
@@ -432,24 +437,29 @@
 			var defer = $q.defer();
 			
 			UserResource
-				.logout(loginData)
+				.logout()
 					.then(
 							//success
 							function (responseData) {
 								deleteTokenData();
 								deleteSessionData();
 								setConnectionState(false);
-								setCurrentUser(AuthenticationConstant.anonymousUser);
+								setCurrentUser(AuthenticationServiceConstant.anonymousUser);
 								//@TODO remove
 								refreshConnection();
+								
+								AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData);
+								defer.resolve(responseData); 
+								
 							},
 							//error
 							function (errors) {
-								reject(errors);
+								AuthenticationChannel.pubAuthenticationLogoutFailed(errors);
+								defer.reject(errors); 
 							}
 					);
 		
-			return defer.promise();
+			return defer.promise;
 			
 		};
         
