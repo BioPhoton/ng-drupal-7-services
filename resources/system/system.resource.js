@@ -49,39 +49,29 @@
 		 * @return 	{Promise}
 		 * 
 		**/
-		function connect() {
+        function connect() {
 			
 			//undefined check
 	    	//data = (data)?data:{};
 	    	
 			//validation of params
-	    	var errors = [],
-			defer = $q.defer();	
-	    
-	    	if(errors.length != 0) {
-	    		SystemChannel.pubSystemConnectFailed(errors);
-	    		defer.reject(errors); 
-	    		return defer.promise;
-	    	};
+	    	var errors = [];
 	    	
-			
 			var connectPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
 				requestConfig = {
 						method :'POST',
 						url : connectPath
 				};
 			
-			$http(requestConfig)
+			return $http(requestConfig)
 				.success(function(responseData, status, headers, config){
 					SystemChannel.pubSystemConnectConfirmed(responseData);
-					defer.resolve(responseData);
+					return responseData
 				})
 				.error(function(responseData, status, headers, config){
 					SystemChannel.pubSystemConnectFailed(responseData);
-					defer.reject(responseData);
+					return responseData
 				});
-			
-			return defer.promise;
 	
 		};
 		

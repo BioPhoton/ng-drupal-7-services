@@ -48,7 +48,11 @@
 			currentUser	 = AuthenticationServiceConstant.anonymousUser,
 			// time of last successful connection in ms
 			lastConnectTime  = 0,
+			
 			authenticationHeaders = null,
+			
+			sessid = null,
+			session_name = null,
 			sessionCookieOptions =  { 	
 				domain 			: DrupalApiConstant.drupal_instance,
 				path			: '/',
@@ -152,7 +156,7 @@ Sess
 			var defer = $q.defer();
 			
 			//check token
-			refreshToken().then(
+			refreshTokenFromServer().then(
 					//initToken success
 					function(token) {	
 						SystemResource.connect().then(
@@ -189,28 +193,6 @@ Sess
 		
 			return defer.promise;
 		};
-		
-		/**
-		 * refreshToken
-		 * 
-		 * fetches the token from local storage
-		 * if token is not saved in local storage this function fetches a new token from server
-		 * 
-		 * @return {Promise} with new token 
-		**/
-		function refreshToken() {
-			var defer = $q.defer();
-				
-			//refresh token from server
-			refreshTokenFromServer().then(
-				//refreshTokenFromServer success
-				function(token) { defer.resolve(token); },
-				//refreshTokenFromServer error
-				function() { defer.reject(false); }
-			);
-		
-			return defer.promise;
-		}
 		
 		/**
 		 * refreshTokenFromServer
@@ -329,7 +311,11 @@ Sess
 		 * 
 		 * 
 		**/
-        var saveSessionData = function (data) {			
+        var saveSessionData = function (data) {		
+        	//save data in service
+        	sessid = data.sessid;
+			session_name = data.session_name;
+			
 			//store session cookies
 			ipCookie(data.session_name, data.sessid, sessionCookieOptions);
 			//set headers
@@ -338,7 +324,7 @@ Sess
 		
 		var deleteSessionData = function () {
 			//delete session cookies
-			ipCookie.remove($localstorage.getItem('session_name'), sessionCookieOptions.path);
+			ipCookie.remove(session_name, sessionCookieOptions.path);
 			//remove headers
 			$http.defaults.withCredentials = false;
 		};
