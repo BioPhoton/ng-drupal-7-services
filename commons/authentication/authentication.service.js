@@ -10,7 +10,6 @@
     		  ,'ngDrupal7Services-3_x.commons.authentication.channel'
     		  ,'ngDrupal7Services-3_x.resources.system.resource'
     		  ,'ngDrupal7Services-3_x.resources.user.resource'
-    		  ,'ngDrupal7Services-3_x.commons.localstorage'
     		  ,'ipCookie'
     		 ])
     
@@ -28,7 +27,7 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    AuthenticationService.$inject = ['$rootScope', 'DrupalApiConstant', 'AuthenticationServiceConstant', 'AuthenticationChannel', 'SystemResource', 'UserResource', '$localstorage', 'ipCookie', '$http', '$q'];
+    AuthenticationService.$inject = ['$rootScope', 'DrupalApiConstant', 'AuthenticationServiceConstant', 'AuthenticationChannel', 'SystemResource', 'UserResource', 'ipCookie', '$http', '$q'];
     
     /**
      * ApiAuthService
@@ -39,7 +38,7 @@
      * 
     **/
 	/** @ngInject */
-	function AuthenticationService( $rootScope, DrupalApiConstant, AuthenticationServiceConstant, AuthenticationChannel, SystemResource, UserResource, $localstorage, ipCookie, $http, $q ) { 
+	function AuthenticationService( $rootScope, DrupalApiConstant, AuthenticationServiceConstant, AuthenticationChannel, SystemResource, UserResource, ipCookie, $http, $q ) { 
 		
 		//needed to use the $on method in the authentications channel
 		//http://stackoverflow.com/questions/16477123/how-do-i-use-on-in-a-service-in-angular
@@ -56,13 +55,12 @@
 				expires			: DrupalApiConstant.session_expiration_time,
 				expirationUnit 	: DrupalApiConstant.session_expiration_unite,
 			};
-		
-		
+Sess		
 		//setup and return service        
         var authenticationService = {
         		login	: login,
     			logout	: logout,
-    			refreshConnection	: refreshConnection,
+    			refreshConnection			: refreshConnection,
     			getLastConnectTime			: getLastConnectTime,
     			getConnectionState			: getConnectionState,
         		getAuthenticationHeaders 	: getAuthenticationHeaders
@@ -87,7 +85,7 @@
 					.then(
 							//success
 							function (responseData) {
-								saveTokenData(responseData.token);
+								setAuthenticationHeaders(responseData.token);
 								saveSessionData(responseData);
 								setConnectionState(true);
 								setCurrentUser(responseData.user);
@@ -120,7 +118,7 @@
 					.then(
 						//success
 						function (responseData) {
-							deleteTokenData();
+							delAuthenticationHeaders();
 							deleteSessionData();
 							setConnectionState(false);
 							setCurrentUser(AuthenticationServiceConstant.anonymousUser);
@@ -192,7 +190,6 @@
 			return defer.promise;
 		};
 		
-		
 		/**
 		 * refreshToken
 		 * 
@@ -203,46 +200,17 @@
 		**/
 		function refreshToken() {
 			var defer = $q.defer();
-			
-			//if refreshTokenFromLocalStorage is not possible
-			var localStorageToken = refreshTokenFromLocalStorage();
-			if(!localStorageToken) {
 				
-				//refresh token from server
-				refreshTokenFromServer().then(
-					//refreshTokenFromServer success
-					function(token) { defer.resolve(token); },
-					//refreshTokenFromServer error
-					function() { defer.reject(false); }
-				);
-				
-			} 
-			//if refreshTokenFromLocalStorage was possible
-			else { defer.resolve(localStorageToken); }
-			
+			//refresh token from server
+			refreshTokenFromServer().then(
+				//refreshTokenFromServer success
+				function(token) { defer.resolve(token); },
+				//refreshTokenFromServer error
+				function() { defer.reject(false); }
+			);
+		
 			return defer.promise;
 		}
-		
-		/**
-		 * refreshTokenFromLocalStorage
-		 * 
-		 * if token is saved in local storage set token value to http headers
-		 * this function is needed when lounging app to check if user has token already 
-		 * 
-		 * @return {Boolean||String} new token
-		 *  
-		**/
-		function refreshTokenFromLocalStorage() {
-			//load token from local storage or flase
-			var token = $localstorage.getItem('token', false);
-			
-			if (token) {
-				saveTokenData(token);
-				return token
-			}
-			
-			return false;
-		};
 		
 		/**
 		 * refreshTokenFromServer
@@ -258,7 +226,7 @@
 			UserResource.token().then(
 				//UserResource.token success
 				function(token){
-					 saveTokenData(token);
+					 setAuthenticationHeaders(token);
 					 defer.resolve(token);
 				},
 				//UserResource.token error
@@ -268,39 +236,6 @@
 			);
 
 			return defer.promise;
-		};
-		
-		/**
-		 * deleteTokenData
-		 * 
-		 * Deletes the auth token in local storage and the http header
-		 * 
-		**/
-		function deleteTokenData() {
-				$localstorage.removeItem('token');
-				authenticationHeaders = null;
-		};
-        
-		/**
-		 * saveTokenData
-		 * 
-		 * Stores the auth token in local storage and the http header.
-		 * 
-		 * @params  {String} newToken the new auth token
-		 * 
-		**/
-		function saveTokenData(newToken) {
-			newToken = (newToken)?newToken:false;
-		
-			if(newToken !== false) { 
-				
-				if( newToken != $localstorage.getItem('token', false) ) {
-					$localstorage.setItem('token', newToken);
-				}
-				
-				setAuthenticationHeaders(newToken); 
-
-			}
 		};
 		
 		/**
@@ -362,7 +297,7 @@
         function getAuthenticationHeaders() {
         	return authenticationHeaders;
         };
-        
+
         /**
 		 * setAuthenticationHeaders
 		 * 
@@ -376,6 +311,37 @@
 					'X-CSRF-TOKEN'  : newToken
 			};
         };
+        
+        /**
+		 * delAuthenticationHeaders
+		 * 
+		 * Deletes the authentication header obj
+		 * 
+		**/
+        function delAuthenticationHeaders() {
+        	 authenticationHeaders = null;
+        };
+        
+        /**
+		 * saveSessionData
+		 * 
+		 * Saves the session id and name in cookies
+		 * 
+		 * 
+		**/
+        var saveSessionData = function (data) {			
+			//store session cookies
+			ipCookie(data.session_name, data.sessid, sessionCookieOptions);
+			//set headers
+			$http.defaults.withCredentials = true;
+		};
+		
+		var deleteSessionData = function () {
+			//delete session cookies
+			ipCookie.remove($localstorage.getItem('session_name'), sessionCookieOptions.path);
+			//remove headers
+			$http.defaults.withCredentials = false;
+		};
 		
 		/**
 		 * getCurrentUser

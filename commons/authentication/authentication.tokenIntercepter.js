@@ -54,8 +54,6 @@
 	        }]);
 
 	        if (tokenHeaders) {
-	        	// @TODO set only if logged in or needed
-	    		$http.defaults.withCredentials = true; 
 	            angular.extend(config.headers, tokenHeaders);
 	        }
 
