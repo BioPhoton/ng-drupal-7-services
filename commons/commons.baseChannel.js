@@ -8,7 +8,6 @@ http://angular-tips.com/blog/2013/08/understanding-service-types/
 	angular.module('ngDrupal7Services-3_x.commons.baseChannel', [])
 		   .factory('BaseChannel', BaseChannel);
 
-	
 	/**
 	 * Manually identify dependencies for minification-safe code
 	 * 
