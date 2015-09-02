@@ -72,17 +72,16 @@
 	    			method 	:'GET'
 	    		};
 	    	
-	    	$http(requestConfig)
+    		return $http(requestConfig)
 		    	.success(function(responseData, status, headers, config){
 		    		UserChannel.pubUserRetrieveConfirmed(responseData);
-		    		defer.resolve(responseData);
+		    		return responseData;
 		    	})
-		    	.error(function(data, status, headers, config){
-		    		UserChannel.pubUserRetrieveFailed(data);
-		    		defer.reject(data);
+		    	.error(function(responseData, status, headers, config){
+		    		UserChannel.pubUserRetrieveFailed(responseData);
+		    		return responseData;
 		    	});
-	
-	    	return defer.promise;
+
 	    };
 	    
 		/**
@@ -127,17 +126,16 @@
 						},
 				};
 	    						
-			$http(requestConfig)
+			return $http(requestConfig)
 				.success(function (responseData, status, headers, config) {
 					 UserChannel.pubUserLoginConfirmed(responseData);
-		             defer.resolve(responseData);
+					 return responseData;
 		         })
-		         .error(function (data, status, headers, config) {
-		        	 UserChannel.pubUserLoginFailed(data);
-		        	 defer.reject(data);
+		         .error(function (responseData, status, headers, config) {
+		        	 UserChannel.pubUserLoginFailed(responseData);
+		        	 return responseData;
 		         });
-			
-			return defer.promise;
+		
 		};
 		
 		/**
@@ -156,20 +154,18 @@
 			 	requestConfig = {
 			 			url 	: pathToLogout,
 			 			method	: 'POST'
-				},
-				defer = $q.defer();
+				};
 			 
-			 $http(requestConfig)
+			return  $http(requestConfig)
 	         .success(function (responseData, status, headers, config) {
 	           UserChannel.pubUserLogoutConfirmed(responseData);
-	           defer.resolve(responseData);
+	           return responseData;
 	         })
-	         .error(function (data, status, headers, config) {
-	           UserChannel.pubUserLogoutFailed(data);
-	           defer.reject(data);
+	         .error(function (responseData, status, headers, config) {
+	           UserChannel.pubUserLogoutFailed(responseData);
+	           return responseData;
 	         });
-	         
-	         return defer.promise;
+	        
 		};
 		
 		/**
@@ -185,24 +181,22 @@
 		**/
 		function token() {
 			
-			var  defer = $q.defer(),
-		         pathToToken = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.token,
+			var  pathToToken = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.token,
 				 requestConfig = {
 			     	url		: pathToToken,
 			     	method	: 'POST'
 				};
 				
-		    $http(requestConfig)
+			return $http(requestConfig)
 		         .success(function (responseData) {
 		        	 UserChannel.pubUserTokenConfirmed(responseData);
-		        	 defer.resolve(responseData);
+		        	 return responseData;
 		         })
-		         .error(function (data) {
-		        	 UserChannel.pubUserTokenFailed(data);
-		        	 defer.reject(data);
+		         .error(function (responseData) {
+		        	 UserChannel.pubUserTokenFailed(responseData);
+		        	 return responseData;
 		         });
 
-		    return defer.promise;
 		};
 					
 	};

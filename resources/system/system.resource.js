@@ -124,17 +124,16 @@
 				requestConfig.data['default'] = data.default;
 			}
 
-			$http(requestConfig)
+			return $http(requestConfig)
 				.success(function(responseData, status, headers, config){
 					SystemChannel.pubSystemGetVariableConfirmed(responseData);
-					defer.resolve(responseData);
+					return responseData;
 				})
 				.error(function(responseData, status, headers, config){
 					SystemChannel.pubSystemGetVariableFailed(responseData);
-					defer.reject(responseData);
+					return responseData;
 				});
 			
-			return defer.promise;
 		};
 		
 		/**
@@ -181,17 +180,16 @@
 						}
 				};
 
-			$http(requestConfig)
+			return $http(requestConfig)
 				.success(function(responseData, status, headers, config){
 					SystemChannel.pubSystemSetVariableConfirmed(responseData);
-					defer.resolve(responseData);
+					return responseData;
 				})
 				.error(function(responseData, status, headers, config){
 					SystemChannel.pubSystemSetVariableFailed(responseData);
-					defer.reject(responseData);
+					return responseData;
 				});
 			
-			return defer.promise;
 		};
 		
 		/**
@@ -236,17 +234,16 @@
 						}
 				};
 			
-			$http(requestConfig)
+			return $http(requestConfig)
 				.success(function(responseData, status, headers, config){
 					SystemChannel.pubSystemDelVariableConfirmed(responseData);
-					defer.resolve(responseData);
+					return responseData
 				})
 				.error(function(responseData, status, headers, config){
 					SystemChannel.pubSystemDelVariableFailed(responseData);
-					defer.reject(responseData);
+					return responseData;
 				});
 			
-			return defer.promise;
 		};
 	
 	};
