@@ -62,13 +62,10 @@
         var authenticationService = {
         		login	: login,
     			logout	: logout,
-        		
     			refreshConnection	: refreshConnection,
-    			
     			getLastConnectTime			: getLastConnectTime,
     			getConnectionState			: getConnectionState,
-        		getAuthenticationHeaders 	: getAuthenticationHeaders,
-
+        		getAuthenticationHeaders 	: getAuthenticationHeaders
         };
         
         return authenticationService;
