@@ -59,7 +59,7 @@
 				expires			: DrupalApiConstant.session_expiration_time,
 				expirationUnit 	: DrupalApiConstant.session_expiration_unite,
 			};
-Sess		
+		
 		//setup and return service        
         var authenticationService = {
         		login	: login,
