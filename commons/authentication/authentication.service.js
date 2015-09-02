@@ -162,29 +162,32 @@
 					function(token) {	
 						SystemResource.connect().then(
 								//SystemResource.connect success
-					            function (data) {
+					            function (responseData) {
 					            	
 					              var user_id = data.user.uid;
 					              
 					              setLastConnectTime(Date.now());
 					              saveSessionData(data);
 					              
-					              if (user_id == 0) { 
-					            	  setConnectionState(false); 
-					            	  defer.resolve(data.user);
-					              }
+					              if (user_id == 0) { setConnectionState(false); }
 					              else { setConnectionState(true); }
+					              
+					              AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData);
+				            	  defer.resolve(data.user);
 
 					            },
 					            //SystemResource.connect error
-					            function(data) {
+					            function(errors) {
 					            	setConnectionState(false);
-					            	defer.reject(data);
+					            	
+					            	AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(errors);
+					            	defer.reject(errors);
 					            }
 							);
 					},
 					//initToken error
 					function(error) {
+						AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(errors);
 						defer.reject(error);
 					}
 			);
