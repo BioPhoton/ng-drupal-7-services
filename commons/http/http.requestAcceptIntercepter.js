@@ -36,7 +36,7 @@
         /**
 		 * request
 		 * 
-		 * Intercepts a request and sets the Accept attribute 
+		 * Intercepts a request and sets the request attribute 
 	     *
 		 * @param 	{Object} config The requests config object 
 		 * 
@@ -47,6 +47,8 @@
 
         	$injector.invoke(['DrupalApiConstant', function (DrupalApiConstant) {
  	           config.headers['Accept'] = DrupalApiConstant.responseFormat;
+ 	           config.headers['Content-Type'] = DrupalApiConstant.responseFormat;
+ 	         	
  	        }]);
 
 			return config;

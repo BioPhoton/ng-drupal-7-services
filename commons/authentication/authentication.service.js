@@ -10,7 +10,7 @@
     		  ,'ngDrupal7Services-3_x.commons.authentication.channel'
     		  ,'ngDrupal7Services-3_x.resources.system.resource'
     		  ,'ngDrupal7Services-3_x.resources.user.resource'
-    		  ,'ipCookie'
+    		  ,'ngCookies'
     		 ])
     
     /**
@@ -27,7 +27,7 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    AuthenticationService.$inject = ['$rootScope', 'DrupalApiConstant', 'AuthenticationServiceConstant', 'AuthenticationChannel', 'SystemResource', 'UserResource', 'ipCookie', '$http', '$q'];
+    AuthenticationService.$inject = ['$rootScope', 'DrupalApiConstant', 'AuthenticationServiceConstant', 'AuthenticationChannel', 'SystemResource', 'UserResource', '$cookies', '$http', '$q'];
     
     /**
      * ApiAuthService
@@ -38,7 +38,7 @@
      * 
     **/
 	/** @ngInject */
-	function AuthenticationService( $rootScope, DrupalApiConstant, AuthenticationServiceConstant, AuthenticationChannel, SystemResource, UserResource, ipCookie, $http, $q ) { 
+	function AuthenticationService( $rootScope, DrupalApiConstant, AuthenticationServiceConstant, AuthenticationChannel, SystemResource, UserResource, $cookies, $http, $q ) { 
 		
 		//needed to use the $on method in the authentications channel
 		//http://stackoverflow.com/questions/16477123/how-do-i-use-on-in-a-service-in-angular
@@ -56,8 +56,10 @@
 			sessionCookieOptions =  { 	
 				domain 			: DrupalApiConstant.drupal_instance,
 				path			: '/',
-				expires			: DrupalApiConstant.session_expiration_time,
-				expirationUnit 	: DrupalApiConstant.session_expiration_unite,
+				//secure 			: false,
+				//@TODO this line throws error in IE 
+				//expires			: DrupalApiConstant.session_expiration_time,
+				//expirationUnit 	: DrupalApiConstant.session_expiration_unite,
 			};
 		
 		
@@ -351,7 +353,8 @@
 			session_name = data.session_name;
 			
 			//store session cookies
-			ipCookie(data.session_name, data.sessid, sessionCookieOptions);	
+			//$cookies[data.session_name] = data.sessid;
+			$cookies.put(data.session_name, data.sessid, sessionCookieOptions);	
         };
         
         /**
@@ -366,7 +369,8 @@
 			session_name = null;
 			
         	//delete session cookies
-			ipCookie.remove(session_name, sessionCookieOptions.path);
+			//$cookies.remove(session_name, sessionCookieOptions.path);
+			$cookies.remove(session_name, sessionCookieOptions.path);
         };
 
         
