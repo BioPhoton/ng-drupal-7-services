@@ -66,7 +66,7 @@
 		 * 
 		**/
     	function pubAuthenticationLoginConfirmed(args) {
-    		var args = {loginionState: args};
+    		var args = args;
     		 
     		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_loginConfirmed, args);
     	};
@@ -146,7 +146,6 @@
     	**/
     	function pubAuthenticationLogoutConfirmed(args) {
     		var args = args;
-    		console.log('channel pubAuthenticationLogoutConfirmed'); 
     		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_logoutConfirmed, args);
     	};
 
@@ -185,7 +184,6 @@
     	**/
     	function pubAuthenticationLogoutFailed(args) {
     		var args = {errors: args};
-    		console.log('channel pubAuthenticationLogoutFailed'); 
     		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_logoutFailed, args);
     	};
 
@@ -225,7 +223,7 @@
 		 * 
 		**/
     	function pubAuthenticationRefreshConnectionConfirmed(args) {
-    		var args = {connectionState: args};
+    		var args = args;
     		 
     		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_refreshConnectionConfirmed, args);
     	};
@@ -304,7 +302,7 @@
 		 * 
 		**/
     	function pubAuthenticationConnectionStateUpdated(args) {
-    		var args = {state: args};
+    		var args = args;
     		
     		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_connectionStateUpdated, args);
     	};
@@ -343,7 +341,7 @@
 		 * 
 		**/
     	function pubAuthenticationCurrentUserUpdated(args) {
-    		var args = {user: args};
+    		var args = args;
 
     		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_currentUserUpdated, args);
     	};

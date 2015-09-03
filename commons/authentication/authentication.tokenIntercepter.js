@@ -22,7 +22,7 @@
 		
 		//setup and return service            	
         var intercepter = {
-        	request 	: addX_CSRF_Token,
+        	request 	: addHeadersAndFlags,
         };
         
         return intercepter;
@@ -41,7 +41,7 @@
 		 * @return  {Object} The edited config object
 		 * 
 		**/
-        function addX_CSRF_Token (config) {
+        function addHeadersAndFlags (config) {
 	        var tokenHeaders = null;
  
 	        // Need to manually retrieve dependencies with $injector.invoke
@@ -51,11 +51,21 @@
 	        // dependencies after they have been created.
 	        $injector.invoke(['AuthenticationService', function (AuthenticationService) {
 	            tokenHeaders = AuthenticationService.getAuthenticationHeaders();
+	            console.log(tokenHeaders); 
 	        }]);
 
+	        //add headers
+	        
+	        //add Authorisation and X-CSRF-TOKEN if given
 	        if (tokenHeaders) {
 	            angular.extend(config.headers, tokenHeaders);
 	        }
+	        
+	        //add flags
+	        
+	        //add withCredentials to every request
+	        //needed because we send cookies in our request headers
+	        config.withCredentials = true;
 
 	        return config;
         };

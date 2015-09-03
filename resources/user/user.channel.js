@@ -44,7 +44,6 @@
         	pubUserTokenFailed 		: pubUserTokenFailed,
         	subUserTokenFailed			: subUserTokenFailed,
 
-    		
         };
         
         return userChannelService;
@@ -63,8 +62,7 @@
 		 * 
 		**/
     	function pubUserRetrieveConfirmed(args) {
-    		var args = {retrieveionState: args};
-    		console.log('channel pubUserRetrieveConfirmed'); 
+    		var args = args;
     		BaseChannel.pubRootEmit(UserChannelConstant.user_retrieveConfirmed, args);
     	};
     	
@@ -103,7 +101,6 @@
 		**/
     	function pubUserRetrieveFailed(args) {
     		var args = {errors: args};
-    		console.log('channel pubUserRetrieveFailed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_retrieveFailed, args);
     	};
     	
@@ -124,7 +121,7 @@
     		};
     		
     		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_retrieveFailed, _Scope, scopeHandler, prepArgs);
-    		
+
     		return unsubsSopeHandler;
     	};
 
@@ -144,7 +141,7 @@
 		 * 
 		**/
     	function pubUserLoginConfirmed(args) {
-    		var args = {loginionState: args};
+    		var args = args;
     		 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_loginConfirmed, args);
     	};
@@ -224,7 +221,6 @@
     	**/
     	function pubUserLogoutConfirmed(args) {
     		var args = args;
-    		console.log('channel pubUserLogoutConfirmed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_logoutConfirmed, args);
     	};
 
@@ -263,7 +259,6 @@
     	**/
     	function pubUserLogoutFailed(args) {
     		var args = {errors: args};
-    		console.log('channel pubUserLogoutFailed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_logoutFailed, args);
     	};
 
@@ -304,7 +299,6 @@
     	**/
     	function pubUserTokenConfirmed(args) {
     		var args = args;
-    		console.log('channel pubUserTokenConfirmed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_tokenConfirmed, args);
     	};
 
@@ -343,7 +337,7 @@
     	**/
     	function pubUserTokenFailed(args) {
     		var args = {errors: args};
-    		console.log('channel pubUserTokenFailed'); 
+
     		BaseChannel.pubRootEmit(UserChannelConstant.user_tokenFailed, args);
     	};
 

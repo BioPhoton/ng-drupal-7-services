@@ -60,14 +60,16 @@
 				expirationUnit 	: DrupalApiConstant.session_expiration_unite,
 			};
 		
+		
+		
 		//setup and return service        
         var authenticationService = {
         		login	: login,
     			logout	: logout,
-    			refreshConnection			: refreshConnection,
+    			//refreshConnection			: refreshConnection,
     			getLastConnectTime			: getLastConnectTime,
     			getConnectionState			: getConnectionState,
-        		getAuthenticationHeaders 	: getAuthenticationHeaders
+    			getAuthenticationHeaders 	: getAuthenticationHeaders
         };
         
         return authenticationService;
@@ -82,29 +84,29 @@
 		 * 
 		**/
 		function login(loginData) {
-			var defer = $q.defer();	
 			
-			UserResource
+			return UserResource
 				.login(loginData)
 					.then(
-							//success
-							function (responseData) {
-								setAuthenticationHeaders(responseData.token);
-								saveSessionData(responseData);
-								setConnectionState(true);
-								setCurrentUser(responseData.user);
-								
-								AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData);
-								defer.resolve(responseData); 
-							},
-							//error
-							function (errors) {
-								AuthenticationChannel.pubAuthenticationLoginFailed(errors);
-								defer.reject(errors); 
-							}
+						//success
+						function (responseData, status, headers, config) {
+							
+							setAuthenticationHeaders(responseData.data.token);
+							setCookies(responseData.data);
+							
+							setConnectionState(true);
+							setLastConnectTime(Date.now());
+							setCurrentUser(responseData.data.user);
+							
+							AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData.data);
+							return responseData.data; 
+						},
+						//error
+						function (responseError, status, headers, config) {
+							AuthenticationChannel.pubAuthenticationLoginFailed(responseError.data);
+							return responseError.data; 
+						}
 					);
-			
-			return defer.promise;
 			
 		};
 		
@@ -115,32 +117,27 @@
 		 * 
 		**/
 		function logout() {
-			var defer = $q.defer();
 			
-			UserResource
+			return UserResource
 				.logout()
 					.then(
 						//success
 						function (responseData) {
 							delAuthenticationHeaders();
-							deleteSessionData();
+							delCookies();
 							setConnectionState(false);
 							setCurrentUser(AuthenticationServiceConstant.anonymousUser);
-							//@TODO remove
-							refreshConnection();
-							
-							AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData);
-							defer.resolve(responseData); 
+
+							AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData.data);
+							return responseData.data; 
 							
 						},
 						//error
-						function (errors) {
-							AuthenticationChannel.pubAuthenticationLogoutFailed(errors);
-							defer.reject(errors); 
+						function (responseError) {
+							AuthenticationChannel.pubAuthenticationLogoutFailed(responseError.data);
+							return responseError.data; 
 						}
 					);
-		
-			return defer.promise;
 			
 		};
 		
@@ -152,47 +149,55 @@
 		 * @return {Promise} with new token 
 		 *  
 		**/
-		function refreshConnection() {
-			var defer = $q.defer();
+		/*function refreshConnection() {
 			
 			//check token
-			refreshTokenFromServer().then(
+			return refreshTokenFromServer()
+				.then(
 					//initToken success
-					function(token) {	
-						SystemResource.connect().then(
-								//SystemResource.connect success
-					            function (responseData) {
-					            	
-					              var user_id = responseData.uid;
-					              
-					              setLastConnectTime(Date.now());
-					              saveSessionData(responseData);
-					              
-					              if (user_id == 0) { setConnectionState(false); }
-					              else { setConnectionState(true); }
-					              
-					              AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData);
-				            	  defer.resolve(responseData);
-
-					            },
-					            //SystemResource.connect error
-					            function(errors) {
-					            	setConnectionState(false);
-					            	
-					            	AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(errors);
-					            	defer.reject(errors);
-					            }
-							);
+					function(responseData) {	
+						
+						return tryConnect();
 					},
+					
 					//initToken error
-					function(error) {
-						AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(errors);
-						defer.reject(error);
+					function(responseError) {
+						AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
+						return responseError.data;
 					}
-			);
+				);
 		
-			return defer.promise;
-		};
+		};*/
+		
+		/*function tryConnect() {
+			
+			 return SystemResource.connect()
+			 	.then(
+					//SystemResource.connect success
+		            function (responseData) {
+		            	
+		              var user_id = responseData.data.uid;
+		              
+		              setLastConnectTime(Date.now());
+		              setCookies(responseData.data);
+		              
+		              if (user_id == 0) { setConnectionState(false); }
+		              else { setConnectionState(true); }
+		              
+		              AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData.data);
+	            	  return responseData.data;
+
+		            },
+		            
+		            //SystemResource.connect error
+		            function(responseError) {
+		            	setConnectionState(false);
+		            	
+		            	AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
+		            	return errors;
+		            }
+				);
+		}*/
 		
 		/**
 		 * refreshTokenFromServer
@@ -202,23 +207,23 @@
 		 * @return {Promise} with new token 
 		 *  
 		**/
-		function refreshTokenFromServer() {
-			var defer = $q.defer();
-			
-			UserResource.token().then(
-				//UserResource.token success
-				function(token){
-					 setAuthenticationHeaders(token);
-					 defer.resolve(token);
-				},
-				//UserResource.token error
-				function(data) {
-					defer.reject(false);
-				}
-			);
+		/*function refreshTokenFromServer() {
 
-			return defer.promise;
-		};
+			return UserResource.token()
+				.then(
+					//UserResource.token success
+					function(responseData){
+						setAuthenticationHeaders(responseData.data.token);
+						return responseData.data;
+					},
+					
+					//UserResource.token error
+					function(responseError) {
+						return false;
+					}
+				);
+
+		};*/
 		
 		/**
 		 * getLastConnectTime
@@ -252,7 +257,7 @@
 		 * @return {Boolean} userIsConected
 		 * 
 		**/
-		function getConnectionState() { return userIsConected; };
+		function getConnectionState() { return (userIsConected)?true:false; };
 		
 		/**
 		 * setConnectionState
@@ -283,21 +288,38 @@
         /**
 		 * setAuthenticationHeaders
 		 * 
-		 * Sets the authentication header as obj
+		 * Sets the authentication header as obj if different from actual value.
+		 * After this action the commons.authentication.AuthenticationHeaderInterceptor add's Authorisation and X-CSRF-Token headers to request
 		 * 
+		 * @param {String} X-CSRF-TOKEN value
 		 * 
 		**/
         function setAuthenticationHeaders(newToken) {
-        	authenticationHeaders = { 
+       
+        	var newData = { 
 					'Authorization' : newToken,
 					'X-CSRF-TOKEN'  : newToken
 			};
+        	
+        	//if header data exist check if they are different.
+        	//if they are different set them
+        	if(authenticationHeaders) {
+        		if(authenticationHeaders.Authorization != newToken) {
+        			authenticationHeaders = newData;
+        		}
+        	} 
+        	//if header data not exist set them
+        	else {
+        		authenticationHeaders = newData;
+        	 }
+        	
         };
         
         /**
 		 * delAuthenticationHeaders
 		 * 
-		 * Deletes the authentication header obj
+		 * Deletes the authentication headers from service
+		 * After this action the http intercepter will not add Authorisation and X-CSRF-Token headers to request
 		 * 
 		**/
         function delAuthenticationHeaders() {
@@ -305,30 +327,49 @@
         };
         
         /**
-		 * saveSessionData
+		 * getCookies
 		 * 
-		 * Saves the session id and name in cookies
+		 * Returns the saved cookie data
+		 * 
+		 * @return  {String} cookie data
+		 * 
+		**/
+        function getCookies() {
+        	return session_name+"="+sessid;
+        };
+
+        /**
+		 * setCookies
+		 * 
+		 * Saves the session id and name in service and cookies
 		 * 
 		 * 
 		**/
-        function saveSessionData(data) {		
+        function setCookies(data) {		
         	//save data in service
         	sessid = data.sessid;
 			session_name = data.session_name;
 			
 			//store session cookies
-			ipCookie(data.session_name, data.sessid, sessionCookieOptions);
-			//set headers
-			$http.defaults.withCredentials = true;
-		};
-		
-		function deleteSessionData() {
-			//delete session cookies
+			ipCookie(data.session_name, data.sessid, sessionCookieOptions);	
+        };
+        
+        /**
+		 * delCookies
+		 * 
+		 * Deletes the cookie from service and cookies 
+		 * 
+		**/
+        function delCookies() {
+        	//delete data in service
+        	sessid = null;
+			session_name = null;
+			
+        	//delete session cookies
 			ipCookie.remove(session_name, sessionCookieOptions.path);
-			//remove headers
-			$http.defaults.withCredentials = false;
-		};
-		
+        };
+
+        
 		/**
 		 * getCurrentUser
 		 * 

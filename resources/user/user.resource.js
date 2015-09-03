@@ -184,11 +184,11 @@
 				};
 				
 		    return $http(requestConfig)
-		         .success(function (responseData) {
+		         .success(function (responseData, status, headers, config) {
 		        	 UserChannel.pubUserTokenConfirmed(responseData);
 		        	 return responseData;
 		         })
-		         .error(function (responseError) {
+		         .error(function (responseError, status, headers, config) {
 		        	 UserChannel.pubUserTokenFailed(responseError);
 		        	 return responseError;
 		         });
