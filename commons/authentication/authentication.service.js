@@ -163,16 +163,16 @@
 								//SystemResource.connect success
 					            function (responseData) {
 					            	
-					              var user_id = data.user.uid;
+					              var user_id = responseData.uid;
 					              
 					              setLastConnectTime(Date.now());
-					              saveSessionData(data);
+					              saveSessionData(responseData);
 					              
 					              if (user_id == 0) { setConnectionState(false); }
 					              else { setConnectionState(true); }
 					              
 					              AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData);
-				            	  defer.resolve(data.user);
+				            	  defer.resolve(responseData);
 
 					            },
 					            //SystemResource.connect error
@@ -311,7 +311,7 @@
 		 * 
 		 * 
 		**/
-        var saveSessionData = function (data) {		
+        function saveSessionData(data) {		
         	//save data in service
         	sessid = data.sessid;
 			session_name = data.session_name;
@@ -322,7 +322,7 @@
 			$http.defaults.withCredentials = true;
 		};
 		
-		var deleteSessionData = function () {
+		function deleteSessionData() {
 			//delete session cookies
 			ipCookie.remove(session_name, sessionCookieOptions.path);
 			//remove headers

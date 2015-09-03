@@ -54,16 +54,14 @@
     	function retrieve( data ) {
     		//undefined check
 	    	data = (data)?data:{};
-	    	var errors = [],
-			defer = $q.defer();		
+	    	var errors = [];		
 	    	
 	    	//if not given
 	    	if(!data.uid) { errors.push('Param uid is required.'); }
 	    	
 	    	if(errors.length != 0) {
 	    		UserChannel.pubUserRetrieveFailed(errors);
-	    		defer.reject(errors); 
-	    		return defer.promise;
+	    		return $q.reject(errors);
 	    	};
 			
     		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/'+data.uid,
@@ -77,9 +75,9 @@
 		    		UserChannel.pubUserRetrieveConfirmed(responseData);
 		    		return responseData;
 		    	})
-		    	.error(function(responseData, status, headers, config){
-		    		UserChannel.pubUserRetrieveFailed(responseData);
-		    		return responseData;
+		    	.error(function(responseError, status, headers, config){
+		    		UserChannel.pubUserRetrieveFailed(responseError);
+		    		return responseError;
 		    	});
 
 	    };
@@ -102,8 +100,7 @@
 			//undefined check
 	    	data = (data)?data:{};
 	   
-			var errors = [],
-				defer = $q.defer();		
+			var errors = [];		
 			
 			//if not given
 	    	if(!data.username) { errors.push('Param username is required.'); }
@@ -111,8 +108,7 @@
 	    	
 	    	if(errors.length != 0) {
 	    		UserChannel.pubUserLoginFailed(errors);
-	    		defer.reject(errors); 
-	    		return defer.promise;
+	    		return $q.reject(errors);
 	    	};	
 						
 	    	
@@ -129,13 +125,12 @@
 			return $http(requestConfig)
 				.success(function (responseData, status, headers, config) {
 					 UserChannel.pubUserLoginConfirmed(responseData);
-					 return responseData;
+		             return responseData;
 		         })
-		         .error(function (responseData, status, headers, config) {
-		        	 UserChannel.pubUserLoginFailed(responseData);
-		        	 return responseData;
+		         .error(function (responseError, status, headers, config) {
+		        	 UserChannel.pubUserLoginFailed(responseError);
+		        	 return responseError;
 		         });
-		
 		};
 		
 		/**
@@ -156,16 +151,16 @@
 			 			method	: 'POST'
 				};
 			 
-			return  $http(requestConfig)
+			 return $http(requestConfig)
 	         .success(function (responseData, status, headers, config) {
 	           UserChannel.pubUserLogoutConfirmed(responseData);
 	           return responseData;
 	         })
-	         .error(function (responseData, status, headers, config) {
-	           UserChannel.pubUserLogoutFailed(responseData);
-	           return responseData;
+	         .error(function (responseError, status, headers, config) {
+	           UserChannel.pubUserLogoutFailed(responseError);
+	           return responseError;
 	         });
-	        
+	       
 		};
 		
 		/**
@@ -181,20 +176,21 @@
 		**/
 		function token() {
 			
-			var  pathToToken = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.token,
+			var  defer = $q.defer(),
+		         pathToToken = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.token,
 				 requestConfig = {
 			     	url		: pathToToken,
 			     	method	: 'POST'
 				};
 				
-			return $http(requestConfig)
+		    return $http(requestConfig)
 		         .success(function (responseData) {
 		        	 UserChannel.pubUserTokenConfirmed(responseData);
 		        	 return responseData;
 		         })
-		         .error(function (responseData) {
-		        	 UserChannel.pubUserTokenFailed(responseData);
-		        	 return responseData;
+		         .error(function (responseError) {
+		        	 UserChannel.pubUserTokenFailed(responseError);
+		        	 return responseError;
 		         });
 
 		};

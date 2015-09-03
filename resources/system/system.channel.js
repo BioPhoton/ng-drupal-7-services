@@ -60,7 +60,7 @@
 		 * 
 		**/
     	function pubSystemConnectConfirmed(args) {
-    		var args = {connectionState: args};
+    		var args = args;
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectConfirmed, args);
     	};
