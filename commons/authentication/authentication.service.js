@@ -10,8 +10,7 @@
     		  ,'ngDrupal7Services-3_x.commons.authentication.channel'
     		  ,'ngDrupal7Services-3_x.resources.system.resource'
     		  ,'ngDrupal7Services-3_x.resources.user.resource'
-    		  ,'ngDrupal7Services-3_x.commons.localstorage'
-    		  ,'ipCookie'
+    		  ,'ngCookies'
     		 ])
     
     /**
@@ -28,17 +27,7 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    AuthenticationService.$inject = ['$rootScope'
-                                     , 'DrupalApiConstant'
-                                     , 'AuthenticationServiceConstant'
-                                     , 'AuthenticationChannel'
-                                     , 'SystemResource'
-                                     , 'UserResource'
-                                     , '$localstorage'
-                                     , 'ipCookie'
-                                     , '$http'
-                                    , '$q'
-                                     ];
+    AuthenticationService.$inject = ['$rootScope', 'DrupalApiConstant', 'AuthenticationServiceConstant', 'AuthenticationChannel', 'SystemResource', 'UserResource', '$cookies', '$http', '$q'];
     
     /**
      * ApiAuthService
@@ -49,17 +38,7 @@
      * 
     **/
 	/** @ngInject */
-	function AuthenticationService(  $rootScope,    
-			DrupalApiConstant
-			 ,   AuthenticationServiceConstant
-			 ,   AuthenticationChannel
-			 ,   SystemResource
-			 ,   UserResource
-			 ,   $localstorage
-			 ,   ipCookie
-			 ,   $http
-			 ,   $q
-			 ) { 
+	function AuthenticationService( $rootScope, DrupalApiConstant, AuthenticationServiceConstant, AuthenticationChannel, SystemResource, UserResource, $cookies, $http, $q ) { 
 		
 		//needed to use the $on method in the authentications channel
 		//http://stackoverflow.com/questions/16477123/how-do-i-use-on-in-a-service-in-angular
@@ -69,102 +48,186 @@
 			currentUser	 = AuthenticationServiceConstant.anonymousUser,
 			// time of last successful connection in ms
 			lastConnectTime  = 0,
+			
+			authenticationHeaders = null,
+			
+			sessid = null,
+			session_name = null,
 			sessionCookieOptions =  { 	
 				domain 			: DrupalApiConstant.drupal_instance,
 				path			: '/',
-				expires			: DrupalApiConstant.session_expiration_time,
-				expirationUnit 	: DrupalApiConstant.session_expiration_unite,
+				//secure 			: false,
+				//@TODO this line throws error in IE 
+				//expires			: DrupalApiConstant.session_expiration_time,
+				//expirationUnit 	: DrupalApiConstant.session_expiration_unite,
 			};
+		
 		
 		
 		//setup and return service        
         var authenticationService = {
-        		storeTokenData	: storeTokenData,
-    			deleteTokenData	: deleteTokenData,
-    			refreshToken	: refreshToken,
-    			
-    			storeSessionData	: storeSessionData,
-    			deleteSessionData	: deleteSessionData,
-    			
-    			getConnectionState	: getConnectionState,
-    			setConnectionState	: setConnectionState,
-    			
-    			getCurrentUser	: getCurrentUser,
-    			setCurrentUser	: setCurrentUser,
-    			
-    			refreshConnection	: refreshConnection,
-    			getLastConnectTime	: getLastConnectTime,
-    			
-    			login	: login,
-    			logout	: logout
+        		login	: login,
+    			logout	: logout,
+    			//refreshConnection			: refreshConnection,
+    			getLastConnectTime			: getLastConnectTime,
+    			getConnectionState			: getConnectionState,
+    			getAuthenticationHeaders 	: getAuthenticationHeaders
         };
         
         return authenticationService;
 
-////////////
-      
+        ////////////
+        
+		
 		/**
-		 * storeTokenData
+		 * login
 		 * 
-		 * Stores the auth token in local storage and the http header.
-		 * 
-		 * @params  {String} newToken the new auth token
-		 * 
+		 * Uses the login request of the user resource and saves session data on success
 		 * 
 		**/
-		function storeTokenData(newToken) {
-			newToken = (newToken)?newToken:false;
-		
-			if(newToken !== false) { 
-				
-				if( newToken != $localstorage.getItem('token', false) ) {
-					$localstorage.setItem('token', newToken);
-				}
+		function login(loginData) {
 			
-				$http.defaults.headers.common.Authorization = newToken;
-				$http.defaults.headers.common['X-CSRF-TOKEN'] = newToken;
-
-			}
-			else { $localstorage.removeItem('token'); }
-			 
-		};
-
-		/**
-		 * deleteTokenData
-		 * 
-		 * Deletes the auth token in local storage and the http header
-		 * 
-		**/
-		function deleteTokenData() {
-				$localstorage.removeItem('token');
-
-				$http.defaults.headers.common.Authorization = undefined;
-				$http.defaults.headers.common['X-CSRF-TOKEN'] = undefined;
-		};
-		
-		/**
-		 * getLastConnectTime
-		 * 
-		 * Returns the time of last successful connection in ms
-		 * 
-		 * @return time in ms
-		 * 
-		**/
-		function getLastConnectTime() {
-			return lastConnectTime;
+			return UserResource
+				.login(loginData)
+					.then(
+						//success
+						function (responseData, status, headers, config) {
+							
+							setAuthenticationHeaders(responseData.data.token);
+							setCookies(responseData.data);
+							
+							setConnectionState(true);
+							setLastConnectTime(Date.now());
+							setCurrentUser(responseData.data.user);
+							
+							AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData.data);
+							return responseData.data; 
+						},
+						//error
+						function (responseError, status, headers, config) {
+							AuthenticationChannel.pubAuthenticationLoginFailed(responseError.data);
+							return responseError.data; 
+						}
+					);
+			
 		};
 		
 		/**
-		 * setLastConnectTime
+		 * logout
 		 * 
-		 * Sets the time of last successful connection in ms
+		 * Uses the logout request of the user resource and deletes session data on success
 		 * 
 		**/
-		function setLastConnectTime(newTimeInMs) {
-			var newTimeInMs = parseInt(newTimeInMs);
-			if(newTimeInMs === NaN || newTimeInMs < 0) return;
-			lastConnectTime = newTimeInMs;
+		function logout() {
+			
+			return UserResource
+				.logout()
+					.then(
+						//success
+						function (responseData) {
+							delAuthenticationHeaders();
+							delCookies();
+							setConnectionState(false);
+							setCurrentUser(AuthenticationServiceConstant.anonymousUser);
+
+							AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData.data);
+							return responseData.data; 
+							
+						},
+						//error
+						function (responseError) {
+							AuthenticationChannel.pubAuthenticationLogoutFailed(responseError.data);
+							return responseError.data; 
+						}
+					);
+			
 		};
+		
+		/**
+		 * refreshConnection
+		 * 
+		 * @TODO add explanation of workflow
+		 * 
+		 * @return {Promise} with new token 
+		 *  
+		**/
+		/*function refreshConnection() {
+			
+			//check token
+			return refreshTokenFromServer()
+				.then(
+					//initToken success
+					function(responseData) {	
+						
+						return tryConnect();
+					},
+					
+					//initToken error
+					function(responseError) {
+						AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
+						return responseError.data;
+					}
+				);
+		
+		};*/
+		
+		/*function tryConnect() {
+			
+			 return SystemResource.connect()
+			 	.then(
+					//SystemResource.connect success
+		            function (responseData) {
+		            	
+		              var user_id = responseData.data.uid;
+		              
+		              setLastConnectTime(Date.now());
+		              setCookies(responseData.data);
+		              
+		              if (user_id == 0) { setConnectionState(false); }
+		              else { setConnectionState(true); }
+		              
+		              AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData.data);
+	            	  return responseData.data;
+
+		            },
+		            
+		            //SystemResource.connect error
+		            function(responseError) {
+		            	setConnectionState(false);
+		            	
+		            	AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
+		            	return errors;
+		            }
+				);
+		}*/
+		
+		/**
+		 * refreshTokenFromServer
+		 * 
+		 * request a new token from server => api_endpoint/user/token
+		 * 
+		 * @return {Promise} with new token 
+		 *  
+		**/
+		/*function refreshTokenFromServer() {
+
+			return UserResource.token()
+				.then(
+					//UserResource.token success
+					function(responseData){
+						setAuthenticationHeaders(responseData.data.token);
+						return responseData.data;
+					},
+					
+					//UserResource.token error
+					function(responseError) {
+						return false;
+					}
+				);
+
+		};*/
+		
+		
 		
 		/**
 		 * getCurrentUser
@@ -193,87 +256,6 @@
 		};
 		
 		/**
-		 * getConnectionState
-		 * 
-		 * Returns the current state of connection
-		 * 
-		 * @return {Boolean} userIsConected
-		 * 
-		**/
-		function getConnectionState() {
-			return userIsConected;
-		};
-		
-		/**
-		 * setConnectionState
-		 * 
-		 * Sets the current state of connection as boolean
-		 * 
-		**/
-		function setConnectionState(newState) {
-	        if(newState != userIsConected) {
-	          userIsConected = newState;
-	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
-	        }
-		};
-		
-		/**
-		 * refreshToken
-		 * 
-		 * fetches the token from local storage
-		 * if token is not stored in local storage this function fetches a new token from server
-		 * 
-		 * @return {Promise} with new token 
-		**/
-		function refreshToken() {
-			var defer = $q.defer();
-			
-			//if refreshTokenFromLocalStorage is not possible
-			var localStorageToken = refreshTokenFromLocalStorage();
-			if(!localStorageToken) {
-			
-				//refresh token from server
-				refreshTokenFromServer().then(
-					
-					//refreshTokenFromServer success
-					function(token) {
-						 defer.resolve(token);
-					},
-					//refreshTokenFromServer error
-					function() {
-						defer.reject(false);
-					}
-				);
-			} 
-			//if refreshTokenFromLocalStorage was possible
-			else { defer.resolve(localStorageToken); }
-			
-			return defer.promise;
-		};
-		
-		/**
-		 * refreshTokenFromLocalStorage
-		 * 
-		 * if token is stored in local storage set token value to http headers
-		 * this function is needed when lounging app to check if user has token already 
-		 * 
-		 * @return {Boolean||String} new token
-		 *  
-		**/
-		function refreshTokenFromLocalStorage() {
-			//load token from local storage or flase
-			var token = $localstorage.getItem('token', false);
-			
-			if (token) {
-				storeTokenData(token);
-				return token
-			}
-			
-			return false;
-		};
-		
-		
-		/**
 		 * refreshTokenFromServer
 		 * 
 		 * request a new token from server => api_endpoint/user/token
@@ -296,173 +278,154 @@
 				}
 			);
 
-			return defer.promise;
-		};
-		
 		/**
-		 * refreshConnection
+		 * getAuthenticationHeaders
 		 * 
-		 * @TODO add explanation of workflow
+		 * Returns the saved authentication header obj
 		 * 
-		 * @return {Promise} with new token 
-		 *  
-		**/
-		function refreshConnection() {
-			var defer = $q.defer();
-			
-			//check token
-			refreshToken().then(
-					//initToken success
-					function(token) {	
-						SystemResource.connect().then(
-								//SystemResource.connect success
-					            function (data) {
-					            	
-					              var user_id = data.user.uid;
-					              
-					              setLastConnectTime(Date.now());
-					              storeSessionData(data);
-					              
-					              if (user_id == 0) { 
-					            	  setConnectionState(false); 
-					            	  setCurrentUser(data.user);
-					            	  defer.resolve(data.user);
-					              }
-					              else {  
-					            	  setConnectionState(true);
-					            	  //we have to use UserResource.retrieve() to get full data of current user
-						              UserResource.retrieve(data.user.uid).then(
-						            		  function(user) {
-						            			  setCurrentUser(user);
-						            			  defer.resolve(user);
-						            		  },
-						            		  function(data) {
-						            			  console.log(); 
-						            			  defer.reject(data);
-						            		  }
-						              );
-					              }
+		 * @return  {Object} authentication header
+		 * 
+		**/	
+        function getAuthenticationHeaders() {
+        	return authenticationHeaders;
+        };
 
-					            },
-					            //SystemResource.connect error
-					            function(data) {
-					            	setConnectionState(false);
-					            	defer.reject(data);
-					            }
-							);
-					},
-					//initToken error
-					function(error) {
-						defer.reject(error);
-					}
-			);
-		
-			return defer.promise;
-		};
-		
-		/**
-		 * storeSessionData
+
+        /**
+		 * setAuthenticationHeaders
 		 * 
-		 * Stores the session data in the local storage and cookie
-		 *  
+		 * Sets the authentication header as obj if different from actual value.
+		 * After this action the commons.authentication.AuthenticationHeaderInterceptor add's Authorisation and X-CSRF-Token headers to request
+		 * 
+		 * @param {String} X-CSRF-TOKEN value
+		 * 
 		**/
-		function storeSessionData(data) { 
-			//store local storage data
-			$localstorage.setItem('sessid', data.sessid);
-			$localstorage.setItem('session_name', data.session_name);			
+        function setAuthenticationHeaders(newToken) {
+       
+        	var newData = { 
+					'Authorization' : newToken,
+					'X-CSRF-TOKEN'  : newToken
+			};
+        	
+        	//if header data exist check if they are different.
+        	//if they are different set them
+        	if(authenticationHeaders) {
+        		if(authenticationHeaders.Authorization != newToken) {
+        			authenticationHeaders = newData;
+        		}
+        	} 
+        	//if header data not exist set them
+        	else {
+        		authenticationHeaders = newData;
+        	 }
+        	
+        };
+        
+        /**
+		 * delAuthenticationHeaders
+		 * 
+		 * Deletes the authentication headers from service
+		 * After this action the http intercepter will not add Authorisation and X-CSRF-Token headers to request
+		 * 
+		**/
+        function delAuthenticationHeaders() {
+        	 authenticationHeaders = null;
+        };
+        
+        /**
+		 * getCookies
+		 * 
+		 * Returns the saved cookie data
+		 * 
+		 * @return  {String} cookie data
+		 * 
+		**/
+        function getCookies() {
+        	return session_name+"="+sessid;
+        };
+
+        /**
+		 * setCookies
+		 * 
+		 * Saves the session id and name in service and cookies
+		 * 
+		 * 
+		**/
+        function setCookies(data) {		
+        	//save data in service
+        	sessid = data.sessid;
+			session_name = data.session_name;
+			
 			//store session cookies
-			ipCookie(data.session_name, data.sessid, sessionCookieOptions);
-			//set headers
-			$http.defaults.withCredentials = true;
+			//$cookies[data.session_name] = data.sessid;
+			$cookies.put(data.session_name, data.sessid, sessionCookieOptions);	
+        };
+        
+        /**
+		 * delCookies
+		 * 
+		 * Deletes the cookie from service and cookies 
+		 * 
+		**/
+        function delCookies() {
+        	//delete data in service
+        	sessid = null;
+			session_name = null;
+			
+        	//delete session cookies
+			//$cookies.remove(session_name, sessionCookieOptions.path);
+			$cookies.remove(session_name, sessionCookieOptions.path);
+        };
 
+        
+		/**
+		 * getCurrentUser
+		 * 
+		 * Returns the current authenticated user
+		 * 
+		 * @return {Object} user as JSON
+		 * 
+		**/
+		function getCurrentUser() { return currentUser; };
+
+		/**
+		 * setCurrentUser
+		 * 
+		 * Sets the current loggend in user
+		 * 
+		**/
+		function setCurrentUser(newUser) {
+			if(currentUser != newUser) {
+	        	currentUser = newUser;
+	      	    AuthenticationChannel.pubAuthenticationCurrentUserUpdated(newUser);
+	        }
 		};
 		
 		/**
-		 * deleteSessionData
+		 * getLastConnectTime
 		 * 
-		 * Deletes the session data in the local storage and cookie
-		 *  
+		 * Returns the time of last successful connection in ms
+		 * 
+		 * @return time in ms
+		 * 
 		**/
-		function deleteSessionData() {
-			console.log(sessionCookieOptions); 
-			//delete session cookies
-			ipCookie.remove($localstorage.getItem('session_name'), sessionCookieOptions.path);
-			//remove headers
-			$http.defaults.withCredentials = false;
-			//delete local storage data
-			$localstorage.removeItem('sessid');
-			$localstorage.removeItem('session_name');
+		function getLastConnectTime() {
+			return lastConnectTime;
 		};
 		
 		/**
-		 * login
+		 * setLastConnectTime
 		 * 
-		 * Uses the login request of the user resource and stores session data on success
-		 * 
-		**/
-		function login(loginData) {
-			var defer = $q.defer();
-			
-			UserResource
-				.login(loginData)
-					.then(
-							//success
-							function (responseData) {
-								storeTokenData(responseData.token);
-								storeSessionData(responseData);
-								setConnectionState(true);
-								setCurrentUser(responseData.user);
-								
-								AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData);
-								defer.resolve(responseData); 
-							},
-							//error
-							function (errors) {
-								AuthenticationChannel.pubAuthenticationLoginFailed(errors);
-								defer.reject(errors); 
-							}
-					);
-			
-			return defer.promise;
-			
-		};
-		
-		/**
-		 * logout
-		 * 
-		 * Uses the logout request of the user resource and deletes session data on success
+		 * Sets the time of last successful connection in ms
 		 * 
 		**/
-		function logout() {
-			var defer = $q.defer();
-			
-			UserResource
-				.logout()
-					.then(
-							//success
-							function (responseData) {
-								deleteTokenData();
-								deleteSessionData();
-								setConnectionState(false);
-								setCurrentUser(AuthenticationServiceConstant.anonymousUser);
-								//@TODO remove
-								refreshConnection();
-								
-								AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData);
-								defer.resolve(responseData); 
-								
-							},
-							//error
-							function (errors) {
-								AuthenticationChannel.pubAuthenticationLogoutFailed(errors);
-								defer.reject(errors); 
-							}
-					);
-		
-			return defer.promise;
-			
+		function setLastConnectTime(newTimeInMs) {
+			var newTimeInMs = parseInt(newTimeInMs);
+			if(newTimeInMs === NaN || newTimeInMs < 0) return;
+			lastConnectTime = newTimeInMs;
 		};
-  
+		
+
 	};
 
 })();

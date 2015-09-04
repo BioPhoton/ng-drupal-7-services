@@ -155,3 +155,7 @@ A live demo and showcases can be found here: [Ionic-Headless-Drupal-Demo](https:
 
 ### Directives
 - accessLevel => show hide elem based on role and acessLevel
+
+#Links
+Testing resources on a test server => https://www.drupal.org/node/1447020
+promises http://blog.ninja-squad.com/2015/06/04/angularjs-promises-2/

@@ -49,39 +49,29 @@
 		 * @return 	{Promise}
 		 * 
 		**/
-		function connect() {
+        function connect() {
 			
 			//undefined check
 	    	//data = (data)?data:{};
 	    	
 			//validation of params
-	    	var errors = [],
-			defer = $q.defer();	
-	    
-	    	if(errors.length != 0) {
-	    		SystemChannel.pubSystemConnectFailed(errors);
-	    		defer.reject(errors); 
-	    		return defer.promise;
-	    	};
+	    	var errors = [];
 	    	
-			
 			var connectPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
 				requestConfig = {
 						method :'POST',
 						url : connectPath
 				};
 			
-			$http(requestConfig)
+			return $http(requestConfig)
 				.success(function(responseData, status, headers, config){
 					SystemChannel.pubSystemConnectConfirmed(responseData);
-					defer.resolve(responseData);
+					return responseData
 				})
-				.error(function(responseData, status, headers, config){
-					SystemChannel.pubSystemConnectFailed(responseData);
-					defer.reject(responseData);
+				.error(function(responseError, status, headers, config){
+					SystemChannel.pubSystemConnectFailed(responseError);
+					return responseError
 				});
-			
-			return defer.promise;
 	
 		};
 		
@@ -106,8 +96,7 @@
 	    	data = (data)?data:{};
 	    	
 			//validation of params
-	    	var errors = [],
-			defer = $q.defer();	
+	    	var errors = [];	
 
 			//basic validation
 			if(!data.name) { 
@@ -116,8 +105,7 @@
 			
 			if(errors.length != 0) {
 				SystemChannel.pubSystemGetVariableFailed(errors);
-				defer.reject(errors); 
-				return defer.promise;
+				return $q.reject(errors);
 			}
 			
 			var getVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
@@ -134,17 +122,16 @@
 				requestConfig.data['default'] = data.default;
 			}
 
-			$http(requestConfig)
+			return $http(requestConfig)
 				.success(function(responseData, status, headers, config){
 					SystemChannel.pubSystemGetVariableConfirmed(responseData);
-					defer.resolve(responseData);
+					return responseData;
 				})
-				.error(function(responseData, status, headers, config){
-					SystemChannel.pubSystemGetVariableFailed(responseData);
-					defer.reject(responseData);
+				.error(function(responseError, status, headers, config){
+					SystemChannel.pubSystemGetVariableFailed(responseError);
+					return responseError;
 				});
 			
-			return defer.promise;
 		};
 		
 		/**
@@ -167,17 +154,15 @@
 	    	data = (data)?data:{};
 	    	
 			//validation of params
-	    	var errors = [],
-			defer = $q.defer();	
+	    	var errors = [];	
 
 			//basic validation
 	    	if(!data.name) { errors.push('Param name is required.'); }
 			if(!data.value) { errors.push('Param value is required.');}
 					
 			if(errors.length != 0) {
-				SystemChannel.pubSystemSetVariableFailed({data: errors});
-				defer.reject(errors); 
-				return defer.promise;
+				SystemChannel.pubSystemSetVariableFailed(errors);
+				return $q.reject(errors);
 			}
 			
 			var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
@@ -191,17 +176,16 @@
 						}
 				};
 
-			$http(requestConfig)
+			return $http(requestConfig)
 				.success(function(responseData, status, headers, config){
 					SystemChannel.pubSystemSetVariableConfirmed(responseData);
-					defer.resolve(responseData);
+					return responseData;
 				})
-				.error(function(responseData, status, headers, config){
-					SystemChannel.pubSystemSetVariableFailed(responseData);
-					defer.reject(responseData);
+				.error(function(responseError, status, headers, config){
+					SystemChannel.pubSystemSetVariableFailed(responseError);
+					return responseError;
 				});
 			
-			return defer.promise;
 		};
 		
 		/**
@@ -223,8 +207,7 @@
 	    	data = (data)?data:{};
 	    	
 			//validation of params
-	    	var errors = [],
-			defer = $q.defer();	
+	    	var errors = [];	
 
 	    	//basic validation
 			if(!data.name) { 
@@ -234,7 +217,7 @@
 			if(errors.length != 0) {
 				SystemChannel.pubSystemDelVariableFailed(errors);
 				defer.reject(errors); 
-				return defer.promise;
+				return $q.reject(errors);
 			}
 			
 			var delVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
@@ -246,17 +229,16 @@
 						}
 				};
 			
-			$http(requestConfig)
+			return $http(requestConfig)
 				.success(function(responseData, status, headers, config){
 					SystemChannel.pubSystemDelVariableConfirmed(responseData);
-					defer.resolve(responseData);
+					return responseData
 				})
-				.error(function(responseData, status, headers, config){
-					SystemChannel.pubSystemDelVariableFailed(responseData);
-					defer.reject(responseData);
+				.error(function(responseError, status, headers, config){
+					SystemChannel.pubSystemDelVariableFailed(responseError);
+					return responseError;
 				});
 			
-			return defer.promise;
 		};
 	
 	};

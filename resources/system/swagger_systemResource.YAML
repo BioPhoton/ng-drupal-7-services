@@ -1,0 +1,201 @@
+# This is the documentation of the system resource of Drupal's services 3.x module
+# Drupal configurations for this file can be found in the README_SERVICES.md
+# The API spec is written in YAML
+swagger: '2.0'
+info:
+  title: Drupal's system resource API
+  description: This document contains all requests for the system resource 
+  version: "1.0.0"
+# the domain of the service
+host: www.drupalionic.org/drupal_test/api
+# array of all schemes that your API supports
+schemes:
+  - http
+# will be prefixed to all paths depends on your settings resource settings in the edit tab 
+basePath: /v1
+produces:
+  - application/json
+paths:
+  #
+  /system/connect:
+    post:
+      summary: Returns the details of currently logged in user.
+      description: |
+        This method is used to check the current loggedin state of a user. 
+      tags:
+        - connect
+      responses:
+        200:
+          description: An object containing session users
+          schema:
+            type: object
+            $ref: '#/definitions/AnonymousUserResponse'
+        401:
+          description: Unauthorized
+          schema:
+            type: string
+            $ref: '#/definitions/CSRFValidationFailedResponse'
+        default:
+          description: Unexpected error
+  # informations for this is copied from https://api.drupal.org/api/drupal/includes!bootstrap.inc/function/variable_get/  
+  /system/get_variable:
+    post:
+      summary: Returns the value of a system variable using variable_get().
+      description: Returns a persistent variable. Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
+      tags:
+        - variables
+      parameters:
+        - name: name
+          in: header
+          description: The name of the variable to return.
+          required: true
+          type: string
+          format: string
+        - name: default
+          in: header
+          description: The default value to use if this variable has never been set.
+          required: false
+          type: string
+          format: string
+      responses:
+        200:
+          description: The value of the variable. Unserialization is taken care of as necessary. Returns the value of the variable or undefined.
+          schema:
+            type: object
+            "$ref": "#/definitions/GetVariableResponseDefinition"
+        403:
+          description: Unauthorized
+          schema:
+            type: string
+            $ref: '#/definitions/AccessDeniedResponse'
+        default:
+          description: Unexpected error   
+  # informations for this is copied from https://api.drupal.org/api/drupal/includes!bootstrap.inc/function/variable_set/7       
+  /system/set_variable:
+    post:
+      summary: Sets the value of a system variable using variable_set().
+      description: Sets a persistent variable. Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
+      tags:
+        - variables
+      parameters:
+        - name: name
+          in: header
+          description: The name of the variable to set.
+          required: true
+          type: string
+          format: string
+        - name: value
+          in: header
+          description: The value to set. This can be any PHP data type; these functions take care of serialization as necessary.
+          required: true
+          type: string
+          format: string
+  
+      responses:
+        200:
+          description: A Object named data containing  Unserialization is taken care of as necessary. Returns the value of the variable or undefined.
+          schema:
+            type: object
+            "$ref": "#/definitions/SetVariableResponseDefinition"
+        403:
+          description: Unauthorized
+          schema:
+            type: string
+            $ref: '#/definitions/AccessDeniedResponse'
+        default:
+          description: Unexpected error          
+         
+  # informations for this is copied from https://api.drupal.org/api/drupal/includes!bootstrap.inc/function/variable_del/7       
+  /system/del_variable:
+    post:
+      summary: Deletes a system variable using variable_del().
+      description:  Unsets a persistent variable. Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
+      tags:
+        - variables
+      parameters:
+        - name: name
+          in: header
+          description: The name of the variable to undefine.
+          required: true
+          type: string
+          format: string
+  
+      responses:
+        200:
+          description: A Object named data containing  Unserialization is taken care of as necessary. Returns the value of the variable or undefined.
+          schema:
+            type: object
+            "$ref": "#/definitions/SetVariableResponseDefinition"
+        403:
+          description: Unauthorized
+          schema:
+            type: string
+            $ref: '#/definitions/AccessDeniedResponse'
+        default:
+          description: Unexpected error          
+         
+definitions: 
+  #
+  CSRFValidationFailedResponse:
+    properties:
+      0:
+        type: string
+        description: contains "CSRF validation failed"
+  #
+  AccessDeniedResponse:
+    properties:
+      0:
+        type: string
+        description: contains "Access denied for user anonymous"
+  #
+  AnonymousUserResponse:
+    properties:
+      sessid:
+        type: string
+        description: The sessionid from the server.
+      session_name:
+        type: string
+        description: The session_name from the server.
+      user:
+        type: object
+        description: Display data of unauthorized user.
+        $ref: '#/definitions/AnonymousUser'
+  #    
+  AnonymousUser:
+    properties:
+      uid:
+        type: integer
+        description: The uid of the unauthorized user/guest.
+      hostname:
+        type: string
+        description: The IP of the server that requested
+      roles:
+        type: object
+        description: Display id and name of the guest user roles. id of role = 1 name of role = anonymous user
+      cache:
+        type: integer
+        description: cache state of user can be 0 or 1 
+      timestamp: 
+        type: integer
+        description: timestamp of request i.e. 1440761811
+  #
+  GetVariableResponseDefinition:
+    properties:
+      data:
+        type: array
+        description: The value of the variable.
+  #
+  SetVariableResponseDefinition:
+    properties:
+      name:
+        type: string
+        description: The name of the variable. If variable is not set name is empty.
+      value:
+        type: string
+        description: The value of the variable. If variable is not set value is empty.
+  #
+  DelVariableResponseDefinition:
+    properties:
+      data:
+        type: array
+        description: The value of the variable.  

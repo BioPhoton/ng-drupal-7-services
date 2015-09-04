@@ -60,7 +60,7 @@
 		 * 
 		**/
     	function pubSystemConnectConfirmed(args) {
-    		var args = {connectionState: args};
+    		var args = args;
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectConfirmed, args);
     	};
@@ -139,7 +139,7 @@
 		 * 
 		**/
     	function pubSystemGetVariableConfirmed(args) {
-    		var args = {variable: args};
+    		var args = args;
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_getVariableConfirmed, args);
     	};
@@ -178,7 +178,7 @@
 		 * 
 		**/
     	function pubSystemGetVariableFailed(args) {
-    		var args = {errors: args};
+    		var args = args;
 
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_getVariableFailed, args);
     	};
@@ -218,7 +218,7 @@
 		 * 
 		**/
     	function pubSystemSetVariableConfirmed(args) {
-    		var args = {variable: args};
+    		var args = args;
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_setVariableConfirmed, args);
     	};
@@ -297,7 +297,7 @@
 		 * 
 		**/
     	function pubSystemDelVariableConfirmed(args) {
-    		var args = {variable: args};
+    		var args = args;
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_delVariableConfirmed, args);
     	};
