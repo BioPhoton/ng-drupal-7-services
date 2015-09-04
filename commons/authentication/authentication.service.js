@@ -39,18 +39,14 @@
     **/
 	/** @ngInject */
 	function AuthenticationService( $rootScope, DrupalApiConstant, AuthenticationServiceConstant, AuthenticationChannel, SystemResource, UserResource, $cookies, $http, $q ) { 
-		
-		//needed to use the $on method in the authentications channel
-		//http://stackoverflow.com/questions/16477123/how-do-i-use-on-in-a-service-in-angular
-		var scope = $rootScope.$new(); // or $new(true) if you want an isolate scope
-		
+	
 		var userIsConected = false,
 			currentUser	 = AuthenticationServiceConstant.anonymousUser,
 			// time of last successful connection in ms
 			lastConnectTime  = 0,
-			
+			//auth token
 			authenticationHeaders = null,
-			
+			//session data
 			sessid = null,
 			session_name = null,
 			sessionCookieOptions =  { 	
@@ -61,8 +57,6 @@
 				//expires			: DrupalApiConstant.session_expiration_time,
 				//expirationUnit 	: DrupalApiConstant.session_expiration_unite,
 			};
-		
-		
 		
 		//setup and return service        
         var authenticationService = {
@@ -277,7 +271,8 @@
 					defer.reject(false);
 				}
 			);
-
+		}
+		
 		/**
 		 * getAuthenticationHeaders
 		 * 
