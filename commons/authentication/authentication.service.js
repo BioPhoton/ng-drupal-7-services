@@ -397,6 +397,34 @@
 		};
 		
 		/**
+		 * getConnectionState
+		 * 
+		 * Returns the current authentication state as boolean
+		 * 
+		 * @return {Boolean} state as boolesan
+		 * 
+		**/
+		var getConnectionState = function() {
+			return userIsConected;
+		};
+		
+		/**
+		 * setCurrentUser
+		 * 
+		 * Sets the current authentication state 
+		 * 
+		**/
+		var setConnectionState = function(newState) {
+			
+			newState = (newState)?newState:false;
+			
+	        if(newState != userIsConected) {
+	          userIsConected = newState;
+	      	  ApiAuthChannel.publishConnectionStateUpdated(userIsConected);
+	        }
+		};
+		
+		/**
 		 * getLastConnectTime
 		 * 
 		 * Returns the time of last successful connection in ms
