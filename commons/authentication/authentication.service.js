@@ -39,18 +39,14 @@
     **/
 	/** @ngInject */
 	function AuthenticationService( $rootScope, DrupalApiConstant, AuthenticationServiceConstant, AuthenticationChannel, SystemResource, UserResource, $cookies, $http, $q ) { 
-		
-		//needed to use the $on method in the authentications channel
-		//http://stackoverflow.com/questions/16477123/how-do-i-use-on-in-a-service-in-angular
-		var scope = $rootScope.$new(); // or $new(true) if you want an isolate scope
-		
+	
 		var userIsConected = false,
 			currentUser	 = AuthenticationServiceConstant.anonymousUser,
 			// time of last successful connection in ms
 			lastConnectTime  = 0,
-			
+			//auth token
 			authenticationHeaders = null,
-			
+			//session data
 			sessid = null,
 			session_name = null,
 			sessionCookieOptions =  { 	
@@ -61,8 +57,6 @@
 				//expires			: DrupalApiConstant.session_expiration_time,
 				//expirationUnit 	: DrupalApiConstant.session_expiration_unite,
 			};
-		
-		
 		
 		//setup and return service        
         var authenticationService = {
@@ -227,24 +221,35 @@
 
 		};*/
 		
-		/**
-		 * getLastConnectTime
-		 * 
-		 * Returns the time of last successful connection in ms
-		 * 
-		 * @return time in ms
-		 * 
-		**/
-		function getLastConnectTime() {
-			return lastConnectTime;
-		};
+		
 		
 		/**
-		 * setLastConnectTime
+		 * getCurrentUser
 		 * 
-		 * Sets the time of last successful connection in ms
+		 * Returns the current authenticated user
+		 * 
+		 * @return {Object} user as JSON
 		 * 
 		**/
+		function getCurrentUser() {
+			return currentUser;
+		};
+
+		/**
+		 * setCurrentUser
+		 * 
+		 * Sets the current loggend in user
+		 * 
+		**/
+		function setCurrentUser(newUser) {
+			if(currentUser != newUser) {
+			 
+	        	currentUser = newUser;
+	      	    AuthenticationChannel.pubAuthenticationCurrentUserUpdated(newUser);
+
+	        }
+		}
+
 		function setLastConnectTime(newTimeInMs) {
 			var newTimeInMs = parseInt(newTimeInMs);
 			if(newTimeInMs === NaN || newTimeInMs < 0) return;
@@ -271,21 +276,44 @@
 	        if(newState != userIsConected) {
 	          userIsConected = (newState)?true:false;
 	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
-	        }
 		};
 		
-      
-        /**
+		/**
+		 * refreshTokenFromServer
+		 * 
+		 * request a new token from server => api_endpoint/user/token
+		 * 
+		 * @return {Promise} with new token 
+		 *  
+		**/
+		function refreshTokenFromServer() {
+			var defer = $q.defer();
+			
+			UserResource.token().then(
+				//UserResource.token success
+				function(token){
+					 storeTokenData(token);
+					 defer.resolve(token);
+				},
+				//UserResource.token error
+				function(data) {
+					defer.reject(false);
+				}
+			);
+		}
+		
+		/**
 		 * getAuthenticationHeaders
 		 * 
 		 * Returns the saved authentication header obj
 		 * 
 		 * @return  {Object} authentication header
 		 * 
-		**/
+		**/	
         function getAuthenticationHeaders() {
         	return authenticationHeaders;
         };
+
 
         /**
 		 * setAuthenticationHeaders
@@ -396,7 +424,60 @@
 	      	    AuthenticationChannel.pubAuthenticationCurrentUserUpdated(newUser);
 	        }
 		};
- 
+		
+		/**
+		 * getConnectionState
+		 * 
+		 * Returns the current authentication state as boolean
+		 * 
+		 * @return {Boolean} state as boolesan
+		 * 
+		**/
+		var getConnectionState = function() {
+			return userIsConected;
+		};
+		
+		/**
+		 * setCurrentUser
+		 * 
+		 * Sets the current authentication state 
+		 * 
+		**/
+		var setConnectionState = function(newState) {
+			
+			newState = (newState)?newState:false;
+			
+	        if(newState != userIsConected) {
+	          userIsConected = newState;
+	      	  ApiAuthChannel.publishConnectionStateUpdated(userIsConected);
+	        }
+		};
+		
+		/**
+		 * getLastConnectTime
+		 * 
+		 * Returns the time of last successful connection in ms
+		 * 
+		 * @return time in ms
+		 * 
+		**/
+		function getLastConnectTime() {
+			return lastConnectTime;
+		};
+		
+		/**
+		 * setLastConnectTime
+		 * 
+		 * Sets the time of last successful connection in ms
+		 * 
+		**/
+		function setLastConnectTime(newTimeInMs) {
+			var newTimeInMs = parseInt(newTimeInMs);
+			if(newTimeInMs === NaN || newTimeInMs < 0) return;
+			lastConnectTime = newTimeInMs;
+		};
+		
+
 	};
 
 })();
