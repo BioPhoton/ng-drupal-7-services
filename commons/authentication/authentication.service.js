@@ -82,27 +82,27 @@
 		function login(loginData) {
 			
 			return UserResource
-				.login(loginData)
-					.then(
-						//success
-						function (responseData, status, headers, config) {
-							
-							setAuthenticationHeaders(responseData.data.token);
-							setCookies(responseData.data);
-							
-							setConnectionState(true);
-							setLastConnectTime(Date.now());
-							setCurrentUser(responseData.data.user);
-							
-							AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData.data);
-							return responseData.data; 
-						},
-						//error
-						function (responseError, status, headers, config) {
-							AuthenticationChannel.pubAuthenticationLoginFailed(responseError.data);
-							return responseError.data; 
-						}
-					);
+					.login(loginData)
+						.then(
+							//success
+							function (responseData, status, headers, config) {
+								
+								setAuthenticationHeaders(responseData.data.token);
+								setCookies(responseData.data);
+								
+								setConnectionState(true);
+								setLastConnectTime(Date.now());
+								setCurrentUser(responseData.data.user);
+								
+								AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData.data);
+								return responseData.data; 
+							},
+							//error
+							function (responseError, status, headers, config) {
+								AuthenticationChannel.pubAuthenticationLoginFailed(responseError.data);
+								return responseError.data; 
+							}
+						);
 			
 		};
 		
@@ -115,25 +115,25 @@
 		function logout() {
 			
 			return UserResource
-				.logout()
-					.then(
-						//success
-						function (responseData) {
-							delAuthenticationHeaders();
-							delCookies();
-							setConnectionState(false);
-							setCurrentUser(AuthenticationServiceConstant.anonymousUser);
-
-							AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData.data);
-							return responseData.data; 
-							
-						},
-						//error
-						function (responseError) {
-							AuthenticationChannel.pubAuthenticationLogoutFailed(responseError.data);
-							return responseError.data; 
-						}
-					);
+					.logout()
+						.then(
+							//success
+							function (responseData) {
+								delAuthenticationHeaders();
+								delCookies();
+								setConnectionState(false);
+								setCurrentUser(AuthenticationServiceConstant.anonymousUser);
+	
+								AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData.data);
+								return responseData.data; 
+								
+							},
+							//error
+							function (responseError) {
+								AuthenticationChannel.pubAuthenticationLogoutFailed(responseError.data);
+								return responseError.data; 
+							}
+						);
 			
 		};
 		
@@ -231,9 +231,7 @@
 		 * @return {Object} user as JSON
 		 * 
 		**/
-		function getCurrentUser() {
-			return currentUser;
-		};
+		function getCurrentUser() { return currentUser; };
 
 		/**
 		 * setCurrentUser
@@ -248,12 +246,6 @@
 	      	    AuthenticationChannel.pubAuthenticationCurrentUserUpdated(newUser);
 
 	        }
-		}
-
-		function setLastConnectTime(newTimeInMs) {
-			var newTimeInMs = parseInt(newTimeInMs);
-			if(newTimeInMs === NaN || newTimeInMs < 0) return;
-			lastConnectTime = newTimeInMs;
 		};
 		
 		/**
@@ -265,6 +257,7 @@
 		 * 
 		**/
 		function getConnectionState() { return (userIsConected)?true:false; };
+	
 		
 		/**
 		 * setConnectionState
@@ -276,6 +269,7 @@
 	        if(newState != userIsConected) {
 	          userIsConected = (newState)?true:false;
 	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
+	        }
 		};
 		
 		/**
@@ -286,21 +280,23 @@
 		 * @return {Promise} with new token 
 		 *  
 		**/
-		function refreshTokenFromServer() {
+		/*function refreshTokenFromServer() {
 			var defer = $q.defer();
 			
-			UserResource.token().then(
-				//UserResource.token success
-				function(token){
-					 storeTokenData(token);
-					 defer.resolve(token);
-				},
-				//UserResource.token error
-				function(data) {
-					defer.reject(false);
-				}
-			);
-		}
+			UserResource
+				.token()
+					.then(
+						//UserResource.token success
+						function(token){
+							 storeTokenData(token);
+							 defer.resolve(token);
+						},
+						//UserResource.token error
+						function(data) {
+							defer.reject(false);
+						}
+					);
+		}*/
 		
 		/**
 		 * getAuthenticationHeaders
@@ -310,9 +306,7 @@
 		 * @return  {Object} authentication header
 		 * 
 		**/	
-        function getAuthenticationHeaders() {
-        	return authenticationHeaders;
-        };
+        function getAuthenticationHeaders() { return authenticationHeaders; };
 
 
         /**
@@ -341,7 +335,7 @@
         	//if header data not exist set them
         	else {
         		authenticationHeaders = newData;
-        	 }
+        	}
         	
         };
         
@@ -400,30 +394,6 @@
 			//$cookies.remove(session_name, sessionCookieOptions.path);
 			$cookies.remove(session_name, sessionCookieOptions.path);
         };
-
-        
-		/**
-		 * getCurrentUser
-		 * 
-		 * Returns the current authenticated user
-		 * 
-		 * @return {Object} user as JSON
-		 * 
-		**/
-		function getCurrentUser() { return currentUser; };
-
-		/**
-		 * setCurrentUser
-		 * 
-		 * Sets the current loggend in user
-		 * 
-		**/
-		function setCurrentUser(newUser) {
-			if(currentUser != newUser) {
-	        	currentUser = newUser;
-	      	    AuthenticationChannel.pubAuthenticationCurrentUserUpdated(newUser);
-	        }
-		};
 		
 		/**
 		 * getConnectionState
@@ -433,19 +403,19 @@
 		 * @return {Boolean} state as boolesan
 		 * 
 		**/
-		var getConnectionState = function() {
+		function getConnectionState() {
 			return userIsConected;
 		};
 		
 		/**
-		 * setCurrentUser
+		 * setConnectionState
 		 * 
 		 * Sets the current authentication state 
 		 * 
 		**/
-		var setConnectionState = function(newState) {
+		function setConnectionState(newState) {
 			
-			newState = (newState)?newState:false;
+			newState = (newState)?true:false;
 			
 	        if(newState != userIsConected) {
 	          userIsConected = newState;
