@@ -46,8 +46,8 @@
         function request(config){
 
         	$injector.invoke(['DrupalApiConstant', function (DrupalApiConstant) {
- 	           config.headers['Accept'] = DrupalApiConstant.responseFormat;
- 	           config.headers['Content-Type'] = DrupalApiConstant.responseFormat;
+ 	           config.headers['Accept'] = DrupalApiConstant.dataFormat;
+ 	           config.headers['Content-Type'] = DrupalApiConstant.dataFormat;
  	         	
  	        }]);
 

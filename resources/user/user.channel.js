@@ -41,8 +41,13 @@
         	//user token request
         	pubUserTokenConfirmed 		: pubUserTokenConfirmed,
         	subUserTokenConfirmed		: subUserTokenConfirmed,
-        	pubUserTokenFailed 		: pubUserTokenFailed,
+        	pubUserTokenFailed 			: pubUserTokenFailed,
         	subUserTokenFailed			: subUserTokenFailed,
+        	//user create request
+        	pubUserCreateConfirmed 		: pubUserCreateConfirmed,
+        	subUserCreateConfirmed		: subUserCreateConfirmed,
+        	pubUserCreateFailed 		: pubUserCreateFailed,
+        	subUserCreateFailed			: subUserCreateFailed
 
         };
         
@@ -364,6 +369,84 @@
 
     	//________________________________________________________________________________________________________________________________________
 
+    	//User create request functions
+
+    	/**
+    	 * pubUserCreateConfirmed
+    	 * 
+    	 * Publish the UserCreateConfirmed event with giver args 
+    	 *
+    	 * @param 	{Object} args The events arguments 
+    	 * 
+    	 * 
+    	**/
+    	function pubUserCreateConfirmed(args) {
+    		var args = args;
+    		console.log('channel pubUserCreateConfirmed'); 
+    		BaseChannel.pubRootEmit(UserChannelConstant.user_createConfirmed, args);
+    	};
+
+    	/**
+    	 * subUserCreateConfirmed
+    	 * 
+    	 * subscribe for the UserCreateConfirmed event
+    	 *
+    	 * @param 	{Object} _Scope The scope that calls the channels subUserCreateConfirmed function
+    	 * @param 	{function} scopeHandler The callback handler for UserCreateConfirmed event
+    	 * 
+    	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+    	 * 
+    	**/
+    	function subUserCreateConfirmed(_Scope, scopeHandler) {
+    		var prepArgs = function (args) {
+    			return args; 
+    		};
+    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_createConfirmed, _Scope, scopeHandler, prepArgs);
+    		
+    		return unsubsSopeHandler;
+    	};
+
+    	//###############
+
+
+    	/**
+    	 * pubUserCreateConfirmed
+    	 * 
+    	 * Publish the UserCreateConfirmed event with giver args 
+    	 *
+    	 * @param 	{Object} args The events arguments 
+    	 * 
+    	 * 
+    	**/
+    	function pubUserCreateFailed(args) {
+    		var args = {errors: args};
+    		console.log('channel pubUserCreateFailed'); 
+    		BaseChannel.pubRootEmit(UserChannelConstant.user_createFailed, args);
+    	};
+
+    	/**
+    	 * subUserCreateFailed
+    	 * 
+    	 * subscribe for the UserCreateFailed event
+    	 *
+    	 * @param 	{Object} _Scope The scope that calls the channels subUserCreateFailed function
+    	 * @param 	{function} scopeHandler The callback handler for UserCreateFailed event
+    	 * 
+    	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+    	 * 
+    	**/
+    	function subUserCreateFailed(_Scope, scopeHandler) {
+    		var prepArgs = function (args) { 
+    			return args; 
+    		};
+    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_createFailed, _Scope, scopeHandler, prepArgs);
+    		
+    		return unsubsSopeHandler;
+    	};
+
+    	//________________________________________________________________________________________________________________________________________
 
     	
 	};

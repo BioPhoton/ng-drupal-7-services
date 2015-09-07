@@ -28,9 +28,14 @@
 		//setup and return service            	
         var userResourceService = {
         	retrieve 	: retrieve,
+    		create 		: create,
+    		//update 				: 'update',
+    		//delete 				: 'delete',
+    	    //index 				: 'index',
         	login 		: login,
         	logout 		: logout,
-        	token		: token
+        	token		: token,
+        	
         };
         
         return userResourceService;
@@ -79,6 +84,68 @@
 		    		UserChannel.pubUserRetrieveFailed(responseError);
 		    		return responseError;
 		    	});
+
+	    };
+	    
+	    /**
+	     * create
+	     * 
+	     * Returns the data of a user fetched by uid.
+	     * 
+	     * Method: POST
+	     * Url: http://drupal_instance/api_endpoint/user
+	     * 
+	     * @params  {Object} data the users accout data
+	     * 			@key 	{String} uid The uid of the user to retrieve, required:true, source:post body
+	     * 
+	     * @return 	{Promise}
+	     *
+	    **/
+	    function create(data){
+	    	
+	    	//undefined check
+	    	data = (data)?data:{};
+	    	
+	    	//validation of params
+	    	var errors = [];	
+
+	    	//basic validation
+	    	//if not given
+	    	if(!data) { errors.push('Param data is required.'); }
+	    	//if is not an array
+	    	if( data instanceof Array ) { errors.push('Param data has to be an array.'); }
+	    	
+	    	
+	    	if(errors.length != 0) {
+	    		UserChannel.pubUserCreateFailed(errors);
+	    		return $q.reject(errors);
+	    	}
+	    	
+	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.create,
+	    		requestConfig = {
+	    				url 	: createPath,
+	    				method 	:'POST',
+	    				data 	: {
+	    					name : data.username,
+	    					pass : data.password,
+	    					email : data.mail,
+	    				}
+	    		};
+	    	
+	    	//set default if given
+	    	if(data.default) {
+	    		requestConfig.data['default'] = data.default;
+	    	}
+
+	    	return $http(requestConfig)
+	    		.success(function(responseData, status, headers, config){
+	    			UserChannel.pubUserCreateConfirmed(responseData);
+	    			return responseData;
+	    		})
+	    		.error(function(responseError, status, headers, config){
+	    			UserChannel.pubUserCreateFailed(responseError);
+	    			return responseError;
+	    		});
 
 	    };
 	    
