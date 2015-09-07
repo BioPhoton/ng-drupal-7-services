@@ -269,7 +269,7 @@
 		**/
 		function setConnectionState(newState) {
 	        if(newState != userIsConected) {
-	          userIsConected = newState;
+	          userIsConected = (newState)?true:false;
 	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
 	        }
 		};

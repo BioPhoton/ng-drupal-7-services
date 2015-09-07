@@ -1,15 +1,11 @@
 {
-  "name": "ng-drupal-ionic",
+  "name": "ng-drupal-7-services",
   "version": "0.0.1",
-  "homepage": "https://github.com/BioPhoton/ng-drupal-ionic",
+  "homepage": "https://github.com/BioPhoton/ng-drupal-7-services",
   "authors": [
     "BioPhoton bio_photon@gmx.at"
   ],
   "description": "An API client for Drupal 7 and Services 3.x",
-  "main": [
-  	"commons/*",
-  	"resources/*"
-  ],
   "keywords": [
     "Drupal",
     "Angular",
