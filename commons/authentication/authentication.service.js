@@ -62,7 +62,7 @@
         var authenticationService = {
         		login	: login,
     			logout	: logout,
-    			//refreshConnection			: refreshConnection,
+    			refreshConnection			: refreshConnection,
     			getLastConnectTime			: getLastConnectTime,
     			getConnectionState			: getConnectionState,
     			getAuthenticationHeaders 	: getAuthenticationHeaders
@@ -145,55 +145,55 @@
 		 * @return {Promise} with new token 
 		 *  
 		**/
-		/*function refreshConnection() {
+		function refreshConnection() {
 			
 			//check token
 			return refreshTokenFromServer()
-				.then(
-					//initToken success
-					function(responseData) {	
+					.then(
+						//initToken success
+						function(responseData) {	
+							return tryConnect();
+						},
 						
-						return tryConnect();
-					},
-					
-					//initToken error
-					function(responseError) {
-						AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
-						return responseError.data;
-					}
-				);
+						//initToken error
+						function(responseError) {
+							AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
+							return responseError.data;
+						}
+					);
 		
-		};*/
+		};
 		
-		/*function tryConnect() {
+		function tryConnect() {
 			
-			 return SystemResource.connect()
-			 	.then(
-					//SystemResource.connect success
-		            function (responseData) {
-		            	
-		              var user_id = responseData.data.uid;
-		              
-		              setLastConnectTime(Date.now());
-		              setCookies(responseData.data);
-		              
-		              if (user_id == 0) { setConnectionState(false); }
-		              else { setConnectionState(true); }
-		              
-		              AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData.data);
-	            	  return responseData.data;
-
-		            },
-		            
-		            //SystemResource.connect error
-		            function(responseError) {
-		            	setConnectionState(false);
-		            	
-		            	AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
-		            	return errors;
-		            }
-				);
-		}*/
+			 return SystemResource
+			 			.connect()
+						 	.then(
+								//SystemResource.connect success
+					            function (responseData) {
+					            	
+					              var user_id = responseData.data.uid;
+					              
+					              setLastConnectTime(Date.now());
+					              setCookies(responseData.data);
+					              
+					              if (user_id == 0) { setConnectionState(false); }
+					              else { setConnectionState(true); }
+					              
+					              AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData.data);
+				            	  return responseData.data;
+			
+					            },
+					            
+					            //SystemResource.connect error
+					            function(responseError) {
+					            	setConnectionState(false);
+					            	
+					            	AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
+					            	return errors;
+					            }
+							);
+		}
 		
 		/**
 		 * refreshTokenFromServer
@@ -203,23 +203,25 @@
 		 * @return {Promise} with new token 
 		 *  
 		**/
-		/*function refreshTokenFromServer() {
+		function refreshTokenFromServer() {
 
-			return UserResource.token()
-				.then(
-					//UserResource.token success
-					function(responseData){
-						setAuthenticationHeaders(responseData.data.token);
-						return responseData.data;
-					},
-					
-					//UserResource.token error
-					function(responseError) {
-						return false;
-					}
-				);
+			return UserResource
+					.token()
+						.then(
+							//UserResource.token success
+							function(responseData){
+								console.log(responseData.data); 
+								setAuthenticationHeaders(responseData.data.token);
+								return responseData.data;
+							},
+							
+							//UserResource.token error
+							function(responseError) {
+								return false;
+							}
+						);
 
-		};*/
+		};
 		
 		
 		
@@ -271,32 +273,6 @@
 	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
 	        }
 		};
-		
-		/**
-		 * refreshTokenFromServer
-		 * 
-		 * request a new token from server => api_endpoint/user/token
-		 * 
-		 * @return {Promise} with new token 
-		 *  
-		**/
-		/*function refreshTokenFromServer() {
-			var defer = $q.defer();
-			
-			UserResource
-				.token()
-					.then(
-						//UserResource.token success
-						function(token){
-							 storeTokenData(token);
-							 defer.resolve(token);
-						},
-						//UserResource.token error
-						function(data) {
-							defer.reject(false);
-						}
-					);
-		}*/
 		
 		/**
 		 * getAuthenticationHeaders
@@ -403,9 +379,7 @@
 		 * @return {Boolean} state as boolesan
 		 * 
 		**/
-		function getConnectionState() {
-			return userIsConected;
-		};
+		function getConnectionState() { return userIsConected; };
 		
 		/**
 		 * setConnectionState
@@ -419,7 +393,7 @@
 			
 	        if(newState != userIsConected) {
 	          userIsConected = newState;
-	      	  ApiAuthChannel.publishConnectionStateUpdated(userIsConected);
+	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
 	        }
 		};
 		
@@ -431,9 +405,7 @@
 		 * @return time in ms
 		 * 
 		**/
-		function getLastConnectTime() {
-			return lastConnectTime;
-		};
+		function getLastConnectTime() { return lastConnectTime; };
 		
 		/**
 		 * setLastConnectTime
