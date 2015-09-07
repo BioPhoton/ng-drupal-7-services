@@ -6,6 +6,9 @@
     "BioPhoton bio_photon@gmx.at"
   ],
   "description": "An API client for Drupal 7 and Services 3.x",
+   "main": [
+             "*"
+           ]
   "keywords": [
     "Drupal",
     "Angular",
