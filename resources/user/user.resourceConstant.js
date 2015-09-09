@@ -13,7 +13,7 @@
 		//actions of user resource
 		actions : {
 			//following actions are defined over their request method (GET, POST, PUT, DELETE) so they are commented out
-			//retrieve 				: 'retrieve',
+			retrieve 				: 'retrieve',
 			//create 				: 'create',
 			//update 				: 'update',
 			//delete 				: 'delete',
