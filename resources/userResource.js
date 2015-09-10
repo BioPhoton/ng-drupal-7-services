@@ -605,7 +605,7 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 * Headers: Content-Type:application/json
 	 * 
 	 * @param 	{Integer} uid Unique identifier for this user, required:true, source:path
-	 * @param 	{Array} data The user object with updated information, required:true, source:post body
+	 * @param 	{Array}  data The user object with updated information, required:true, source:post body
 	 * 
 	 * @return 	{Promise}
 	 * 
@@ -705,7 +705,6 @@ UserResourceModules.service('UserResource', [ 'DrupalApiConstant', 'BaseResource
 	 * uid,name,mail,theme,signature,signature_format,created,access,login,status,timezone,language,picture,init,data
 	 * @param 	{Array} parameters Parameters, required:false, source:param
 	 * @param 	{Integer} pagesize Number of records to get per page., required:false, source:param
-	 * 
 	 * 
 	 * @return 	{Promise}
 	 * 

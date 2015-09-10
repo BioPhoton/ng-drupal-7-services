@@ -4,7 +4,7 @@
 	/**
 	 * User Resource Modules
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.user.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.user.resourceConstant', 'ngDrupal7Services-3_x.resources.user.channel'])
+    angular.module('ngDrupal7Services-3_x.resources.user.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.user.resourceConstant', 'ngDrupal7Services-3_x.resources.user.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
     
     /**
 	 * UserResource
@@ -20,10 +20,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    UserResource.$inject = ['$http', '$q', 'DrupalApiConstant', 'UserResourceConstant', 'UserChannel'];
+    UserResource.$inject = ['$http', '$q', 'baseResource', 'DrupalApiConstant', 'UserResourceConstant', 'UserChannel'];
     
 	/** @ngInject */
-	function UserResource($http, $q, DrupalApiConstant, UserResourceConstant, UserChannel) { 
+	function UserResource($http, $q, baseResource, DrupalApiConstant, UserResourceConstant, UserChannel) { 
 		
 		//setup and return service            	
         var userResourceService = {
@@ -34,13 +34,13 @@
     		delete 		: _delete,
     	    index 		: index,
     	    //
-    		//register 				: 'register',
-    		//resend_welcome_email 	: 'resend_welcome_email',
-    		//cancel 					: 'cancel',
+    		register 	: register,
+    		//resend_welcome_email 	: resend_welcome_email,
+    		//cancel 					: cancel,
     		login 		: login,
         	logout 		: logout,
-        	//password_reset 			: 'password_reset',
-        	//request_new_password 	: 'request_new_password',
+        	//password_reset 			: password_reset,
+        	//request_new_password 	: request_new_password,
         	//
         	token		: token,
         	
@@ -64,41 +64,17 @@
 		 * @return 	{Promise}
 		 * 
 		**/
-    	function retrieve( data ) {
-    		//undefined check
-	    	data = (data)?data:{};
-	    	var errors = [];		
-	    	
-	    	//if not given
-	    	if(!data.uid) { errors.push('Param uid is required.'); }
-	    	
-	    	if(errors.length != 0) {
-	    		UserChannel.pubUserRetrieveFailed(errors);
-	    		return $q.reject(errors);
-	    	};
-			
-    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/'+data.uid,
-	    		requestConfig = {
-    				url 	: retrievePath,
-	    			method 	:'GET'
-	    		};
-	    	
-    		return $http(requestConfig)
-		    	.success(function(responseData, status, headers, config){
-		    		UserChannel.pubUserRetrieveConfirmed(responseData);
-		    		return responseData;
-		    	})
-		    	.error(function(responseError, status, headers, config){
-		    		UserChannel.pubUserRetrieveFailed(responseError);
-		    		return responseError;
-		    	});
+    	function retrieve(data) {
 
+    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/'+data.uid;
+    		
+    		return baseResource.retrieve( retrievePath, UserChannel.pubUserRetrieveFailed, UserChannel.pubUserRetrieveConfirmed);
 	    };
 	    
 	    /**
 	     * create
 	     * 
-	     * Returns the data of a user fetched by uid.
+	     * Create a user.
 	     * 
 	     * Method: POST
 	     * Url: http://drupal_instance/api_endpoint/user
@@ -111,228 +87,118 @@
 	    **/
 	    function create(data){
 	    	
-	    	//undefined check
-	    	data = (data)?data:{};
-	    	
-	    	//validation of params
-	    	var errors = [];	
+	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath;
 
-	    	//basic validation
-	    	//if not given
-	    	if(!data) { errors.push('Param data is required.'); }
-	    	//if is not an array
-	    	if( data instanceof Array ) { errors.push('Param data has to be an array.'); }
-	    	
-	    	
-	    	if(errors.length != 0) {
-	    		UserChannel.pubUserCreateFailed(errors);
-	    		return $q.reject(errors);
-	    	}
-	    	console.log(data);
-	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath,
-	    		requestConfig = {
-	    				url 	: createPath,
-	    				method 	:'POST',
-	    				data 	: {
-	    					name : data.username,
-	    					pass : data.password,
-	    					mail : data.email
-	    				}
-	    		};
-	    	
-	    	//set default if given
-	    	if(data.default) {
-	    		requestConfig.data['default'] = data.default;
-	    	}
-
-	    	return $http(requestConfig)
-	    		.success(function(responseData, status, headers, config){
-	    			UserChannel.pubUserCreateConfirmed(responseData);
-	    			return responseData;
-	    		})
-	    		.error(function(responseError, status, headers, config){
-	    			UserChannel.pubUserCreateFailed(responseError);
-	    			return responseError;
-	    		});
+    		var createdata 	= {
+				name : data.name,
+				pass : data.pass,
+				mail : data.mail
+			}
+    		
+    		return baseResource.create( createdata, createPath, UserChannel.pubUserCreateFailed, UserChannel.pubUserCreateConfirmed);
 
 	    };
-	    
+	        
 	    /**
 	     * update
 	     * 
-	     * Returns the value of a user variable using variable_get().
+	     * Update a user
 	     * 
-	     * Method: POST
-	     * Url: http://drupal_instance/api_endpoint/user/update
+	     * Method: PUT
+	     * Url: http://drupal_instance/api_endpoint/user/{UID}
 	     * 
-	     * @params  {Object} data the requests data
-	     * 			@key 	{String} var1 The name of the variable to return, required:true, source:post body
-	     * 			@key 	{String} var2 The default value to use if this variable has never been set, required:false, source:post body
+	     * @params  {Object} data The requests data
+	     * 			@key 	{Integer} uid Unique identifier for this user, required:true, source:path
+	     * 			@key 	{Array}  data The user object with updated information, required:true, source:post body
 	     * 
 	     * @return 	{Promise}
 	     *
 	    **/
 	    function update(data){
 	    	
-	    	//undefined check
-	    	data = (data)?data:{};
+	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid;
 	    	
-	    	//validation of params
-	    	var errors = [];	
-
-	    	//basic validation
-	    	//if not given
-	    	if(!data) { errors.push('Param data is required.'); }
-
-	    	if(errors.length != 0) {
-	    		UserChannel.pubUserUpdateFailed(errors);
-	    		return $q.reject(errors);
-	    	}
-	    	
-	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid,
-	    		requestConfig = {
-	    				url 	: updatePath,
-	    				method 	:'PUT',
-	    				data 	:  data.data,
-	    		};
-
-	    	return $http(requestConfig)
-	    		.success(function(responseData, status, headers, config){
-	    			UserChannel.pubUserUpdateConfirmed(responseData);
-	    			return responseData;
-	    		})
-	    		.error(function(responseError, status, headers, config){
-	    			UserChannel.pubUserUpdateFailed(responseError);
-	    			return responseError;
-	    		});
+	    	//@TODO check possible fields
+    		var updateData 	= {
+				name : data.name,
+				mail : data.mail,
+			}
+    		
+    		return baseResource.update( updateData, updatePath, UserChannel.pubUserUpdateFailed, UserChannel.pubUserUpdateConfirmed);
 
 	    };
 	    
 	    /**
 	     * delete
 	     * 
-	     * Returns the value of a user variable using variable_get().
+	     * Delete a user
 	     * 
 	     * Method: POST
 	     * Url: http://drupal_instance/api_endpoint/user/delete
 	     * 
 	     * @params  {Object} data the requests data
-	     * 			@key 	{String} var1 The name of the variable to return, required:true, source:post body
-	     * 			@key 	{String} var2 The default value to use if this variable has never been set, required:false, source:post body
+	     * 			@key 	{Integer} uid Unique identifier for this user, required:true, source:path
 	     * 
 	     * @return 	{Promise}
 	     *
 	    **/
 	    function _delete(data){
 	    	
-	    	//undefined check
-	    	data = (data)?data:{};
+	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid
 	    	
-	    	//validation of params
-	    	var errors = [];	
-
-	    	//basic validation
-	    	//if not given
-	    	if(!data) { errors.push('Param data is required.'); }
-	    	//if not given
-	    	if(!data.uid) { errors.push('Param data.uid is required.'); }
-
-	    	
-	    	if(errors.length != 0) {
-	    		UserChannel.pubUserDeleteFailed(errors);
-	    		return $q.reject(errors);
-	    	}
-	    	
-	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid,
-	    		requestConfig = {
-	    				url 	: deletePath,
-	    				method 	:'DELETE'
-	    		};
-
-	    	return $http(requestConfig)
-	    		.success(function(responseData, status, headers, config){
-	    			UserChannel.pubUserDeleteConfirmed(responseData);
-	    			return responseData;
-	    		})
-	    		.error(function(responseError, status, headers, config){
-	    			//@TODO maks a generic function for this in baseResource.js
-	    			var formatedResponseError = {
-	    											form_errors:[],
-	    											server_errors : [] 
-	    			};
-	    			
-	    			if(responseError.form_errors) {
-	    				formatedResponseError.form_errors = responseError.form_errors;
-	    				delete responseError['form_errors'];
-	    			}
-	    			
-	    			formatedResponseError.server_errors.push(responseError[0]);
-	    			
-	    			
-	    			UserChannel.pubUserDeleteFailed(formatedResponseError);
-	    			return responseError;
-	    		});
-
+	    	return baseResource.delete(deletePath, UserChannel.pubUserDeleteFailed, UserChannel.pubUserDeleteConfirmed);
 	    };
 	    
 	    /**
 	     * index
 	     * 
-	     * Returns the value of a user variable using variable_get().
-	     * 
-	     * Method: POST
-	     * Url: http://drupal_instance/api_endpoint/user/index
-	     * 
-	     * @params  {Object} data the requests data
-	     * 			@key 	{String} var1 The name of the variable to return, required:true, source:post body
-	     * 			@key 	{String} var2 The default value to use if this variable has never been set, required:false, source:post body
+	     * List all users
+	     * Method: GET
+		 * Url: http://drupal_instance/api_endpoint/user
+		 * Headers: Content-Type:application/json
+		 * 
+		 * @params  {Object} data the requests data
+		 * 		@key 	{Integer} page The zero-based index of the page to get. defaults to 0., required:false, source:param
+		 * 		@key 	{Integer} pagesize Number of records to get per page., required:false, source:param
+		 * 		@key 	{String} fields The fields to get., required:false, source:param
+		 * 				uid,name,mail,theme,signature,signature_format,created,access,login,status,timezone,language,picture,init,data
+		 * 		@key 	{Array} parameters Parameters, required:false, source:param
+		 * 		
 	     * 
 	     * @return 	{Promise}
 	     *
 	    **/
 	    function index(data){
+	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/';
 	    	
-	    	//undefined check
-	    	data = (data)?data:{};
-	    	
-	    	//validation of params
-	    	var errors = [];	
-
-	    	//basic validation
-	    	//if not given
-	    	if(!data) { errors.push('Param data is required.'); }
-
-	    	
-	    	if(errors.length != 0) {
-	    		UserChannel.pubUserIndexFailed(errors);
-	    		return $q.reject(errors);
-	    	}
-	    	
-	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + '?',
-	    		requestConfig = {
-	    				url 	: indexPath,
-	    				method 	:'GET',
-	    				data 	: {
-	    					name : data.name,
-	    				}
-	    		};
-	    	
-	    	//set default if given
-	    	if(data.default) {
-	    		requestConfig.data['default'] = data.default;
-	    	}
-
-	    	return $http(requestConfig)
-	    		.success(function(responseData, status, headers, config){
-	    			UserChannel.pubUserIndexConfirmed(responseData);
-	    			return responseData;
-	    		})
-	    		.error(function(responseError, status, headers, config){
-	    			UserChannel.pubUserIndexFailed(responseError);
-	    			return responseError;
-	    		});
-
+	    	return baseResource.index(data, indexPath, UserChannel.pubUserIndexFailed, UserChannel.pubUserIndexConfirmed);
 	    };
+	    
+	    /**
+		 * register
+		 * 
+		 * Register a user
+		 * Method: POST
+		 * Url: http://drupal_instance/api_endpoint/user/register
+		 * 
+		 * @param {Object} data The user object, required:true, source:post body
+		 * 
+		 * @return {Promise}
+		 * 
+		**/
+		var register = function(data){
+			//undefined check
+	    	data = (data)?data:{};
+
+			 var registerPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.register;
+		 	 	 requestConfig = {
+		 			method: 'POST',
+					url : registerPath,
+					data : data
+		 	 	  };
+		 
+		 	return baseResource.request(requestConfig, UserChannel.publishUserRegisterFailed, UserChannel.publishUserRegisterConfirmed);
+		};
 	    
 		/**
 		 * login
@@ -351,38 +217,19 @@
 	    function login( data ) {
 			//undefined check
 	    	data = (data)?data:{};
-	   
-			var errors = [];		
-			
-			//if not given
-	    	if(!data.username) { errors.push('Param username is required.'); }
-	    	if(!data.password) { errors.push('Param password is required.'); }
-	    	
-	    	if(errors.length != 0) {
-	    		UserChannel.pubUserLoginFailed(errors);
-	    		return $q.reject(errors);
-	    	};	
-						
-	    	
+
 			var pathToLogin = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.login,
 				requestConfig = {
 						url : pathToLogin,
 						method :'POST',
 						data : {
-								"username" : data.username,
-								"password" : data.password
+								username : data.username,
+								password : data.password
 						},
 				};
-	    						
-			return $http(requestConfig)
-				.success(function (responseData, status, headers, config) {
-					 UserChannel.pubUserLoginConfirmed(responseData);
-		             return responseData;
-		         })
-		         .error(function (responseError, status, headers, config) {
-		        	 UserChannel.pubUserLoginFailed(responseError);
-		        	 return responseError;
-		         });
+	    	
+			return baseResource.request(requestConfig, UserChannel.pubUserLoginFailed, UserChannel.pubUserLoginConfirmed);
+
 		};
 		
 		/**
@@ -403,16 +250,8 @@
 			 			method	: 'POST'
 				};
 			 
-			 return $http(requestConfig)
-	         .success(function (responseData, status, headers, config) {
-	           UserChannel.pubUserLogoutConfirmed(responseData);
-	           return responseData;
-	         })
-	         .error(function (responseError, status, headers, config) {
-	           UserChannel.pubUserLogoutFailed(responseError);
-	           return responseError;
-	         });
-	       
+			return baseResource.request(requestConfig, UserChannel.pubUserLogoutFailed, UserChannel.pubUserLogoutConfirmed);
+
 		};
 		
 		/**
@@ -434,16 +273,8 @@
 			     	url		: pathToToken,
 			     	method	: 'POST'
 				};
-				
-		    return $http(requestConfig)
-		         .success(function (responseData, status, headers, config) {
-		        	 UserChannel.pubUserTokenConfirmed(responseData);
-		        	 return responseData;
-		         })
-		         .error(function (responseError, status, headers, config) {
-		        	 UserChannel.pubUserTokenFailed(responseError);
-		        	 return responseError;
-		         });
+			
+			return baseResource.request(requestConfig, UserChannel.pubUserTokenFailed, UserChannel.pubUserTokenConfirmed);
 
 		};
 					

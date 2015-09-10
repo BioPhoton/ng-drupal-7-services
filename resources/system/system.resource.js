@@ -4,7 +4,7 @@
 	/**
 	 * System Resource Modules
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.system.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.system.resourceConstant', 'ngDrupal7Services-3_x.resources.system.channel'])
+    angular.module('ngDrupal7Services-3_x.resources.system.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.baseResource', 'ngDrupal7Services-3_x.resources.system.resourceConstant', 'ngDrupal7Services-3_x.resources.system.channel'])
     
 
     /**
@@ -21,10 +21,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    SystemResource.$inject = ['$http', '$q', 'DrupalApiConstant', 'SystemResourceConstant', 'SystemChannel'];
+    SystemResource.$inject = ['$http', '$q', 'DrupalApiConstant', 'baseResource', 'SystemResourceConstant', 'SystemChannel'];
     
 	/** @ngInject */
-	function SystemResource($http, $q, DrupalApiConstant, SystemResourceConstant, SystemChannel) { 
+	function SystemResource($http, $q, DrupalApiConstant, baseResource, SystemResourceConstant, SystemChannel) { 
 		
 		//setup and return service            	
         var systemResourceService = {
@@ -63,16 +63,8 @@
 						url : connectPath
 				};
 			
-			return $http(requestConfig)
-				.success(function(responseData, status, headers, config){
-					SystemChannel.pubSystemConnectConfirmed(responseData);
-					return responseData
-				})
-				.error(function(responseError, status, headers, config){
-					SystemChannel.pubSystemConnectFailed(responseError);
-					return responseError
-				});
-	
+			return baseResource.request(requestConfig, SystemChannel.pubSystemConnectFailed, SystemChannel.pubSystemConnectConfirmed);
+			
 		};
 		
 		/**
@@ -94,19 +86,6 @@
 			
 			//undefined check
 	    	data = (data)?data:{};
-	    	
-			//validation of params
-	    	var errors = [];	
-
-			//basic validation
-			if(!data.name) { 
-				errors.push('Param name is required.');
-			}
-			
-			if(errors.length != 0) {
-				SystemChannel.pubSystemGetVariableFailed(errors);
-				return $q.reject(errors);
-			}
 			
 			var getVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
 				requestConfig = {
@@ -117,20 +96,7 @@
 						}
 				};
 			
-			//set default if given
-			if(data.default) {
-				requestConfig.data['default'] = data.default;
-			}
-
-			return $http(requestConfig)
-				.success(function(responseData, status, headers, config){
-					SystemChannel.pubSystemGetVariableConfirmed(responseData);
-					return responseData;
-				})
-				.error(function(responseError, status, headers, config){
-					SystemChannel.pubSystemGetVariableFailed(responseError);
-					return responseError;
-				});
+			return baseResource.request(requestConfig, SystemChannel.pubSystemGetVariableFailed, SystemChannel.pubSystemGetVariableConfirmed);
 			
 		};
 		
@@ -152,19 +118,7 @@
 			
 			//undefined check
 	    	data = (data)?data:{};
-	    	
-			//validation of params
-	    	var errors = [];	
-
-			//basic validation
-	    	if(!data.name) { errors.push('Param name is required.'); }
-			if(!data.value) { errors.push('Param value is required.');}
-					
-			if(errors.length != 0) {
-				SystemChannel.pubSystemSetVariableFailed(errors);
-				return $q.reject(errors);
-			}
-			
+	
 			var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
 				defer = $q.defer(),
 				requestConfig = {
@@ -176,15 +130,7 @@
 						}
 				};
 
-			return $http(requestConfig)
-				.success(function(responseData, status, headers, config){
-					SystemChannel.pubSystemSetVariableConfirmed(responseData);
-					return responseData;
-				})
-				.error(function(responseError, status, headers, config){
-					SystemChannel.pubSystemSetVariableFailed(responseError);
-					return responseError;
-				});
+			return baseResource.request(requestConfig, SystemChannel.pubSystemSetVariableFailed, SystemChannel.pubSystemSetVariableConfirmed);
 			
 		};
 		
@@ -206,20 +152,6 @@
 			//undefined check
 	    	data = (data)?data:{};
 	    	
-			//validation of params
-	    	var errors = [];	
-
-	    	//basic validation
-			if(!data.name) { 
-				errors.push('Param name is required.');
-			}
-			
-			if(errors.length != 0) {
-				SystemChannel.pubSystemDelVariableFailed(errors);
-				defer.reject(errors); 
-				return $q.reject(errors);
-			}
-			
 			var delVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
 				requestConfig = {
 						method 	:'POST',
@@ -229,16 +161,8 @@
 						}
 				};
 			
-			return $http(requestConfig)
-				.success(function(responseData, status, headers, config){
-					SystemChannel.pubSystemDelVariableConfirmed(responseData);
-					return responseData
-				})
-				.error(function(responseError, status, headers, config){
-					SystemChannel.pubSystemDelVariableFailed(responseError);
-					return responseError;
-				});
-			
+			return baseResource.request(requestConfig, SystemChannel.pubSystemDelVariableFailed, SystemChannel.pubSystemDelVariableConfirmed);
+
 		};
 	
 	};

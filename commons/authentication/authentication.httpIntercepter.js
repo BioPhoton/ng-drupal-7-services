@@ -51,6 +51,7 @@
 	        // dependencies after they have been created.
 	        $injector.invoke(['AuthenticationService', function (AuthenticationService) {
 	            tokenHeaders = AuthenticationService.getAuthenticationHeaders();
+	            
 	        }]);
 
 	        //add headers___________________________________________________________________

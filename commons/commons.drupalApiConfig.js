@@ -17,7 +17,7 @@
 			  
 			  //response format of a request. possible values are
 			  //look at https://www.drupal.org/node/1699450
-			  dataFormat : "application/json",
+			  responseFormat : "application/json",
 			  //- bencode: The encoding used by the BitTorrent file sharing system.
 			  //- json => JavaScript Object Notation
 			  //- jsonp: JSON with padding
