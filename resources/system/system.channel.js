@@ -1,4 +1,4 @@
-(function() {
+;(function() {
 	'use strict';
 
 	/**
@@ -23,25 +23,25 @@
 		//setup and return service            	
         var systemChannelService = {
         		
-    		pubSystemConnectConfirmed 	: pubSystemConnectConfirmed,
-    		subSystemConnectConfirmed	: subSystemConnectConfirmed,
-    		pubSystemConnectFailed 		: pubSystemConnectFailed,
-    		subSystemConnectFailed		: subSystemConnectFailed,
+    		pubConnectConfirmed 	: pubConnectConfirmed,
+    		subConnectConfirmed	: subConnectConfirmed,
+    		pubConnectFailed 		: pubConnectFailed,
+    		subConnectFailed		: subConnectFailed,
     		
-    		pubSystemGetVariableConfirmed 	: pubSystemGetVariableConfirmed,
-    		subSystemGetVariableConfirmed	: subSystemGetVariableConfirmed,
-    		pubSystemGetVariableFailed 		: pubSystemGetVariableFailed,
-    		subSystemGetVariableFailed		: subSystemGetVariableFailed,
+    		pubGetVariableConfirmed 	: pubGetVariableConfirmed,
+    		subGetVariableConfirmed	: subGetVariableConfirmed,
+    		pubGetVariableFailed 		: pubGetVariableFailed,
+    		subGetVariableFailed		: subGetVariableFailed,
     		
-    		pubSystemSetVariableConfirmed 	: pubSystemSetVariableConfirmed,
-    		subSystemSetVariableConfirmed	: subSystemSetVariableConfirmed,
-    		pubSystemSetVariableFailed 		: pubSystemSetVariableFailed,
-    		subSystemSetVariableFailed		: subSystemSetVariableFailed,
+    		pubSetVariableConfirmed 	: pubSetVariableConfirmed,
+    		subSetVariableConfirmed	: subSetVariableConfirmed,
+    		pubSetVariableFailed 		: pubSetVariableFailed,
+    		subSetVariableFailed		: subSetVariableFailed,
     		
-    		pubSystemDelVariableConfirmed 	: pubSystemDelVariableConfirmed,
-    		subSystemDelVariableConfirmed	: subSystemDelVariableConfirmed,
-    		pubSystemDelVariableFailed 		: pubSystemDelVariableFailed,
-    		subSystemDelVariableFailed		: subSystemDelVariableFailed
+    		pubDelVariableConfirmed 	: pubDelVariableConfirmed,
+    		subDelVariableConfirmed	: subDelVariableConfirmed,
+    		pubDelVariableFailed 		: pubDelVariableFailed,
+    		subDelVariableFailed		: subDelVariableFailed
         };
         
         return systemChannelService;
@@ -51,7 +51,7 @@
         //System connect request functions
         
         /**
-		 * pubSystemConnectConfirmed
+		 * pubConnectConfirmed
 		 * 
 		 * Publish the SystemConnectConfirmed event with giver args 
 	     *
@@ -59,24 +59,24 @@
 		 * 
 		 * 
 		**/
-    	function pubSystemConnectConfirmed(args) {
+    	function pubConnectConfirmed(args) {
     		var args = args;
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectConfirmed, args);
     	};
     	
     	 /**
-		 * subSystemConnectConfirmed
+		 * subConnectConfirmed
 		 * 
 		 * subscribe for the SystemConnectConfirmed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subSystemConnectConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subConnectConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for SystemConnectConfirmed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subSystemConnectConfirmed(_Scope, scopeHandler) {
+    	function subConnectConfirmed(_Scope, scopeHandler) {
     		var prepArgs = function (args) {
     			return args; 
     		};
@@ -90,7 +90,7 @@
     	
         
         /**
-		 * pubSystemConnectConfirmed
+		 * pubConnectConfirmed
 		 * 
 		 * Publish the SystemConnectConfirmed event with giver args 
 	     *
@@ -98,24 +98,24 @@
 		 * 
 		 * 
 		**/
-    	function pubSystemConnectFailed(args) {
+    	function pubConnectFailed(args) {
     		var args = {errors: args};
 
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectFailed, args);
     	};
     	
     	/**
-		 * subSystemConnectFailed
+		 * subConnectFailed
 		 * 
 		 * subscribe for the SystemConnectFailed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subSystemConnectFailed function
+		 * @param 	{Object} _Scope The scope that calls the channels subConnectFailed function
 		 * @param 	{function} scopeHandler The callback handler for SystemConnectFailed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subSystemConnectFailed(_Scope, scopeHandler) {
+    	function subConnectFailed(_Scope, scopeHandler) {
     		var prepArgs = function (args) { 
     			return args; 
     		};
@@ -130,7 +130,7 @@
     	//System get_variable request functions
         
         /**
-		 * pubSystemGetVariableConfirmed
+		 * pubGetVariableConfirmed
 		 * 
 		 * Publish the SystemGetVariableConfirmed event with giver args 
 	     *
@@ -138,24 +138,24 @@
 		 * 
 		 * 
 		**/
-    	function pubSystemGetVariableConfirmed(args) {
+    	function pubGetVariableConfirmed(args) {
     		var args = args;
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_getVariableConfirmed, args);
     	};
     	
     	 /**
-		 * subSystemGetVariableConfirmed
+		 * subGetVariableConfirmed
 		 * 
 		 * subscribe for the SystemGetVariableConfirmed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subSystemGetVariableConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subGetVariableConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for SystemGetVariableConfirmed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subSystemGetVariableConfirmed(_Scope, scopeHandler) {
+    	function subGetVariableConfirmed(_Scope, scopeHandler) {
     		var prepArgs = function (args) {
     			return args; 
     		};
@@ -169,7 +169,7 @@
     	
         
         /**
-		 * pubSystemGetVariableFailed
+		 * pubGetVariableFailed
 		 * 
 		 * Publish the SystemGetVariableFailed event with giver args 
 	     *
@@ -177,24 +177,24 @@
 		 * 
 		 * 
 		**/
-    	function pubSystemGetVariableFailed(args) {
+    	function pubGetVariableFailed(args) {
     		var args = args;
 
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_getVariableFailed, args);
     	};
     	
     	/**
-		 * subSystemGetVariableFailed
+		 * subGetVariableFailed
 		 * 
 		 * subscribe for the SystemGetVariableFailed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subSystemGetVariableFailed function
+		 * @param 	{Object} _Scope The scope that calls the channels subGetVariableFailed function
 		 * @param 	{function} scopeHandler The callback handler for SystemGetVariableFailed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subSystemGetVariableFailed(_Scope, scopeHandler) {
+    	function subGetVariableFailed(_Scope, scopeHandler) {
     		var prepArgs = function (args) { 
     			return args; 
     		};
@@ -209,7 +209,7 @@
     	//System set_variable request functions
         
         /**
-		 * pubSystemSetVariableConfirmed
+		 * pubSetVariableConfirmed
 		 * 
 		 * Publish the SystemSetVariableConfirmed event with giver args 
 	     *
@@ -217,24 +217,24 @@
 		 * 
 		 * 
 		**/
-    	function pubSystemSetVariableConfirmed(args) {
+    	function pubSetVariableConfirmed(args) {
     		var args = args;
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_setVariableConfirmed, args);
     	};
     	
     	 /**
-		 * subSystemSetVariableConfirmed
+		 * subSetVariableConfirmed
 		 * 
 		 * subscribe for the SystemSetVariableConfirmed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subSystemSetVariableConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subSetVariableConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for SystemSetVariableConfirmed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subSystemSetVariableConfirmed(_Scope, scopeHandler) {
+    	function subSetVariableConfirmed(_Scope, scopeHandler) {
     		var prepArgs = function (args) {
     			return args; 
     		};
@@ -248,7 +248,7 @@
     	
         
         /**
-		 * pubSystemSetVariableFailed
+		 * pubSetVariableFailed
 		 * 
 		 * Publish the SystemSetVariableFailed event with giver args 
 	     *
@@ -256,24 +256,24 @@
 		 * 
 		 * 
 		**/
-    	function pubSystemSetVariableFailed(args) {
+    	function pubSetVariableFailed(args) {
     		var args = {errors: args};
 
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_setVariableFailed, args);
     	};
     	
     	/**
-		 * subSystemSetVariableFailed
+		 * subSetVariableFailed
 		 * 
 		 * subscribe for the SystemSetVariableFailed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subSystemSetVariableFailed function
+		 * @param 	{Object} _Scope The scope that calls the channels subSetVariableFailed function
 		 * @param 	{function} scopeHandler The callback handler for SystemSetVariableFailed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subSystemSetVariableFailed(_Scope, scopeHandler) {
+    	function subSetVariableFailed(_Scope, scopeHandler) {
     		var prepArgs = function (args) { 
     			return args; 
     		};
@@ -288,7 +288,7 @@
     	//System del_variable request functions
         
         /**
-		 * pubSystemDelVariableConfirmed
+		 * pubDelVariableConfirmed
 		 * 
 		 * Publish the SystemDelVariableConfirmed event with giver args 
 	     *
@@ -296,24 +296,24 @@
 		 * 
 		 * 
 		**/
-    	function pubSystemDelVariableConfirmed(args) {
+    	function pubDelVariableConfirmed(args) {
     		var args = args;
     		
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_delVariableConfirmed, args);
     	};
     	
     	 /**
-		 * subSystemDelVariableConfirmed
+		 * subDelVariableConfirmed
 		 * 
 		 * subscribe for the SystemDelVariableConfirmed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subSystemDelVariableConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subDelVariableConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for SystemDelVariableConfirmed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subSystemDelVariableConfirmed(_Scope, scopeHandler) {
+    	function subDelVariableConfirmed(_Scope, scopeHandler) {
     		var prepArgs = function (args) {
     			return args; 
     		};
@@ -327,7 +327,7 @@
     	
         
         /**
-		 * pubSystemDelVariableFailed
+		 * pubDelVariableFailed
 		 * 
 		 * Publish the SystemDelVariableFailed event with giver args 
 	     *
@@ -335,24 +335,24 @@
 		 * 
 		 * 
 		**/
-    	function pubSystemDelVariableFailed(args) {
+    	function pubDelVariableFailed(args) {
     		var args = {errors: args};
 
     		BaseChannel.pubRootEmit(SystemChannelConstant.system_delVariableFailed, args);
     	};
     	
     	/**
-		 * subSystemDelVariableFailed
+		 * subDelVariableFailed
 		 * 
 		 * subscribe for the SystemDelVariableFailed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subSystemDelVariableFailed function
+		 * @param 	{Object} _Scope The scope that calls the channels subDelVariableFailed function
 		 * @param 	{function} scopeHandler The callback handler for SystemDelVariableFailed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subSystemDelVariableFailed(_Scope, scopeHandler) {
+    	function subDelVariableFailed(_Scope, scopeHandler) {
     		var prepArgs = function (args) { 
     			return args; 
     		};

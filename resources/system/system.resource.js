@@ -1,8 +1,11 @@
-(function() {
+;(function() {
     'use strict';
 
 	/**
 	 * System Resource Modules
+	 * 
+	 * see sourcecode in services/resources/system_resource.inc
+	 * 
 	**/
     angular.module('ngDrupal7Services-3_x.resources.system.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.baseResource', 'ngDrupal7Services-3_x.resources.system.resourceConstant', 'ngDrupal7Services-3_x.resources.system.channel'])
     
@@ -12,7 +15,6 @@
 	 * 
 	 * This service mirrors the Drupal system resource of the services 3.x module.
 	 * To use this you have to set following line in your Drupal CORS module settings
-	 * your_api_endpoint/system/*|<mirror>|POST|Content-Type,Authorization|true
 	 * 
 	**/
     .factory('SystemResource', SystemResource);
@@ -41,12 +43,12 @@
         /**
 		 * connect
 		 * 
-		 * Returns the logged in state of the current user.
+		 * Returns the details of currently logged in user.
 		 * 
 		 * Method: POST 
 		 * Url: http://drupal_instance/api_endpoint/system/connect
 		 * 
-		 * @return 	{Promise}
+		 * @return 	{Promise} Object with session id, session name and a user object.
 		 * 
 		**/
         function connect() {
@@ -63,14 +65,15 @@
 						url : connectPath
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubSystemConnectFailed, SystemChannel.pubSystemConnectConfirmed);
+			return baseResource.request(requestConfig, SystemChannel.pubConnectFailed, SystemChannel.pubConnectConfirmed);
 			
 		};
 		
 		/**
 		 * get_variable
 		 * 
-		 * Returns the value of a system variable using variable_get().
+		 * Returns a persistent variable.
+		 * Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
 		 * 
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/system/get_variable
@@ -79,7 +82,7 @@
 		 * 			@key 	{String} name The name of the variable to return, required:true, source:post body
 		 * 			@key 	{String} _default The default value to use if this variable has never been set, required:false, source:post body
 		 * 
-		 * @return 	{Promise}
+		 * @return 	{Promise} The value of the variable. Unserialization is taken care of as necessary.
 		 *
 		**/
 		function get_variable(data){
@@ -96,22 +99,24 @@
 						}
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubSystemGetVariableFailed, SystemChannel.pubSystemGetVariableConfirmed);
+			return baseResource.request(requestConfig, SystemChannel.pubGetVariableFailed, SystemChannel.pubGetVariableConfirmed);
 			
 		};
 		
 		/**
 		 * set_variable
 		 * 
-		 * Returns the value of a system variable using variable_get().
+		 * Sets a persistent variable.
+		 * Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
+		 * 
 		 * Method: POST
-		 * Url: http://drupal_instance/api_endpoint/system/get_variable
+		 * Url: http://drupal_instance/api_endpoint/system/set_variable
 		 * 
 		 * @params  {Object} data the requests data
 		 * 			@key 	{String} name The name of the variable to set, required:true, source:post body
-		 * 			@key 	{String} value The value to set, required:true, source:post body
+		 * 			@key 	{String} value The value to set. This can be any PHP data type; these functions take care of serialization as necessary, required:true, source:post body
 		 * 
-		 * @return 	{Promise}
+		 * @return 	{Promise} True if successful false if not
 		 * 
 		**/
 		function set_variable(data){
@@ -130,19 +135,21 @@
 						}
 				};
 
-			return baseResource.request(requestConfig, SystemChannel.pubSystemSetVariableFailed, SystemChannel.pubSystemSetVariableConfirmed);
+			return baseResource.request(requestConfig, SystemChannel.pubSetVariableFailed, SystemChannel.pubSetVariableConfirmed);
 			
 		};
 		
 		/**
 		 * del_variable
 		 * 
-		 * Deletes a system variable using variable_del().
+		 * Unsets a persistent variable.
+		 * Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
+		 * 
 		 * Method: POST
-		 * Url: http://drupal_instance/api_endpoint/system/get_variable
+		 * Url: http://drupal_instance/api_endpoint/system/del_variable
 		 * 
 		 * @params  {Object} data the requests data
-		 * 			@key 	{String} name The name of the variable to delete, required:true, source:post body
+		 * 			@key 	{String} name The name of the variable to undefine, required:true, source:post body
 		 * 
 		 * @return 	{Promise}
 		 * 
@@ -161,7 +168,7 @@
 						}
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubSystemDelVariableFailed, SystemChannel.pubSystemDelVariableConfirmed);
+			return baseResource.request(requestConfig, SystemChannel.pubDelVariableFailed, SystemChannel.pubDelVariableConfirmed);
 
 		};
 	

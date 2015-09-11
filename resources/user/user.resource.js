@@ -1,8 +1,10 @@
-(function() {
+;(function() {
     'use strict';
 
 	/**
 	 * User Resource Modules
+	 * 
+	 * see sourcecode in services/resources/user_resource.inc
 	**/
     angular.module('ngDrupal7Services-3_x.resources.user.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.user.resourceConstant', 'ngDrupal7Services-3_x.resources.user.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
     
@@ -27,22 +29,21 @@
 		
 		//setup and return service            	
         var userResourceService = {
-        	//
+        	//CRUD operations
         	retrieve 	: retrieve,
     		create 		: create,
     		update 		: update,
     		delete 		: _delete,
     	    index 		: index,
-    	    //
+    	    //Actions
+    	    token		: token,
     		register 	: register,
-    		//resend_welcome_email 	: resend_welcome_email,
-    		//cancel 					: cancel,
+    		resendWelcomeEmail 	: resendWelcomeEmail,
+    		cancel 		: cancel,
     		login 		: login,
         	logout 		: logout,
-        	//password_reset 			: password_reset,
-        	//request_new_password 	: request_new_password,
-        	//
-        	token		: token,
+        	passwordReset 		: passwordReset,
+        	requestNewPassword 	: requestNewPassword
         	
         };
         
@@ -53,36 +54,47 @@
         /**
 		 * retrieve
 		 * 
-		 * Returns the user fetched by uid
+		 * Retrieve a user
 		 * 
-		 * Method: POST 
+		 * Method: GET 
 		 * Url: http://drupal_instance/api_endpoint/user/{UID}
 		 * 
 		 * @params  {Object} data The requests data
-		 * 			@key 	{Integer} uid The uid of the user you want to retrieve, required:true, source:post body
+		 * 			@key 	{Integer} uid UID of the user to be loaded, required:true, source:path
 		 * 
-		 * @return 	{Promise}
+		 * @return 	{Promise} A user object
 		 * 
 		**/
     	function retrieve(data) {
-
-    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/'+data.uid;
-    		
-    		return baseResource.retrieve( retrievePath, UserChannel.pubUserRetrieveFailed, UserChannel.pubUserRetrieveConfirmed);
+    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid;
+    		return baseResource.retrieve( retrievePath, UserChannel.pubRetrieveFailed, UserChannel.pubRetrieveConfirmed);
 	    };
 	    
 	    /**
 	     * create
 	     * 
-	     * Create a user.
+	     * Create a new user.
+	     * This function uses drupal_form_submit() and as such expects all input to match
+	     * the submitting form in question.
 	     * 
 	     * Method: POST
 	     * Url: http://drupal_instance/api_endpoint/user
 	     * 
-	     * @params  {Object} data the users accout data
-	     * 			@key 	{String} uid The uid of the user to retrieve, required:true, source:post body
+	     * @params  {Object} data The accout of the user to create, required:true, source:post body
 	     * 
-	     * @return 	{Promise}
+	     *  The $account object should contain, at minimum, the following properties:
+		 *     - {String} name  The user name
+		 *     - {String} mail  The email address
+		 *     - {String} pass  The plain text unencrypted password
+		 *
+		 *  These properties can be passed but are optional
+		 *     - {Integer} status Value 0 for blocked, otherwise will be active by default
+		 *     - {Integer} notify Value 1 to notify user of new account, will not notify by default
+		 *
+		 *  Roles can be passed in a roles property which is an associative
+		 *  array formatted with '<role id>' => '<role id>', not including the authenticated user role, which is given by default.
+	     * 
+	     * @return 	{Promise} The user object of the newly created user.
 	     *
 	    **/
 	    function create(data){
@@ -95,7 +107,10 @@
 				mail : data.mail
 			}
     		
-    		return baseResource.create( createdata, createPath, UserChannel.pubUserCreateFailed, UserChannel.pubUserCreateConfirmed);
+    		if(data.status) { createdata.status = (data.status)?1:0; }
+    		if(data.notify) { createdata.notify = (data.notify)?1:0; }
+    		
+    		return baseResource.create( createdata, createPath, UserChannel.pubCreateFailed, UserChannel.pubCreateConfirmed);
 
 	    };
 	        
@@ -121,10 +136,10 @@
 	    	//@TODO check possible fields
     		var updateData 	= {
 				name : data.name,
-				mail : data.mail,
+				mail : data.mail
 			}
     		
-    		return baseResource.update( updateData, updatePath, UserChannel.pubUserUpdateFailed, UserChannel.pubUserUpdateConfirmed);
+    		return baseResource.update( updateData, updatePath, UserChannel.pubUpdateFailed, UserChannel.pubUpdateConfirmed);
 
 	    };
 	    
@@ -133,11 +148,11 @@
 	     * 
 	     * Delete a user
 	     * 
-	     * Method: POST
-	     * Url: http://drupal_instance/api_endpoint/user/delete
+	     * Method: DELETE
+	     * Url: http://drupal_instance/api_endpoint/user/{UID}
 	     * 
 	     * @params  {Object} data the requests data
-	     * 			@key 	{Integer} uid Unique identifier for this user, required:true, source:path
+	     * 			@key 	{Integer} uid The id of the user to delete, required:true, source:path
 	     * 
 	     * @return 	{Promise}
 	     *
@@ -146,13 +161,14 @@
 	    	
 	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid
 	    	
-	    	return baseResource.delete(deletePath, UserChannel.pubUserDeleteFailed, UserChannel.pubUserDeleteConfirmed);
+	    	return baseResource.delete(deletePath, UserChannel.pubDeleteFailed, UserChannel.pubDeleteConfirmed);
 	    };
 	    
 	    /**
 	     * index
 	     * 
 	     * List all users
+	     * 
 	     * Method: GET
 		 * Url: http://drupal_instance/api_endpoint/user
 		 * Headers: Content-Type:application/json
@@ -161,7 +177,6 @@
 		 * 		@key 	{Integer} page The zero-based index of the page to get. defaults to 0., required:false, source:param
 		 * 		@key 	{Integer} pagesize Number of records to get per page., required:false, source:param
 		 * 		@key 	{String} fields The fields to get., required:false, source:param
-		 * 				uid,name,mail,theme,signature,signature_format,created,access,login,status,timezone,language,picture,init,data
 		 * 		@key 	{Array} parameters Parameters, required:false, source:param
 		 * 		
 	     * 
@@ -171,13 +186,14 @@
 	    function index(data){
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/';
 	    	
-	    	return baseResource.index(data, indexPath, UserChannel.pubUserIndexFailed, UserChannel.pubUserIndexConfirmed);
+	    	return baseResource.index(data, indexPath, UserChannel.pubIndexFailed, UserChannel.pubIndexConfirmed);
 	    };
 	    
 	    /**
 		 * register
 		 * 
-		 * Register a user
+		 * register a user
+		 * 
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/user/register
 		 * 
@@ -186,24 +202,136 @@
 		 * @return {Promise}
 		 * 
 		**/
-		var register = function(data){
+		function register(data){
 			//undefined check
 	    	data = (data)?data:{};
 
-			 var registerPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.register;
-		 	 	 requestConfig = {
+			 var registerPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.register,
+			 	 requestConfig = {
 		 			method: 'POST',
 					url : registerPath,
 					data : data
 		 	 	  };
 		 
-		 	return baseResource.request(requestConfig, UserChannel.publishUserRegisterFailed, UserChannel.publishUserRegisterConfirmed);
+		 	return baseResource.request(requestConfig, UserChannel.pubRegisterFailed, UserChannel.pubRegisterConfirmed);
 		};
+		
+		 
+	    /**
+		 * resendWelcomeEmail
+		 * 
+		 * Resend the welcome email of a user fetched by uid
+		 * 
+		 * Method: POST
+		 * Url: http://drupal_instance/api_endpoint/user/resend_welcome_email
+		 * 
+		 * @param {Object} data The user object, required:true, source:post body
+		 * 
+		 * @return {Promise}
+		 * 
+		**/
+		function resendWelcomeEmail(data){
+			//undefined check
+	    	data = (data)?data:{};
+
+			 var resendWelcomeEmailPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid  + '/' + UserResourceConstant.actions.resend_welcome_email,
+			 	 requestConfig = {
+		 			method: 'POST',
+					url : resendWelcomeEmailPath
+		 	 	  };
+		 
+		 	return baseResource.request(requestConfig, UserChannel.pubResendWelcomeEmailFailed, UserChannel.pubResendWelcomeEmailConfirmed);
+		};
+		
+		/**
+		 * cancel
+		 * 
+		 * Cancel a user
+		 * 
+		 * Method: POST
+		 * Url: http://drupal_instance/api_endpoint/user/cancel
+		 * 
+		 * @param {Object} data The user object, required:true, source:post body
+		 * 
+		 * @return {Promise}
+		 * 
+		**/
+		function cancel(data){
+			//undefined check
+	    	data = (data)?data:{};
+
+			 var cancelPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid  + '/' + UserResourceConstant.actions.cancel,
+			 	 requestConfig = {
+		 			method: 'POST',
+					url : cancelPath
+		 	 	  };
+		 
+		 	return baseResource.request(requestConfig, UserChannel.pubCancelFailed, UserChannel.pubCancelConfirmed);
+		};
+		
+		/**
+		 * PasswordReset
+		 * 
+		 * PasswordReset a user
+		 * 
+		 * Method: POST
+		 * Url: http://drupal_instance/api_endpoint/user/password_reset
+		 * 
+		 * @param {Object} data The user object, required:true, source:post body
+		 * 
+		 * @return {Promise}
+		 * 
+		**/
+		function passwordReset(data){
+			//undefined check
+	    	data = (data)?data:{};
+
+			 var passwordResetPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid  + '/' + UserResourceConstant.actions.password_reset,
+			 	 requestConfig = {
+		 			method: 'POST',
+					url : passwordResetPath
+		 	 	  };
+		 
+		 	return baseResource.request(requestConfig, UserChannel.pubPasswordResetFailed, UserChannel.pubPasswordResetConfirmed);
+		};
+		
+		/**
+		 * requestNewPassword
+		 * 
+		 * Request a new password, given a user name or e-mail address
+		 * 
+		 * Method: POST
+		 * Url: http://drupal_instance/api_endpoint/user/request_new_password
+		 * 
+		 * @param {Object} data The user object
+		 * 			@key {String} name A valid user name or e-mail address, required:true, source:post body
+		 * 
+		 * 
+		 * @return {Promise}
+		 * 
+		**/
+		function requestNewPassword(data){
+			//undefined check
+	    	data = (data)?data:{};
+
+			 var requestNewPasswordPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid  + '/' + UserResourceConstant.actions.request_new_password,
+			 	 requestConfig = {
+		 			method: 'POST',
+					url : requestNewPasswordPath,
+					data : {
+						name : data.name
+					}
+		 	 	  };
+		 
+		 	return baseResource.request(requestConfig, UserChannel.pubRequestNewPasswordFailed, UserChannel.pubRequestNewPasswordConfirmed);
+		};
+	    
 	    
 		/**
 		 * login
 		 * 
 		 * Login a user for a new session
+		 * 
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/user/login
 		 * 
@@ -223,12 +351,13 @@
 						url : pathToLogin,
 						method :'POST',
 						data : {
-								username : data.username,
-								password : data.password
+							//@TODO normalize the data over all requests (register name === login username) 
+							username : data.username,
+							password : data.password
 						},
 				};
 	    	
-			return baseResource.request(requestConfig, UserChannel.pubUserLoginFailed, UserChannel.pubUserLoginConfirmed);
+			return baseResource.request(requestConfig, UserChannel.pubLoginFailed, UserChannel.pubLoginConfirmed);
 
 		};
 		
@@ -236,6 +365,7 @@
 		 * logout
 		 * 
 		 * Logout a user session
+		 * 
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/user/logout
 		 * 
@@ -250,7 +380,7 @@
 			 			method	: 'POST'
 				};
 			 
-			return baseResource.request(requestConfig, UserChannel.pubUserLogoutFailed, UserChannel.pubUserLogoutConfirmed);
+			return baseResource.request(requestConfig, UserChannel.pubLogoutFailed, UserChannel.pubLogoutConfirmed);
 
 		};
 		
@@ -274,7 +404,7 @@
 			     	method	: 'POST'
 				};
 			
-			return baseResource.request(requestConfig, UserChannel.pubUserTokenFailed, UserChannel.pubUserTokenConfirmed);
+			return baseResource.request(requestConfig, UserChannel.pubTokenFailed, UserChannel.pubTokenConfirmed);
 
 		};
 					

@@ -4,21 +4,21 @@
 	/**
 	 * System Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.baseResource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.validationConstant', 'ngDrupal7Services-3_x.commons.helperService'])
+	angular.module('ngDrupal7Services-3_x.commons.baseResource', ['ngDrupal7Services-3_x.commons.configurations'])
 		   .factory('baseResource', baseResource);
 
 	/**
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	 **/
-	baseResource.$inject = ['$http', '$q', 'DrupalApiConstant', 'ValidationConstant', 'DrupalHelperService'];
+	baseResource.$inject = ['$http', '$q', 'DrupalApiConstant'];
 	
 	/**
 	 * The resource basic functions
 	 * 
-	 **/
+	**/
 	/** @ngInject */
-	function baseResource($http, $q, DrupalApiConstant, ValidationConstant, DrupalHelperService) {
+	function baseResource($http, $q, DrupalApiConstant) {
 		
 		var baseResourceService = {
 			request 	: request,
@@ -32,7 +32,6 @@
         return baseResourceService;
 
         ////////////
-        
         
         /**
          * request

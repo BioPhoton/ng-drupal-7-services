@@ -1,10 +1,10 @@
-(function() {
+;(function() {
     'use strict';
 
     /**
 	 *  Constants for UserChannel
 	 *  
-	 *  NOTE: if you want to change this constant do this in your app.js config section
+	 *  NOTE: if you want to change this constant do this in a config section of angular
 	 */
 	var UserChannelConstant =  {
 	 		// Retrieve action
