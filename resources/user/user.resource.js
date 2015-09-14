@@ -107,8 +107,22 @@
 				mail : data.mail
 			}
     		
-    		if(data.status) { createdata.status = (data.status)?1:0; }
-    		if(data.notify) { createdata.notify = (data.notify)?1:0; }
+    		//optional data
+    		
+    		if(data.status || data.status == 0) {
+    			createdata.status = (data.status)?1:0;
+    		}
+    		
+    		if(data.notify || data.notify == 0) {
+    			createdata.notify = (data.notify)?1:0;
+    		}
+
+    		//@TODO check if is propper json 
+    		if (data.roles) {
+    			createdata.roles = baseResource.preparePostData(data.roles, 'array_of_values');
+    		}
+    		
+    		
     		
     		return baseResource.create( createdata, createPath, UserChannel.pubCreateFailed, UserChannel.pubCreateConfirmed);
 

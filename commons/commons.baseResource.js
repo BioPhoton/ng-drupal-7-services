@@ -21,6 +21,9 @@
 	function baseResource($http, $q, DrupalApiConstant) {
 		
 		var baseResourceService = {
+			prepareGetParams : prepareGetParams,	
+			preparePostData: preparePostData,
+			//base 
 			request 	: request,
 			retrieve 	: retrieve,
 			create 		: create,
@@ -225,6 +228,49 @@
     		
     		return getParamsString;
         };
+        
+        /**
+         * 
+         * preparePostData
+         * 
+         * @TODO write doc
+         */
+         function preparePostData(values, format) {
+        	 var postData = undefined,
+	            formats = { 
+	      			  'array_of_keys' : true,
+	      			 'array_of_values' : true
+	            };
+        	 
+        	//validate format
+     		if(!formats[format]) { return '';  }
+     		
+     		//array
+    		//example: ["3", "asfasf"], 
+    		if(format === 'array_of_keys' && Object.keys(values).length > 0) {
+    		
+    			var arrayValues = [];
+    			angular.forEach(values, function(value, k) {
+    				if(value !== false) { this.push(k); }
+    			}, arrayValues);	
+    			if(arrayValues.length) { postData = arrayValues; }
+    			return postData;
+    		}
+    		
+    		if(format === 'array_of_values' && Object.keys(values).length > 0) {
+        		
+    			var arrayValues = [];
+    			angular.forEach(values, function(value, k) {
+    				if(value !== false) { this.push(value); }
+    			}, arrayValues);	
+    			if(arrayValues.length) { postData = arrayValues; }
+    			return postData;
+    		}
+     		
+        	 
+        	 
+        	 
+         }
         
         /**
          * 
