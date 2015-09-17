@@ -59,6 +59,7 @@
 		
 		//setup and return service        
         var authenticationService = {
+        		isAuthorized : isAuthorized,
         		login	: login,
     			logout	: logout,
     			refreshConnection			: refreshConnection,
@@ -70,7 +71,36 @@
         return authenticationService;
 
         ////////////
-        
+        /**
+         * isAuthorized
+         * 
+         * @param {Object} accessLevel The access level to check for
+         * @param {Object} roles The role to check with. If roles is not gives the users roles will be taken
+         * 
+         * @returns {Boolean} true if authorized false if not
+         * 
+         */
+        function isAuthorized(accessLevel, roles) {
+	   		 //if no user is given set unauthorized user
+	   		 currentUser = getCurrentUser();
+	   		 //
+	   	     if(roles === undefined) {
+	   			roles = currentUser.roles; 
+	            }
+	   	    
+	   	     //
+	   	     if(accessLevel == '*') { return true;}
+	   	     
+	   	     var isGranted = false;
+	   		 for (var i = 0; i < accessLevel.length; i++) {
+	   			 for (var prop in roles) {
+	   				if(accessLevel[i] == currentUser.roles[prop]) {
+	   					 isGranted = true;
+	   				}
+	   			 }
+	   	     }
+	         return isGranted;
+        };
 		
 		/**
 		 * login
