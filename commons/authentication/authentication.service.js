@@ -53,7 +53,6 @@
 				domain 			: DrupalApiConstant.drupal_instance,
 				path			: '/',
 				//secure 			: false,
-				//@TODO this line throws error in IE 
 				//expires			: DrupalApiConstant.session_expiration_time,
 				//expirationUnit 	: DrupalApiConstant.session_expiration_unite,
 			};
@@ -140,7 +139,6 @@
 		/**
 		 * refreshConnection
 		 * 
-		 * @TODO add explanation of workflow
 		 * 
 		 * @return {Promise} with new token 
 		 *  

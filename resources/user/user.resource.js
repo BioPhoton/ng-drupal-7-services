@@ -117,7 +117,6 @@
     			createdata.notify = (data.notify)?1:0;
     		}
 
-    		//@TODO check if is propper json 
     		if (data.roles) {
     			createdata.roles = baseResource.preparePostData(data.roles, 'array_of_values');
     		}
@@ -147,7 +146,6 @@
 	    	
 	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid;
 	    	
-	    	//@TODO check possible fields
     		var updateData 	= {
 				name : data.name,
 				mail : data.mail
@@ -365,7 +363,7 @@
 						url : pathToLogin,
 						method :'POST',
 						data : {
-							//@TODO normalize the data over all requests (register name === login username) 
+
 							username : data.username,
 							password : data.password
 						},

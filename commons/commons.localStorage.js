@@ -23,7 +23,7 @@ localstorageServices.factory('$localstorage', ['$window',
       getObject: function (key, emptyValue) {
         emptyValue = (emptyValue !== undefined) ? emptyValue : '{}';
         var result = $window.localStorage[key];
-        //@TODO double check this
+ 
         if(result === undefined || result === "Max"){return emptyValue}
         return JSON.parse($window.localStorage[key] || emptyValue);
       },

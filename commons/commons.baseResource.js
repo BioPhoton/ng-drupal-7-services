@@ -233,12 +233,17 @@
          * 
          * preparePostData
          * 
-         * @TODO write doc
+         * Formats the JSON depending on format param
+         * 
+         * @param {Object} values The value to format
+         * @param {String} format The new format of the value param
+         * 
+         * @return {Array} formated data
          */
          function preparePostData(values, format) {
         	 var postData = undefined,
 	            formats = { 
-	      			  'array_of_keys' : true,
+	      			 'array_of_keys' : true,
 	      			 'array_of_values' : true
 	            };
         	 
@@ -266,17 +271,20 @@
     			if(arrayValues.length) { postData = arrayValues; }
     			return postData;
     		}
-     		
-        	 
-        	 
-        	 
+ 
          }
         
         /**
          * 
          * prepareGetParam
          * 
-         * @TODO write doc
+         * Formats the JSON depending on formata and key param
+         * 
+         * @param {Object} values The value to format
+         * @param {String} key The name of key to use in formated output
+         * @param {String} format The new format of the value param
+         * 
+         * @return {String} formated data
          */
          function prepareGetParams(values, key, format) {
         	 console.log(values, key, format); 
