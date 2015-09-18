@@ -16,7 +16,8 @@
                 'anon': ['anonymous user'],
                 'user' : ['authenticated user'],
                 'admin': ['administrator']
-            };
+            }
+	};
     
 	/**
 	 *  AccessControlConstant Module

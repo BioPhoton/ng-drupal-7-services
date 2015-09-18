@@ -65,7 +65,8 @@
     			refreshConnection			: refreshConnection,
     			getLastConnectTime			: getLastConnectTime,
     			getConnectionState			: getConnectionState,
-    			getAuthenticationHeaders 	: getAuthenticationHeaders
+    			getAuthenticationHeaders 	: getAuthenticationHeaders,
+    			getCurrentUser				: getCurrentUser
         };
         
         return authenticationService;
@@ -124,12 +125,15 @@
 								setCurrentUser(responseData.data.user);
 								
 								AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData.data);
-								return responseData.data; 
+								console.log('responseData');
+								
+								return $q.resolve(responseData.data);
 							},
 							//error
 							function (responseError, status, headers, config) {
 								AuthenticationChannel.pubAuthenticationLoginFailed(responseError.data);
-								return responseError.data; 
+								console.log('responseError');
+								return $q.reject(responseError.data); 
 							}
 						);
 			
@@ -186,7 +190,7 @@
 						//initToken error
 						function(responseError) {
 							AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
-							return responseError.data;
+							return $q.reject(responseError.data);
 						}
 					);
 		
@@ -207,9 +211,11 @@
 					              
 					              if (user_id == 0) { setConnectionState(false); }
 					              else { setConnectionState(true); }
+					            
+					              setCurrentUser(responseData.data.user);
 					              
 					              AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData.data);
-				            	  return responseData.data;
+				            	  return $q.resolve(responseData.data);
 			
 					            },
 					            
@@ -218,7 +224,7 @@
 					            	setConnectionState(false);
 					            	
 					            	AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
-					            	return errors;
+					            	return $q.reject(errors);
 					            }
 							);
 		}
