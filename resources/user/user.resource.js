@@ -97,7 +97,7 @@
 	     * @return 	{Promise} The user object of the newly created user.
 	     *
 	    **/
-	    function create(data){
+	    function create(data) {
 	    	
 	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath;
 
@@ -121,8 +121,6 @@
     			createdata.roles = baseResource.preparePostData(data.roles, 'array_of_values');
     		}
     		
-    		
-    		
     		return baseResource.create( createdata, createPath, UserChannel.pubCreateFailed, UserChannel.pubCreateConfirmed);
 
 	    };
@@ -142,7 +140,7 @@
 	     * @return 	{Promise}
 	     *
 	    **/
-	    function update(data){
+	    function update(data) {
 	    	
 	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid;
 	    	
@@ -169,10 +167,8 @@
 	     * @return 	{Promise}
 	     *
 	    **/
-	    function _delete(data){
-	    	
+	    function _delete(data) {
 	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid
-	    	
 	    	return baseResource.delete(deletePath, UserChannel.pubDeleteFailed, UserChannel.pubDeleteConfirmed);
 	    };
 	    
@@ -195,9 +191,8 @@
 	     * @return 	{Promise}
 	     *
 	    **/
-	    function index(data){
+	    function index(data) {
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/';
-	    	
 	    	return baseResource.index(data, indexPath, UserChannel.pubIndexFailed, UserChannel.pubIndexConfirmed);
 	    };
 	    
@@ -214,7 +209,7 @@
 		 * @return {Promise}
 		 * 
 		**/
-		function register(data){
+		function register(data) {
 			//undefined check
 	    	data = (data)?data:{};
 
@@ -242,7 +237,7 @@
 		 * @return {Promise}
 		 * 
 		**/
-		function resendWelcomeEmail(data){
+		function resendWelcomeEmail(data) {
 			//undefined check
 	    	data = (data)?data:{};
 
@@ -268,7 +263,7 @@
 		 * @return {Promise}
 		 * 
 		**/
-		function cancel(data){
+		function cancel(data) {
 			//undefined check
 	    	data = (data)?data:{};
 
@@ -294,7 +289,7 @@
 		 * @return {Promise}
 		 * 
 		**/
-		function passwordReset(data){
+		function passwordReset(data) {
 			//undefined check
 	    	data = (data)?data:{};
 
@@ -322,7 +317,7 @@
 		 * @return {Promise}
 		 * 
 		**/
-		function requestNewPassword(data){
+		function requestNewPassword(data) {
 			//undefined check
 	    	data = (data)?data:{};
 

@@ -23,64 +23,55 @@
 	
 		//setup and return service            	
         var drupalHelperService = {
-        		isFloat : isFloat,
-				isInteger	: isInteger,
-				isNumeric : isNumeric,
-				keyExist	: keyExist,
-        		sprintf : sprintf,
+        		sprintf 		: sprintf,
+        		structureField 	: structureField
         };
         
         return drupalHelperService;
 
         ////////////
         
-        //validations
+        //
         
         /**
-         * isFloat
-         * 
-         * @param {Number} n The variable to check if it's float
-         * 
-         * @return {Boolean} True if value is float false if not
-         * 
-         */
-        function isFloat(n) {
-            n = n.length > 0 ? Number(n) : false;
-            return (n === parseFloat(n));
-        };
-        
-        /**
-         * isInteger
-         * 
-         * @param {Number} n The variable to check if it's integer
-         * 
-         * @return {Boolean} True if value is integer false if not
-         * 
-         */
-        function isInteger(n) {
-            n = n.toString().length > 0 ? Number(n) : false;
-            console.log(n, n === parseInt(n)); 
-            return (n === parseInt(n));
-        };
+    	 * https://github.com/jbeuckm/drupal-client/blob/master/lib/field.js
+    	 * Create the basic field structure for uploading a field.
+    	 */
+        function structureField(value, _label, language) {
 
-        /**
-         * isNumeric
-         * 
-         * @param {Number} n The variable to check if it's a number
-         * 
-         * @return {Boolean} True if value is number false if not
-         * 
-         */
-        function isNumeric(n){
-           if(isInteger(n) || isFloat(n)){ return true; }
-           return false;
-        };
-        
-        
-        function keyExist(jsonObj, keyName) {
-        	
-        };
-        
+    	  // record optional label string or default to "value"
+    	  var label = _label || "value";
+    	  var language_key = (language)? function() {return language}:function() {return baseResourceConfig.LANGUAGE_NONE};
+
+    	  if (angular.isArray(value)) {
+
+    	    var field_array = [];
+    	    for (var i= 0, l=value.length; i<l; i++) {
+    	      var item = {};
+    	      item[label] = value[i];
+
+    	      field_array.push(item);
+    	    }
+    	    return {
+    	      und: field_array
+    	    };
+    	  }
+
+    	  if (value instanceof Date) {
+
+    	    var obj = {
+    	      value: {
+    	        date: (value.getMonth()+1)+'/'+value.getDate()+'/'+value.getFullYear()+' - '+value.getHours()+':'+value.getMinutes()+':'+value.getSeconds()
+    	      }
+    	    };
+
+    	    return {
+    	    	und: [
+    	        obj
+    	      ]
+    	    };
+    	  }
+        }
         //
         
         function sprintf() {

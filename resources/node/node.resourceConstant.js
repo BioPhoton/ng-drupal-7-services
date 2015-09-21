@@ -13,20 +13,15 @@
 		//actions of user resource
 		actions : {
 			//following actions are defined over their request method (GET, POST, PUT, DELETE) so they are commented out
-			//retrieve 				: 'retrieve',
-			//create 				: 'create',
-			//update 				: 'update',
-			//delete 				: 'delete',
-		    //index 				: 'index',
-			//
-			login 					: 'login',
-			logout 					: 'logout',
-			token 					: 'token',
-			request_new_password 	: 'request_new_password',
-			register 				: 'register',
-			cancel 					: 'cancel',
-			password_reset 			: 'password_reset',
-			resend_welcome_email 	: 'resend_welcome_email'
+			//retrieve 	: 'retrieve',
+			//create 	: 'create',
+			//update 	: 'update',
+			//delete 	: 'delete',
+		    //index 	: 'index',
+			
+			files		: 'files',
+			comments 	: 'comments',
+			attach_file : 'attach_file'
 		}
 
 	};
