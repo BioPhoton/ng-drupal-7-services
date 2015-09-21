@@ -55,22 +55,22 @@
         	subIndexFailed			: subIndexFailed,
         	
         	// Files action
-     	   	pubNodeFilesConfirmed		: pubNodeFilesConfirmed,
-     	   	subNodeFilesConfirmed		: subNodeFilesConfirmed,
-     	   	pubNodeFilesFailed			: pubNodeFilesFailed,
-     	   	subNodeFilesFailed 			: subNodeFilesFailed,
+     	   	pubFilesConfirmed		: pubFilesConfirmed,
+     	   	subFilesConfirmed		: subFilesConfirmed,
+     	   	pubFilesFailed			: pubFilesFailed,
+     	   	subFilesFailed 			: subFilesFailed,
      	   	
      	   	// Comments action
-     	   	pubNodeCommentsConfirmed	: pubNodeCommentsConfirmed,
-     	   	subNodeCommentsConfirmed	: subNodeCommentsConfirmed,
-     	   	pubNodeCommentsFailed		: pubNodeCommentsFailed,
-     	   	subNodeCommentsFailed 		: subNodeCommentsFailed,
+     	   	pubCommentsConfirmed	: pubCommentsConfirmed,
+     	   	subCommentsConfirmed	: subCommentsConfirmed,
+     	   	pubCommentsFailed		: pubCommentsFailed,
+     	   	subCommentsFailed 		: subCommentsFailed,
      	   	
      	   	// Attachfile action
-     	   	pubNodeAttachFileConfirmed	: pubNodeAttachFileConfirmed,
-     	   	subNodeAttachFileConfirmed	: subNodeAttachFileConfirmed,
-     	   	pubNodeAttachFileFailed		: pubNodeAttachFileFailed,
-     	   	subNodeAttachFileFailed 	: subNodeAttachFileFailed
+     	   	pubAttachFileConfirmed	: pubAttachFileConfirmed,
+     	   	subAttachFileConfirmed	: subAttachFileConfirmed,
+     	   	pubAttachFileFailed		: pubAttachFileFailed,
+     	   	subAttachFileFailed 	: subAttachFileFailed
 
         };
         

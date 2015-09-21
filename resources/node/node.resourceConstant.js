@@ -2,14 +2,14 @@
     'use strict';
     
     /**
-	 *  Constants for UserResourceModules
+	 *  Constants for NodeResourceModules
 	 *  
 	 *  NOTE: if you want to change this constant do this in your app.js config section
 	 */
-	var UserResourceConstant =  {
+	var NodeResourceConstant =  {
 
 		// NOTE: This is the default alias aliases for your system resources defined in Drupal
-		resourcePath : 'user',
+		resourcePath : 'node',
 		//actions of user resource
 		actions : {
 			//following actions are defined over their request method (GET, POST, PUT, DELETE) so they are commented out
@@ -18,7 +18,7 @@
 			//update 	: 'update',
 			//delete 	: 'delete',
 		    //index 	: 'index',
-			
+			//
 			files		: 'files',
 			comments 	: 'comments',
 			attach_file : 'attach_file'
@@ -27,10 +27,10 @@
 	};
 
 	/**
-	 * User Constant Modules
+	 * Node Constant Modules
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.user.resourceConstant', ['ngDrupal7Services-3_x.commons.configurations'])
-	    .constant("UserResourceConstant", UserResourceConstant);
+	    .module('ngDrupal7Services-3_x.resources.node.resourceConstant', ['ngDrupal7Services-3_x.commons.configurations'])
+	    .constant("NodeResourceConstant", NodeResourceConstant);
 	
 })();
