@@ -17,6 +17,9 @@
 		authentication_refreshConnectionConfirmed  	: 'event:drupal-authService-refreshConnectionConfirmed',
 		authentication_refreshConnectionFailed  	: 'event:drupal-authService-refreshConnectionFailed',
 		
+		authentication_tryConnectConfirmed 	: 'event:drupal-authService-tryConnectConfirmed',
+		authentication_tryConnectFailed 	: 'event:drupal-authService-tryConnectFailed',
+		
 		authentication_connectionStateUpdated  	: 'event:drupal-authService-connectionStateUpdated',
 		
 		authentication_currentUserUpdated		: 'event:drupal-authService-currentUserUpdated'

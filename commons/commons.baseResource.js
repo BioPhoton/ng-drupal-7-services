@@ -60,12 +60,12 @@
 			
     		return $http(requestConfig)
 		    	.success(function(responseData, status, headers, config){
+		    		console.log(responseData, status, headers, config); 
 		    		pubSuccess(responseData);
-		    		return responseData;
 		    	})
 		    	.error(function(responseError, status, headers, config){
-		    		pubError(responseError)
-		    		return responseError;
+		    		console.log(responseError, status, headers, config); 
+		    		pubError(responseError);
 		    	});
         	
         };

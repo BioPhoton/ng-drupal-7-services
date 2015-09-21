@@ -59,9 +59,9 @@
 		
 		//setup and return service        
         var authenticationService = {
-        		isAuthorized : isAuthorized,
-        		login	: login,
-    			logout	: logout,
+        		isAuthorized 	: isAuthorized,
+        		login			: login,
+    			logout			: logout,
     			refreshConnection			: refreshConnection,
     			getLastConnectTime			: getLastConnectTime,
     			getConnectionState			: getConnectionState,
@@ -113,29 +113,19 @@
 			
 			return UserResource
 					.login(loginData)
-						.then(
-							//success
-							function (responseData, status, headers, config) {
-								
-								setAuthenticationHeaders(responseData.data.token);
-								setCookies(responseData.data);
-								
-								setConnectionState(true);
-								setLastConnectTime(Date.now());
-								setCurrentUser(responseData.data.user);
-								
-								AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData.data);
-								console.log('responseData');
-								
-								return $q.resolve(responseData.data);
-							},
-							//error
-							function (responseError, status, headers, config) {
-								AuthenticationChannel.pubAuthenticationLoginFailed(responseError.data);
-								console.log('responseError');
-								return $q.reject(responseError.data); 
-							}
-						);
+						.success(function (responseData, status, headers, config) {
+							setAuthenticationHeaders(responseData.token);
+							
+							setLastConnectTime(Date.now());
+							setConnectionState((responseData.user.uid === 0)?false:true)
+							setCookies(responseData.sessid, responseData.session_name);
+							setCurrentUser(responseData.user);
+										
+							AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData);
+						})
+						.error(function (responseError, status, headers, config) {
+							AuthenticationChannel.pubAuthenticationLoginFailed(responseError);
+						});
 			
 		};
 		
@@ -144,35 +134,30 @@
 		 * 
 		 * Uses the logout request of the user resource and deletes session data on success
 		 * 
+		 * @return {Promise} requests promise
 		**/
 		function logout() {
 			
 			return UserResource
 					.logout()
-						.then(
-							//success
-							function (responseData) {
-								delAuthenticationHeaders();
-								delCookies();
-								setConnectionState(false);
-								setCurrentUser(AuthenticationServiceConstant.anonymousUser);
-	
-								AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData.data);
-								return responseData.data; 
-								
-							},
-							//error
-							function (responseError) {
-								AuthenticationChannel.pubAuthenticationLogoutFailed(responseError.data);
-								return responseError.data; 
-							}
-						);
-			
+						.success(function (responseData, status, headers, config) {
+							delAuthenticationHeaders();
+							delCookies();
+							setConnectionState(false);
+							setCurrentUser(AuthenticationServiceConstant.anonymousUser);
+
+							AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData);
+						})
+						.error(function (responseError, status, headers, config) {
+							AuthenticationChannel.pubAuthenticationLogoutFailed(responseError);
+						});
+						
 		};
 		
 		/**
 		 * refreshConnection
 		 * 
+		 * @TODO write doc
 		 * 
 		 * @return {Promise} with new token 
 		 *  
@@ -181,52 +166,41 @@
 			
 			//check token
 			return refreshTokenFromServer()
-					.then(
-						//initToken success
-						function(responseData) {	
-							return tryConnect();
-						},
+						.success( function(responseData, status, headers, config) {	
+							return tryConnect()
+									.success(function(responseData, status, headers, config) { 
+										AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData);
+									});
+						})
+						.error( function(responseError, status, headers, config) {
+							AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError);
+						});
 						
-						//initToken error
-						function(responseError) {
-							AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
-							return $q.reject(responseError.data);
-						}
-					);
-		
 		};
 		
+		/**
+		 * tryConnect
+		 * 
+		 * @TODO write doc
+		 * 
+		 * @returns
+		 */
 		function tryConnect() {
 			
 			 return SystemResource
 			 			.connect()
-						 	.then(
-								//SystemResource.connect success
-					            function (responseData) {
-					            	
-					              var user_id = responseData.data.uid;
+				 			.success( function (responseData, status, headers, config) {
+					             setLastConnectTime(Date.now());
+					             setCookies(responseData.sessid, responseData.session_name);
+					             setConnectionState((responseData.user.uid === 0)?false:true)
+					             setCurrentUser(responseData.user);
 					              
-					              setLastConnectTime(Date.now());
-					              setCookies(responseData.data);
-					              
-					              if (user_id == 0) { setConnectionState(false); }
-					              else { setConnectionState(true); }
-					            
-					              setCurrentUser(responseData.data.user);
-					              
-					              AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData.data);
-				            	  return $q.resolve(responseData.data);
-			
-					            },
-					            
-					            //SystemResource.connect error
-					            function(responseError) {
-					            	setConnectionState(false);
-					            	
-					            	AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError.data);
-					            	return $q.reject(errors);
-					            }
-							);
+					             AuthenticationChannel.pubAuthenticationTryConnectConfirmed(responseData);  
+				            })
+				            .error(function(responseError, status, headers, config) {
+				            	AuthenticationChannel.pubAuthenticationTryConnectFailed(responseError);
+				            });
+						 	
 		}
 		
 		/**
@@ -241,22 +215,14 @@
 
 			return UserResource
 					.token()
-						.then(
-							//UserResource.token success
-							function(responseData){
-								console.log(responseData.data); 
-								setAuthenticationHeaders(responseData.data.token);
-								return responseData.data;
-							},
-							
-							//UserResource.token error
-							function(responseError) {
-								return false;
-							}
-						);
+						.success(function(responseData, status, headers, config) {
+									setAuthenticationHeaders(responseData.token);
+								})
+						.error(function(responseError) {
+							//
+						});	
 
 		};
-		
 		
 		
 		/**
@@ -277,10 +243,8 @@
 		**/
 		function setCurrentUser(newUser) {
 			if(currentUser != newUser) {
-			 
 	        	currentUser = newUser;
 	      	    AuthenticationChannel.pubAuthenticationCurrentUserUpdated(newUser);
-
 	        }
 		};
 		
@@ -294,7 +258,6 @@
 		**/
 		function getConnectionState() { return (userIsConected)?true:false; };
 	
-		
 		/**
 		 * setConnectionState
 		 * 
@@ -379,14 +342,14 @@
 		 * 
 		 * 
 		**/
-        function setCookies(data) {		
+        function setCookies(newSessid, newSession_name) {	
         	//save data in service
-        	sessid = data.sessid;
-			session_name = data.session_name;
+        	sessid = newSessid;
+			session_name = newSession_name;
 			
 			//store session cookies
 			//$cookies[data.session_name] = data.sessid;
-			$cookies.put(data.session_name, data.sessid, sessionCookieOptions);	
+			$cookies.put(newSession_name, newSessid, sessionCookieOptions);	
         };
         
         /**

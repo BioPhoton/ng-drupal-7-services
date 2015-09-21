@@ -40,6 +40,12 @@
         	subAuthenticationRefreshConnectionConfirmed		: subAuthenticationRefreshConnectionConfirmed,
         	pubAuthenticationRefreshConnectionFailed 		: pubAuthenticationRefreshConnectionFailed,
         	subAuthenticationRefreshConnectionFailed		: subAuthenticationRefreshConnectionFailed,
+        	
+        	// try connect to Drupal
+        	pubAuthenticationTryConnectConfirmed	: pubAuthenticationTryConnectConfirmed,
+        	subAuthenticationTryConnectConfirmed 	: subAuthenticationTryConnectConfirmed,
+        	pubAuthenticationTryConnectFailed		: pubAuthenticationTryConnectFailed,
+        	subAuthenticationTryConnectFailed 		: subAuthenticationTryConnectFailed,
     		
         	// Connection state updated
     		pubAuthenticationConnectionStateUpdated 	: pubAuthenticationConnectionStateUpdated,
@@ -290,6 +296,85 @@
 
     	//________________________________________________________________________________________________________________________________________
 
+    	
+    	//try connect request functions
+        
+        /**
+		 * pubAuthenticationTryConnectConfirmed
+		 * 
+		 * Publish the AuthenticationTryConnectConfirmed event with giver args 
+	     *
+		 * @param 	{Object} args The events arguments 
+		 * 
+		 * 
+		**/
+    	function pubAuthenticationTryConnectConfirmed(args) {
+    		var args = args;
+    		 
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_tryConnectConfirmed, args);
+    	};
+    	
+    	 /**
+		 * subAuthenticationTryConnectConfirmed
+		 * 
+		 * subscribe for the AuthenticationTryConnectConfirmed event
+	     *
+		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationTryConnectConfirmed function
+		 * @param 	{function} scopeHandler The callback handler for AuthenticationTryConnectConfirmed event
+		 * 
+		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+		 * 
+		**/
+    	function subAuthenticationTryConnectConfirmed(_Scope, scopeHandler) {
+    		var prepArgs = function (args) {
+    			return args; 
+    		};
+    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_tryConnectConfirmed, _Scope, scopeHandler, prepArgs);
+    		
+    		return unsubsSopeHandler;
+    	};
+    	
+    	//###############
+    	
+        
+        /**
+		 * pubAuthenticationTryConnectFailed
+		 * 
+		 * Publish the AuthenticationTryConnectConfirmed event with giver args 
+	     *
+		 * @param 	{Object} args The events arguments 
+		 * 
+		 * 
+		**/
+    	function pubAuthenticationTryConnectFailed(args) {
+    		var args = {errors: args};
+    		
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_tryConnectFailed, args);
+    	};
+    	
+    	/**
+		 * subAuthenticationTryConnectFailed
+		 * 
+		 * subscribe for the AuthenticationTryConnectFailed event
+	     *
+		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationTryConnectFailed function
+		 * @param 	{function} scopeHandler The callback handler for AuthenticationTryConnectFailed event
+		 * 
+		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+		 * 
+		**/
+    	function subAuthenticationTryConnectFailed(_Scope, scopeHandler) {
+    		var prepArgs = function (args) { 
+    			return args; 
+    		};
+    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_tryConnectFailed, _Scope, scopeHandler, prepArgs);
+    		
+    		return unsubsSopeHandler;
+    	};
+
+    	//________________________________________________________________________________________________________________________________________
     	
         
         /**
