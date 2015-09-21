@@ -74,6 +74,7 @@
         }
         //
         
+        // copied from http://phpjs.org/
         function sprintf() {
         	  //  discuss at: http://phpjs.org/functions/sprintf/
         	  // original by: Ash Searle (http://hexmen.com/blog/)
