@@ -1,9 +1,9 @@
-http://angular-tips.com/blog/2013/08/understanding-service-types/
+
 (function() {
 	'use strict';
 
 	/**
-	 * System Channel Module
+	 * Base Channel Module
 	 */
 	angular.module('ngDrupal7Services-3_x.commons.baseChannel', [])
 		   .factory('BaseChannel', BaseChannel);
