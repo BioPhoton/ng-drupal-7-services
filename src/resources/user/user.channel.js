@@ -120,7 +120,6 @@
 		 * 
 		**/
     	function pubRetrieveConfirmed(args) {
-    		var args = args;
     		BaseChannel.pubRootEmit(UserChannelConstant.user_retrieveConfirmed, args);
     	};
     	
@@ -136,12 +135,7 @@
 		 * 
 		**/
     	function subRetrieveConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_retrieveConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_retrieveConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -158,7 +152,6 @@
 		 * 
 		**/
     	function pubRetrieveFailed(args) {
-    		var args = {errors: args};
     		BaseChannel.pubRootEmit(UserChannelConstant.user_retrieveFailed, args);
     	};
     	
@@ -174,12 +167,7 @@
 		 * 
 		**/
     	function subRetrieveFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_retrieveFailed, _Scope, scopeHandler, prepArgs);
-
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_retrieveFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -197,8 +185,6 @@
     	 * 
     	**/
     	function pubCreateConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubCreateConfirmed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_createConfirmed, args);
     	};
 
@@ -214,12 +200,7 @@
     	 * 
     	**/
     	function subCreateConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_createConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_createConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -236,8 +217,6 @@
     	 * 
     	**/
     	function pubCreateFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubCreateFailed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_createFailed, args);
     	};
 
@@ -253,12 +232,7 @@
     	 * 
     	**/
     	function subCreateFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_createFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_createFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -276,8 +250,6 @@
     	 * 
     	**/
     	function pubUpdateConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubUpdateConfirmed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_updateConfirmed, args);
     	};
 
@@ -293,12 +265,7 @@
     	 * 
     	**/
     	function subUpdateConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_updateConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_updateConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -314,8 +281,6 @@
     	 * 
     	**/
     	function pubUpdateFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubUpdateFailed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_updateFailed, args);
     	};
 
@@ -331,12 +296,7 @@
     	 * 
     	**/
     	function subUpdateFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_updateFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_updateFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -354,8 +314,6 @@
     	 * 
     	**/
     	function pubDeleteConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubDeleteConfirmed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_deleteConfirmed, args);
     	};
 
@@ -371,12 +329,7 @@
     	 * 
     	**/
     	function subDeleteConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_deleteConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_deleteConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -393,8 +346,6 @@
     	 * 
     	**/
     	function pubDeleteFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubDeleteFailed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_deleteFailed, args);
     	};
 
@@ -410,12 +361,7 @@
     	 * 
     	**/
     	function subDeleteFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_deleteFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_deleteFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -433,8 +379,6 @@
     	 * 
     	**/
     	function pubIndexConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubIndexConfirmed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_indexConfirmed, args);
     	};
 
@@ -450,12 +394,7 @@
     	 * 
     	**/
     	function subIndexConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_indexConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_indexConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -472,8 +411,6 @@
     	 * 
     	**/
     	function pubIndexFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubIndexFailed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_indexFailed, args);
     	};
 
@@ -489,12 +426,7 @@
     	 * 
     	**/
     	function subIndexFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_indexFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_indexFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -512,8 +444,6 @@
 		 * 
 		**/
     	function pubLoginConfirmed(args) {
-    		var args = args;
-    		 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_loginConfirmed, args);
     	};
     	
@@ -529,12 +459,7 @@
 		 * 
 		**/
     	function subLoginConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_loginConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_loginConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -551,8 +476,6 @@
 		 * 
 		**/
     	function pubLoginFailed(args) {
-    		var args = {errors: args};
-    		
     		BaseChannel.pubRootEmit(UserChannelConstant.user_loginFailed, args);
     	};
     	
@@ -568,12 +491,7 @@
 		 * 
 		**/
     	function subLoginFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_loginFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_loginFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -591,7 +509,6 @@
     	 * 
     	**/
     	function pubLogoutConfirmed(args) {
-    		var args = args;
     		BaseChannel.pubRootEmit(UserChannelConstant.user_logoutConfirmed, args);
     	};
 
@@ -607,12 +524,7 @@
     	 * 
     	**/
     	function subLogoutConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_logoutConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_logoutConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -629,7 +541,6 @@
     	 * 
     	**/
     	function pubLogoutFailed(args) {
-    		var args = {errors: args};
     		BaseChannel.pubRootEmit(UserChannelConstant.user_logoutFailed, args);
     	};
 
@@ -645,12 +556,7 @@
     	 * 
     	**/
     	function subLogoutFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_logoutFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_logoutFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -669,7 +575,6 @@
     	 * 
     	**/
     	function pubTokenConfirmed(args) {
-    		var args = args;
     		BaseChannel.pubRootEmit(UserChannelConstant.user_tokenConfirmed, args);
     	};
 
@@ -685,12 +590,7 @@
     	 * 
     	**/
     	function subTokenConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_tokenConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_tokenConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -707,8 +607,6 @@
     	 * 
     	**/
     	function pubTokenFailed(args) {
-    		var args = {errors: args};
-
     		BaseChannel.pubRootEmit(UserChannelConstant.user_tokenFailed, args);
     	};
 
@@ -724,12 +622,7 @@
     	 * 
     	**/
     	function subTokenFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_tokenFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_tokenFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -747,7 +640,6 @@
     	 * 
     	**/
     	function pubRegisterConfirmed(args) {
-    		var args = args;
     		BaseChannel.pubRootEmit(UserChannelConstant.user_registerConfirmed, args);
     	};
 
@@ -763,12 +655,7 @@
     	 * 
     	**/
     	function subRegisterConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_registerConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_registerConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -785,8 +672,6 @@
     	 * 
     	**/
     	function pubRegisterFailed(args) {
-    		var args = {errors: args};
-
     		BaseChannel.pubRootEmit(UserChannelConstant.user_registerFailed, args);
     	};
 
@@ -802,12 +687,7 @@
     	 * 
     	**/
     	function subRegisterFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_registerFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_registerFailed, _Scope, scopeHandler);   		
     		return unsubsSopeHandler;
     	};
 
@@ -825,7 +705,6 @@
     	 * 
     	**/
     	function pubResendWelcomeEmailConfirmed(args) {
-    		var args = args;
     		BaseChannel.pubRootEmit(UserChannelConstant.user_resend_welcome_emailConfirmed, args);
     	};
 
@@ -841,12 +720,7 @@
     	 * 
     	**/
     	function subResendWelcomeEmailConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_resend_welcome_emailConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_resend_welcome_emailConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -863,8 +737,6 @@
     	 * 
     	**/
     	function pubResendWelcomeEmailFailed(args) {
-    		var args = {errors: args};
-
     		BaseChannel.pubRootEmit(UserChannelConstant.user_resend_welcome_emailFailed, args);
     	};
 
@@ -879,13 +751,8 @@
     	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
     	 * 
     	**/
-    	function subResendWelcomeEmailFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_resend_welcome_emailFailed, _Scope, scopeHandler, prepArgs);
-    		
+    	function subResendWelcomeEmailFailed(_Scope, scopeHandler) {	
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_resend_welcome_emailFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -903,7 +770,6 @@
     	 * 
     	**/
     	function pubCancelConfirmed(args) {
-    		var args = args;
     		BaseChannel.pubRootEmit(UserChannelConstant.user_cancelConfirmed, args);
     	};
 
@@ -919,12 +785,7 @@
     	 * 
     	**/
     	function subCancelConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_cancelConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_cancelConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -941,8 +802,6 @@
     	 * 
     	**/
     	function pubCancelFailed(args) {
-    		var args = {errors: args};
-
     		BaseChannel.pubRootEmit(UserChannelConstant.user_cancelFailed, args);
     	};
 
@@ -957,13 +816,8 @@
     	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
     	 * 
     	**/
-    	function subCancelFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_cancelFailed, _Scope, scopeHandler, prepArgs);
-    		
+    	function subCancelFailed(_Scope, scopeHandler) {	
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_cancelFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -981,8 +835,6 @@
     	 * 
     	**/
     	function pubPasswordResetConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubPasswordResetConfirmed'); 
     		BaseChannel.pubRootEmit(UserChannelConstant.user_password_resetConfirmed, args);
     	};
 
@@ -998,12 +850,7 @@
     	 * 
     	**/
     	function subPasswordResetConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_password_resetConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_password_resetConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -1020,7 +867,6 @@
     	 * 
     	**/
     	function pubPasswordResetFailed(args) {
-    		var args = {errors: args};
     		BaseChannel.pubRootEmit(UserChannelConstant.user_password_resetFailed, args);
     	};
 
@@ -1036,12 +882,7 @@
     	 * 
     	**/
     	function subPasswordResetFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_password_resetFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_password_resetFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -1060,8 +901,7 @@
     	 * 
     	**/
     	function pubRequestNewPasswordConfirmed(args) {
-    		var args = args;
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_xxxConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.user_requestNewPasswordConfirmed, args);
     	};
 
     	/**
@@ -1076,12 +916,7 @@
     	 * 
     	**/
     	function subRequestNewPasswordConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_xxxConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_requestNewPasswordConfirmed, _Scope, scopeHandler);	
     		return unsubsSopeHandler;
     	};
 
@@ -1098,8 +933,7 @@
     	 * 
     	**/
     	function pubRequestNewPasswordFailed(args) {
-    		var args = {errors: args};
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_xxxFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.user_requestNewPasswordFailed, args);
     	};
 
     	/**
@@ -1114,12 +948,7 @@
     	 * 
     	**/
     	function subRequestNewPasswordFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_requestNewPasswordFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_requestNewPasswordFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 

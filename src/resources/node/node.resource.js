@@ -61,7 +61,7 @@
 		**/
     	function retrieve(data) {
     		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid;
-    		return baseResource.retrieve( retrievePath, NodeChannel.pubRetrieveFailed, NodeChannel.pubRetrieveConfirmed);
+    		return baseResource.retrieve( retrievePath,NodeChannel.pubRetrieveConfirmed,  NodeChannel.pubRetrieveFailed);
 	    };
 	    
 	    /**
@@ -115,7 +115,7 @@
     			createdata.roles = baseResource.preparePostData(data.roles, 'array_of_values');
     		}
     		
-    		return baseResource.create( createdata, createPath, NodeChannel.pubCreateFailed, NodeChannel.pubCreateConfirmed);
+    		return baseResource.create( createdata, createPath, NodeChannel.pubCreateConfirmed, NodeChannel.pubCreateFailed);
 
 	    };
 	        
@@ -143,7 +143,7 @@
 				mail : data.mail
 			}
     		
-    		return baseResource.update( updateData, updatePath, NodeChannel.pubUpdateFailed, NodeChannel.pubUpdateConfirmed);
+    		return baseResource.update( updateData, updatePath, NodeChannel.pubUpdateConfirmed, NodeChannel.pubUpdateFailed);
 
 	    };
 	    
@@ -163,7 +163,7 @@
 	    **/
 	    function _delete(data) {
 	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid
-	    	return baseResource.delete(deletePath, NodeChannel.pubDeleteFailed, NodeChannel.pubDeleteConfirmed);
+	    	return baseResource.delete(deletePath, NodeChannel.pubDeleteConfirmed,  NodeChannel.pubDeleteFailed);
 	    };
 	    
 	    /**
@@ -187,7 +187,7 @@
 	    **/
 	    function index(data) {
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/';
-	    	return baseResource.index(data, indexPath, NodeChannel.pubIndexFailed, NodeChannel.pubIndexConfirmed);
+	    	return baseResource.index(data, indexPath, NodeChannel.pubIndexConfirmed, NodeChannel.pubIndexFailed);
 	    };
 	    
 	    /**
@@ -195,8 +195,8 @@
 	     * 
 	     * This method returns files associated with a node.
 	     * 
-	     * Method: DELETE
-	     * Url: http://drupal_instance/api_endpoint/node/files
+	     * Method: GET
+	     * Url: http://drupal_instance/api_endpoint/node/files/{NID}/{FILE_CONTENTS}/{IMAGE_STYLES}
 	     * 
 	     * @params  {Object} data the requests data
 	     * 			 @key {Integer} nid The nid of the node whose files we are getting, required:true, source:path
@@ -207,11 +207,21 @@
 	     *
 	    **/
 	    function files(data) {
-	    	var filesPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid
-	    	return baseResource.delete(filesPath, NodeChannel.pubDeleteFailed, NodeChannel.pubDeleteConfirmed);
+	    	var filesPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' NodeResourceConstant.actions.files + '/' + data.nid;
 	    	
-	    	//var attachFilePath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + NodeResourceConfig.resourcePath + '/' + nid + '/' + NodeResourceConfig.actions.files + ((file_contents)?('/'+file_contents):'')+((image_styles)?('/'+image_styles):''),
-			
+    		//set file_contents value
+    		filesPath += '/'+( (data.file_contents)?1:0);
+    		//set image_styles value
+    		filesPath += '/'+( (data.image_styles)?1:0);
+	    	
+	    	var requestConfig = {
+	    			url : filesPath,
+	    			method : 'GET'
+	    	}
+	    	
+	    	request(requestConfig, pubError, pubSuccess)
+	    	return baseResource.request(requestConfig, NodeChannel.pubFilesConfirmed, NodeChannel.pubFilesFailed);
+	    	
 	    };
 	    
 	    /**
@@ -219,8 +229,8 @@
 	     * 
 	     * This method returns the number of new comments on a given node.
 	     * 
-	     * Method: DELETE
-	     * Url: http://drupal_instance/api_endpoint/node/files
+	     * Method: GET
+	     * Url: http://drupal_instance/api_endpoint/node/comments/{NID}
 	     * 
 	     * @params  {Object} data the requests data
 	     * 			@key {Integer} nid The node id to load comments for., required:true, source:path
@@ -231,10 +241,9 @@
 	     *
 	    **/
 	    function comments(data) {
-	    	var commentsPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid
-	    	return baseResource.delete(commentsPath, NodeChannel.pubDeleteFailed, NodeChannel.pubDeleteConfirmed);
-	    	
-	    	//var attachFilePath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + NodeResourceConfig.resourcePath + '/' + nid +'/' + NodeResourceConfig.actions.comments + '/' + ((count != undefined ||  offset != undefined)?'?':'')+ ((count != undefined)?('count='+count+','):'') + ((offset != undefined)?('offset=' + offset):''),
+	    	var commentsPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' NodeResourceConstant.actions.comments + '/' data.nid
+	    	return baseResource.delete(commentsPath, NodeChannel.pubDeleteConfirmed, NodeChannel.pubDeleteFailed);
+		
 	    };
 	    
 	    /**
@@ -242,8 +251,8 @@
 	     * 
 	     * This method returns the number of new comments on a given node.
 	     * 
-	     * Method: DELETE
-	     * Url: http://drupal_instance/api_endpoint/node/files
+	     * Method: POST 
+	     * Url: http://drupal_instance/api_endpoint/node/attach_file/{NID}
 	     * 
 	     * @params  {Object} data the requests data
 	     * 			@key {Integer} nid The nid of the node to attach a file to, required:true, source:path
@@ -256,10 +265,8 @@
 	    **/
 	    function attachFile(data) {
 	    	//@TODO check how it works
-	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid
-	    	return baseResource.delete(attachFilePath, NodeChannel.pubDeleteFailed, NodeChannel.pubDeleteConfirmed);
-	    	
-	    	//var attachFilePath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + NodeResourceConfig.resourcePath + '/' + nid + '/' + NodeResourceConfig.actions.attachFile
+	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid + '/' + NodeResourceConstant.actions.attachFile
+	    	return baseResource.delete(attachFilePath, NodeChannel.pubDeleteConfirmed, NodeChannel.pubDeleteFailed);
 	    };
 		
 					

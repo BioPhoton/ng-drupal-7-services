@@ -49,7 +49,7 @@
          * @return {Promise} Promise of the retrieve request
          * 
          */
-        function request(requestConfig, pubError, pubSuccess) {
+        function request(requestConfig,  pubSuccess, pubError) {
 
 	    	var errors = [];		
 	    	
@@ -60,12 +60,15 @@
 			
     		return $http(requestConfig)
 		    	.success(function(responseData, status, headers, config){
-		    		console.log(responseData, status, headers, config); 
-		    		pubSuccess(responseData);
+		    		if(typeof pubSuccess === 'function') {
+		    			pubSuccess(responseData);
+		    		}
+		    		
 		    	})
 		    	.error(function(responseError, status, headers, config){
-		    		console.log(responseError, status, headers, config); 
-		    		pubError(responseError);
+		    		if(typeof pubError === 'function') {
+		    			pubError(responseError);
+		    		}
 		    	});
         	
         };
@@ -82,14 +85,14 @@
          * @return {Promise} Promise of the retrieve request
          * 
          */
-        function retrieve(retrievePath, pubError, pubSuccess) {
+        function retrieve(retrievePath,  pubSuccess, pubError) {
         	
         	var requestConfig = {
     				url 	: retrievePath,
 	    			method 	:'GET'
 	    	};
         	
-        	return request(requestConfig, pubError, pubSuccess);
+        	return request(requestConfig,  pubSuccess, pubError);
 
         };
         
@@ -106,7 +109,7 @@
          * @return {Promise} Promise of the create request
          * 
          */
-        function create( data, createPath, pubError, pubSuccess) {
+        function create( data, createPath,  pubSuccess, pubError) {
         	
         	var requestConfig = {
     				url 	: createPath,
@@ -114,7 +117,7 @@
 	    			data    : data
 	    	};
    
-        	return request(requestConfig, pubError, pubSuccess);
+        	return request(requestConfig,  pubSuccess, pubError);
         };
         
         /**
@@ -130,7 +133,7 @@
          * @return {Promise} Promise of the update request
          * 
          */
-        function update( data, updatePath, pubError, pubSuccess) {
+        function update( data, updatePath,  pubSuccess, pubError) {
         	
         	var requestConfig = {
     				url 	: updatePath,
@@ -138,7 +141,7 @@
     				data 	: data,
     		};
    
-        	return request(requestConfig, pubError, pubSuccess);
+        	return request(requestConfig,  pubSuccess, pubError);
         };
         
         /**
@@ -153,14 +156,14 @@
          * @return {Promise} Promise of the delete request
          * 
          */
-        function _delete( deletePath, pubError, pubSuccess) {
+        function _delete( deletePath,  pubSuccess, pubError) {
         	
         	var requestConfig = {
     				url 	: deletePath,
     				method 	: 'DELETE'
     		};
    
-        	return request(requestConfig, pubError, pubSuccess);
+        	return request(requestConfig,  pubSuccess, pubError);
         };
         
         
@@ -176,7 +179,7 @@
          * @return {Promise} Promise of the delete request
          * 
          */
-        function index(data, indexPath, pubError, pubSuccess) {
+        function index(data, indexPath,  pubSuccess, pubError) {
         	
         	var options = {};
         	//prepare index options
@@ -194,7 +197,7 @@
     				method 	:'GET'
     		};
    
-        	return request(requestConfig, pubError, pubSuccess);
+        	return request(requestConfig,  pubSuccess, pubError);
         };
  
         /**

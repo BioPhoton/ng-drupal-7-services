@@ -65,7 +65,7 @@
 						url : connectPath
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubConnectFailed, SystemChannel.pubConnectConfirmed);
+			return baseResource.request(requestConfig,SystemChannel.pubConnectConfirmed,  SystemChannel.pubConnectFailed);
 			
 		};
 		
@@ -99,7 +99,7 @@
 						}
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubGetVariableFailed, SystemChannel.pubGetVariableConfirmed);
+			return baseResource.request(requestConfig, SystemChannel.pubGetVariableConfirmed, SystemChannel.pubGetVariableFailed);
 			
 		};
 		
@@ -135,7 +135,7 @@
 						}
 				};
 
-			return baseResource.request(requestConfig, SystemChannel.pubSetVariableFailed, SystemChannel.pubSetVariableConfirmed);
+			return baseResource.request(requestConfig, SystemChannel.pubSetVariableConfirmed, SystemChannel.pubSetVariableFailed);
 			
 		};
 		
@@ -168,7 +168,7 @@
 						}
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubDelVariableFailed, SystemChannel.pubDelVariableConfirmed);
+			return baseResource.request(requestConfig, SystemChannel.pubDelVariableConfirmed, SystemChannel.pubDelVariableFailed);
 
 		};
 	
