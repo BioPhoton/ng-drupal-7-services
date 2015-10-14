@@ -283,7 +283,7 @@
 	    **/
 	    function attachFile(data) {
 	    	//@TODO check how it works
-	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid '/' + NodeResourceConstant.actions.attachFile;	    	
+	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid + '/' + NodeResourceConstant.actions.attachFile;	    	
 	    	return baseResource.delete(attachFilePath, NodeChannel.pubDeleteConfirmed, NodeChannel.pubDeleteFailed);
 	    };
 		
