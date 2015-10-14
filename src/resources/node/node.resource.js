@@ -219,7 +219,6 @@
 	    			method : 'GET'
 	    	}
 	    	
-	    	request(requestConfig, pubError, pubSuccess)
 	    	return baseResource.request(requestConfig, NodeChannel.pubFilesConfirmed, NodeChannel.pubFilesFailed);
 	    	
 	    };
@@ -241,8 +240,27 @@
 	     *
 	    **/
 	    function comments(data) {
-	    	var commentsPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + NodeResourceConstant.actions.comments + '/' + data.nid;
-	    	return baseResource.delete(commentsPath, NodeChannel.pubDeleteConfirmed, NodeChannel.pubDeleteFailed);
+	    
+	    	var commentsPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + NodeResourceConstant.actions.comments + '/' + data.nid,
+	    		requestConfig = {
+	    			url : commentsPath,
+	    			method : 'GET'
+	    		};
+	    	
+	    	if( data.count || data.count == 0 || data.offset || data.offset == 0 ) {
+	    		commentsPath += '?';
+	    	}
+	    	
+	    	//optional data
+    		if(data.count || data.count == 0) {
+    			commentsPath += 'count='+data.count+',';
+    		}
+    		//@TODO check if we need count set to non-zero to use offset value
+    		if(data.offset || data.offset == 0 ) {
+    			commentsPath += 'offset='+data.offset+',';
+    		}
+
+	    	return baseResource.request(requestConfig, NodeChannel.pubDeleteConfirmed, NodeChannel.pubDeleteFailed);
 		
 	    };
 	    
@@ -265,7 +283,7 @@
 	    **/
 	    function attachFile(data) {
 	    	//@TODO check how it works
-	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + NodeResourceConstant.actions.attachFile + '/' + data.nid;
+	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + NodeResourceConstant.actions.attachFile + '/' + data.nid;	    	
 	    	return baseResource.delete(attachFilePath, NodeChannel.pubDeleteConfirmed, NodeChannel.pubDeleteFailed);
 	    };
 		
