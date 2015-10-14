@@ -25,7 +25,7 @@
 	 * System Channel Constant
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.system.channelConstant', ['ngDrupal7Services-3_x.commons.configurations'])
+	    .module('ngDrupal7Services-3_x.resources.system.channelConstant', [])
 	    .constant("SystemChannelConstant", SystemChannelConstant);
 
 })();
