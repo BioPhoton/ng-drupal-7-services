@@ -22,10 +22,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    NodeResource.$inject = ['$http', '$q', 'baseResource', 'DrupalApiConstant', 'NodeResourceConstant', 'NodeChannel'];
+    NodeResource.$inject = ['$http', 'baseResource', 'DrupalApiConstant', 'NodeResourceConstant', 'NodeChannel'];
     
 	/** @ngInject */
-	function NodeResource($http, $q, baseResource, DrupalApiConstant, NodeResourceConstant, NodeChannel) { 
+	function NodeResource($http, baseResource, DrupalApiConstant, NodeResourceConstant, NodeChannel) { 
 		
 		//setup and return service            	
         var nodeResourceService = {

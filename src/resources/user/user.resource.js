@@ -22,10 +22,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    UserResource.$inject = ['$http', '$q', 'baseResource', 'DrupalApiConstant', 'UserResourceConstant', 'UserChannel'];
+    UserResource.$inject = ['$http', 'baseResource', 'DrupalApiConstant', 'UserResourceConstant', 'UserChannel'];
     
 	/** @ngInject */
-	function UserResource($http, $q, baseResource, DrupalApiConstant, UserResourceConstant, UserChannel) { 
+	function UserResource($http, baseResource, DrupalApiConstant, UserResourceConstant, UserChannel) { 
 		
 		//setup and return service            	
         var userResourceService = {

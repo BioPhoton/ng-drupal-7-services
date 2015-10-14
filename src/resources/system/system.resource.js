@@ -23,10 +23,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    SystemResource.$inject = ['$http', '$q', 'DrupalApiConstant', 'baseResource', 'SystemResourceConstant', 'SystemChannel'];
+    SystemResource.$inject = ['$http', 'DrupalApiConstant', 'baseResource', 'SystemResourceConstant', 'SystemChannel'];
     
 	/** @ngInject */
-	function SystemResource($http, $q, DrupalApiConstant, baseResource, SystemResourceConstant, SystemChannel) { 
+	function SystemResource($http, DrupalApiConstant, baseResource, SystemResourceConstant, SystemChannel) { 
 		
 		//setup and return service            	
         var systemResourceService = {
@@ -125,7 +125,6 @@
 	    	data = (data)?data:{};
 	
 			var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
-				defer = $q.defer(),
 				requestConfig = {
 						method 	:'POST',
 						url 	: setVariablePath,
