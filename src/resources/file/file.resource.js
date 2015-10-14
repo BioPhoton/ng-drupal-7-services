@@ -167,6 +167,6 @@
 	    	return baseResource.request(null, createRawPath, FileChannel.pubIndexConfirmed, FileChannel.pubIndexFailed);
 	    };
 	    
-
+	}
 
 })();
