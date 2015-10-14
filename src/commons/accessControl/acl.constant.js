@@ -1,4 +1,4 @@
-(function() {
+;(function() {
     'use strict';
 
     /**
@@ -23,7 +23,7 @@
 	 *  AccessControlConstant Module
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.commons.acl.constant', [])
+	    .module('ngDrupal7Services-3_x.commons.accessControl.constant', [])
 	    .constant("accessControlConstant", accessControlConstant);
 	
 

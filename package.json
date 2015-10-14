@@ -1,0 +1,9 @@
+{
+  "name": "ng-drupal-services-3x",
+  "version": "2.0.0",
+  "description": "An angular api client for drupal7 services 3.x",
+  "devDependencies": {
+  	"gulp": "^3.9.0",
+    "gulp-bundle-assets": "^2.23.0"
+  }
+}
