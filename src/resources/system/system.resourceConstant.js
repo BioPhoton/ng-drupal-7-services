@@ -24,7 +24,7 @@
 	 * System Constant Modules
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.system.resourceConstant', ['ngDrupal7Services-3_x.commons.configurations'])
+	    .module('ngDrupal7Services-3_x.resources.system.resourceConstant', [])
 	    .constant("SystemResourceConstant", SystemResourceConstant);
 	
 })();
