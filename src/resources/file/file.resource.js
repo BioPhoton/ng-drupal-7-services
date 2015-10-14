@@ -99,11 +99,13 @@
     			file : data.file
 			}
     		
-    		if (data.roles) {
-    			createdata.roles = baseResource.preparePostData(data.roles, 'array_of_values');
-    		}
+    		var fileData = new FormData();
+    		if(data.filename) {fileData.append('filename', data.filename);}
+    		if(data.file) {fileData.append('file', data.file);}
+    		if(data.filesize) {fileData.append('filesize', "" + data.filesize);}
+    		if(data.image_file_name) {fileData.append('filepath', DrupalApiConstant.publicFilePath + data.image_file_name); }
     		
-    		return baseResource.create( createdata, createPath, FileChannel.pubCreateConfirmed, FileChannel.pubCreateFailed);
+    		return baseResource.create( fileData, createPath, FileChannel.pubCreateConfirmed, FileChannel.pubCreateFailed);
 
 	    };
 	        
