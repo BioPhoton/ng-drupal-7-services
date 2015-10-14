@@ -1,7 +1,7 @@
 # AngularJS for your Headless Drupal 
 
-You want to create an app or custon frontend for your headles or decoupled Drupal? Using AngularJS??
-This is what you need to make your live easyer!
+You want to create an app or custom frontend for your headless or decoupled Drupal? Using AngularJS??
+This is repository makes your live easyer!
 
 # ng-drupal 7-services
 An api client for Drupal 7 Services 3.x designed to work with Ionic also!
