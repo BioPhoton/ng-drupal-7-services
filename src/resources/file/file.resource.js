@@ -99,6 +99,7 @@
     			file : data.file
 			}
     		
+    		//@TODO try find a  better way
     		var fileData = new FormData();
     		if(data.filename) {fileData.append('filename', data.filename);}
     		if(data.file) {fileData.append('file', data.file);}
