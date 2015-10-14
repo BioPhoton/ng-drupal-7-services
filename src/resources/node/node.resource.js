@@ -260,7 +260,7 @@
     			commentsPath += 'offset='+data.offset+',';
     		}
 
-	    	return baseResource.request(requestConfig, NodeChannel.pubDeleteConfirmed, NodeChannel.pubDeleteFailed);
+	    	return baseResource.request(requestConfig, NodeChannel.pubCommentsConfirmed, NodeChannel.pubCommentsFailed);
 		
 	    };
 	    
@@ -284,7 +284,7 @@
 	    function attachFile(data) {
 	    	//@TODO check how it works
 	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid + '/' + NodeResourceConstant.actions.attachFile;	    	
-	    	return baseResource.delete(attachFilePath, NodeChannel.pubDeleteConfirmed, NodeChannel.pubDeleteFailed);
+	    	return baseResource.delete(attachFilePath, NodeChannel.pubAttachFileConfirmed, NodeChannel.pubAttachFileFailed);
 	    };
 		
 					
