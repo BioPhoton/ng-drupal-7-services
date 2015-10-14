@@ -60,7 +60,7 @@
 		 * 
 		**/
     	function pubConnectConfirmed(args) {
-    		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectConfirmed, args);
+    		BaseChannel.pubRootEmit(SystemChannelConstant.connectConfirmed, args);
     	};
     	
     	 /**
@@ -75,7 +75,7 @@
 		 * 
 		**/
     	function subConnectConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_connectConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.connectConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -92,7 +92,7 @@
 		 * 
 		**/
     	function pubConnectFailed(args) {
-    		BaseChannel.pubRootEmit(SystemChannelConstant.system_connectFailed, args);
+    		BaseChannel.pubRootEmit(SystemChannelConstant.connectFailed, args);
     	};
     	
     	/**
@@ -107,7 +107,7 @@
 		 * 
 		**/
     	function subConnectFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_connectFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.connectFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -125,7 +125,7 @@
 		 * 
 		**/
     	function pubGetVariableConfirmed(args) {
-    		BaseChannel.pubRootEmit(SystemChannelConstant.system_getVariableConfirmed, args);
+    		BaseChannel.pubRootEmit(SystemChannelConstant.getVariableConfirmed, args);
     	};
     	
     	 /**
@@ -140,7 +140,7 @@
 		 * 
 		**/
     	function subGetVariableConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_getVariableConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.getVariableConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -157,7 +157,7 @@
 		 * 
 		**/
     	function pubGetVariableFailed(args) {
-    		BaseChannel.pubRootEmit(SystemChannelConstant.system_getVariableFailed, args);
+    		BaseChannel.pubRootEmit(SystemChannelConstant.getVariableFailed, args);
     	};
     	
     	/**
@@ -172,7 +172,7 @@
 		 * 
 		**/
     	function subGetVariableFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_getVariableFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.getVariableFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -190,7 +190,7 @@
 		 * 
 		**/
     	function pubSetVariableConfirmed(args) {
-    		BaseChannel.pubRootEmit(SystemChannelConstant.system_setVariableConfirmed, args);
+    		BaseChannel.pubRootEmit(SystemChannelConstant.setVariableConfirmed, args);
     	};
     	
     	 /**
@@ -205,7 +205,7 @@
 		 * 
 		**/
     	function subSetVariableConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_setVariableConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.setVariableConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -222,7 +222,7 @@
 		 * 
 		**/
     	function pubSetVariableFailed(args) {
-    		BaseChannel.pubRootEmit(SystemChannelConstant.system_setVariableFailed, args);
+    		BaseChannel.pubRootEmit(SystemChannelConstant.setVariableFailed, args);
     	};
     	
     	/**
@@ -237,7 +237,7 @@
 		 * 
 		**/
     	function subSetVariableFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_setVariableFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.setVariableFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -255,7 +255,7 @@
 		 * 
 		**/
     	function pubDelVariableConfirmed(args) {
-    		BaseChannel.pubRootEmit(SystemChannelConstant.system_delVariableConfirmed, args);
+    		BaseChannel.pubRootEmit(SystemChannelConstant.delVariableConfirmed, args);
     	};
     	
     	 /**
@@ -270,7 +270,7 @@
 		 * 
 		**/
     	function subDelVariableConfirmed(_Scope, scopeHandler) {	
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_delVariableConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.delVariableConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -287,7 +287,7 @@
 		 * 
 		**/
     	function pubDelVariableFailed(args) {
-    		BaseChannel.pubRootEmit(SystemChannelConstant.system_delVariableFailed, args);
+    		BaseChannel.pubRootEmit(SystemChannelConstant.delVariableFailed, args);
     	};
     	
     	/**
@@ -302,7 +302,7 @@
 		 * 
 		**/
     	function subDelVariableFailed(_Scope, scopeHandler) {
-     		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.system_delVariableFailed, _Scope, scopeHandler);	
+     		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.delVariableFailed, _Scope, scopeHandler);	
     		return unsubsSopeHandler;
     	};
     	

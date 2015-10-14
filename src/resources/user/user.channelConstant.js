@@ -8,44 +8,44 @@
 	 */
 	var UserChannelConstant =  {
 	 		// Retrieve action
- 			user_retrieveConfirmed 				: 'event:drupal-user-retrieveConfirmed',
- 			user_retrieveFailed  				: 'event:drupal-user-retrieveFailed',
+ 			retrieveConfirmed 				: 'event:drupal-user-retrieveConfirmed',
+ 			retrieveFailed  				: 'event:drupal-user-retrieveFailed',
  			// Create action
- 			user_createConfirmed				: 'event:drupal-user-createConfirmed',
- 			user_createFailed  					: 'event:drupal-user-createFailed',
+ 			createConfirmed				: 'event:drupal-user-createConfirmed',
+ 			createFailed  					: 'event:drupal-user-createFailed',
  			// Update action
- 			user_updateConfirmed				: 'event:drupal-user-updateConfirmed',
- 			user_updateFailed  					: 'event:drupal-user-updateFailed',
+ 			updateConfirmed				: 'event:drupal-user-updateConfirmed',
+ 			updateFailed  					: 'event:drupal-user-updateFailed',
  			// Delete action	
- 			user_deleteConfirmed				: 'event:drupal-user-deleteConfirmed',
- 			user_deleteFailed  					: 'event:drupal-user-deleteFailed',
+ 			deleteConfirmed				: 'event:drupal-user-deleteConfirmed',
+ 			deleteFailed  					: 'event:drupal-user-deleteFailed',
  			// Index action
- 			user_indexConfirmed  				: 'event:drupal-user-indexConfirmed',
- 			user_indexFailed  					: 'event:drupal-user-indexFailed',
+ 			indexConfirmed  				: 'event:drupal-user-indexConfirmed',
+ 			indexFailed  					: 'event:drupal-user-indexFailed',
  			//Request new password action
- 			user_requestNewPasswordConfirmed  	: 'event:drupal-user-requestNewPasswordConfirmed',
- 			user_requestNewPasswordFailed  		: 'event:drupal-user-requestNewPasswordFailed',
+ 			requestNewPasswordConfirmed  	: 'event:drupal-user-requestNewPasswordConfirmed',
+ 			requestNewPasswordFailed  		: 'event:drupal-user-requestNewPasswordFailed',
  			//Cancel action
- 			user_cancelConfirmed  				: 'event:drupal-user-cancelConfirmed',
- 			user_cancelFailed  					: 'event:drupal-user-cancelFailed',
+ 			cancelConfirmed  				: 'event:drupal-user-cancelConfirmed',
+ 			cancelFailed  					: 'event:drupal-user-cancelFailed',
  			//Password Reset
- 			user_passwordResetConfirmed  		: 'event:drupal-user-passwordResetConfirmed',
- 			user_passwordResetFailed  			: 'event:drupal-user-passwordResetFailed',
+ 			passwordResetConfirmed  		: 'event:drupal-user-passwordResetConfirmed',
+ 			passwordResetFailed  			: 'event:drupal-user-passwordResetFailed',
  			//Resend Welcome Email
- 			user_resendWelcomeEmailConfirmed  	: 'event:drupal-user-resendWelcomeEmailConfirmed',
- 			user_resendWelcomeEmailFailed  		: 'event:drupal-user-resendWelcomeEmailFailed',
+ 			resendWelcomeEmailConfirmed  	: 'event:drupal-user-resendWelcomeEmailConfirmed',
+ 			resendWelcomeEmailFailed  		: 'event:drupal-user-resendWelcomeEmailFailed',
  			// Token action
- 			user_tokenConfirmed  				: 'event:drupal-user-tokenConfirmed',
- 			user_tokenFailed  					: 'event:drupal-user-tokenFailed',
+ 			tokenConfirmed  				: 'event:drupal-user-tokenConfirmed',
+ 			tokenFailed  					: 'event:drupal-user-tokenFailed',
  			// Register action
- 			user_registerConfirmed  			: 'event:drupal-user-registerConfirmed',
- 			user_registerFailed  				: 'event:drupal-user-registerFailed',
+ 			registerConfirmed  			: 'event:drupal-user-registerConfirmed',
+ 			registerFailed  				: 'event:drupal-user-registerFailed',
  			// Login action
- 			user_loginConfirmed  				: 'event:drupal-user-loginConfirmed',
- 			user_loginFailed  					: 'event:drupal-user-loginFailed',
+ 			loginConfirmed  				: 'event:drupal-user-loginConfirmed',
+ 			loginFailed  					: 'event:drupal-user-loginFailed',
  			// Logout action
- 			user_logoutConfirmed  				: 'event:drupal-user-logoutConfirmed',
- 			user_logoutFailed  					: 'event:drupal-user-logoutFailed'
+ 			logoutConfirmed  				: 'event:drupal-user-logoutConfirmed',
+ 			logoutFailed  					: 'event:drupal-user-logoutFailed'
 	 		
 	};
     

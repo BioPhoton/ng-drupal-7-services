@@ -120,7 +120,7 @@
 		 * 
 		**/
     	function pubRetrieveConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_retrieveConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.retrieveConfirmed, args);
     	};
     	
     	/**
@@ -135,7 +135,7 @@
 		 * 
 		**/
     	function subRetrieveConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_retrieveConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -152,7 +152,7 @@
 		 * 
 		**/
     	function pubRetrieveFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_retrieveFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.retrieveFailed, args);
     	};
     	
     	/**
@@ -167,7 +167,7 @@
 		 * 
 		**/
     	function subRetrieveFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_retrieveFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.retrieveFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -185,7 +185,7 @@
     	 * 
     	**/
     	function pubCreateConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_createConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.createConfirmed, args);
     	};
 
     	/**
@@ -200,7 +200,7 @@
     	 * 
     	**/
     	function subCreateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_createConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.createConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -217,7 +217,7 @@
     	 * 
     	**/
     	function pubCreateFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_createFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.createFailed, args);
     	};
 
     	/**
@@ -232,7 +232,7 @@
     	 * 
     	**/
     	function subCreateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_createFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.createFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -250,7 +250,7 @@
     	 * 
     	**/
     	function pubUpdateConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_updateConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.updateConfirmed, args);
     	};
 
     	/**
@@ -265,7 +265,7 @@
     	 * 
     	**/
     	function subUpdateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_updateConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.updateConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -281,7 +281,7 @@
     	 * 
     	**/
     	function pubUpdateFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_updateFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.updateFailed, args);
     	};
 
     	/**
@@ -296,7 +296,7 @@
     	 * 
     	**/
     	function subUpdateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_updateFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.updateFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -314,7 +314,7 @@
     	 * 
     	**/
     	function pubDeleteConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_deleteConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.deleteConfirmed, args);
     	};
 
     	/**
@@ -329,7 +329,7 @@
     	 * 
     	**/
     	function subDeleteConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_deleteConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.deleteConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -346,7 +346,7 @@
     	 * 
     	**/
     	function pubDeleteFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_deleteFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.deleteFailed, args);
     	};
 
     	/**
@@ -361,7 +361,7 @@
     	 * 
     	**/
     	function subDeleteFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_deleteFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.deleteFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -379,7 +379,7 @@
     	 * 
     	**/
     	function pubIndexConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_indexConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.indexConfirmed, args);
     	};
 
     	/**
@@ -394,7 +394,7 @@
     	 * 
     	**/
     	function subIndexConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_indexConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.indexConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -411,7 +411,7 @@
     	 * 
     	**/
     	function pubIndexFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_indexFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.indexFailed, args);
     	};
 
     	/**
@@ -426,7 +426,7 @@
     	 * 
     	**/
     	function subIndexFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_indexFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.indexFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -444,7 +444,7 @@
 		 * 
 		**/
     	function pubLoginConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_loginConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.loginConfirmed, args);
     	};
     	
     	 /**
@@ -459,7 +459,7 @@
 		 * 
 		**/
     	function subLoginConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_loginConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.loginConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -476,7 +476,7 @@
 		 * 
 		**/
     	function pubLoginFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_loginFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.loginFailed, args);
     	};
     	
     	/**
@@ -491,7 +491,7 @@
 		 * 
 		**/
     	function subLoginFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_loginFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.loginFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -509,7 +509,7 @@
     	 * 
     	**/
     	function pubLogoutConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_logoutConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.logoutConfirmed, args);
     	};
 
     	/**
@@ -524,7 +524,7 @@
     	 * 
     	**/
     	function subLogoutConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_logoutConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.logoutConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -541,7 +541,7 @@
     	 * 
     	**/
     	function pubLogoutFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_logoutFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.logoutFailed, args);
     	};
 
     	/**
@@ -556,7 +556,7 @@
     	 * 
     	**/
     	function subLogoutFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_logoutFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.logoutFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
     	
@@ -575,7 +575,7 @@
     	 * 
     	**/
     	function pubTokenConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_tokenConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.tokenConfirmed, args);
     	};
 
     	/**
@@ -590,7 +590,7 @@
     	 * 
     	**/
     	function subTokenConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_tokenConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.tokenConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -607,7 +607,7 @@
     	 * 
     	**/
     	function pubTokenFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_tokenFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.tokenFailed, args);
     	};
 
     	/**
@@ -622,7 +622,7 @@
     	 * 
     	**/
     	function subTokenFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_tokenFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.tokenFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -640,7 +640,7 @@
     	 * 
     	**/
     	function pubRegisterConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_registerConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.registerConfirmed, args);
     	};
 
     	/**
@@ -655,7 +655,7 @@
     	 * 
     	**/
     	function subRegisterConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_registerConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.registerConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -672,7 +672,7 @@
     	 * 
     	**/
     	function pubRegisterFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_registerFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.registerFailed, args);
     	};
 
     	/**
@@ -687,7 +687,7 @@
     	 * 
     	**/
     	function subRegisterFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_registerFailed, _Scope, scopeHandler);   		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.registerFailed, _Scope, scopeHandler);   		
     		return unsubsSopeHandler;
     	};
 
@@ -705,7 +705,7 @@
     	 * 
     	**/
     	function pubResendWelcomeEmailConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_resend_welcome_emailConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.resend_welcome_emailConfirmed, args);
     	};
 
     	/**
@@ -720,7 +720,7 @@
     	 * 
     	**/
     	function subResendWelcomeEmailConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_resend_welcome_emailConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.resend_welcome_emailConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -737,7 +737,7 @@
     	 * 
     	**/
     	function pubResendWelcomeEmailFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_resend_welcome_emailFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.resend_welcome_emailFailed, args);
     	};
 
     	/**
@@ -752,7 +752,7 @@
     	 * 
     	**/
     	function subResendWelcomeEmailFailed(_Scope, scopeHandler) {	
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_resend_welcome_emailFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.resend_welcome_emailFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -770,7 +770,7 @@
     	 * 
     	**/
     	function pubCancelConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_cancelConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.cancelConfirmed, args);
     	};
 
     	/**
@@ -785,7 +785,7 @@
     	 * 
     	**/
     	function subCancelConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_cancelConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.cancelConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -802,7 +802,7 @@
     	 * 
     	**/
     	function pubCancelFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_cancelFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.cancelFailed, args);
     	};
 
     	/**
@@ -817,7 +817,7 @@
     	 * 
     	**/
     	function subCancelFailed(_Scope, scopeHandler) {	
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_cancelFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.cancelFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -835,7 +835,7 @@
     	 * 
     	**/
     	function pubPasswordResetConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_password_resetConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.password_resetConfirmed, args);
     	};
 
     	/**
@@ -850,7 +850,7 @@
     	 * 
     	**/
     	function subPasswordResetConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_password_resetConfirmed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.password_resetConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -867,7 +867,7 @@
     	 * 
     	**/
     	function pubPasswordResetFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_password_resetFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.password_resetFailed, args);
     	};
 
     	/**
@@ -882,7 +882,7 @@
     	 * 
     	**/
     	function subPasswordResetFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_password_resetFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.password_resetFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -901,7 +901,7 @@
     	 * 
     	**/
     	function pubRequestNewPasswordConfirmed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_requestNewPasswordConfirmed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.requestNewPasswordConfirmed, args);
     	};
 
     	/**
@@ -916,7 +916,7 @@
     	 * 
     	**/
     	function subRequestNewPasswordConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_requestNewPasswordConfirmed, _Scope, scopeHandler);	
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.requestNewPasswordConfirmed, _Scope, scopeHandler);	
     		return unsubsSopeHandler;
     	};
 
@@ -933,7 +933,7 @@
     	 * 
     	**/
     	function pubRequestNewPasswordFailed(args) {
-    		BaseChannel.pubRootEmit(UserChannelConstant.user_requestNewPasswordFailed, args);
+    		BaseChannel.pubRootEmit(UserChannelConstant.requestNewPasswordFailed, args);
     	};
 
     	/**
@@ -948,7 +948,7 @@
     	 * 
     	**/
     	function subRequestNewPasswordFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.user_requestNewPasswordFailed, _Scope, scopeHandler);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( UserChannelConstant.requestNewPasswordFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
