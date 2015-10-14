@@ -207,7 +207,7 @@
 	     *
 	    **/
 	    function files(data) {
-	    	var filesPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + NodeResourceConstant.actions.files + '/' + data.nid;
+	    	var filesPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid + '/' + NodeResourceConstant.actions.files;
 	    	
     		//set file_contents value
     		filesPath += '/'+( (data.file_contents)?1:0);
@@ -241,7 +241,7 @@
 	    **/
 	    function comments(data) {
 	    
-	    	var commentsPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + NodeResourceConstant.actions.comments + '/' + data.nid,
+	    	var commentsPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid + '/' + NodeResourceConstant.actions.comments,
 	    		requestConfig = {
 	    			url : commentsPath,
 	    			method : 'GET'
@@ -283,7 +283,7 @@
 	    **/
 	    function attachFile(data) {
 	    	//@TODO check how it works
-	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + NodeResourceConstant.actions.attachFile + '/' + data.nid;	    	
+	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid '/' + NodeResourceConstant.actions.attachFile;	    	
 	    	return baseResource.delete(attachFilePath, NodeChannel.pubDeleteConfirmed, NodeChannel.pubDeleteFailed);
 	    };
 		
