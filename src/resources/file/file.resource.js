@@ -32,13 +32,10 @@
         	//CRUD operations
         	retrieve 	: retrieve,
     		create 		: create,
-    		update 		: update,
     		delete 		: _delete,
     	    index 		: index,
     	    //Actions
-    	    files		: files,
-			comments 	: comments,
-			attachFile : attachFile
+    	    createRaw		: createRaw,
         };
         
         return fileResourceService;
@@ -51,16 +48,33 @@
 		 * Retrieve a file
 		 * 
 		 * Method: GET 
-		 * Url: http://drupal_instance/api_endpoint/file/{CID}
+		 * Url: http://www.drupalionic.org/drupal_test/api/v1/file/{FID}
 		 * 
 		 * @params  {Object} data The requests data
-		 * 			@key 	{Integer} nid UID of the file to be loaded, required:true, source:path
+		 * 			@key 	{Integer} fid FID of the file to be loaded, required:true, source:path
+		 * 			@key 	{Integer} file_contents To return file contents or not., required:false, source:param
+		 * 			@key 	{Integer} image_styles To return image styles or not., required:false, source:param
 		 * 
 		 * @return 	{Promise} A file object
 		 * 
 		**/
     	function retrieve(data) {
-    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/' + data.nid;
+    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/' + data.fid;
+    		
+    		if( data.file_contents || data.file_contents == 0 || data.image_styles || data.image_styles == 0 ) {
+    			retrievePath += '?';
+	    	}
+	    	
+	    	//optional data
+    		if(data.file_contents || data.file_contents == 0) {
+    			retrievePath += 'file_contents='+data.file_contents+',';
+    		}
+    		//@TODO check if we need count set to non-zero to use offset value
+    		if(data.image_styles || data.image_styles == 0 ) {
+    			retrievePath += 'image_styles='+data.image_styles+',';
+    		}
+    		
+    		
     		return baseResource.retrieve( retrievePath,FileChannel.pubRetrieveConfirmed,  FileChannel.pubRetrieveFailed);
 	    };
 	    
@@ -93,33 +107,6 @@
 
 	    };
 	        
-	    /**
-	     * update
-	     * 
-	     * Update a file
-	     * 
-	     * Method: PUT
-	     * Url: http://drupal_instance/api_endpoint/file/{CID}
-	     * 
-	     * @params  {Object} data The requests data
-	     * 			@key 	{Integer} nid Unique identifier for this file, required:true, source:path
-	     * 			@key 	{Array}  data The file object with updated information, required:true, source:post body
-	     * 
-	     * @return 	{Promise}
-	     *
-	    **/
-	    function update(data) {
-	    	
-	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/' + data.nid;
-	    	
-    		var updateData 	= {
-				name : data.name,
-				mail : data.mail
-			}
-    		
-    		return baseResource.update( updateData, updatePath, FileChannel.pubUpdateConfirmed, FileChannel.pubUpdateFailed);
-
-	    };
 	    
 	    /**
 	     * delete
@@ -127,16 +114,16 @@
 	     * Delete a file
 	     * 
 	     * Method: DELETE
-	     * Url: http://drupal_instance/api_endpoint/file/{CID}
+	     * Url: http://drupal_instance/api_endpoint/file/{FID}
 	     * 
 	     * @params  {Object} data the requests data
-	     * 			@key 	{Integer} nid The id of the file to delete, required:true, source:path
+	     * 			@key 	{Integer} fid The id of the file to delete, required:true, source:path
 	     * 
 	     * @return 	{Promise}
 	     *
 	    **/
 	    function _delete(data) {
-	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/' + data.nid
+	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/' + data.fid
 	    	return baseResource.delete(deletePath, FileChannel.pubDeleteConfirmed,  FileChannel.pubDeleteFailed);
 	    };
 	    
@@ -147,7 +134,6 @@
 	     * 
 	     * Method: GET
 		 * Url: http://drupal_instance/api_endpoint/file
-		 * Headers: Content-Type:application/json
 		 * 
 		 * @params  {Object} data the requests data
 		 * 		@key 	{Integer} page The zero-based index of the page to get. defaults to 0., required:false, source:param
@@ -162,6 +148,23 @@
 	    function index(data) {
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/';
 	    	return baseResource.index(data, indexPath, FileChannel.pubIndexConfirmed, FileChannel.pubIndexFailed);
+	    };
+	    
+	    
+	    /**
+	     * createRaw
+	     * 
+	     * Create a file with raw data.
+	     * 
+	     * Method: POST 
+		 * Url: http://drupal_instance/api_endpoint/file/create_raw
+	     * 
+	     * @return 	{Promise}
+	     *
+	    **/
+	    function createRaw(data) {
+	    	var createRawPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/create_raw';
+	    	return baseResource.request(null, createRawPath, FileChannel.pubIndexConfirmed, FileChannel.pubIndexFailed);
 	    };
 	    
 

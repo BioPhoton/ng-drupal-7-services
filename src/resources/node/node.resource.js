@@ -173,7 +173,6 @@
 	     * 
 	     * Method: GET
 		 * Url: http://drupal_instance/api_endpoint/node
-		 * Headers: Content-Type:application/json
 		 * 
 		 * @params  {Object} data the requests data
 		 * 		@key 	{Integer} page The zero-based index of the page to get. defaults to 0., required:false, source:param
