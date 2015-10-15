@@ -67,11 +67,11 @@
 	    	
 	    	//optional data
     		if(data.file_contents || data.file_contents == 0) {
-    			retrievePath += 'file_contents='+data.file_contents+',';
+    			retrievePath += 'file_contents='+((data.file_contents)?1:0)+',';
     		}
-    		//@TODO check if we need count set to non-zero to use offset value
+    		
     		if(data.image_styles || data.image_styles == 0 ) {
-    			retrievePath += 'image_styles='+data.image_styles+',';
+    			retrievePath += 'image_styles='+((data.image_styles)?1:0)+',';
     		}
     		
     		
@@ -93,20 +93,24 @@
 	    **/
 	    function create(data) {
 	    	
-	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath;
+	    	var createPath 	= DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath,
+	    		formData 	= new FormData();
 
-    		var createdata 	= {
-    			file : data.file
+    		
+    		if(data.filename) {formData.append('filename', data.filename);}
+    		if(data.file) {formData.append('file', data.file);}
+    		if(data.filesize) {formData.append('filesize', "" + data.filesize);}
+    		if(data.image_file_name) {formData.append('filepath', DrupalApiConstant.publicFilePath + data.image_file_name); }
+    		
+    		var requestConfig = {
+    				method : 'POST',
+    				url : createPath,
+					transformRequest: angular.identity,
+					headers: {'Content-Type': undefined},
+					data: formData
 			}
     		
-    		//@TODO try find a  better way
-    		var fileData = new FormData();
-    		if(data.filename) {fileData.append('filename', data.filename);}
-    		if(data.file) {fileData.append('file', data.file);}
-    		if(data.filesize) {fileData.append('filesize', "" + data.filesize);}
-    		if(data.image_file_name) {fileData.append('filepath', DrupalApiConstant.publicFilePath + data.image_file_name); }
-    		
-    		return baseResource.create( fileData, createPath, FileChannel.pubCreateConfirmed, FileChannel.pubCreateFailed);
+    		return baseResource.request(requestConfig, FileChannel.pubCreateConfirmed, FileChannel.pubCreateFailed);
 
 	    };
 	        
