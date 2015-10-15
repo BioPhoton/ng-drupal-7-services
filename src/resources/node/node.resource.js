@@ -6,7 +6,7 @@
 	 * 
 	 * see sourcecode in services/resources/node_resource.inc
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.node.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.node.resourceConstant', 'ngDrupal7Services-3_x.resources.node.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
+    angular.module('ngDrupal7Services-3_x.resources.node.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.node.resourceConstant', 'ngDrupal7Services-3_x.resources.node.channel', 'ngDrupal7Services-3_x.commons.BaseResource'])
     
     /**
 	 * NodeResource
@@ -22,10 +22,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    NodeResource.$inject = ['$http', 'baseResource', 'DrupalApiConstant', 'NodeResourceConstant', 'NodeChannel'];
+    NodeResource.$inject = ['$http', 'BaseResource', 'DrupalApiConstant', 'NodeResourceConstant', 'NodeChannel'];
     
 	/** @ngInject */
-	function NodeResource($http, baseResource, DrupalApiConstant, NodeResourceConstant, NodeChannel) { 
+	function NodeResource($http, BaseResource, DrupalApiConstant, NodeResourceConstant, NodeChannel) { 
 		
 		//setup and return service            	
         var nodeResourceService = {
@@ -61,7 +61,7 @@
 		**/
     	function retrieve(data) {
     		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid;
-    		return baseResource.retrieve( retrievePath,NodeChannel.pubRetrieveConfirmed,  NodeChannel.pubRetrieveFailed);
+    		return BaseResource.retrieve( retrievePath,NodeChannel.pubRetrieveConfirmed,  NodeChannel.pubRetrieveFailed);
 	    };
 	    
 	    /**
@@ -112,10 +112,10 @@
     		}
 
     		if (data.roles) {
-    			createdata.roles = baseResource.preparePostData(data.roles, 'array_of_values');
+    			createdata.roles = BaseResource.preparePostData(data.roles, 'array_of_values');
     		}
     		
-    		return baseResource.create( createdata, createPath, NodeChannel.pubCreateConfirmed, NodeChannel.pubCreateFailed);
+    		return BaseResource.create( createdata, createPath, NodeChannel.pubCreateConfirmed, NodeChannel.pubCreateFailed);
 
 	    };
 	        
@@ -143,7 +143,7 @@
 				mail : data.mail
 			}
     		
-    		return baseResource.update( updateData, updatePath, NodeChannel.pubUpdateConfirmed, NodeChannel.pubUpdateFailed);
+    		return BaseResource.update( updateData, updatePath, NodeChannel.pubUpdateConfirmed, NodeChannel.pubUpdateFailed);
 
 	    };
 	    
@@ -163,7 +163,7 @@
 	    **/
 	    function _delete(data) {
 	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid
-	    	return baseResource.delete(deletePath, NodeChannel.pubDeleteConfirmed,  NodeChannel.pubDeleteFailed);
+	    	return BaseResource.delete(deletePath, NodeChannel.pubDeleteConfirmed,  NodeChannel.pubDeleteFailed);
 	    };
 	    
 	    /**
@@ -186,7 +186,7 @@
 	    **/
 	    function index(data) {
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/';
-	    	return baseResource.index(data, indexPath, NodeChannel.pubIndexConfirmed, NodeChannel.pubIndexFailed);
+	    	return BaseResource.index(data, indexPath, NodeChannel.pubIndexConfirmed, NodeChannel.pubIndexFailed);
 	    };
 	    
 	    /**
@@ -218,7 +218,7 @@
 	    			method : 'GET'
 	    	}
 	    	
-	    	return baseResource.request(requestConfig, NodeChannel.pubFilesConfirmed, NodeChannel.pubFilesFailed);
+	    	return BaseResource.request(requestConfig, NodeChannel.pubFilesConfirmed, NodeChannel.pubFilesFailed);
 	    	
 	    };
 	    
@@ -259,7 +259,7 @@
     			commentsPath += 'offset='+data.offset+',';
     		}
 
-	    	return baseResource.request(requestConfig, NodeChannel.pubCommentsConfirmed, NodeChannel.pubCommentsFailed);
+	    	return BaseResource.request(requestConfig, NodeChannel.pubCommentsConfirmed, NodeChannel.pubCommentsFailed);
 		
 	    };
 	    
@@ -294,7 +294,7 @@
 	    			}
 	    		};
 	    	
-	    	return baseResource.request(attachFilePath, NodeChannel.pubAttachFileConfirmed, NodeChannel.pubAttachFileFailed);
+	    	return BaseResource.request(attachFilePath, NodeChannel.pubAttachFileConfirmed, NodeChannel.pubAttachFileFailed);
 	    };
 		
 					

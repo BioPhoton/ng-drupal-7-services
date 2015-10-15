@@ -7,7 +7,7 @@
 	 * see sourcecode in services/resources/views_resource.inc
 	 * 
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.views.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.baseResource', 'ngDrupal7Services-3_x.resources.views.resourceConstant', 'ngDrupal7Services-3_x.resources.views.channel'])
+    angular.module('ngDrupal7Services-3_x.resources.views.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.BaseResource', 'ngDrupal7Services-3_x.resources.views.resourceConstant', 'ngDrupal7Services-3_x.resources.views.channel'])
     
 
     /**
@@ -23,14 +23,14 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    ViewsResource.$inject = ['$http', 'DrupalApiConstant', 'baseResource', 'ViewsResourceConstant', 'ViewsChannel'];
+    ViewsResource.$inject = ['$http', 'DrupalApiConstant', 'BaseResource', 'ViewsResourceConstant', 'ViewsChannel'];
     
 	/** @ngInject */
-	function ViewsResource($http, DrupalApiConstant, baseResource, ViewsResourceConstant, ViewsChannel) { 
+	function ViewsResource($http, DrupalApiConstant, BaseResource, ViewsResourceConstant, ViewsChannel) { 
 		
 		//setup and return service            	
         var viewsResourceService = {
-        	retrieve : retrieve,
+        	retrieve : retrieve
         };
         
         return viewsResourceService;
@@ -47,13 +47,12 @@
 		 * 
 		 * @params  {Object} data The requests data
 		 * 			@key {String} view_name The name of the view to get., required:true, source:path
-		 * 			@key {Json-Object} options
-		 * 				 - options@key {String} display_id The display ID of the view to get., required:false, source:param
-		 * 				 - options@key {Array} args A list of arguments to pass to the view., required:false, source:param
-		 * 				 - options@key {Integer} offset The number of the entry for the page begin with., required:false, source:param
-		 * 				 - options@key {Integer} limit The total number of entries to list., required:false, source:param
-		 * 				 - options@key {Boolean} format_output Whether to return the raw data results or style the results., required:false, source:param
-		 * 				 - options@key {Array} exposed_filters A list of filters to pass to the view. These are defined by the exposed filters on your view. Example call: /views/your_view?filters[nid]=12345, required:false, source:param
+		 * 			@key {String} display_id The display ID of the view to get., required:false, source:param
+		 * 			@key {Array} args A list of arguments to pass to the view., required:false, source:param
+		 * 			@key {Integer} offset The number of the entry for the page begin with., required:false, source:param
+		 * 			@key {Integer} limit The total number of entries to list., required:false, source:param
+		 * 			@key {Boolean} format_output Whether to return the raw data results or style the results., required:false, source:param
+		 * 			@key {Array} exposed_filters A list of filters to pass to the view. These are defined by the exposed filters on your view. Example call: /views/your_view?filters[nid]=12345, required:false, source:param
 		 * 
 		 * 
 		 * @return 	{Promise}
@@ -64,16 +63,30 @@
 		 * 
 		 *
 		 **/
-		var retrieve = function(data){
-			
-			//if not given
-			if(!data.view_name) { errors.push('Param view_name is required.'); }
+		 function retrieve(data){
+			var _data = {};
+
+			//we extend because we dont want to change the views/controllers vlaues
+			angular.extend(_data, data);
 		
-			var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + ViewsResourceConstant.resourcePath + '/' + data.view_name;
+			var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + ViewsResourceConstant.resourcePath + '/' + _data.view_name;
 			
-			data.options
+			delete _data.view_name;
 			
-    		return baseResource.retrieve( retrievePath,UserChannel.pubRetrieveConfirmed,  UserChannel.pubRetrieveFailed);
+			var format = undefined,
+				preparedParams = undefined;
+			
+			angular.forEach(_data, function(value , key) {
+				if(key === 'exposed_filters') { format = 'json'; }
+				
+				preparedParams = BaseResource.prepareGetParams(value, key, format);
+				console.log(preparedParams); 
+		        type = undefined;
+		    });
+				
+			retrievePath += '?'+BaseResource.getParams.join('&');
+
+    		return BaseResource.retrieve( retrievePath, ViewsChannel.pubRetrieveConfirmed,  ViewsChannel.pubRetrieveFailed);
 
 		};
 		

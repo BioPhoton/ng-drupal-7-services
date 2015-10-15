@@ -7,7 +7,7 @@
 	 * see sourcecode in services/resources/system_resource.inc
 	 * 
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.system.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.baseResource', 'ngDrupal7Services-3_x.resources.system.resourceConstant', 'ngDrupal7Services-3_x.resources.system.channel'])
+    angular.module('ngDrupal7Services-3_x.resources.system.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.BaseResource', 'ngDrupal7Services-3_x.resources.system.resourceConstant', 'ngDrupal7Services-3_x.resources.system.channel'])
     
 
     /**
@@ -23,10 +23,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    SystemResource.$inject = ['$http', 'DrupalApiConstant', 'baseResource', 'SystemResourceConstant', 'SystemChannel'];
+    SystemResource.$inject = ['$http', 'DrupalApiConstant', 'BaseResource', 'SystemResourceConstant', 'SystemChannel'];
     
 	/** @ngInject */
-	function SystemResource($http, DrupalApiConstant, baseResource, SystemResourceConstant, SystemChannel) { 
+	function SystemResource($http, DrupalApiConstant, BaseResource, SystemResourceConstant, SystemChannel) { 
 		
 		//setup and return service            	
         var systemResourceService = {
@@ -65,7 +65,7 @@
 						url : connectPath
 				};
 			
-			return baseResource.request(requestConfig,SystemChannel.pubConnectConfirmed,  SystemChannel.pubConnectFailed);
+			return BaseResource.request(requestConfig,SystemChannel.pubConnectConfirmed,  SystemChannel.pubConnectFailed);
 			
 		};
 		
@@ -99,7 +99,7 @@
 						}
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubGetVariableConfirmed, SystemChannel.pubGetVariableFailed);
+			return BaseResource.request(requestConfig, SystemChannel.pubGetVariableConfirmed, SystemChannel.pubGetVariableFailed);
 			
 		};
 		
@@ -134,7 +134,7 @@
 						}
 				};
 
-			return baseResource.request(requestConfig, SystemChannel.pubSetVariableConfirmed, SystemChannel.pubSetVariableFailed);
+			return BaseResource.request(requestConfig, SystemChannel.pubSetVariableConfirmed, SystemChannel.pubSetVariableFailed);
 			
 		};
 		
@@ -167,7 +167,7 @@
 						}
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubDelVariableConfirmed, SystemChannel.pubDelVariableFailed);
+			return BaseResource.request(requestConfig, SystemChannel.pubDelVariableConfirmed, SystemChannel.pubDelVariableFailed);
 
 		};
 	

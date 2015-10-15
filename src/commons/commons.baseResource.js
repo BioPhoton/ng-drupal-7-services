@@ -4,23 +4,23 @@
 	/**
 	 * System Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.baseResource', ['ngDrupal7Services-3_x.commons.configurations'])
-		   .factory('baseResource', baseResource);
+	angular.module('ngDrupal7Services-3_x.commons.BaseResource', ['ngDrupal7Services-3_x.commons.configurations'])
+		   .factory('BaseResource', BaseResource);
 
 	/**
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	 **/
-	baseResource.$inject = ['$http', '$q', 'DrupalApiConstant'];
+	BaseResource.$inject = ['$http', '$q', 'DrupalApiConstant'];
 	
 	/**
 	 * The resource basic functions
 	 * 
 	**/
 	/** @ngInject */
-	function baseResource($http, $q, DrupalApiConstant) {
+	function BaseResource($http, $q, DrupalApiConstant) {
 		
-		var baseResourceService = {
+		var BaseResourceService = {
 			prepareGetParams : prepareGetParams,	
 			preparePostData: preparePostData,
 			//base 
@@ -32,7 +32,7 @@
 			index 		: index
 		};
        
-        return baseResourceService;
+        return BaseResourceService;
 
         ////////////
         

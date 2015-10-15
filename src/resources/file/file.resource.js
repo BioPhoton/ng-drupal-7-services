@@ -6,7 +6,7 @@
 	 * 
 	 * see sourcecode in services/resources/file_resource.inc
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.file.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.file.resourceConstant', 'ngDrupal7Services-3_x.resources.file.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
+    angular.module('ngDrupal7Services-3_x.resources.file.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.file.resourceConstant', 'ngDrupal7Services-3_x.resources.file.channel', 'ngDrupal7Services-3_x.commons.BaseResource'])
     
     /**
 	 * FileResource
@@ -22,10 +22,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    FileResource.$inject = ['$http', 'baseResource', 'DrupalApiConstant', 'FileResourceConstant', 'FileChannel'];
+    FileResource.$inject = ['$http', 'BaseResource', 'DrupalApiConstant', 'FileResourceConstant', 'FileChannel'];
     
 	/** @ngInject */
-	function FileResource($http, baseResource, DrupalApiConstant, FileResourceConstant, FileChannel) { 
+	function FileResource($http, BaseResource, DrupalApiConstant, FileResourceConstant, FileChannel) { 
 		
 		//setup and return service            	
         var fileResourceService = {
@@ -75,7 +75,7 @@
     		}
     		
     		
-    		return baseResource.retrieve( retrievePath,FileChannel.pubRetrieveConfirmed,  FileChannel.pubRetrieveFailed);
+    		return BaseResource.retrieve( retrievePath,FileChannel.pubRetrieveConfirmed,  FileChannel.pubRetrieveFailed);
 	    };
 	    
 	    /**
@@ -110,7 +110,7 @@
 					data: formData
 			}
     		
-    		return baseResource.request(requestConfig, FileChannel.pubCreateConfirmed, FileChannel.pubCreateFailed);
+    		return BaseResource.request(requestConfig, FileChannel.pubCreateConfirmed, FileChannel.pubCreateFailed);
 
 	    };
 	        
@@ -131,7 +131,7 @@
 	    **/
 	    function _delete(data) {
 	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/' + data.fid
-	    	return baseResource.delete(deletePath, FileChannel.pubDeleteConfirmed,  FileChannel.pubDeleteFailed);
+	    	return BaseResource.delete(deletePath, FileChannel.pubDeleteConfirmed,  FileChannel.pubDeleteFailed);
 	    };
 	    
 	    /**
@@ -154,7 +154,7 @@
 	    **/
 	    function index(data) {
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/';
-	    	return baseResource.index(data, indexPath, FileChannel.pubIndexConfirmed, FileChannel.pubIndexFailed);
+	    	return BaseResource.index(data, indexPath, FileChannel.pubIndexConfirmed, FileChannel.pubIndexFailed);
 	    };
 	    
 	    
@@ -171,7 +171,7 @@
 	    **/
 	    function createRaw(data) {
 	    	var createRawPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/create_raw';
-	    	return baseResource.request(null, createRawPath, FileChannel.pubIndexConfirmed, FileChannel.pubIndexFailed);
+	    	return BaseResource.request(null, createRawPath, FileChannel.pubIndexConfirmed, FileChannel.pubIndexFailed);
 	    };
 	    
 	}

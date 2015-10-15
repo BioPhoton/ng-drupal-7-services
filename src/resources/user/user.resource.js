@@ -6,7 +6,7 @@
 	 * 
 	 * see sourcecode in services/resources/user_resource.inc
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.user.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.user.resourceConstant', 'ngDrupal7Services-3_x.resources.user.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
+    angular.module('ngDrupal7Services-3_x.resources.user.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.user.resourceConstant', 'ngDrupal7Services-3_x.resources.user.channel', 'ngDrupal7Services-3_x.commons.BaseResource'])
     
     /**
 	 * UserResource
@@ -22,10 +22,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    UserResource.$inject = ['$http', 'baseResource', 'DrupalApiConstant', 'UserResourceConstant', 'UserChannel'];
+    UserResource.$inject = ['$http', 'BaseResource', 'DrupalApiConstant', 'UserResourceConstant', 'UserChannel'];
     
 	/** @ngInject */
-	function UserResource($http, baseResource, DrupalApiConstant, UserResourceConstant, UserChannel) { 
+	function UserResource($http, BaseResource, DrupalApiConstant, UserResourceConstant, UserChannel) { 
 		
 		//setup and return service            	
         var userResourceService = {
@@ -67,7 +67,7 @@
 		**/
     	function retrieve(data) {
     		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid;
-    		return baseResource.retrieve( retrievePath,UserChannel.pubRetrieveConfirmed,  UserChannel.pubRetrieveFailed);
+    		return BaseResource.retrieve( retrievePath,UserChannel.pubRetrieveConfirmed,  UserChannel.pubRetrieveFailed);
 	    };
 	    
 	    /**
@@ -118,10 +118,10 @@
     		}
 
     		if (data.roles) {
-    			createdata.roles = baseResource.preparePostData(data.roles, 'array_of_values');
+    			createdata.roles = BaseResource.preparePostData(data.roles, 'array_of_values');
     		}
     		
-    		return baseResource.create( createdata, createPath,  UserChannel.pubCreateConfirmed, UserChannel.pubCreateFailed);
+    		return BaseResource.create( createdata, createPath,  UserChannel.pubCreateConfirmed, UserChannel.pubCreateFailed);
 
 	    };
 	        
@@ -149,7 +149,7 @@
 				mail : data.mail
 			}
     		
-    		return baseResource.update( updateData, updatePath, UserChannel.pubUpdateConfirmed, UserChannel.pubUpdateFailed);
+    		return BaseResource.update( updateData, updatePath, UserChannel.pubUpdateConfirmed, UserChannel.pubUpdateFailed);
 
 	    };
 	    
@@ -169,7 +169,7 @@
 	    **/
 	    function _delete(data) {
 	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + data.uid
-	    	return baseResource.delete(deletePath, UserChannel.pubDeleteConfirmed, UserChannel.pubDeleteFailed);
+	    	return BaseResource.delete(deletePath, UserChannel.pubDeleteConfirmed, UserChannel.pubDeleteFailed);
 	    };
 	    
 	    /**
@@ -192,7 +192,7 @@
 	    **/
 	    function index(data) {
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/';
-	    	return baseResource.index(data, indexPath,UserChannel.pubIndexConfirmed,  UserChannel.pubIndexFailed);
+	    	return BaseResource.index(data, indexPath,UserChannel.pubIndexConfirmed,  UserChannel.pubIndexFailed);
 	    };
 	    
 	    /**
@@ -219,7 +219,7 @@
 					data : data
 		 	 	  };
 		 
-		 	return baseResource.request(requestConfig, UserChannel.pubRegisterConfirmed, UserChannel.pubRegisterFailed);
+		 	return BaseResource.request(requestConfig, UserChannel.pubRegisterConfirmed, UserChannel.pubRegisterFailed);
 		};
 		
 		 
@@ -246,7 +246,7 @@
 					url : resendWelcomeEmailPath
 		 	 	  };
 		 
-		 	return baseResource.request(requestConfig, UserChannel.pubResendWelcomeEmailConfirmed, UserChannel.pubResendWelcomeEmailFailed);
+		 	return BaseResource.request(requestConfig, UserChannel.pubResendWelcomeEmailConfirmed, UserChannel.pubResendWelcomeEmailFailed);
 		};
 		
 		/**
@@ -272,7 +272,7 @@
 					url : cancelPath
 		 	 	  };
 		 
-		 	return baseResource.request(requestConfig, UserChannel.pubCancelConfirmed, UserChannel.pubCancelFailed);
+		 	return BaseResource.request(requestConfig, UserChannel.pubCancelConfirmed, UserChannel.pubCancelFailed);
 		};
 		
 		/**
@@ -298,7 +298,7 @@
 					url : passwordResetPath
 		 	 	  };
 		 
-		 	return baseResource.request(requestConfig, UserChannel.pubPasswordResetConfirmed, UserChannel.pubPasswordResetFailed);
+		 	return BaseResource.request(requestConfig, UserChannel.pubPasswordResetConfirmed, UserChannel.pubPasswordResetFailed);
 		};
 		
 		/**
@@ -329,7 +329,7 @@
 					}
 		 	 	  };
 		 
-		 	return baseResource.request(requestConfig, UserChannel.pubRequestNewPasswordConfirmed, UserChannel.pubRequestNewPasswordFailed);
+		 	return BaseResource.request(requestConfig, UserChannel.pubRequestNewPasswordConfirmed, UserChannel.pubRequestNewPasswordFailed);
 		};
 	    
 	    
@@ -363,7 +363,7 @@
 						},
 				};
 	    	
-			return baseResource.request(requestConfig, UserChannel.pubLoginConfirmed, UserChannel.pubLoginFailed);
+			return BaseResource.request(requestConfig, UserChannel.pubLoginConfirmed, UserChannel.pubLoginFailed);
 
 		};
 		
@@ -386,7 +386,7 @@
 			 			method	: 'POST'
 				};
 			 
-			return baseResource.request(requestConfig, UserChannel.pubLogoutConfirmed, UserChannel.pubLogoutFailed);
+			return BaseResource.request(requestConfig, UserChannel.pubLogoutConfirmed, UserChannel.pubLogoutFailed);
 
 		};
 		
@@ -409,7 +409,7 @@
 			     	method	: 'POST'
 				};
 			
-			return baseResource.request(requestConfig,UserChannel.pubTokenConfirmed,  UserChannel.pubTokenFailed);
+			return BaseResource.request(requestConfig,UserChannel.pubTokenConfirmed,  UserChannel.pubTokenFailed);
 
 		};
 					
