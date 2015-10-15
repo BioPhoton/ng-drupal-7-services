@@ -61,16 +61,16 @@
     	function retrieve(data) {
     		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath + '/' + data.fid;
     		
-    		if( data.file_contents || data.file_contents == 0 || data.image_styles || data.image_styles == 0 ) {
+    		if( data.file_contents || data.image_styles ) {
     			retrievePath += '?';
 	    	}
 	    	
 	    	//optional data
-    		if(data.file_contents || data.file_contents == 0) {
+    		if(data.file_contents) {
     			retrievePath += 'file_contents='+((data.file_contents)?1:0)+',';
     		}
     		
-    		if(data.image_styles || data.image_styles == 0 ) {
+    		if(data.image_styles) {
     			retrievePath += 'image_styles='+((data.image_styles)?1:0)+',';
     		}
     		
