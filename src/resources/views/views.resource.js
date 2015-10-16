@@ -7,7 +7,7 @@
 	 * see sourcecode in services/resources/views_resource.inc
 	 * 
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.views.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.baseResource', 'ngDrupal7Services-3_x.resources.views.resourceConstant', 'ngDrupal7Services-3_x.resources.views.channel'])
+    angular.module('ngDrupal7Services-3_x.resources.views.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.BaseResource', 'ngDrupal7Services-3_x.resources.views.resourceConstant', 'ngDrupal7Services-3_x.resources.views.channel'])
     
 
     /**
@@ -66,25 +66,58 @@
 		 function retrieve(data){
 			var _data = {};
 
-			//we extend because we dont want to change the views/controllers vlaues
-			angular.extend(_data, data);
+			//we merge (deep copy) because we dont want to change the views/controllers vlaues
+			angular.merge(_data, data);
 		
 			var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + ViewsResourceConstant.resourcePath + '/' + _data.view_name;
 			
 			delete _data.view_name;
+			delete _data.exposed_filters.comment_count;
 			
+			
+			//prepare params
 			var format = undefined,
-				preparedParams = undefined;
+				preparedParams  = undefined,
+				preparedParamsArray = [];
+			
+			var exposedFiltersFieldsWithOperators = [];
+			//collect all exposed filters with operators
+			if(_data.exposed_filters) {
+				var fieldName = undefined;
+				angular.forEach(_data.exposed_filters , function(value, key)  {
+					//if a key ends with _op
+					if(key.substr(key.length - 3) == '_op') {
+						fieldName = key.split('_op').shift();
+						exposedFiltersFieldsWithOperators.push(fieldName);
+					}
+				});
+			}
+		
+			//prepare exposed filters fields that have operators
+			angular.forEach(_data.exposed_filters , function(value, key)  {
+				//if a key is in exposedFiltersFieldsWithOperators array
+				if(exposedFiltersFieldsWithOperators.indexOf(key) > -1) {
+					delete _data.exposed_filters[key];
+					preparedParamsArray.push(BaseResource.prepareGetParams(value, key, 'array_key_value'));
+				}
+			});
+			
 			
 			angular.forEach(_data, function(value , key) {
-				if(key === 'exposed_filters') { format = 'json'; }
+				if(key === 'exposed_filters' || key === 'exposed_sorts') { format = 'json'; }
 				
 				preparedParams = BaseResource.prepareGetParams(value, key, format);
-				console.log(preparedParams); 
-		        type = undefined;
+				if(preparedParams) {
+					preparedParamsArray.push(preparedParams);
+				}
+				
+				format = undefined;
 		    });
 				
-			retrievePath += '?'+BaseResource.getParams.join('&');
+			if(preparedParamsArray.length > 0) {
+				retrievePath += '?'+ preparedParamsArray.join('&');
+			}
+			
 
     		return BaseResource.retrieve( retrievePath, ViewsChannel.pubRetrieveConfirmed,  ViewsChannel.pubRetrieveFailed);
 

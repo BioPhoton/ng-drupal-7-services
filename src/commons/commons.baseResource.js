@@ -4,7 +4,7 @@
 	/**
 	 * System Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.baseResource', ['ngDrupal7Services-3_x.commons.configurations'])
+	angular.module('ngDrupal7Services-3_x.commons.BaseResource', ['ngDrupal7Services-3_x.commons.configurations'])
 		   .factory('BaseResource', BaseResource);
 
 	/**
@@ -290,7 +290,7 @@
          * @return {String} formated data
          */
          function prepareGetParams(values, key, format) {
-        	 console.log(values, key, format); 
+        	 
             var getParams = [],
 	            formats = { 
 	      			  'array' : true,
@@ -302,18 +302,18 @@
     		//validate key
     		if(key) { 
     			key = (key)?key:false;
-    			if(key === false) {return false;}
-    		} else { return false; }
+    			if(key === false) {return;}
+    		} else { return; }
     		
     		//validate values
-    		values = (values || values === 0)?values:false;
+    		values = (values || values === 0)?values:undefined;
     		
     		//validate values
-    		if(values === false) {return false;}
+    		if(values === undefined) {return;}
     		//if no json or length 0 and no int
     		else if (parseInt(values) === NaN) { 
     			if(Object.keys(values).length <= 0) {
-    				return false; 
+    				return ; 
     			}
     		}
     		
@@ -324,7 +324,7 @@
     		}
     		
     		//validate format
-    		if(!formats[format]) { return '';  }
+    		if(!formats[format]) { return;  }
     		
     		//json
     		//example: exposed_filter=value
