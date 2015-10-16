@@ -6,7 +6,7 @@
 	 * 
 	 * see sourcecode in services/resources/user_resource.inc
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.user.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.user.resourceConstant', 'ngDrupal7Services-3_x.resources.user.channel', 'ngDrupal7Services-3_x.commons.BaseResource'])
+    angular.module('ngDrupal7Services-3_x.resources.user.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.user.resourceConstant', 'ngDrupal7Services-3_x.resources.user.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
     
     /**
 	 * UserResource
