@@ -15,7 +15,19 @@
 							  },
 				"cache"		: 0,
 				"timestamp"	: Date.now()
-		}
+		},
+		//default drupal roles
+   		roles :[
+                'anonymous user',
+                'authenticated user',
+                'administrator'],
+        //default access levels
+        accessLevels : {
+            'public' : "*",
+            'anon': ['anonymous user'],
+            'user' : ['authenticated user'],
+            'admin': ['administrator']
+        }
 			
 	};
 	

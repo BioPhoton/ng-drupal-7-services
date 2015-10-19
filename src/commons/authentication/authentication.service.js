@@ -45,8 +45,8 @@
 			currentUser	 = AuthenticationServiceConstant.anonymousUser,
 			// time of last successful connection in ms
 			lastConnectTime  = 0,
-			//auth token
-			authenticationHeaders = null,
+			//auth token rendered as Authentication headers
+			authenticationHeaders,
 			//session data
 			sessid = null,
 			session_name = null,
@@ -83,8 +83,12 @@
          * 
          */
         function isAuthorized(accessLevel, roles) {
-	   		 //if no user is given set unauthorized user
+        	//@TODO add optional check for roles only
+        	
+        	var isGranted = false;
+        	 
 	   		 currentUser = getCurrentUser();
+	   		 
 	   		 //
 	   	     if(roles === undefined) {
 	   			roles = currentUser.roles; 
@@ -93,7 +97,6 @@
 	   	     //
 	   	     if(accessLevel == '*') { return true;}
 	   	     
-	   	     var isGranted = false;
 	   		 for (var i = 0; i < accessLevel.length; i++) {
 	   			 for (var prop in roles) {
 	   				if(accessLevel[i] == currentUser.roles[prop]) {
@@ -101,6 +104,7 @@
 	   				}
 	   			 }
 	   	     }
+	   		 
 	         return isGranted;
         };
 		
