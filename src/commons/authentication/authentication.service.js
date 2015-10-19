@@ -40,7 +40,8 @@
 	/** @ngInject */
 	function AuthenticationService( $rootScope, DrupalApiConstant, AuthenticationServiceConstant, AuthenticationChannel, SystemResource, UserResource, $cookies, $http, $q ) { 
 	
-		var userIsConected = false,
+			//we set this to undefined because we wan't to detect the first connection check 
+		var userIsConected,
 			currentUser	 = AuthenticationServiceConstant.anonymousUser,
 			// time of last successful connection in ms
 			lastConnectTime  = 0,
@@ -110,7 +111,7 @@
 		 * 
 		**/
 		function login(loginData) {
-			
+
 			return UserResource
 					.login(loginData)
 						.success(function (responseData, status, headers, config) {
@@ -178,7 +179,7 @@
 								}
 						)
 						.catch(
-								function() {
+								function(responseError) {
 									AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError);
 									return defer.resolve(responseData);
 								}
@@ -202,7 +203,7 @@
 				 			.success( function (responseData, status, headers, config) {
 					             setLastConnectTime(Date.now());
 					             setCookies(responseData.sessid, responseData.session_name);
-					             setConnectionState((responseData.user.uid === 0)?false:true);
+					             setConnectionState((responseData.user.uid === 0)?false:true)
 					             setCurrentUser(responseData.user);
 					              
 					             AuthenticationChannel.pubAuthenticationTryConnectConfirmed(responseData);  
@@ -275,8 +276,10 @@
 		 * 
 		**/
 		function setConnectionState(newState) {
-	        if(newState != userIsConected) {
-	          userIsConected = (newState)?true:false;
+			newState = (newState)?true:false;
+			
+	        if(newState !== userIsConected) {
+	          userIsConected = newState;
 	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
 	        }
 		};
@@ -374,35 +377,8 @@
 			session_name = null;
 			
         	//delete session cookies
-			//$cookies.remove(session_name, sessionCookieOptions.path);
 			$cookies.remove(session_name, sessionCookieOptions.path);
         };
-		
-		/**
-		 * getConnectionState
-		 * 
-		 * Returns the current authentication state as boolean
-		 * 
-		 * @return {Boolean} state as boolesan
-		 * 
-		**/
-		function getConnectionState() { return userIsConected; };
-		
-		/**
-		 * setConnectionState
-		 * 
-		 * Sets the current authentication state 
-		 * 
-		**/
-		function setConnectionState(newState) {
-			
-			newState = (newState)?true:false;
-			
-	        if(newState != userIsConected) {
-	          userIsConected = newState;
-	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
-	        }
-		};
 		
 		/**
 		 * getLastConnectTime
