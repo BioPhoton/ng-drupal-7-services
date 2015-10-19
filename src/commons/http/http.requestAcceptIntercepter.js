@@ -48,11 +48,10 @@
         	
         	$injector.invoke(['DrupalApiConstant', 'FileResourceConstant', function (DrupalApiConstant, FileResourceConstant) {
         	       		
-        		//console.log(config.method , config.url , DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath); 
+        		config.headers['Accept'] = DrupalApiConstant.responseFormat;
         		
         		if(!(config.method == 'POST' && config.url == DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + FileResourceConstant.resourcePath)) {
-        			config.headers['Accept'] = DrupalApiConstant.responseFormat;
-    	        	config.headers['Content-Type'] = 'multipart/form-data';
+    	        	config.headers['Content-Type'] = DrupalApiConstant.responseFormat;
         		}
         		
 	        	

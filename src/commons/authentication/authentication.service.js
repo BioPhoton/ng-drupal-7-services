@@ -163,18 +163,28 @@
 		 *  
 		**/
 		function refreshConnection() {
+			var defer = $q.defer();
 			
 			//check token
-			return refreshTokenFromServer()
-						.success( function(responseData, status, headers, config) {	
-							return tryConnect()
-									.success(function(responseData, status, headers, config) { 
-										AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData);
-									});
-						})
-						.error( function(responseError, status, headers, config) {
-							AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError);
-						});
+			refreshTokenFromServer()
+						.then(
+								function(response) {
+									//check connection
+									tryConnect()
+										.success(function(responseData, status, headers, config) { 
+											AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData);
+											return defer.resolve(responseData.data);
+										});
+								}
+						)
+						.catch(
+								function() {
+									AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError);
+									return defer.resolve(responseData);
+								}
+						);
+			 
+			return defer.promise; 
 						
 		};
 		
@@ -192,7 +202,7 @@
 				 			.success( function (responseData, status, headers, config) {
 					             setLastConnectTime(Date.now());
 					             setCookies(responseData.sessid, responseData.session_name);
-					             setConnectionState((responseData.user.uid === 0)?false:true)
+					             setConnectionState((responseData.user.uid === 0)?false:true);
 					             setCurrentUser(responseData.user);
 					              
 					             AuthenticationChannel.pubAuthenticationTryConnectConfirmed(responseData);  
