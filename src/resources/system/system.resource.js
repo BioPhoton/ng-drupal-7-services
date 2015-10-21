@@ -23,10 +23,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    SystemResource.$inject = ['$http', '$q', 'DrupalApiConstant', 'baseResource', 'SystemResourceConstant', 'SystemChannel'];
+    SystemResource.$inject = ['$http', 'DrupalApiConstant', 'BaseResource', 'SystemResourceConstant', 'SystemChannel'];
     
 	/** @ngInject */
-	function SystemResource($http, $q, DrupalApiConstant, baseResource, SystemResourceConstant, SystemChannel) { 
+	function SystemResource($http, DrupalApiConstant, BaseResource, SystemResourceConstant, SystemChannel) { 
 		
 		//setup and return service            	
         var systemResourceService = {
@@ -65,7 +65,7 @@
 						url : connectPath
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubConnectFailed, SystemChannel.pubConnectConfirmed);
+			return BaseResource.request(requestConfig,SystemChannel.pubConnectConfirmed,  SystemChannel.pubConnectFailed);
 			
 		};
 		
@@ -99,7 +99,7 @@
 						}
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubGetVariableFailed, SystemChannel.pubGetVariableConfirmed);
+			return BaseResource.request(requestConfig, SystemChannel.pubGetVariableConfirmed, SystemChannel.pubGetVariableFailed);
 			
 		};
 		
@@ -125,7 +125,6 @@
 	    	data = (data)?data:{};
 	
 			var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
-				defer = $q.defer(),
 				requestConfig = {
 						method 	:'POST',
 						url 	: setVariablePath,
@@ -135,7 +134,7 @@
 						}
 				};
 
-			return baseResource.request(requestConfig, SystemChannel.pubSetVariableFailed, SystemChannel.pubSetVariableConfirmed);
+			return BaseResource.request(requestConfig, SystemChannel.pubSetVariableConfirmed, SystemChannel.pubSetVariableFailed);
 			
 		};
 		
@@ -168,7 +167,7 @@
 						}
 				};
 			
-			return baseResource.request(requestConfig, SystemChannel.pubDelVariableFailed, SystemChannel.pubDelVariableConfirmed);
+			return BaseResource.request(requestConfig, SystemChannel.pubDelVariableConfirmed, SystemChannel.pubDelVariableFailed);
 
 		};
 	

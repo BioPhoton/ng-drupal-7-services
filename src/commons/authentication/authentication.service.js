@@ -40,12 +40,13 @@
 	/** @ngInject */
 	function AuthenticationService( $rootScope, DrupalApiConstant, AuthenticationServiceConstant, AuthenticationChannel, SystemResource, UserResource, $cookies, $http, $q ) { 
 	
-		var userIsConected = false,
+			//we set this to undefined because we wan't to detect the first connection check 
+		var userIsConected,
 			currentUser	 = AuthenticationServiceConstant.anonymousUser,
 			// time of last successful connection in ms
 			lastConnectTime  = 0,
-			//auth token
-			authenticationHeaders = null,
+			//auth token rendered as Authentication headers
+			authenticationHeaders,
 			//session data
 			sessid = null,
 			session_name = null,
@@ -72,6 +73,7 @@
         return authenticationService;
 
         ////////////
+        
         /**
          * isAuthorized
          * 
@@ -81,26 +83,32 @@
          * @returns {Boolean} true if authorized false if not
          * 
          */
-        function isAuthorized(accessLevel, roles) {
-	   		 //if no user is given set unauthorized user
-	   		 currentUser = getCurrentUser();
-	   		 //
-	   	     if(roles === undefined) {
-	   			roles = currentUser.roles; 
-	            }
-	   	    
-	   	     //
-	   	     if(accessLevel == '*') { return true;}
+        function isAuthorized(accessLevelRoles, userRoles) {       	
+			var isGranted = false,
+				currentUser = getCurrentUser();
+			console.log(userRoles); 
+			if(userRoles === undefined ) {
+				userRoles = currentUser.roles; 
+				console.log('take users roles'); 
+			}	
+			
+			//check by accessLevel and optional given roles
+			if(accessLevelRoles == '*') { return true; }
+			
+			if(!angular.isArray(accessLevelRoles)) {
+				return false;
+			}
+			
+			for (var i = 0; i < accessLevelRoles.length; i++) {
+				for (var prop in userRoles) {
+					console.log(accessLevelRoles[i][prop] , userRoles[prop]); 
+					if(accessLevelRoles[i][prop] === userRoles[prop]) {
+						 return true;
+					}
+				 }
+			}
 	   	     
-	   	     var isGranted = false;
-	   		 for (var i = 0; i < accessLevel.length; i++) {
-	   			 for (var prop in roles) {
-	   				if(accessLevel[i] == currentUser.roles[prop]) {
-	   					 isGranted = true;
-	   				}
-	   			 }
-	   	     }
-	         return isGranted;
+	         return false;
         };
 		
 		/**
@@ -110,7 +118,7 @@
 		 * 
 		**/
 		function login(loginData) {
-			
+
 			return UserResource
 					.login(loginData)
 						.success(function (responseData, status, headers, config) {
@@ -163,18 +171,28 @@
 		 *  
 		**/
 		function refreshConnection() {
+			var defer = $q.defer();
 			
 			//check token
-			return refreshTokenFromServer()
-						.success( function(responseData, status, headers, config) {	
-							return tryConnect()
-									.success(function(responseData, status, headers, config) { 
-										AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData);
-									});
-						})
-						.error( function(responseError, status, headers, config) {
-							AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError);
-						});
+			refreshTokenFromServer()
+						.then(
+								function(response) {
+									//check connection
+									tryConnect()
+										.success(function(responseData, status, headers, config) { 
+											AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData);
+											return defer.resolve(responseData.data);
+										});
+								}
+						)
+						.catch(
+								function(responseError) {
+									AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError);
+									return defer.resolve(responseData);
+								}
+						);
+			 
+			return defer.promise; 
 						
 		};
 		
@@ -265,8 +283,10 @@
 		 * 
 		**/
 		function setConnectionState(newState) {
-	        if(newState != userIsConected) {
-	          userIsConected = (newState)?true:false;
+			newState = (newState)?true:false;
+			
+	        if(newState !== userIsConected) {
+	          userIsConected = newState;
 	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
 	        }
 		};
@@ -364,35 +384,8 @@
 			session_name = null;
 			
         	//delete session cookies
-			//$cookies.remove(session_name, sessionCookieOptions.path);
 			$cookies.remove(session_name, sessionCookieOptions.path);
         };
-		
-		/**
-		 * getConnectionState
-		 * 
-		 * Returns the current authentication state as boolean
-		 * 
-		 * @return {Boolean} state as boolesan
-		 * 
-		**/
-		function getConnectionState() { return userIsConected; };
-		
-		/**
-		 * setConnectionState
-		 * 
-		 * Sets the current authentication state 
-		 * 
-		**/
-		function setConnectionState(newState) {
-			
-			newState = (newState)?true:false;
-			
-	        if(newState != userIsConected) {
-	          userIsConected = newState;
-	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
-	        }
-		};
 		
 		/**
 		 * getLastConnectTime

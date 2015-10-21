@@ -22,10 +22,10 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	**/
-    NodeResource.$inject = ['$http', '$q', 'baseResource', 'DrupalApiConstant', 'NodeResourceConstant', 'NodeChannel'];
+    NodeResource.$inject = ['$http', 'BaseResource', 'DrupalApiConstant', 'NodeResourceConstant', 'NodeChannel'];
     
 	/** @ngInject */
-	function NodeResource($http, $q, baseResource, DrupalApiConstant, NodeResourceConstant, NodeChannel) { 
+	function NodeResource($http, BaseResource, DrupalApiConstant, NodeResourceConstant, NodeChannel) { 
 		
 		//setup and return service            	
         var nodeResourceService = {
@@ -61,7 +61,7 @@
 		**/
     	function retrieve(data) {
     		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid;
-    		return baseResource.retrieve( retrievePath, NodeChannel.pubRetrieveFailed, NodeChannel.pubRetrieveConfirmed);
+    		return BaseResource.retrieve( retrievePath,NodeChannel.pubRetrieveConfirmed,  NodeChannel.pubRetrieveFailed);
 	    };
 	    
 	    /**
@@ -112,10 +112,10 @@
     		}
 
     		if (data.roles) {
-    			createdata.roles = baseResource.preparePostData(data.roles, 'array_of_values');
+    			createdata.roles = BaseResource.preparePostData(data.roles, 'array_of_values');
     		}
     		
-    		return baseResource.create( createdata, createPath, NodeChannel.pubCreateFailed, NodeChannel.pubCreateConfirmed);
+    		return BaseResource.create( createdata, createPath, NodeChannel.pubCreateConfirmed, NodeChannel.pubCreateFailed);
 
 	    };
 	        
@@ -143,7 +143,7 @@
 				mail : data.mail
 			}
     		
-    		return baseResource.update( updateData, updatePath, NodeChannel.pubUpdateFailed, NodeChannel.pubUpdateConfirmed);
+    		return BaseResource.update( updateData, updatePath, NodeChannel.pubUpdateConfirmed, NodeChannel.pubUpdateFailed);
 
 	    };
 	    
@@ -163,7 +163,7 @@
 	    **/
 	    function _delete(data) {
 	    	var deletePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid
-	    	return baseResource.delete(deletePath, NodeChannel.pubDeleteFailed, NodeChannel.pubDeleteConfirmed);
+	    	return BaseResource.delete(deletePath, NodeChannel.pubDeleteConfirmed,  NodeChannel.pubDeleteFailed);
 	    };
 	    
 	    /**
@@ -173,7 +173,6 @@
 	     * 
 	     * Method: GET
 		 * Url: http://drupal_instance/api_endpoint/node
-		 * Headers: Content-Type:application/json
 		 * 
 		 * @params  {Object} data the requests data
 		 * 		@key 	{Integer} page The zero-based index of the page to get. defaults to 0., required:false, source:param
@@ -187,7 +186,7 @@
 	    **/
 	    function index(data) {
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/';
-	    	return baseResource.index(data, indexPath, NodeChannel.pubIndexFailed, NodeChannel.pubIndexConfirmed);
+	    	return BaseResource.index(data, indexPath, NodeChannel.pubIndexConfirmed, NodeChannel.pubIndexFailed);
 	    };
 	    
 	    /**
@@ -195,8 +194,8 @@
 	     * 
 	     * This method returns files associated with a node.
 	     * 
-	     * Method: DELETE
-	     * Url: http://drupal_instance/api_endpoint/node/files
+	     * Method: GET
+	     * Url: http://drupal_instance/api_endpoint/node/files/{NID}/{FILE_CONTENTS}/{IMAGE_STYLES}
 	     * 
 	     * @params  {Object} data the requests data
 	     * 			 @key {Integer} nid The nid of the node whose files we are getting, required:true, source:path
@@ -207,11 +206,20 @@
 	     *
 	    **/
 	    function files(data) {
-	    	var filesPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid
-	    	return baseResource.delete(filesPath, NodeChannel.pubDeleteFailed, NodeChannel.pubDeleteConfirmed);
+	    	var filesPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid + '/' + NodeResourceConstant.actions.files;
 	    	
-	    	//var attachFilePath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + NodeResourceConfig.resourcePath + '/' + nid + '/' + NodeResourceConfig.actions.files + ((file_contents)?('/'+file_contents):'')+((image_styles)?('/'+image_styles):''),
-			
+    		//set file_contents value
+    		filesPath += '/'+( (data.file_contents)?1:0);
+    		//set image_styles value
+    		filesPath += '/'+( (data.image_styles)?1:0);
+	    	
+	    	var requestConfig = {
+	    			url : filesPath,
+	    			method : 'GET'
+	    	}
+	    	
+	    	return BaseResource.request(requestConfig, NodeChannel.pubFilesConfirmed, NodeChannel.pubFilesFailed);
+	    	
 	    };
 	    
 	    /**
@@ -219,8 +227,8 @@
 	     * 
 	     * This method returns the number of new comments on a given node.
 	     * 
-	     * Method: DELETE
-	     * Url: http://drupal_instance/api_endpoint/node/files
+	     * Method: GET
+	     * Url: http://drupal_instance/api_endpoint/node/comments/{NID}
 	     * 
 	     * @params  {Object} data the requests data
 	     * 			@key {Integer} nid The node id to load comments for., required:true, source:path
@@ -231,10 +239,28 @@
 	     *
 	    **/
 	    function comments(data) {
-	    	var commentsPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid
-	    	return baseResource.delete(commentsPath, NodeChannel.pubDeleteFailed, NodeChannel.pubDeleteConfirmed);
+	    
+	    	var commentsPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid + '/' + NodeResourceConstant.actions.comments,
+	    		requestConfig = {
+	    			url : commentsPath,
+	    			method : 'GET'
+	    		};
 	    	
-	    	//var attachFilePath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + NodeResourceConfig.resourcePath + '/' + nid +'/' + NodeResourceConfig.actions.comments + '/' + ((count != undefined ||  offset != undefined)?'?':'')+ ((count != undefined)?('count='+count+','):'') + ((offset != undefined)?('offset=' + offset):''),
+	    	if( data.count || data.count == 0 || data.offset || data.offset == 0 ) {
+	    		commentsPath += '?';
+	    	}
+	    	
+	    	//optional data
+    		if(data.count || data.count == 0) {
+    			commentsPath += 'count='+data.count+',';
+    		}
+    		//@TODO check if we need count set to non-zero to use offset value
+    		if(data.offset || data.offset == 0 ) {
+    			commentsPath += 'offset='+data.offset+',';
+    		}
+
+	    	return BaseResource.request(requestConfig, NodeChannel.pubCommentsConfirmed, NodeChannel.pubCommentsFailed);
+		
 	    };
 	    
 	    /**
@@ -242,8 +268,8 @@
 	     * 
 	     * This method returns the number of new comments on a given node.
 	     * 
-	     * Method: DELETE
-	     * Url: http://drupal_instance/api_endpoint/node/files
+	     * Method: POST 
+	     * Url: http://drupal_instance/api_endpoint/node/attach_file/{NID}
 	     * 
 	     * @params  {Object} data the requests data
 	     * 			@key {Integer} nid The nid of the node to attach a file to, required:true, source:path
@@ -256,10 +282,19 @@
 	    **/
 	    function attachFile(data) {
 	    	//@TODO check how it works
-	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid
-	    	return baseResource.delete(attachFilePath, NodeChannel.pubDeleteFailed, NodeChannel.pubDeleteConfirmed);
 	    	
-	    	//var attachFilePath = drupalApiConfig.drupal_instance + drupalApiConfig.api_endpoint + NodeResourceConfig.resourcePath + '/' + nid + '/' + NodeResourceConfig.actions.attachFile
+	    	var attachFilePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid + '/' + NodeResourceConstant.actions.attachFile,
+	    		requestConfig = {
+	    			url : attachFilePath,
+	    			method : 'POST ',
+	    			data : {
+	    				field_name 		: field_name,
+	    				attach 			: data.attach,
+		    			field_values 	: data.field_values
+	    			}
+	    		};
+	    	
+	    	return BaseResource.request(attachFilePath, NodeChannel.pubAttachFileConfirmed, NodeChannel.pubAttachFileFailed);
 	    };
 		
 					

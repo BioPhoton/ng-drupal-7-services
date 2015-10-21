@@ -21,11 +21,13 @@
   ],
   "license": "MIT",
   "ignore": [
-    "**/.*",
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "package.json",
+    "gulpfile.js",
+    "bundle.config.js"
   ],
   "dependencies": {
     "ngstorage": "~0.3.9",

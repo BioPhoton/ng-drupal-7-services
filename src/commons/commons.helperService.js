@@ -41,7 +41,7 @@
 
     	  // record optional label string or default to "value"
     	  var label = _label || "value";
-    	  var language_key = (language)? function() {return language}:function() {return baseResourceConfig.LANGUAGE_NONE};
+    	  var language_key = (language)? function() {return language}:function() {return BaseResourceConfig.LANGUAGE_NONE};
 
     	  if (angular.isArray(value)) {
 

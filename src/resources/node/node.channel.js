@@ -90,8 +90,7 @@
 		 * 
 		**/
     	function pubRetrieveConfirmed(args) {
-    		var args = args;
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_retrieveConfirmed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.retrieveConfirmed, args);
     	};
     	
     	/**
@@ -106,11 +105,7 @@
 		 * 
 		**/
     	function subRetrieveConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_retrieveConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
     		
     		return unsubsSopeHandler;
     	};
@@ -128,8 +123,7 @@
 		 * 
 		**/
     	function pubRetrieveFailed(args) {
-    		var args = {errors: args};
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_retrieveFailed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.retrieveFailed, args);
     	};
     	
     	/**
@@ -144,11 +138,7 @@
 		 * 
 		**/
     	function subRetrieveFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_retrieveFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.retrieveFailed, _Scope, scopeHandler);
 
     		return unsubsSopeHandler;
     	};
@@ -167,9 +157,7 @@
     	 * 
     	**/
     	function pubCreateConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubCreateConfirmed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_createConfirmed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.createConfirmed, args);
     	};
 
     	/**
@@ -184,12 +172,7 @@
     	 * 
     	**/
     	function subCreateConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_createConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.createConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -206,9 +189,7 @@
     	 * 
     	**/
     	function pubCreateFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubCreateFailed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_createFailed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.createFailed, args);
     	};
 
     	/**
@@ -223,12 +204,7 @@
     	 * 
     	**/
     	function subCreateFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_createFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.createFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -246,9 +222,7 @@
     	 * 
     	**/
     	function pubUpdateConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubUpdateConfirmed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_updateConfirmed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.updateConfirmed, args);
     	};
 
     	/**
@@ -263,12 +237,7 @@
     	 * 
     	**/
     	function subUpdateConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_updateConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.updateConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -284,9 +253,7 @@
     	 * 
     	**/
     	function pubUpdateFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubUpdateFailed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_updateFailed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.updateFailed, args);
     	};
 
     	/**
@@ -301,12 +268,7 @@
     	 * 
     	**/
     	function subUpdateFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_updateFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.updateFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -324,9 +286,7 @@
     	 * 
     	**/
     	function pubDeleteConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubDeleteConfirmed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_deleteConfirmed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.deleteConfirmed, args);
     	};
 
     	/**
@@ -341,12 +301,7 @@
     	 * 
     	**/
     	function subDeleteConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_deleteConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.deleteConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -363,9 +318,7 @@
     	 * 
     	**/
     	function pubDeleteFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubDeleteFailed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_deleteFailed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.deleteFailed, args);
     	};
 
     	/**
@@ -380,12 +333,7 @@
     	 * 
     	**/
     	function subDeleteFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_deleteFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.deleteFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -403,9 +351,7 @@
     	 * 
     	**/
     	function pubIndexConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubIndexConfirmed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_indexConfirmed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.indexConfirmed, args);
     	};
 
     	/**
@@ -420,12 +366,7 @@
     	 * 
     	**/
     	function subIndexConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_indexConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.indexConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -442,9 +383,7 @@
     	 * 
     	**/
     	function pubIndexFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubIndexFailed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_indexFailed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.indexFailed, args);
     	};
 
     	/**
@@ -459,12 +398,7 @@
     	 * 
     	**/
     	function subIndexFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_indexFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.indexFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -482,9 +416,7 @@
     	 * 
     	**/
     	function pubFilesConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubFilesConfirmed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_filesConfirmed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.filesConfirmed, args);
     	};
 
     	/**
@@ -499,12 +431,7 @@
     	 * 
     	**/
     	function subFilesConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_filesConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.filesConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -521,9 +448,7 @@
     	 * 
     	**/
     	function pubFilesFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubFilesFailed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_filesFailed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.filesFailed, args);
     	};
 
     	/**
@@ -538,12 +463,7 @@
     	 * 
     	**/
     	function subFilesFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_filesFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.filesFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -562,9 +482,7 @@
     	 * 
     	**/
     	function pubCommentsConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubCommentsConfirmed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_commentsConfirmed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.commentsConfirmed, args);
     	};
 
     	/**
@@ -579,12 +497,7 @@
     	 * 
     	**/
     	function subCommentsConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_commentsConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.commentsConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -601,9 +514,7 @@
     	 * 
     	**/
     	function pubCommentsFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubCommentsFailed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_commentsFailed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.commentsFailed, args);
     	};
 
     	/**
@@ -618,12 +529,7 @@
     	 * 
     	**/
     	function subCommentsFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_commentsFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.commentsFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -643,9 +549,7 @@
     	* 
     	**/
     	function pubAttachFileConfirmed(args) {
-    		var args = args;
-    		console.log('channel pubAttachFileConfirmed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_attachFileConfirmed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.attachFileConfirmed, args);
     	};
 
     	/**
@@ -660,12 +564,7 @@
     	* 
     	**/
     	function subAttachFileConfirmed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) {
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_attachFileConfirmed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.attachFileConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 
@@ -682,9 +581,7 @@
     	* 
     	**/
     	function pubAttachFileFailed(args) {
-    		var args = {errors: args};
-    		console.log('channel pubAttachFileFailed'); 
-    		BaseChannel.pubRootEmit(NodeChannelConstant.node_attachFileFailed, args);
+    		BaseChannel.pubRootEmit(NodeChannelConstant.attachFileFailed, args);
     	};
 
     	/**
@@ -699,12 +596,7 @@
     	* 
     	**/
     	function subAttachFileFailed(_Scope, scopeHandler) {
-    		var prepArgs = function (args) { 
-    			return args; 
-    		};
-    		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.node_attachFileFailed, _Scope, scopeHandler, prepArgs);
-    		
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.attachFileFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
 

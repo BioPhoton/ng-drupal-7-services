@@ -2,7 +2,7 @@
 	'use strict';
 
 	/**
-	 * System Channel Module
+	 * Base Channel Module
 	 */
 	angular.module('ngDrupal7Services-3_x.commons.baseChannel', [])
 		   .factory('BaseChannel', BaseChannel);
@@ -47,7 +47,12 @@
      		//subscribe with rootScope to event and cache unsubscribe function
      		var unsubsSopeHandler = $rootScope.$on(eventName, function(event, args) {
      				//console.log('in subRootEmit publish event: ' + eventName + ' with args: ' + JSON.stringify(mapArgs(args)));
-	     			scopeHandler(mapArgs(args));
+     				if(typeof mapArgs === 'function') {
+     					scopeHandler(mapArgs(args));
+     				} else {
+     					scopeHandler(args);
+     				}
+	     			
 	     		});
      		 
      		//unsubscribe rootScope listener after scope destruction

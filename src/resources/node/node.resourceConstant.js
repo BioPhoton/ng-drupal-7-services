@@ -30,7 +30,7 @@
 	 * Node Constant Modules
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.node.resourceConstant', ['ngDrupal7Services-3_x.commons.configurations'])
+	    .module('ngDrupal7Services-3_x.resources.node.resourceConstant', [])
 	    .constant("NodeResourceConstant", NodeResourceConstant);
 	
 })();
