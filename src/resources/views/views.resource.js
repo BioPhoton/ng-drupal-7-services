@@ -51,13 +51,15 @@
 		 * 			@key {Integer} offset The number of the entry for the page begin with., required:false, source:param
 		 * 			@key {Integer} limit The total number of entries to list., required:false, source:param
 		 * 			@key {Boolean} format_output Whether to return the raw data results or style the results., required:false, source:param
-		 * 			@key {Array} exposed_filters A list of filters to pass to the view. These are defined by the exposed filters on your view. Example call: /views/your_view?filters[nid]=12345, required:false, source:param
+		 * 			@key {Array} exposed_sortss A list of sort options to pass to the view. These are defined by the exposed sorts on your view. Example call: /views/your_view?sort_order=ASC&sort_by=created, required:false, source:param
+		 * 			@key {Array} exposed_filters A list of filters to pass to the view. These are defined by the exposed filters on your view. Example call: /views/your_view?comment_count[value]=12345, required:false, source:param
 		 * 
 		 * 
 		 * @return 	{Promise}
 		 * 
 		 * Custom view settings
-		 * exposed filters: create them in the view under "Filter criteria". Expose them for users. Under the more tab in "Configure filter criterion" in the field "Filter identifier" you can change the field name. Use it like => comment_count=4
+		 * exposed filters: 
+		 * 	create them in the view under "Filter criteria". Expose them for users. Under the more tab in "Configure filter criterion" in the field "Filter identifier" you can change the field name. Use it like => comment_count=4
 		 * order by : create them in the view under "Sort criteria".  Expose it for users and use it like => sort_by=created&sort_order=ASC
 		 * 
 		 *
