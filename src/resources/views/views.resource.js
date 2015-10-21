@@ -7,9 +7,8 @@
 	 * see sourcecode in services/resources/views_resource.inc
 	 * 
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.views.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.BaseResource', 'ngDrupal7Services-3_x.resources.views.resourceConstant', 'ngDrupal7Services-3_x.resources.views.channel'])
+    angular.module('ngDrupal7Services-3_x.resources.views.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.baseResource', 'ngDrupal7Services-3_x.resources.views.resourceConstant', 'ngDrupal7Services-3_x.resources.views.channel'])
     
-
     /**
 	 * ViewsResource
 	 * 
@@ -66,14 +65,12 @@
 		 function retrieve(data){
 			var _data = {};
 
-			//we merge (deep copy) because we dont want to change the views/controllers vlaues
+			//we angular.merge "deep copy" because we don't want to change the views/controllers values
 			angular.merge(_data, data);
 		
 			var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + ViewsResourceConstant.resourcePath + '/' + _data.view_name;
 			
-			delete _data.view_name;
-			delete _data.exposed_filters.comment_count;
-			
+			delete _data.view_name;			
 			
 			//prepare params
 			var format = undefined,
@@ -118,13 +115,10 @@
 				retrievePath += '?'+ preparedParamsArray.join('&');
 			}
 			
-
     		return BaseResource.retrieve( retrievePath, ViewsChannel.pubRetrieveConfirmed,  ViewsChannel.pubRetrieveFailed);
 
 		};
-		
-
-	
+			
 	};
 
 })();

@@ -28,7 +28,6 @@
     "package.json",
     "gulpfile.js",
     "bundle.config.js"
-    
   ],
   "dependencies": {
     "ngstorage": "~0.3.9",
