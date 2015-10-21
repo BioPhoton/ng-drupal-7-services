@@ -8,6 +8,8 @@
 	**/
     
     //setup constant
+    
+    //default roles
     var anonymous_user 		= { 
 	    					'id' 	: 1,
 				    		'role' 	: "anonymous user"
@@ -19,28 +21,41 @@
 	    administrator 		= { 
 								'id' 	: 3,
 					    		'role' 	: "administrator"
-					    	},
-		AuthenticationServiceConstant =  {
+					    	};
+    //default access levels
+	var publicLevel = "*",
+		anonLevel = {},
+		userLevel = {},
+		adminLevel = {};
+		
+		anonLevel[anonymous_user.id] 		= anonymous_user.role;
+		userLevel[authenticated_user.id] 	= authenticated_user.role;
+		adminLevel[administrator.id ] 		= administrator.role;
+			
+	var	AuthenticationServiceConstant =  {
 			//the drupals guest user obj
 			anonymousUser : {
 					"uid"		: 0,
-					"roles"		: anonymous_user,
+					"roles"		: {},
 					"cache"		: 0,
 					"timestamp"	: Date.now()
 			},
 			//default drupal roles key is role id
-	   		roles : { },
+	   		roles : {},
 	        //default access levels
 	        //here you can grand access for role groups
 	        accessLevels : {
-	            'public' : "*",
-	            'anon':  [anonymous_user.role],
-	            'user' : [authenticated_user.role],
-	            'admin': [administrator.role]
+	            'public' : publicLevel,
+	            'anon':  [anonLevel],
+	            'user' : [userLevel],
+	            'admin': [adminLevel]
 	        }	
-    },
-    AuthenticationServiceConstant.roles[anonymous_user.id] = anonymous_user.role,
-	AuthenticationServiceConstant.roles[authenticated_user.id] = authenticated_user.role,
+    };
+    
+    AuthenticationServiceConstant.anonymousUser.roles[anonymous_user.id] = anonymous_user.role;
+    
+    AuthenticationServiceConstant.roles[anonymous_user.id] = anonymous_user.role;
+	AuthenticationServiceConstant.roles[authenticated_user.id] = authenticated_user.role;
 	AuthenticationServiceConstant.roles[administrator.id] = administrator.role;
 	
 	/**

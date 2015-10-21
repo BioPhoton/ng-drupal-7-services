@@ -73,6 +73,7 @@
         return authenticationService;
 
         ////////////
+        
         /**
          * isAuthorized
          * 
@@ -82,43 +83,32 @@
          * @returns {Boolean} true if authorized false if not
          * 
          */
-        function isAuthorized(accessLevel, roles) {       	
-        	var isGranted = false,
-	   			currentUser = getCurrentUser();
-	   		 
-	   		 //
-	   	     if(roles === undefined) {
-	   			roles = currentUser.roles; 
-	         }
+        function isAuthorized(accessLevelRoles, userRoles) {       	
+			var isGranted = false,
+				currentUser = getCurrentUser();
+			console.log(userRoles); 
+			if(userRoles === undefined ) {
+				userRoles = currentUser.roles; 
+				console.log('take users roles'); 
+			}	
+			
+			//check by accessLevel and optional given roles
+			if(accessLevelRoles == '*') { return true; }
+			
+			if(!angular.isArray(accessLevelRoles)) {
+				return false;
+			}
+			
+			for (var i = 0; i < accessLevelRoles.length; i++) {
+				for (var prop in userRoles) {
+					console.log(accessLevelRoles[i][prop] , userRoles[prop]); 
+					if(accessLevelRoles[i][prop] === userRoles[prop]) {
+						 return true;
+					}
+				 }
+			}
 	   	     
-	   	     //check by role
-	   	     if(!accessLeve) {
-	   	    	
-	   	    	 for (var prop in roles) {
-	   				if(roles[prop] == currentUser.roles[prop]) {
-	   					 isGranted = true;
-	   				}
-	   			 }
-	   	    	 
-	         } 
-	   	     //check by accessLevel
-	   	     else {
-		   	    
-		   	     if(accessLevel == '*') { return true;}
-		   	     
-		   		 for (var i = 0; i < accessLevel.length; i++) {
-		   			 
-		   			 for (var prop in roles) {
-		   				if(accessLevel[i] == currentUser.roles[prop]) {
-		   					 isGranted = true;
-		   				}
-		   			 }
-		   			 
-		   	     }
-		   		 
-	   		 }
-	   	     
-	         return isGranted;
+	         return false;
         };
 		
 		/**
