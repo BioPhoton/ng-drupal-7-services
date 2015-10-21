@@ -6,7 +6,7 @@
 	 *  
 	 *  NOTE: if you want to change this constant do this in your app.js config section
 	 */
-	var ViewsOptionsConstant =  {
+	var ViewsOperatorsConstant =  {
 			sort_operators : {
 				asc		: "ASC",
 				desc	: "DESC"
