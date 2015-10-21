@@ -82,29 +82,42 @@
          * @returns {Boolean} true if authorized false if not
          * 
          */
-        function isAuthorized(accessLevel, roles) {
-        	//@TODO add optional check for roles only
-        	
-        	var isGranted = false;
-        	 
-	   		 currentUser = getCurrentUser();
+        function isAuthorized(accessLevel, roles) {       	
+        	var isGranted = false,
+	   			currentUser = getCurrentUser();
 	   		 
 	   		 //
 	   	     if(roles === undefined) {
 	   			roles = currentUser.roles; 
-	            }
-	   	    
-	   	     //
-	   	     if(accessLevel == '*') { return true;}
+	         }
 	   	     
-	   		 for (var i = 0; i < accessLevel.length; i++) {
-	   			 for (var prop in roles) {
-	   				if(accessLevel[i] == currentUser.roles[prop]) {
+	   	     //check by role
+	   	     if(!accessLeve) {
+	   	    	
+	   	    	 for (var prop in roles) {
+	   				if(roles[prop] == currentUser.roles[prop]) {
 	   					 isGranted = true;
 	   				}
 	   			 }
-	   	     }
-	   		 
+	   	    	 
+	         } 
+	   	     //check by accessLevel
+	   	     else {
+		   	    
+		   	     if(accessLevel == '*') { return true;}
+		   	     
+		   		 for (var i = 0; i < accessLevel.length; i++) {
+		   			 
+		   			 for (var prop in roles) {
+		   				if(accessLevel[i] == currentUser.roles[prop]) {
+		   					 isGranted = true;
+		   				}
+		   			 }
+		   			 
+		   	     }
+		   		 
+	   		 }
+	   	     
 	         return isGranted;
         };
 		
