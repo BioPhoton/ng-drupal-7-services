@@ -4,7 +4,7 @@
 	/**
 	 * helper Module
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.helperService', [])
+	angular.module('ngDrupal7Services-3_x.commons.helperService', ['ngDrupal7Services-3_x.commons.configurations'])
 		   .factory('DrupalHelperService', DrupalHelperService);
 
 	
@@ -12,7 +12,7 @@
 	 * Manually identify dependencies for minification-safe code
 	 * 
 	 **/
-	//DrupalHelperService.$inject = [];
+	DrupalHelperService.$inject = ['DrupalApiConstant'];
 	
 	/**
 	 * Notification channel for user resource 
@@ -23,6 +23,7 @@
 	
 		//setup and return service            	
         var drupalHelperService = {
+        		getApiPath		: getApiPath,
         		sprintf 		: sprintf,
         		mergeItems 		: mergeItems,
         		structureField 	: structureField
@@ -33,6 +34,10 @@
         ////////////
         
         //
+        
+        function getApiPath() {
+        	return DrupalApiConstant.drupal_instance +  DrupalApiConstant.api_endpoint;
+        }
         
         /**
     	 * https://github.com/jbeuckm/drupal-client/blob/master/lib/field.js
@@ -84,6 +89,7 @@
     		
     		if(!type) {
     			var uniqueNodes = [];
+    			var isUnique;
      			angular.forEach(newItems, function(newItems) {
      				isUnique = true;
      				angular.forEach(currentItems, function(currentItem, key) {
