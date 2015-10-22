@@ -402,7 +402,6 @@
 		 * 
 		**/
 		function token() {
-			console.log(UserResourceConstant); 
 			var  pathToToken = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + UserResourceConstant.resourcePath + '/' + UserResourceConstant.actions.token,
 				 requestConfig = {
 			     	url		: pathToToken,

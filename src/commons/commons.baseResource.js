@@ -212,7 +212,7 @@
         	var type = '',
     			getParamsString = '',
     			prepaeredParams = '';
-        	console.log(options); 
+        
         	if(!options)  { return ''; }
 
     		//prepare and set optional params
@@ -221,8 +221,7 @@
     			else if(key === 'fields') { type = 'array'; }
     			
     			prepaeredParams = prepareGetParams(value, key, type)
-    			console.log(prepaeredParams); 
-
+    		
     			getParamsString += (getParamsString == '')?prepaeredParams:'&'+prepaeredParams;
     			
     			prepaeredParams = '';

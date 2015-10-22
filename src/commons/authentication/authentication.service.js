@@ -86,10 +86,9 @@
         function isAuthorized(accessLevelRoles, userRoles) {       	
 			var isGranted = false,
 				currentUser = getCurrentUser();
-			console.log(userRoles); 
+
 			if(userRoles === undefined ) {
 				userRoles = currentUser.roles; 
-				console.log('take users roles'); 
 			}	
 			
 			//check by accessLevel and optional given roles
@@ -101,7 +100,6 @@
 			
 			for (var i = 0; i < accessLevelRoles.length; i++) {
 				for (var prop in userRoles) {
-					console.log(accessLevelRoles[i][prop] , userRoles[prop]); 
 					if(accessLevelRoles[i][prop] === userRoles[prop]) {
 						 return true;
 					}
