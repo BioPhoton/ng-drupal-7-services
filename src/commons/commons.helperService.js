@@ -19,11 +19,12 @@
 	**/
 	
 	/** @ngInject */
-	function DrupalHelperService() {
+	function DrupalHelperService(DrupalApiConstant) {
 	
 		//setup and return service            	
         var drupalHelperService = {
         		getApiPath		: getApiPath,
+        		getDrupalPath	: getDrupalPath,
         		sprintf 		: sprintf,
         		mergeItems 		: mergeItems,
         		structureField 	: structureField
@@ -37,6 +38,10 @@
         
         function getApiPath() {
         	return DrupalApiConstant.drupal_instance +  DrupalApiConstant.api_endpoint;
+        }
+        
+        function getDrupalPath() {
+        	return DrupalApiConstant.drupal_instance;
         }
         
         /**

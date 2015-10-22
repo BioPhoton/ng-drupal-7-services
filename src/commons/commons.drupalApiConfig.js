@@ -36,10 +36,17 @@
 			  session_expiration_unite : 'seconds',
 			  
 			  //path to public folder
-			  publicFilePath : "public://",
+			  publicFilePath 	: "public://",
 			  
 			  //path to public folder
-			  privateFilePath : "private://",
+			  privateFilePath 	: "private://",
+			  
+			  //default image styles
+			  imageStyles		: {
+				  large 	: 'large',
+				  medium 	: 'medium',
+				  thumbnail : 'thumbnail'
+			  }
 			
 	};
     
