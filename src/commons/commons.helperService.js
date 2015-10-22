@@ -24,6 +24,7 @@
 		//setup and return service            	
         var drupalHelperService = {
         		sprintf 		: sprintf,
+        		mergeItems 		: mergeItems,
         		structureField 	: structureField
         };
         
@@ -37,6 +38,7 @@
     	 * https://github.com/jbeuckm/drupal-client/blob/master/lib/field.js
     	 * Create the basic field structure for uploading a field.
     	 */
+        //@TODO add language support
         function structureField(value, _label, language) {
 
     	  // record optional label string or default to "value"
@@ -70,9 +72,46 @@
     	        obj
     	      ]
     	    };
+    	    
     	  }
         }
         //
+        
+      	
+    	function mergeItems(newItems, currentItems , type, callback) {
+    	
+    		callback = (typeof(callback) === "function")?callback:function(obj) {return obj;};
+    		
+    		if(!type) {
+    			var uniqueNodes = [];
+     			angular.forEach(newItems, function(newItems) {
+     				isUnique = true;
+     				angular.forEach(currentItems, function(currentItem, key) {
+     					if(newItems.nid == currentItem.nid) { isUnique = false; }
+     				}, isUnique);
+     				 
+     				if(isUnique) {
+     						uniqueNodes.push(callback(newItems));
+     				}	
+     			}, uniqueNodes);
+     			
+     			currentItems =  uniqueNodes.concat(currentItems);
+     			
+     			return currentItems;
+    		} 
+    		else {
+    			angular.forEach(newItems, function(newItem) {
+    				
+    				//@TODO add this to if => || currentItems[newItem[type]].updated > newItem.updated
+    				if(!currentItems[newItem[type]] ) {
+    					
+    						currentItems[parseInt(newItem[type])] = callback(newItem);
+    				}
+    				
+    			});
+    			return currentItems;
+    		}
+    	};
         
         // copied from http://phpjs.org/
         function sprintf() {
