@@ -186,7 +186,7 @@
 						.catch(
 								function(responseError) {
 									AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError);
-									return defer.resolve(responseData);
+									return defer.resolve(responseError);
 								}
 						);
 			 
