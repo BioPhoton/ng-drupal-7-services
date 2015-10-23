@@ -25,6 +25,7 @@
         var drupalHelperService = {
         		getApiPath		: getApiPath,
         		getDrupalPath	: getDrupalPath,
+        		getPathToImgByStyle : getPathToImgByStyle,
         		sprintf 		: sprintf,
         		mergeItems 		: mergeItems,
         		structureField 	: structureField
@@ -44,6 +45,13 @@
         	return DrupalApiConstant.drupal_instance;
         }
         
+        function getPathToImgByStyle(style, isPrivate) {
+        	return  getDrupalPath() + 'sites/default/files/styles/'+style+'/'+ ( (isPrivate)?DrupalApiConstant.privateFilePath:DrupalApiConstant.publicFilePath );
+            
+        }
+        
+        
+       
         /**
     	 * https://github.com/jbeuckm/drupal-client/blob/master/lib/field.js
     	 * Create the basic field structure for uploading a field.
