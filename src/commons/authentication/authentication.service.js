@@ -60,6 +60,7 @@
 		
 		//setup and return service        
         var authenticationService = {
+        		isUser			: isUser,
         		isAuthorized 	: isAuthorized,
         		login			: login,
     			logout			: logout,
@@ -73,6 +74,33 @@
         return authenticationService;
 
         ////////////
+        
+        /**
+         * isUser
+         * 
+         * @param {Object} user or uid The user objcet or uid
+         * 
+         * @returns {Boolean} true if uid is equal false if not
+         * 
+         */
+        function isUser(userOrUid) {       	
+			
+			var currentUser = getCurrentUser();
+			
+			if(angular.isObject(userOrUid)) {
+				if(userOrUid.uid == currentUser.uid) {
+					return true;
+				}
+				return false;
+			}
+
+			
+			if(userOrUid == currentUser.uid) {
+				return true;
+			}
+	   	     
+	        return false;
+        };
         
         /**
          * isAuthorized

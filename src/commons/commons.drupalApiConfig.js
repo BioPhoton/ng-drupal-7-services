@@ -46,7 +46,10 @@
 				  large 	: 'large',
 				  medium 	: 'medium',
 				  thumbnail : 'thumbnail'
-			  }
+			  },
+			  
+			  //language
+			  LANGUAGE_NONE : 'und'
 			
 	};
     

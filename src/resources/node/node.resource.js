@@ -93,29 +93,12 @@
 	    **/
 	    function create(data) {
 	    	
-	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath;
+	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath,
+	    		createData 	= {
+					node : data
+				};
 
-    		var createdata 	= {
-				name : data.name,
-				pass : data.pass,
-				mail : data.mail
-			}
-    		
-    		//optional data
-    		
-    		if(data.status || data.status == 0) {
-    			createdata.status = (data.status)?1:0;
-    		}
-    		
-    		if(data.notify || data.notify == 0) {
-    			createdata.notify = (data.notify)?1:0;
-    		}
-
-    		if (data.roles) {
-    			createdata.roles = BaseResource.preparePostData(data.roles, 'array_of_values');
-    		}
-    		
-    		return BaseResource.create( createdata, createPath, NodeChannel.pubCreateConfirmed, NodeChannel.pubCreateFailed);
+    		return BaseResource.create( createData, createPath, NodeChannel.pubCreateConfirmed, NodeChannel.pubCreateFailed);
 
 	    };
 	        

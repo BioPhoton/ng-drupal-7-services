@@ -55,13 +55,78 @@
         /**
     	 * https://github.com/jbeuckm/drupal-client/blob/master/lib/field.js
     	 * Create the basic field structure for uploading a field.
+    	 * 
+    	 * Example input output 
+    	 * 
+    	 * String:
+    	 * IN:
+    	 * OUT: 
+    	 * 
+    	 * Object:
+    	 * IN: 	{ value : 'foobar foo', summary : 'foobar' } 
+    	 * OUT: 	{ und : [{ value : 'foobar foo', summary : 'foobar' }]} 
+    	 * 
     	 */
         //@TODO add language support
-        function structureField(value, _label, language) {
+        function structureField(value, label, language) {
+    	  // record optional label string
+          // default is "value"
+    	  var	prepatedData = undefined,
+    	  		label = label || "value",
+    	  		language = (language !== undefined)?language:DrupalApiConstant.LANGUAGE_NONE;
+    	  	  
+    	      console.log('value', value);
+    	      console.log('label', label);
+    	      console.log('language', language); 
+    	      
+    	      
+    	/*  if (angular.isArray(value)) {
+    		console.log('angular.isArray(value)'); 
+    	    var field_array = [];
+    	    for (var i= 0, l=value.length; i<l; i++) {
+    	      var item = {};
+    	      item[label] = value[i];
+    	      field_array.push(item);
+    	    }
+    	    
+    	    return {
+    	      und: field_array
+    	    };
+    	    
+    	  } */
+    	  
 
-    	  // record optional label string or default to "value"
-    	  var label = _label || "value";
-    	  var language_key = (language)? function() {return language}:function() {return BaseResourceConfig.LANGUAGE_NONE};
+    	  if (angular.isObject(value)) {
+    		  prepatedData =  {};
+    		  prepatedData[language] = [value];
+    	  }
+    	  
+    	  return prepatedData;
+
+    	  
+    	  
+    	  if (value instanceof Date) {
+
+    	    var prepatedData = {
+    	      value: {
+    	        date: (value.getMonth()+1)+'/'+value.getDate()+'/'+value.getFullYear()+' - '+value.getHours()+':'+value.getMinutes()+':'+value.getSeconds()
+    	      }
+    	    };
+
+    	    return {
+    	    	und: [
+    	    	   prepatedData
+    	      ]
+    	    };
+    	    
+    	  } 
+    	  
+    	  ////
+    	  
+    	  
+    	// record optional label string or default to "value"
+    	  var label = label || "value";
+    	  var language_key = (language)? function() {return language}:function() {return baseResourceConfig.LANGUAGE_NONE};
 
     	  if (angular.isArray(value)) {
 
@@ -76,7 +141,22 @@
     	      und: field_array
     	    };
     	  }
+    	  
+    	  if (angular.isObject(value)) {
 
+      	    var field_array = [];
+      	    for (var i= 0, l=value.length; i<l; i++) {
+      	      var item = {};
+      	      item[label] = value[i];
+
+      	      field_array.push(item);
+      	    }
+      	    return {
+      	      und: field_array
+      	    };
+      	  }
+    	  
+    	  
     	  if (value instanceof Date) {
 
     	    var obj = {
@@ -90,8 +170,18 @@
     	        obj
     	      ]
     	    };
-    	    
     	  }
+
+    	  // field value given with label(s) already built
+    	  if (typeof value == "object") {
+    	    return {
+    	    	und: [
+    	        value
+    	      ]
+    	    }
+    	  }
+    	  
+    	  
         }
         //
         
