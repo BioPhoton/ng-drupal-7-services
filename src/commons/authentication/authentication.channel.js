@@ -24,36 +24,36 @@
         var authenticationChannelService = {
         		
     		// login request
-    		pubAuthenticationLoginConfirmed 	: pubAuthenticationLoginConfirmed,
-    		subAuthenticationLoginConfirmed		: subAuthenticationLoginConfirmed,
-    		pubAuthenticationLoginFailed 		: pubAuthenticationLoginFailed,
-    		subAuthenticationLoginFailed		: subAuthenticationLoginFailed,	
+    		pubLoginConfirmed 	: pubLoginConfirmed,
+    		subLoginConfirmed		: subLoginConfirmed,
+    		pubLoginFailed 		: pubLoginFailed,
+    		subLoginFailed		: subLoginFailed,	
         	
     		// logout request
-    		pubAuthenticationLogoutConfirmed 	: pubAuthenticationLogoutConfirmed,
-        	subAuthenticationLogoutConfirmed	: subAuthenticationLogoutConfirmed,
-        	pubAuthenticationLogoutFailed 		: pubAuthenticationLogoutFailed,
-        	subAuthenticationLogoutFailed		: subAuthenticationLogoutFailed,
+    		pubLogoutConfirmed 	: pubLogoutConfirmed,
+        	subLogoutConfirmed	: subLogoutConfirmed,
+        	pubLogoutFailed 		: pubLogoutFailed,
+        	subLogoutFailed		: subLogoutFailed,
         	
         	// refreshConnection request
-    		pubAuthenticationRefreshConnectionConfirmed 	: pubAuthenticationRefreshConnectionConfirmed,
-        	subAuthenticationRefreshConnectionConfirmed		: subAuthenticationRefreshConnectionConfirmed,
-        	pubAuthenticationRefreshConnectionFailed 		: pubAuthenticationRefreshConnectionFailed,
-        	subAuthenticationRefreshConnectionFailed		: subAuthenticationRefreshConnectionFailed,
+    		pubRefreshConnectionConfirmed 	: pubRefreshConnectionConfirmed,
+        	subRefreshConnectionConfirmed		: subRefreshConnectionConfirmed,
+        	pubRefreshConnectionFailed 		: pubRefreshConnectionFailed,
+        	subRefreshConnectionFailed		: subRefreshConnectionFailed,
         	
         	// try connect to Drupal
-        	pubAuthenticationTryConnectConfirmed	: pubAuthenticationTryConnectConfirmed,
-        	subAuthenticationTryConnectConfirmed 	: subAuthenticationTryConnectConfirmed,
-        	pubAuthenticationTryConnectFailed		: pubAuthenticationTryConnectFailed,
-        	subAuthenticationTryConnectFailed 		: subAuthenticationTryConnectFailed,
+        	pubTryConnectConfirmed	: pubTryConnectConfirmed,
+        	subTryConnectConfirmed 	: subTryConnectConfirmed,
+        	pubTryConnectFailed		: pubTryConnectFailed,
+        	subTryConnectFailed 		: subTryConnectFailed,
     		
         	// Connection state updated
-    		pubAuthenticationConnectionStateUpdated 	: pubAuthenticationConnectionStateUpdated,
-    		subAuthenticationConnectionStateUpdated		: subAuthenticationConnectionStateUpdated,
+    		pubConnectionStateUpdated 	: pubConnectionStateUpdated,
+    		subConnectionStateUpdated		: subConnectionStateUpdated,
     		
     		// Current user updated
-    		pubAuthenticationCurrentUserUpdated		: pubAuthenticationCurrentUserUpdated,
-    		subAuthenticationCurrentUserUpdated		: subAuthenticationCurrentUserUpdated,
+    		pubCurrentUserUpdated		: pubCurrentUserUpdated,
+    		subCurrentUserUpdated		: subCurrentUserUpdated,
         };
         
         return authenticationChannelService;
@@ -63,7 +63,7 @@
         //Authentication login request functions
         
         /**
-		 * pubAuthenticationLoginConfirmed
+		 * pubLoginConfirmed
 		 * 
 		 * Publish the AuthenticationLoginConfirmed event with giver args 
 	     *
@@ -71,29 +71,29 @@
 		 * 
 		 * 
 		**/
-    	function pubAuthenticationLoginConfirmed(args) {
+    	function pubLoginConfirmed(args) {
     		var args = args;
     		 
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_loginConfirmed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.loginConfirmed, args);
     	};
     	
     	 /**
-		 * subAuthenticationLoginConfirmed
+		 * subLoginConfirmed
 		 * 
 		 * subscribe for the AuthenticationLoginConfirmed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationLoginConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subLoginConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for AuthenticationLoginConfirmed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subAuthenticationLoginConfirmed(_Scope, scopeHandler) {
+    	function subLoginConfirmed(_Scope, scopeHandler) {
     		var prepArgs = function (args) {
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_loginConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.loginConfirmed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -102,7 +102,7 @@
     	
         
         /**
-		 * pubAuthenticationLoginFailed
+		 * pubLoginFailed
 		 * 
 		 * Publish the AuthenticationLoginConfirmed event with giver args 
 	     *
@@ -110,29 +110,29 @@
 		 * 
 		 * 
 		**/
-    	function pubAuthenticationLoginFailed(args) {
+    	function pubLoginFailed(args) {
     		var args = {errors: args};
     		
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_loginFailed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.loginFailed, args);
     	};
     	
     	/**
-		 * subAuthenticationLoginFailed
+		 * subLoginFailed
 		 * 
 		 * subscribe for the AuthenticationLoginFailed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationLoginFailed function
+		 * @param 	{Object} _Scope The scope that calls the channels subLoginFailed function
 		 * @param 	{function} scopeHandler The callback handler for AuthenticationLoginFailed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subAuthenticationLoginFailed(_Scope, scopeHandler) {
+    	function subLoginFailed(_Scope, scopeHandler) {
     		var prepArgs = function (args) { 
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_loginFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.loginFailed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -142,7 +142,7 @@
     	//Authentication logout request functions
 
     	/**
-    	 * pubAuthenticationLogoutConfirmed
+    	 * pubLogoutConfirmed
     	 * 
     	 * Publish the AuthenticationLogoutConfirmed event with giver args 
     	 *
@@ -150,28 +150,28 @@
     	 * 
     	 * 
     	**/
-    	function pubAuthenticationLogoutConfirmed(args) {
+    	function pubLogoutConfirmed(args) {
     		var args = args;
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_logoutConfirmed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.logoutConfirmed, args);
     	};
 
     	/**
-    	 * subAuthenticationLogoutConfirmed
+    	 * subLogoutConfirmed
     	 * 
     	 * subscribe for the AuthenticationLogoutConfirmed event
     	 *
-    	 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationLogoutConfirmed function
+    	 * @param 	{Object} _Scope The scope that calls the channels subLogoutConfirmed function
     	 * @param 	{function} scopeHandler The callback handler for AuthenticationLogoutConfirmed event
     	 * 
     	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
     	 * 
     	**/
-    	function subAuthenticationLogoutConfirmed(_Scope, scopeHandler) {
+    	function subLogoutConfirmed(_Scope, scopeHandler) {
     		var prepArgs = function (args) {
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_logoutConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.logoutConfirmed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -180,7 +180,7 @@
 
 
     	/**
-    	 * pubAuthenticationLogoutFailed
+    	 * pubLogoutFailed
     	 * 
     	 * Publish the AuthenticationLogoutConfirmed event with giver args 
     	 *
@@ -188,28 +188,28 @@
     	 * 
     	 * 
     	**/
-    	function pubAuthenticationLogoutFailed(args) {
+    	function pubLogoutFailed(args) {
     		var args = {errors: args};
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_logoutFailed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.logoutFailed, args);
     	};
 
     	/**
-    	 * subAuthenticationLogoutFailed
+    	 * subLogoutFailed
     	 * 
     	 * subscribe for the AuthenticationLogoutFailed event
     	 *
-    	 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationLogoutFailed function
+    	 * @param 	{Object} _Scope The scope that calls the channels subLogoutFailed function
     	 * @param 	{function} scopeHandler The callback handler for AuthenticationLogoutFailed event
     	 * 
     	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
     	 * 
     	**/
-    	function subAuthenticationLogoutFailed(_Scope, scopeHandler) {
+    	function subLogoutFailed(_Scope, scopeHandler) {
     		var prepArgs = function (args) { 
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_logoutFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.logoutFailed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -220,7 +220,7 @@
     	//Authentication refresh connection request functions
         
         /**
-		 * pubAuthenticationRefreshConnectionConfirmed
+		 * pubRefreshConnectionConfirmed
 		 * 
 		 * Publish the AuthenticationRefreshConnectionConfirmed event with giver args 
 	     *
@@ -228,29 +228,29 @@
 		 * 
 		 * 
 		**/
-    	function pubAuthenticationRefreshConnectionConfirmed(args) {
+    	function pubRefreshConnectionConfirmed(args) {
     		var args = args;
     		 
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_refreshConnectionConfirmed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.refreshConnectionConfirmed, args);
     	};
     	
     	 /**
-		 * subAuthenticationRefreshConnectionConfirmed
+		 * subRefreshConnectionConfirmed
 		 * 
 		 * subscribe for the AuthenticationRefreshConnectionConfirmed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationRefreshConnectionConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subRefreshConnectionConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for AuthenticationRefreshConnectionConfirmed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subAuthenticationRefreshConnectionConfirmed(_Scope, scopeHandler) {
+    	function subRefreshConnectionConfirmed(_Scope, scopeHandler) {
     		var prepArgs = function (args) {
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_refreshConnectionConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.refreshConnectionConfirmed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -259,7 +259,7 @@
     	
         
         /**
-		 * pubAuthenticationRefreshConnectionFailed
+		 * pubRefreshConnectionFailed
 		 * 
 		 * Publish the AuthenticationRefreshConnectionConfirmed event with giver args 
 	     *
@@ -267,29 +267,29 @@
 		 * 
 		 * 
 		**/
-    	function pubAuthenticationRefreshConnectionFailed(args) {
+    	function pubRefreshConnectionFailed(args) {
     		var args = {errors: args};
     		
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_refreshConnectionFailed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.refreshConnectionFailed, args);
     	};
     	
     	/**
-		 * subAuthenticationRefreshConnectionFailed
+		 * subRefreshConnectionFailed
 		 * 
 		 * subscribe for the AuthenticationRefreshConnectionFailed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationRefreshConnectionFailed function
+		 * @param 	{Object} _Scope The scope that calls the channels subRefreshConnectionFailed function
 		 * @param 	{function} scopeHandler The callback handler for AuthenticationRefreshConnectionFailed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subAuthenticationRefreshConnectionFailed(_Scope, scopeHandler) {
+    	function subRefreshConnectionFailed(_Scope, scopeHandler) {
     		var prepArgs = function (args) { 
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_refreshConnectionFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.refreshConnectionFailed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -300,7 +300,7 @@
     	//try connect request functions
         
         /**
-		 * pubAuthenticationTryConnectConfirmed
+		 * pubTryConnectConfirmed
 		 * 
 		 * Publish the AuthenticationTryConnectConfirmed event with giver args 
 	     *
@@ -308,29 +308,29 @@
 		 * 
 		 * 
 		**/
-    	function pubAuthenticationTryConnectConfirmed(args) {
+    	function pubTryConnectConfirmed(args) {
     		var args = args;
     		 
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_tryConnectConfirmed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.tryConnectConfirmed, args);
     	};
     	
     	 /**
-		 * subAuthenticationTryConnectConfirmed
+		 * subTryConnectConfirmed
 		 * 
 		 * subscribe for the AuthenticationTryConnectConfirmed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationTryConnectConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subTryConnectConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for AuthenticationTryConnectConfirmed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subAuthenticationTryConnectConfirmed(_Scope, scopeHandler) {
+    	function subTryConnectConfirmed(_Scope, scopeHandler) {
     		var prepArgs = function (args) {
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_tryConnectConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.tryConnectConfirmed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -339,7 +339,7 @@
     	
         
         /**
-		 * pubAuthenticationTryConnectFailed
+		 * pubTryConnectFailed
 		 * 
 		 * Publish the AuthenticationTryConnectConfirmed event with giver args 
 	     *
@@ -347,29 +347,29 @@
 		 * 
 		 * 
 		**/
-    	function pubAuthenticationTryConnectFailed(args) {
+    	function pubTryConnectFailed(args) {
     		var args = {errors: args};
     		
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_tryConnectFailed, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.tryConnectFailed, args);
     	};
     	
     	/**
-		 * subAuthenticationTryConnectFailed
+		 * subTryConnectFailed
 		 * 
 		 * subscribe for the AuthenticationTryConnectFailed event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationTryConnectFailed function
+		 * @param 	{Object} _Scope The scope that calls the channels subTryConnectFailed function
 		 * @param 	{function} scopeHandler The callback handler for AuthenticationTryConnectFailed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subAuthenticationTryConnectFailed(_Scope, scopeHandler) {
+    	function subTryConnectFailed(_Scope, scopeHandler) {
     		var prepArgs = function (args) { 
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_tryConnectFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.tryConnectFailed, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -378,7 +378,7 @@
     	
         
         /**
-		 * pubAuthenticationConnectionStateUpdated
+		 * pubConnectionStateUpdated
 		 * 
 		 * Publish the ConnectionStateUpdated updated event with given args
 	     *
@@ -386,29 +386,29 @@
 		 * 
 		 * 
 		**/
-    	function pubAuthenticationConnectionStateUpdated(args) {
+    	function pubConnectionStateUpdated(args) {
     		var args = args;
     		
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_connectionStateUpdated, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.connectionStateUpdated, args);
     	};
     	
     	 /**
-		 * subAuthenticationConnectionStateUpdated
+		 * subConnectionStateUpdated
 		 * 
 		 * subscribe for the ConnectionStateUpdated event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationConnectConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subConnectConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for AuthenticationConnectConfirmed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subAuthenticationConnectionStateUpdated(_Scope, scopeHandler) {
+    	function subConnectionStateUpdated(_Scope, scopeHandler) {
     		var prepArgs = function (args) {
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_connectionStateUpdated, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.connectionStateUpdated, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};
@@ -417,7 +417,7 @@
     	
         
         /**
-		 * pubAuthenticationCurrentUserUpdated
+		 * pubCurrentUserUpdated
 		 * 
 		 * Publish the CurrentUserUpdated event with giver args 
 	     *
@@ -425,29 +425,29 @@
 		 * 
 		 * 
 		**/
-    	function pubAuthenticationCurrentUserUpdated(args) {
+    	function pubCurrentUserUpdated(args) {
     		var args = args;
 
-    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.authentication_currentUserUpdated, args);
+    		BaseChannel.pubRootEmit(AuthenticationChannelConstant.currentUserUpdated, args);
     	};
     	
     	/**
-		 * subAuthenticationCurrentUserUpdated
+		 * subCurrentUserUpdated
 		 * 
 		 * subscribe for the CurrentUserUpdated event
 	     *
-		 * @param 	{Object} _Scope The scope that calls the channels subAuthenticationConnectFailed function
+		 * @param 	{Object} _Scope The scope that calls the channels subConnectFailed function
 		 * @param 	{function} scopeHandler The callback handler for AuthenticationConnectFailed event
 		 * 
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 * 
 		**/
-    	function subAuthenticationCurrentUserUpdated(_Scope, scopeHandler) {
+    	function subCurrentUserUpdated(_Scope, scopeHandler) {
     		var prepArgs = function (args) { 
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.authentication_currentUserUpdated, _Scope, scopeHandler, prepArgs);
+    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.currentUserUpdated, _Scope, scopeHandler, prepArgs);
     		
     		return unsubsSopeHandler;
     	};

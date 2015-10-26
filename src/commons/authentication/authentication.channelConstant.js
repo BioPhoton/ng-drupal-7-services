@@ -8,21 +8,21 @@
 	**/
 	var AuthenticationChannelConstant =  {
 		
-		authentication_loginConfirmed  	: 'event:drupal-authService-loginConfirmed',
-		authentication_loginFailed  	: 'event:drupal-authService-loginFailed',
+		loginConfirmed  : 'event:drupal-authService-loginConfirmed',
+		loginFailed  	: 'event:drupal-authService-loginFailed',
 		
-		authentication_logoutConfirmed  : 'event:drupal-authService-logoutConfirmed',
-		authentication_logoutFailed  	: 'event:drupal-authService-logoutFailed',
+		logoutConfirmed  	: 'event:drupal-authService-logoutConfirmed',
+		logoutFailed  		: 'event:drupal-authService-logoutFailed',
 		
-		authentication_refreshConnectionConfirmed  	: 'event:drupal-authService-refreshConnectionConfirmed',
-		authentication_refreshConnectionFailed  	: 'event:drupal-authService-refreshConnectionFailed',
+		refreshConnectionConfirmed  	: 'event:drupal-authService-refreshConnectionConfirmed',
+		refreshConnectionFailed  		: 'event:drupal-authService-refreshConnectionFailed',
 		
-		authentication_tryConnectConfirmed 	: 'event:drupal-authService-tryConnectConfirmed',
-		authentication_tryConnectFailed 	: 'event:drupal-authService-tryConnectFailed',
+		tryConnectConfirmed 	: 'event:drupal-authService-tryConnectConfirmed',
+		tryConnectFailed 		: 'event:drupal-authService-tryConnectFailed',
 		
-		authentication_connectionStateUpdated  	: 'event:drupal-authService-connectionStateUpdated',
+		connectionStateUpdated  	: 'event:drupal-authService-connectionStateUpdated',
 		
-		authentication_currentUserUpdated		: 'event:drupal-authService-currentUserUpdated'
+		currentUserUpdated			: 'event:drupal-authService-currentUserUpdated'
 			
 	};
     
