@@ -31,8 +31,6 @@
             	} else {
             		toggleAction = attrs.toggleAction;
             	}
-            	
-            	
 
                 AuthenticationChannel.subCurrentUserUpdated($scope, currentUserUpdatedHandler);
 
