@@ -34,7 +34,7 @@
             	
             	
 
-                AuthenticationChannel.subAuthenticationCurrentUserUpdated($scope, currentUserUpdatedHandler);
+                AuthenticationChannel.subCurrentUserUpdated($scope, currentUserUpdatedHandler);
 
                 attrs.$observe('toggleByAccesslevel', function(al) {
                 	var parsed = [];

@@ -155,10 +155,10 @@
 							setCookies(responseData.sessid, responseData.session_name);
 							setCurrentUser(responseData.user);
 										
-							AuthenticationChannel.pubAuthenticationLoginConfirmed(responseData);
+							AuthenticationChannel.pubLoginConfirmed(responseData);
 						})
 						.error(function (responseError, status, headers, config) {
-							AuthenticationChannel.pubAuthenticationLoginFailed(responseError);
+							AuthenticationChannel.pubLoginFailed(responseError);
 						});
 			
 		};
@@ -180,10 +180,10 @@
 							setConnectionState(false);
 							setCurrentUser(AuthenticationServiceConstant.anonymousUser);
 
-							AuthenticationChannel.pubAuthenticationLogoutConfirmed(responseData);
+							AuthenticationChannel.pubLogoutConfirmed(responseData);
 						})
 						.error(function (responseError, status, headers, config) {
-							AuthenticationChannel.pubAuthenticationLogoutFailed(responseError);
+							AuthenticationChannel.pubLogoutFailed(responseError);
 						});
 						
 		};
@@ -206,14 +206,14 @@
 									//check connection
 									tryConnect()
 										.success(function(responseData, status, headers, config) { 
-											AuthenticationChannel.pubAuthenticationRefreshConnectionConfirmed(responseData);
+											AuthenticationChannel.pubRefreshConnectionConfirmed(responseData);
 											return defer.resolve(responseData.data);
 										});
 								}
 						)
 						.catch(
 								function(responseError) {
-									AuthenticationChannel.pubAuthenticationRefreshConnectionFailed(responseError);
+									AuthenticationChannel.pubRefreshConnectionFailed(responseError);
 									return defer.resolve(responseError);
 								}
 						);
@@ -239,10 +239,10 @@
 					             setConnectionState((responseData.user.uid === 0)?false:true)
 					             setCurrentUser(responseData.user);
 					              
-					             AuthenticationChannel.pubAuthenticationTryConnectConfirmed(responseData);  
+					             AuthenticationChannel.pubTryConnectConfirmed(responseData);  
 				            })
 				            .error(function(responseError, status, headers, config) {
-				            	AuthenticationChannel.pubAuthenticationTryConnectFailed(responseError);
+				            	AuthenticationChannel.pubTryConnectFailed(responseError);
 				            });
 						 	
 		}
@@ -288,7 +288,7 @@
 		function setCurrentUser(newUser) {
 			if(currentUser != newUser) {
 	        	currentUser = newUser;
-	      	    AuthenticationChannel.pubAuthenticationCurrentUserUpdated(newUser);
+	      	    AuthenticationChannel.pubCurrentUserUpdated(newUser);
 	        }
 		};
 		
@@ -313,7 +313,7 @@
 			
 	        if(newState !== userIsConected) {
 	          userIsConected = newState;
-	      	  AuthenticationChannel.pubAuthenticationConnectionStateUpdated(userIsConected);
+	      	  AuthenticationChannel.pubConnectionStateUpdated(userIsConected);
 	        }
 		};
 		
