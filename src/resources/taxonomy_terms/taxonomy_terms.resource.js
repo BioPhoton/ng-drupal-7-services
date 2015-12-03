@@ -86,9 +86,11 @@
 	    	
 	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyTermsResourceConstant.resourcePath;
 
-    		var createdata 	= {data : data};
+	    	var createData 	= { 
+    				term : data 
+    		};
 
-    		return BaseResource.create( createdata, createPath,  TaxonomyTermsChannel.pubCreateConfirmed, TaxonomyTermsChannel.pubCreateFailed);
+    		return BaseResource.create( createData, createPath,  TaxonomyTermsChannel.pubCreateConfirmed, TaxonomyTermsChannel.pubCreateFailed);
 
 	    };
 	        
@@ -111,10 +113,7 @@
 	    	
 	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyTermsResourceConstant.resourcePath + '/' + data.tid;
 	    	
-    		var updateData 	= {
-				name : data.name,
-				mail : data.mail
-			}
+    		var updateData 	= {term : data};
     		
     		return BaseResource.update( updateData, updatePath, TaxonomyTermsChannel.pubUpdateConfirmed, TaxonomyTermsChannel.pubUpdateFailed);
 
