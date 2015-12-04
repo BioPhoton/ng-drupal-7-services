@@ -9,7 +9,7 @@
 	var CommentResourceConstant =  {
 
 		// NOTE: This is the default alias aliases for your system resources defined in Drupal
-		resourcePath : 'taxonomy_term',
+		resourcePath : 'comment',
 		//actions of comment resource
 		actions : {
 			//following actions are defined over their request method (GET, POST, PUT, DELETE) so they are commented out
