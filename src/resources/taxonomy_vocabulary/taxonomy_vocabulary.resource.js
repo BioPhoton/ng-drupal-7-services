@@ -47,13 +47,13 @@
         /**
 		 * retrieve
 		 * 
-		 * Retrieve a term
+		 * Retrieve a taxonomy vocabulary
 		 * 
 		 * Method: GET 
 		 * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary/{TID}
 		 * 
 		 * @params  {Object} data The requests data
-		 * 			@key 	{Integer} tid TID of the taxonomy_vocabulary to get, required:true, source:path
+		 * 			@key 	{Integer} tid The vid of the taxonomy vocabulary to get, required:true, source:path
 		 * 
 		 * @return 	{Promise} A taxonomy_vocabulary object
 		 * 
@@ -66,14 +66,14 @@
 	    /**
 	     * create
 	     * 
-	     * Create a term
+	     * Create a taxonomy vocabulary
 	     * This function uses drupal_form_submit() and as such expects all input to match
 	     * the submitting form in question.
 	     * 
 	     * Method: POST
 	     * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary
 	     * 
-	     * @params  {Object} data The data of the taxonomy_vocabulary to create, required:true, source:post body
+	     * @params  {Object} data The vid of the taxonomy vocabulary to get, required:true, source:post body
 	     * 
 		 *
 		 *  Roles can be passed in a roles property which is an associative
@@ -97,21 +97,21 @@
 	    /**
 	     * update
 	     * 
-	     * Update a term
+	     * Update a taxonomy vocabulary
 	     * 
 	     * Method: PUT
 	     * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary/{TID}
 	     * 
 	     * @params  {Object} data The requests data
-	     * 			@key 	{Integer} tid The unique identifier for this taxonomy term., required:true, source:path
-	     * 			@key 	{Array}  data The taxonomy term data to update, required:true, source:post body
+	     * 			@key 	{Integer} vid The unique identifier for this taxonomy vocabulary., required:true, source:path
+	     * 			@key 	{Array}  vocabulary The taxonomy vocabulary data to update, required:true, source:post body
 	     * 
 	     * @return 	{Promise}
 	     *
 	    **/
 	    function update(data) {
 	    	
-	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyVocabularyResourceConstant.resourcePath + '/' + data.tid;
+	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyVocabularyResourceConstant.resourcePath + '/' + data.vid;
 	    	
     		var updateData 	= {term : data};
     		
@@ -122,13 +122,13 @@
 	    /**
 	     * delete
 	     * 
-	     * Delete the term
+	     * Delete a taxonomy vocabulary
 	     * 
 	     * Method: DELETE
 	     * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary/{TID}
 	     * 
 	     * @params  {Object} data the requests data
-	     * 			@key 	{Integer} tid The id of the taxonomy_vocabulary to delete, required:true, source:path
+	     * 			@key 	{Integer} tid The id of the taxonomy vocabulary to delete, required:true, source:path
 	     * 
 	     * @return 	{Promise}
 	     *
@@ -141,7 +141,7 @@
 	    /**
 	     * index
 	     * 
-	     * List all taxonomy_vocabularys
+	     * List all taxonomy vocabularies
 	     * 
 	     * Method: GET
 		 * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary
@@ -164,10 +164,16 @@
 		/**
 		 * getTree
 		 * 
-		 * Returns the CSRF token of the current session.
+		 * Returns a full list of taxonomy terms.
 		 * 
 		 * Method: POST
-		 * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary/token 
+		 * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary/getTree 
+		 * 
+		 * @params  {Object} data the requests data
+		 * 		@key 	{Integer} vid The vocabulary id to retrieve., separated by comma., required:true, source:post body
+		 * 		@key 	{Integer} parent The term ID under which to generate the tree. If 0, generate the tree for the entire vocabulary., required:false, source:post body
+		 * 		@key 	{Integer} maxdepth The number of levels of the tree to return. Leave NULL to return all levels., required:false, source:post body
+		 * 		@key 	{Integer} load_entities Whether the tree of terms should contain full term entity objects. If 1 (TRUE), a full entity load will occur on the term objects. Otherwise they are partial objects to save execution time and memory consumption. Defaults to 0 (FALSE)., required:false, source:post body
 		 * 
 		 * @return 	{Promise}
 		 * 
