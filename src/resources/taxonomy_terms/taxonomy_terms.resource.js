@@ -169,6 +169,13 @@
 		 * Method: POST
 		 * Url: http://drupal_instance/api_endpoint/taxonomy_terms/selectNodes
 		 * 
+		 * @params  {Object} data the requests data
+		 * 		@key 	{Integer} tid The vocabulary ids to retrieve, separated by comma., required:true, source:post body
+		 * 		@key 	{Integer} pager Whether the nodes are to be used with a pager (the case on most Drupal pages) or not (in an XML feed, for example)., required:false, source:post body
+		 * 		@key 	{String} limit Maximum number of nodes to find., required:false, source:post body
+		 * 		@key 	{Array} order The order clause for the query that retrieve the nodes., required:false, source:post body
+		 * 		
+		 * 
 		 * @return 	{Promise}
 		 * 
 		**/
