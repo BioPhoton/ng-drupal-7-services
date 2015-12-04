@@ -59,7 +59,7 @@
 		 * 
 		**/
     	function retrieve(data) {
-    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyVocabularyResourceConstant.resourcePath + '/' + data.tid;
+    		var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyVocabularyResourceConstant.resourcePath + '/' + data.vid;
     		return BaseResource.retrieve( retrievePath,TaxonomyVocabularyChannel.pubRetrieveConfirmed,  TaxonomyVocabularyChannel.pubRetrieveFailed);
 	    };
 	    
@@ -87,7 +87,7 @@
 	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyVocabularyResourceConstant.resourcePath;
 
 	    	var createData 	= { 
-    				term : data 
+	    			vocabulary : data 
     		};
 
     		return BaseResource.create( createData, createPath,  TaxonomyVocabularyChannel.pubCreateConfirmed, TaxonomyVocabularyChannel.pubCreateFailed);
@@ -113,7 +113,7 @@
 	    	
 	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyVocabularyResourceConstant.resourcePath + '/' + data.vid;
 	    	
-    		var updateData 	= {term : data};
+    		var updateData 	= {vocabulary : data};
     		
     		return BaseResource.update( updateData, updatePath, TaxonomyVocabularyChannel.pubUpdateConfirmed, TaxonomyVocabularyChannel.pubUpdateFailed);
 
