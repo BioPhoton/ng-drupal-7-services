@@ -2,15 +2,15 @@
     'use strict';
     
     /**
-	 *  Constants for TaxonomyTermsResourceModules
+	 *  Constants for CommentResourceModules
 	 *  
 	 *  NOTE: if you want to change this constant do this in your app.js config section
 	 */
-	var TaxonomyTermsResourceConstant =  {
+	var CommentResourceConstant =  {
 
 		// NOTE: This is the default alias aliases for your system resources defined in Drupal
 		resourcePath : 'taxonomy_term',
-		//actions of taxonomy_terms resource
+		//actions of comment resource
 		actions : {
 			//following actions are defined over their request method (GET, POST, PUT, DELETE) so they are commented out
 			//retrieve 				: 'retrieve',
@@ -19,16 +19,17 @@
 			//delete 				: 'delete',
 		    //index 				: 'index',
 			//
-			selectNodes 			: 'selectNodes',
+			countAll 			: 'countAll',
+			countNew			: 'countNew'
 		}
 
 	};
 
 	/**
-	 * TaxonomyTerms Constant Modules
+	 * Comment Constant Modules
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.taxonomy_terms.resourceConstant', [])
-	    .constant("TaxonomyTermsResourceConstant", TaxonomyTermsResourceConstant);
+	    .module('ngDrupal7Services-3_x.resources.comment.resourceConstant', [])
+	    .constant("CommentResourceConstant", CommentResourceConstant);
 	
 })();
