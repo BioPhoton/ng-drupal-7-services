@@ -167,17 +167,20 @@
 		 * Returns the CSRF token of the current session.
 		 * 
 		 * Method: POST
-		 * Url: http://drupal_instance/api_endpoint/taxonomy_terms/token
+		 * Url: http://drupal_instance/api_endpoint/taxonomy_terms/token 
 		 * 
 		 * @return 	{Promise}
 		 * 
 		**/
-		function selectNodes() {
+		function selectNodes(data) {
 			var  pathToSelectNodes = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyTermsResourceConstant.resourcePath + '/' + TaxonomyTermsResourceConstant.actions.selectNodes,
 				 requestConfig = {
 			     	url		: pathToSelectNodes,
-			     	method	: 'POST'
+			     	method	: 'POST',
+			     	data : data
 				};
+			
+			
 			
 			return BaseResource.request(requestConfig,TaxonomyTermsChannel.pubSelectNodesConfirmed,  TaxonomyTermsChannel.pubSelectNodesFailed);
 
