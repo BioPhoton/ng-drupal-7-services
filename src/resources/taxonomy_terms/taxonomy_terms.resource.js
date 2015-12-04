@@ -73,7 +73,7 @@
 	     * Method: POST
 	     * Url: http://drupal_instance/api_endpoint/taxonomy_terms
 	     * 
-	     * @params  {Object} data The data of the taxonomy_terms to create, required:true, source:post body
+	     * @params  {Object} term The data of the taxonomy_terms to create, required:true, source:post body
 	     * 
 		 *
 		 *  Roles can be passed in a roles property which is an associative
@@ -82,12 +82,12 @@
 	     * @return 	{Promise} The taxonomy_terms object of the newly created taxonomy_terms.
 	     *
 	    **/
-	    function create(data) {
+	    function create(term) {
 	    	
 	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyTermsResourceConstant.resourcePath;
 
 	    	var createData 	= { 
-    				term : data 
+    				term : term 
     		};
 
     		return BaseResource.create( createData, createPath,  TaxonomyTermsChannel.pubCreateConfirmed, TaxonomyTermsChannel.pubCreateFailed);
@@ -164,10 +164,10 @@
 		/**
 		 * selectNodes
 		 * 
-		 * Returns the CSRF token of the current session.
+		 * Returns all nodes with provided taxonomy id.
 		 * 
 		 * Method: POST
-		 * Url: http://drupal_instance/api_endpoint/taxonomy_terms/token 
+		 * Url: http://drupal_instance/api_endpoint/taxonomy_terms/selectNodes
 		 * 
 		 * @return 	{Promise}
 		 * 
