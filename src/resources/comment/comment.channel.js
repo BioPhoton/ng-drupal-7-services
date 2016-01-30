@@ -61,10 +61,10 @@
         	subCountAllFailed			: subCountAllFailed,
         	
         	//comment countNew request
-        	pubcountNewConfirmed 		: pubcountNewConfirmed,
-        	subcountNewConfirmed		: subcountNewConfirmed,
-        	pubcountNewFailed 			: pubcountNewFailed,
-        	subcountNewFailed			: subcountNewFailed,
+        	pubCountNewConfirmed 		: pubCountNewConfirmed,
+        	subCountNewConfirmed		: subCountNewConfirmed,
+        	pubCountNewFailed 			: pubCountNewFailed,
+        	subCountNewFailed			: subCountNewFailed,
         	
         };
         
@@ -464,7 +464,7 @@
     	//Comment countNew request functions
 
     	/**
-    	 * pubcountNewConfirmed
+    	 * pubCountNewConfirmed
     	 * 
     	 * Publish the CommentcountNewConfirmed event with giver args 
     	 *
@@ -472,22 +472,22 @@
     	 * 
     	 * 
     	**/
-    	function pubcountNewConfirmed(args) {
+    	function pubCountNewConfirmed(args) {
     		BaseChannel.pubRootEmit(CommentChannelConstant.countNewConfirmed, args);
     	};
 
     	/**
-    	 * subcountNewConfirmed
+    	 * subCountNewConfirmed
     	 * 
     	 * subscribe for the CommentcountNewConfirmed event
     	 *
-    	 * @param 	{Object} _Scope The scope that calls the channels subcountNewConfirmed function
+    	 * @param 	{Object} _Scope The scope that calls the channels subCountNewConfirmed function
     	 * @param 	{function} scopeHandler The callback handler for CommentcountNewConfirmed event
     	 * 
     	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
     	 * 
     	**/
-    	function subcountNewConfirmed(_Scope, scopeHandler) {
+    	function subCountNewConfirmed(_Scope, scopeHandler) {
     		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countNewConfirmed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
@@ -496,7 +496,7 @@
 
 
     	/**
-    	 * pubcountNewConfirmed
+    	 * pubCountNewConfirmed
     	 * 
     	 * Publish the CommentcountNewConfirmed event with giver args 
     	 *
@@ -504,22 +504,22 @@
     	 * 
     	 * 
     	**/
-    	function pubcountNewFailed(args) {
+    	function pubCountNewFailed(args) {
     		BaseChannel.pubRootEmit(CommentChannelConstant.countNewFailed, args);
     	};
 
     	/**
-    	 * subcountNewFailed
+    	 * subCountNewFailed
     	 * 
     	 * subscribe for the CommentcountNewFailed event
     	 *
-    	 * @param 	{Object} _Scope The scope that calls the channels subcountNewFailed function
+    	 * @param 	{Object} _Scope The scope that calls the channels subCountNewFailed function
     	 * @param 	{function} scopeHandler The callback handler for CommentcountNewFailed event
     	 * 
     	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
     	 * 
     	**/
-    	function subcountNewFailed(_Scope, scopeHandler) {
+    	function subCountNewFailed(_Scope, scopeHandler) {
     		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countNewFailed, _Scope, scopeHandler);
     		return unsubsSopeHandler;
     	};
