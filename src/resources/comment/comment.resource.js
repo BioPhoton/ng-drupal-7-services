@@ -114,6 +114,7 @@
 	    	
 	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + CommentResourceConstant.resourcePath + '/' + data.cid;
 	    	
+	    	delete data.cid
     		var updateData 	= {comment : data};
     		
     		return BaseResource.update( updateData, updatePath, CommentChannel.pubUpdateConfirmed, CommentChannel.pubUpdateFailed);
@@ -186,7 +187,7 @@
 			
 			
 			
-			return BaseResource.request(requestConfig,CommentChannel.pubcountAllConfirmed,  CommentChannel.pubcountAllFailed);
+			return BaseResource.request(requestConfig,CommentChannel.pubCountAllConfirmed,  CommentChannel.pubCountAllFailed);
 
 		};
 		
@@ -206,14 +207,14 @@
 		 * 
 		**/
 		function countNew(data) {
-			var  pathTocountAll = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + CommentResourceConstant.resourcePath + '/' + CommentResourceConstant.actions.countNew,
+			var  pathTocountNew = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + CommentResourceConstant.resourcePath + '/' + CommentResourceConstant.actions.countNew,
 				 requestConfig = {
-			     	url		: pathTocountAll,
+			     	url		: pathTocountNew,
 			     	method	: 'POST',
 			     	data : data
 				};
 
-			return BaseResource.request(requestConfig,CommentChannel.pubcountAllConfirmed,  CommentChannel.pubcountAllFailed);
+			return BaseResource.request(requestConfig,CommentChannel.pubCountNewConfirmed,  CommentChannel.pubCountNewFailed);
 
 		};
 					

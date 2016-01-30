@@ -121,10 +121,9 @@
 	    	
 	    	var updatePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + NodeResourceConstant.resourcePath + '/' + data.nid;
 	    	
-    		var updateData 	= {
-				name : data.name,
-				mail : data.mail
-			}
+	    	delete data.nid;
+    		var updateData = { node: data };
+    		
     		
     		return BaseResource.update( updateData, updatePath, NodeChannel.pubUpdateConfirmed, NodeChannel.pubUpdateFailed);
 
