@@ -46,7 +46,6 @@
      		
      		//subscribe with rootScope to event and cache unsubscribe function
      		var unsubsSopeHandler = $rootScope.$on(eventName, function(event, args) {
-     				//console.log('in subRootEmit publish event: ' + eventName + ' with args: ' + JSON.stringify(mapArgs(args)));
      				if(typeof mapArgs === 'function') {
      					scopeHandler(mapArgs(args));
      				} else {
@@ -57,7 +56,6 @@
      		 
      		//unsubscribe rootScope listener after scope destruction
      		_Scope.$on('$destroy', function() {
-     			//console.log('in pubRootEmit _Scope.$on($destroy)');
      			unsubsSopeHandler();
      		});
      		
@@ -75,7 +73,6 @@
 		 * 
 		**/
      	function pubRootEmit(eventName, args) {
-     		 //console.log('in pubRootEmit publish event: ' + eventName + ' with args: ' + JSON.stringify(args));
      		 $rootScope.$emit(eventName, args);
      	};
      	

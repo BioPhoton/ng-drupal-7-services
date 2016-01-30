@@ -73,28 +73,7 @@
           // default is "value"
     	  var	prepatedData = undefined,
     	  		label = label || "value",
-    	  		language = (language !== undefined)?language:DrupalApiConstant.LANGUAGE_NONE;
-    	  	  
-    	      console.log('value', value);
-    	      console.log('label', label);
-    	      console.log('language', language); 
-    	      
-    	      
-    	/*  if (angular.isArray(value)) {
-    		console.log('angular.isArray(value)'); 
-    	    var field_array = [];
-    	    for (var i= 0, l=value.length; i<l; i++) {
-    	      var item = {};
-    	      item[label] = value[i];
-    	      field_array.push(item);
-    	    }
-    	    
-    	    return {
-    	      und: field_array
-    	    };
-    	    
-    	  } */
-    	  
+    	  		language = (language !== undefined)?language:DrupalApiConstant.LANGUAGE_NONE;    	  
 
     	  if (angular.isObject(value)) {
     		  prepatedData =  {};
@@ -103,8 +82,6 @@
     	  
     	  return prepatedData;
 
-    	  
-    	  
     	  if (value instanceof Date) {
 
     	    var prepatedData = {
@@ -210,10 +187,8 @@
     		} 
     		else {
     			angular.forEach(newItems, function(newItem) {
-    				
     				//@TODO add this to if => || currentItems[newItem[type]].updated > newItem.updated
     				if(!currentItems[newItem[type]] ) {
-    					
     						currentItems[parseInt(newItem[type])] = callback(newItem);
     				}
     				

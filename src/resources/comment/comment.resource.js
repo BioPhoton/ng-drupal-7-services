@@ -88,7 +88,7 @@
 	    	var createPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + CommentResourceConstant.resourcePath;
 
 	    	var createData 	= { 
-	    			comment : data 
+	    		comment : data 
     		};
 
     		return BaseResource.create( createData, createPath,  CommentChannel.pubCreateConfirmed, CommentChannel.pubCreateFailed);
