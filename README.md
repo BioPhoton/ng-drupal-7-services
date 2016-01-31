@@ -23,13 +23,13 @@ Download or install via **[Bower](http://bower.io/)**: by running `$ bower insta
 
 
 ##Architecture
-Angular Drupal7 Services consists holds a resources and commons folder.
+Angular Drupal7 Services holds a resources and commons folder.
 The resources folder consists of resource modules each in a folder named as the corresponding Drupal resource.
 All other general modules, the authentication modules and the helper modules are located in the commons folder.
 
 A resource generally consists out of 4 components. 
 
-Two components that manages the event communication:
+Two components that manages the events and communication:
 - [resourcename].channelConstant.js
 - [resourcename]ChannelConstant.js
 
@@ -39,6 +39,7 @@ And Two components that manages the http requests and promise logic:
 
 The .constant modules hold the api paths, event names and other constants and the .resource and .channel modules manage the communication to server and inside the application.
 Same resources also hold additional modules like the view resource, that provides the Drupal views filter and sort operators and so on.
+
 
 ##Useage
 
@@ -50,7 +51,7 @@ angular
     .controller('NodeController', ['NodeResource', 'NodeChannel', function(NodeResource, NodeChannel){
     
 		//fire request
-		 var retrievePromis = NodeResource.retrieve(vm.retrieveData);
+		 var retrievePromis = NodeResource.retrieve({nid:1});
 		
 		//react over promise.then
 		retrievePromis.then(function(data) { ... },function(error) { ... });
