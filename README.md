@@ -1,12 +1,14 @@
 # Angular Drupal7 Services
 #### Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services)
 
-Angular Drupal7 Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints. Unlike the other project focusing on the same topic, Angular Drupal7 Services is precisely organized around the [Drupal Services 3.x](https://www.drupal.org/project/services) architecture and naming. 
+Angular Drupal7 Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints.   
+Unlike the other project focusing on the same topic, Angular Drupal7 Services is precisely organized around the [Drupal Services 3.x](https://www.drupal.org/project/services) architecture and naming conventions.   
+  
 It optionally provides events next to the common used promise approach.
 
 A full set of Drupal's resources is available, and all basic workflow's depending to authentication or helpers for CRUD operations are also provided as a set of extra modules.
 
-Check out the [Drupal-API-Explorer](https://github.com/BioPhoton/ng-drupal-services-tests-with-ng) for a full demo
+Check out the [Drupal-API-Explorer](https://github.com/BioPhoton/ng-drupal-services-tests-with-ng) for a full demo  
 Or check out the sample implementation for [Ionic-Headless-Drupal](https://github.com/BioPhoton/Ionic-Angular-Headless-Drupal-Demo)
 
 
@@ -15,7 +17,7 @@ Or check out the sample implementation for [Ionic-Headless-Drupal](https://githu
 **(1)** Get Angular Drupal7 Services:
 Download or install via **[Bower](http://bower.io/)**: by running `$ bower install https://github.com/BioPhoton/ng-drupal-7-services` from your console
 
-**(2)** Include `ng-drupal-7-services.js` (or `ng-drupal-7-services.min.js`) in your `index.html`.
+**(2)** Include `ng-drupal-7-services.js` in your `index.html`.
 
 **(3)** Add `'d7-services'` to your main module's list of dependencies
 
