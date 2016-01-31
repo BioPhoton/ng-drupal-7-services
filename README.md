@@ -43,7 +43,7 @@ Same resources also hold additional modules like the view resource, that provide
 
 ##Useage
 
-For example a node retreive call look's like this:
+For example a node retrieve call look's like this:
 
 ```javascript
 angular
@@ -56,7 +56,8 @@ angular
 		//react over promise.then
 		retrievePromis.then(function(data) { ... },function(error) { ... });
 						    
-		//react over event
+		//react over event 
+		//This could happen in another directive/controller too
 		NodeChannel.subRetrieveConfirmed($scope, function(data){ ... });
 		NodeChannel.subRetrieveFailed($scope, function(error){ ... });	    
 	    
