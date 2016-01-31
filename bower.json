@@ -7,7 +7,7 @@
   ],
   "description": "An API client for Drupal 7 and Services 3.x",
    "main": [
-             "src/*"
+             "dist/ng-drupal-7-services.js"
            ],
   "keywords": [
     "Drupal",

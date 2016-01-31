@@ -1,9 +1,12 @@
 module.exports = {
   bundle: {
-    main : {
+	"ng-drupal-7-services" : {
     	scripts : [
-	           'src/**.js'
-    	   ]
+	           './src/**/*.js'
+    	],
+    	options: {
+            rev: false
+        }
     }
   }
 };
