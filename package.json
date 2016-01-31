@@ -1,5 +1,5 @@
 {
-  "name": "ng-drupal-services-3x",
+  "name": "ng-drupal-7-services",
   "version": "2.0.0",
   "description": "An angular api client for drupal7 services 3.x",
   "devDependencies": {
