@@ -46,13 +46,13 @@ For example a node retreive call look's like this:
 
 ```javascript
 angular
-    .module('myApp', ['ngDrupal7Services-3_x'])
+    .module('myApp', ['d7-services'])
     .controller('NodeController', ['NodeResource', 'NodeChannel', function(NodeResource, NodeChannel){
     
 		//fire request
 		 var retrievePromis = NodeResource.retrieve(vm.retrieveData);
 		
-		//react over then
+		//react over promise.then
 		retrievePromis.then(function(data) { ... },function(error) { ... });
 						    
 		//react over event
