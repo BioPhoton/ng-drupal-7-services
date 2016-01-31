@@ -1,11 +1,11 @@
 {
   "name": "ng-drupal-7-services",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "homepage": "https://github.com/BioPhoton/ng-drupal-7-services",
   "authors": [
-    "BioPhoton bio_photon@gmx.at"
+    "Michael 'Hladky michael@hladky.at"
   ],
-  "description": "An API client for Drupal 7 and Services 3.x",
+  "description": "An API client for a Drupal 7 and Services 3.x REST setup",
    "main": [
              "dist/ng-drupal-7-services.js"
            ],
@@ -16,6 +16,8 @@
     "ng",
     "Ionic",
     "API",
+    "REST",
+    "http",
     "Services3",
     "Client"
   ],
