@@ -30,7 +30,7 @@
 	 * API authentication channel constant
 	 */
 	angular
-	.module('ngDrupal7Services-3_x.commons.authentication.channelConstant', [])
+	.module('d7-services.commons.authentication.channelConstant', [])
 	    .constant("AuthenticationChannelConstant", AuthenticationChannelConstant);
 
 })();

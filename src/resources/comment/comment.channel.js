@@ -4,7 +4,7 @@
 	/**
 	 * Comment Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.resources.comment.channel', ['ngDrupal7Services-3_x.commons.baseChannel', 'ngDrupal7Services-3_x.resources.comment.channelConstant'])
+	angular.module('d7-services.resources.comment.channel', ['d7-services.commons.baseChannel', 'd7-services.resources.comment.channelConstant'])
 		   .factory('CommentChannel', CommentChannel);
 
 	

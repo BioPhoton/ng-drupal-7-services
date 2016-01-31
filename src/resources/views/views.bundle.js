@@ -4,10 +4,10 @@
 	/**
 	 * Views modules bundle
 	**/
-	angular.module('ngDrupal7Services-3_x.resources.views', 
-			['ngDrupal7Services-3_x.resources.views.resourceConstant', 
-			 'ngDrupal7Services-3_x.resources.views.resource', 
-			 'ngDrupal7Services-3_x.resources.views.channelConstant', 
-			 'ngDrupal7Services-3_x.resources.views.channel',
-			 'ngDrupal7Services-3_x.resources.views.operatorsConstant']);
+	angular.module('d7-services.resources.views', 
+			['d7-services.resources.views.resourceConstant', 
+			 'd7-services.resources.views.resource', 
+			 'd7-services.resources.views.channelConstant', 
+			 'd7-services.resources.views.channel',
+			 'd7-services.resources.views.operatorsConstant']);
 })();

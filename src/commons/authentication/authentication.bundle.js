@@ -5,11 +5,11 @@
 	 * Authentication modules bundle
 	**/
 	angular
-	    .module('ngDrupal7Services-3_x.commons.authentication', 
-	    		['ngDrupal7Services-3_x.commons.authentication.serviceConstant', 
-	    		 'ngDrupal7Services-3_x.commons.authentication.channel', 
-	    		 'ngDrupal7Services-3_x.commons.authentication.channelConstant', 
-	    		 'ngDrupal7Services-3_x.commons.authentication.httpIntercepter', 
-	    		 'ngDrupal7Services-3_x.commons.authentication.service']);
+	    .module('d7-services.commons.authentication', 
+	    		['d7-services.commons.authentication.serviceConstant', 
+	    		 'd7-services.commons.authentication.channel', 
+	    		 'd7-services.commons.authentication.channelConstant', 
+	    		 'd7-services.commons.authentication.httpIntercepter', 
+	    		 'd7-services.commons.authentication.service']);
 
 })();

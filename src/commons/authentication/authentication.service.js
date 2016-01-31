@@ -4,12 +4,12 @@
     /**
      * Drupal API authentication service
     **/
-    angular.module('ngDrupal7Services-3_x.commons.authentication.service', 
-    		[ 'ngDrupal7Services-3_x.commons.configurations'
-    		  ,'ngDrupal7Services-3_x.commons.authentication.serviceConstant'
-    		  ,'ngDrupal7Services-3_x.commons.authentication.channel'
-    		  ,'ngDrupal7Services-3_x.resources.system.resource'
-    		  ,'ngDrupal7Services-3_x.resources.user.resource'
+    angular.module('d7-services.commons.authentication.service', 
+    		[ 'd7-services.commons.configurations'
+    		  ,'d7-services.commons.authentication.serviceConstant'
+    		  ,'d7-services.commons.authentication.channel'
+    		  ,'d7-services.resources.system.resource'
+    		  ,'d7-services.resources.user.resource'
     		  ,'ngCookies'
     		 ])
     

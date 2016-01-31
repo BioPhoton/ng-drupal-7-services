@@ -16,7 +16,7 @@
 	 * Views Channel Constant
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.views.channelConstant', [])
+	    .module('d7-services.resources.views.channelConstant', [])
 	    .constant("ViewsChannelConstant", ViewsChannelConstant);
 
 })();

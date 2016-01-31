@@ -35,7 +35,7 @@
 	 * User Constant Modules
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.user.resourceConstant', [])
+	    .module('d7-services.resources.user.resourceConstant', [])
 	    .constant("UserResourceConstant", UserResourceConstant);
 	
 })();

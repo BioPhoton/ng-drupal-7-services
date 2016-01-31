@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ngDrupal7Services-3_x.commons.directives.toggleByAccesslevel', ['ngDrupal7Services-3_x.commons.authentication.channel', 'ngDrupal7Services-3_x.commons.authentication.service'])
+        .module('d7-services.commons.directives.toggleByAccesslevel', ['d7-services.commons.authentication.channel', 'd7-services.commons.authentication.service'])
         .directive('toggleByAccesslevel', toggleByAccesslevel);
 
     /**

@@ -25,7 +25,7 @@
 	 * File Constant Modules
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.file.resourceConstant', [])
+	    .module('d7-services.resources.file.resourceConstant', [])
 	    .constant("FileResourceConstant", FileResourceConstant);
 	
 })();

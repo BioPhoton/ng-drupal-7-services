@@ -4,7 +4,7 @@
 	/**
 	 * TaxonomyVocabulary Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.resources.taxonomy_vocabulary.channel', ['ngDrupal7Services-3_x.commons.baseChannel', 'ngDrupal7Services-3_x.resources.taxonomy_vocabulary.channelConstant'])
+	angular.module('d7-services.resources.taxonomy_vocabulary.channel', ['d7-services.commons.baseChannel', 'd7-services.resources.taxonomy_vocabulary.channelConstant'])
 		   .factory('TaxonomyVocabularyChannel', TaxonomyVocabularyChannel);
 
 	

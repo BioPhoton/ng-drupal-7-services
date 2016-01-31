@@ -28,7 +28,7 @@
 	 * TaxonomyTerm Constant Modules
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.taxonomy_term.resourceConstant', [])
+	    .module('d7-services.resources.taxonomy_term.resourceConstant', [])
 	    .constant("TaxonomyTermResourceConstant", TaxonomyTermResourceConstant);
 	
 })();

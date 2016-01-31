@@ -4,9 +4,9 @@
 	/**
 	 * System modules bundle
 	**/
-	angular.module('ngDrupal7Services-3_x.resources.system', 
-			['ngDrupal7Services-3_x.resources.system.resourceConstant', 
-			 'ngDrupal7Services-3_x.resources.system.resource', 
-			 'ngDrupal7Services-3_x.resources.system.channelConstant', 
-			 'ngDrupal7Services-3_x.resources.system.channel']);
+	angular.module('d7-services.resources.system', 
+			['d7-services.resources.system.resourceConstant', 
+			 'd7-services.resources.system.resource', 
+			 'd7-services.resources.system.channelConstant', 
+			 'd7-services.resources.system.channel']);
 })();

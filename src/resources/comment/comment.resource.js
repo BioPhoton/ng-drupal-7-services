@@ -6,7 +6,7 @@
 	 * 
 	 * see sourcecode in services/resources/comment_resource.inc
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.comment.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.comment.resourceConstant', 'ngDrupal7Services-3_x.resources.comment.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
+    angular.module('d7-services.resources.comment.resource', ['d7-services.commons.configurations', 'd7-services.resources.comment.resourceConstant', 'd7-services.resources.comment.channel', 'd7-services.commons.baseResource'])
     
     /**
 	 * CommentResource

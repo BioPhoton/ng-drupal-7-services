@@ -4,7 +4,7 @@
 	/**
 	 * Drupal request intercepter Module for the requests Content-Type attribute
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.http.configurations', ['ngDrupal7Services-3_x.commons.http.intercepter.requestAccept', 'ngDrupal7Services-3_x.commons.authentication.httpIntercepter'])
+	angular.module('d7-services.commons.http.configurations', ['d7-services.commons.http.intercepter.requestAccept', 'd7-services.commons.authentication.httpIntercepter'])
 		   .config(hTTPConfigurations);
 	
 	/**

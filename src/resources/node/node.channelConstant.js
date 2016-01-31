@@ -38,7 +38,7 @@
 	 * Node Channel Constant
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.node.channelConstant', [])
+	    .module('d7-services.resources.node.channelConstant', [])
 	    .constant("NodeChannelConstant", NodeChannelConstant);
 
 })();

@@ -28,7 +28,7 @@
 	 * Views Constant Modules
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.views.operatorsConstant', [])
+	    .module('d7-services.resources.views.operatorsConstant', [])
 	    .constant("ViewsOperatorsConstant", ViewsOperatorsConstant);
 	
 })();

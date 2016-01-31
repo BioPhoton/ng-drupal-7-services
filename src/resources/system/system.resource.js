@@ -7,7 +7,7 @@
 	 * see sourcecode in services/resources/system_resource.inc
 	 * 
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.system.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.baseResource', 'ngDrupal7Services-3_x.resources.system.resourceConstant', 'ngDrupal7Services-3_x.resources.system.channel'])
+    angular.module('d7-services.resources.system.resource', ['d7-services.commons.configurations', 'd7-services.commons.baseResource', 'd7-services.resources.system.resourceConstant', 'd7-services.resources.system.channel'])
     
 
     /**

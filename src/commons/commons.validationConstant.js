@@ -15,7 +15,7 @@
 	 *  ValidationConstant Module
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.commons.validationConstant', [])
+	    .module('d7-services.commons.validationConstant', [])
 	    .constant("ValidationConstant", ValidationConstant);
 	
 

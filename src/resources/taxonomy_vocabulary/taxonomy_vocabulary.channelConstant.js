@@ -32,7 +32,7 @@
 	 * TaxonomyVocabulary Channel Constant
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.taxonomy_vocabulary.channelConstant', [])
+	    .module('d7-services.resources.taxonomy_vocabulary.channelConstant', [])
 	    .constant("TaxonomyVocabularyChannelConstant", TaxonomyVocabularyChannelConstant);
 
 })();

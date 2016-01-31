@@ -7,7 +7,7 @@
 	 * see sourcecode in services/resources/views_resource.inc
 	 * 
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.views.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.commons.baseResource', 'ngDrupal7Services-3_x.resources.views.resourceConstant', 'ngDrupal7Services-3_x.resources.views.channel'])
+    angular.module('d7-services.resources.views.resource', ['d7-services.commons.configurations', 'd7-services.commons.baseResource', 'd7-services.resources.views.resourceConstant', 'd7-services.resources.views.channel'])
     
     /**
 	 * ViewsResource

@@ -4,7 +4,7 @@
 	/**
 	 * Drupal request intercepter Module for the requests Accept attribute
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.http.intercepter.requestAccept', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.file.resourceConstant'])
+	angular.module('d7-services.commons.http.intercepter.requestAccept', ['d7-services.commons.configurations', 'd7-services.resources.file.resourceConstant'])
 		   .factory('RequestIntercepterAccept', RequestIntercepterAccept);
 
 	

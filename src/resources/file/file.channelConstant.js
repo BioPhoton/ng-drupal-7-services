@@ -35,7 +35,7 @@
 	 * File Channel Constant
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.file.channelConstant', [])
+	    .module('d7-services.resources.file.channelConstant', [])
 	    .constant("FileChannelConstant", FileChannelConstant);
 
 })();

@@ -1,15 +1,15 @@
 ;(function() {
     'use strict';
 
-    angular.module('ngDrupal7Services-3_x.commons', 
-    		['ngDrupal7Services-3_x.commons.authentication', 
-    		 'ngDrupal7Services-3_x.commons.http', 
-    		 'ngDrupal7Services-3_x.commons.directives',
+    angular.module('d7-services.commons', 
+    		['d7-services.commons.authentication', 
+    		 'd7-services.commons.http', 
+    		 'd7-services.commons.directives',
              
-    		 'ngDrupal7Services-3_x.commons.baseChannel', 
-    		 'ngDrupal7Services-3_x.commons.baseResource', 
-    		 'ngDrupal7Services-3_x.commons.configurations', 
-    		 'ngDrupal7Services-3_x.commons.helperService', 
-    		 'ngDrupal7Services-3_x.commons.validationConstant']);
+    		 'd7-services.commons.baseChannel', 
+    		 'd7-services.commons.baseResource', 
+    		 'd7-services.commons.configurations', 
+    		 'd7-services.commons.helperService', 
+    		 'd7-services.commons.validationConstant']);
 
 })();

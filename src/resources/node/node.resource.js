@@ -6,7 +6,7 @@
 	 * 
 	 * see sourcecode in services/resources/node_resource.inc
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.node.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.node.resourceConstant', 'ngDrupal7Services-3_x.resources.node.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
+    angular.module('d7-services.resources.node.resource', ['d7-services.commons.configurations', 'd7-services.resources.node.resourceConstant', 'd7-services.resources.node.channel', 'd7-services.commons.baseResource'])
     
     /**
 	 * NodeResource

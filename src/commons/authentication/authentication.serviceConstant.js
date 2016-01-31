@@ -62,7 +62,7 @@
 	 * API authentication service constant
 	**/
 	angular
-	    .module('ngDrupal7Services-3_x.commons.authentication.serviceConstant', [])
+	    .module('d7-services.commons.authentication.serviceConstant', [])
 	    .constant("AuthenticationServiceConstant", AuthenticationServiceConstant);
 
 })();

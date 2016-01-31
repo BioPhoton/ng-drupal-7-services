@@ -4,7 +4,7 @@
 	/**
 	 * System Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.baseResource', ['ngDrupal7Services-3_x.commons.configurations'])
+	angular.module('d7-services.commons.baseResource', ['d7-services.commons.configurations'])
 		   .factory('BaseResource', BaseResource);
 
 	/**

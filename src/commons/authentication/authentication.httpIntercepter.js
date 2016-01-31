@@ -5,7 +5,7 @@
 	/**
 	 * Drupal request intercepter Module for the requests Accept attribute
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.authentication.httpIntercepter', ['ngDrupal7Services-3_x.commons.authentication.service'])
+	angular.module('d7-services.commons.authentication.httpIntercepter', ['d7-services.commons.authentication.service'])
 		   .factory('AuthenticationHttpInterceptor', AuthenticationHttpInterceptor);
 
 	/**

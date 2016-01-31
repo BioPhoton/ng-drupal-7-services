@@ -53,7 +53,7 @@
 	 * User Channel Constant
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.user.channelConstant', [])
+	    .module('d7-services.resources.user.channelConstant', [])
 	    .constant("UserChannelConstant", UserChannelConstant);
 
 })();

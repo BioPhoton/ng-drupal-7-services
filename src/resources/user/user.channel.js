@@ -4,7 +4,7 @@
 	/**
 	 * User Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.resources.user.channel', ['ngDrupal7Services-3_x.commons.baseChannel', 'ngDrupal7Services-3_x.resources.user.channelConstant'])
+	angular.module('d7-services.resources.user.channel', ['d7-services.commons.baseChannel', 'd7-services.resources.user.channelConstant'])
 		   .factory('UserChannel', UserChannel);
 
 	

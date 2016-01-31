@@ -5,14 +5,14 @@
 	 * User modules bundle
 	**/
 	angular
-	    .module('ngDrupal7Services-3_x.resources', 
-	    		['ngDrupal7Services-3_x.resources.comment', 
-	    		 'ngDrupal7Services-3_x.resources.file', 
-	    		 'ngDrupal7Services-3_x.resources.node', 
-	    		 'ngDrupal7Services-3_x.resources.system', 
-	    		 'ngDrupal7Services-3_x.resources.taxonomy_term', 
-	    		 'ngDrupal7Services-3_x.resources.taxonomy_vocabulary', 
-	    		 'ngDrupal7Services-3_x.resources.user', 
-	    		 'ngDrupal7Services-3_x.resources.views' 
+	    .module('d7-services.resources', 
+	    		['d7-services.resources.comment', 
+	    		 'd7-services.resources.file', 
+	    		 'd7-services.resources.node', 
+	    		 'd7-services.resources.system', 
+	    		 'd7-services.resources.taxonomy_term', 
+	    		 'd7-services.resources.taxonomy_vocabulary', 
+	    		 'd7-services.resources.user', 
+	    		 'd7-services.resources.views' 
 	    		 ]);
 })();

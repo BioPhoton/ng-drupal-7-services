@@ -5,8 +5,8 @@
 	 * User modules bundle
 	**/
 	angular
-	    .module('ngDrupal7Services-3_x', 
-	    		['ngDrupal7Services-3_x.resources', 
-	    		 'ngDrupal7Services-3_x.commons'
+	    .module('d7-services', 
+	    		['d7-services.resources', 
+	    		 'd7-services.commons'
 	    		 ]);
 })();

@@ -28,7 +28,7 @@
 	 * TaxonomyVocabulary Constant Modules
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.taxonomy_vocabulary.resourceConstant', [])
+	    .module('d7-services.resources.taxonomy_vocabulary.resourceConstant', [])
 	    .constant("TaxonomyVocabularyResourceConstant", TaxonomyVocabularyResourceConstant);
 	
 })();

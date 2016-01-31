@@ -5,9 +5,9 @@
 	 * User modules bundle
 	**/
 	angular
-	    .module('ngDrupal7Services-3_x.resources.taxonomy_vocabulary', 
-	    		['ngDrupal7Services-3_x.resources.taxonomy_vocabulary.resourceConstant', 
-	    		 'ngDrupal7Services-3_x.resources.taxonomy_vocabulary.resource', 
-	    		 'ngDrupal7Services-3_x.resources.taxonomy_vocabulary.channelConstant', 
-	    		 'ngDrupal7Services-3_x.resources.taxonomy_vocabulary.channel']);
+	    .module('d7-services.resources.taxonomy_vocabulary', 
+	    		['d7-services.resources.taxonomy_vocabulary.resourceConstant', 
+	    		 'd7-services.resources.taxonomy_vocabulary.resource', 
+	    		 'd7-services.resources.taxonomy_vocabulary.channelConstant', 
+	    		 'd7-services.resources.taxonomy_vocabulary.channel']);
 })();

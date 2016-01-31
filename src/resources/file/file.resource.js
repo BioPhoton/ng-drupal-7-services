@@ -6,7 +6,7 @@
 	 * 
 	 * see sourcecode in services/resources/file_resource.inc
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.file.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.file.resourceConstant', 'ngDrupal7Services-3_x.resources.file.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
+    angular.module('d7-services.resources.file.resource', ['d7-services.commons.configurations', 'd7-services.resources.file.resourceConstant', 'd7-services.resources.file.channel', 'd7-services.commons.baseResource'])
     
     /**
 	 * FileResource

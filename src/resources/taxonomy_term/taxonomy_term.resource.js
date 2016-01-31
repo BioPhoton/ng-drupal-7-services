@@ -6,7 +6,7 @@
 	 * 
 	 * see sourcecode in services/resources/taxonomy_term_resource.inc
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.taxonomy_term.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.taxonomy_term.resourceConstant', 'ngDrupal7Services-3_x.resources.taxonomy_term.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
+    angular.module('d7-services.resources.taxonomy_term.resource', ['d7-services.commons.configurations', 'd7-services.resources.taxonomy_term.resourceConstant', 'd7-services.resources.taxonomy_term.channel', 'd7-services.commons.baseResource'])
     
     /**
 	 * TaxonomyTermResource

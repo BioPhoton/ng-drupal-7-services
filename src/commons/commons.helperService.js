@@ -4,7 +4,7 @@
 	/**
 	 * helper Module
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.helperService', ['ngDrupal7Services-3_x.commons.configurations'])
+	angular.module('d7-services.commons.helperService', ['d7-services.commons.configurations'])
 		   .factory('DrupalHelperService', DrupalHelperService);
 
 	

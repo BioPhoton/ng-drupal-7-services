@@ -6,7 +6,7 @@
 	 * 
 	 * see sourcecode in services/resources/taxonomy_vocabulary_resource.inc
 	**/
-    angular.module('ngDrupal7Services-3_x.resources.taxonomy_vocabulary.resource', ['ngDrupal7Services-3_x.commons.configurations', 'ngDrupal7Services-3_x.resources.taxonomy_vocabulary.resourceConstant', 'ngDrupal7Services-3_x.resources.taxonomy_vocabulary.channel', 'ngDrupal7Services-3_x.commons.baseResource'])
+    angular.module('d7-services.resources.taxonomy_vocabulary.resource', ['d7-services.commons.configurations', 'd7-services.resources.taxonomy_vocabulary.resourceConstant', 'd7-services.resources.taxonomy_vocabulary.channel', 'd7-services.commons.baseResource'])
     
     /**
 	 * TaxonomyVocabularyResource

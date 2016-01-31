@@ -5,9 +5,9 @@
 	 * User modules bundle
 	**/
 	angular
-	    .module('ngDrupal7Services-3_x.resources.user', 
-	    		['ngDrupal7Services-3_x.resources.user.resourceConstant', 
-	    		 'ngDrupal7Services-3_x.resources.user.resource', 
-	    		 'ngDrupal7Services-3_x.resources.user.channelConstant', 
-	    		 'ngDrupal7Services-3_x.resources.user.channel']);
+	    .module('d7-services.resources.user', 
+	    		['d7-services.resources.user.resourceConstant', 
+	    		 'd7-services.resources.user.resource', 
+	    		 'd7-services.resources.user.channelConstant', 
+	    		 'd7-services.resources.user.channel']);
 })();

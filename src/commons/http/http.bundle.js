@@ -4,8 +4,8 @@
 	/**
 	 * Drupal http module bundle
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.http', 
-			['ngDrupal7Services-3_x.commons.http.configurations', 
-			 'ngDrupal7Services-3_x.commons.http.intercepter.requestAccept']);
+	angular.module('d7-services.commons.http', 
+			['d7-services.commons.http.configurations', 
+			 'd7-services.commons.http.intercepter.requestAccept']);
 	
 })();

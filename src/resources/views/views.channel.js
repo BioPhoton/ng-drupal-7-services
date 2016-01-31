@@ -4,7 +4,7 @@
 	/**
 	 * Views Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.resources.views.channel', ['ngDrupal7Services-3_x.commons.baseChannel', 'ngDrupal7Services-3_x.resources.views.channelConstant'])
+	angular.module('d7-services.resources.views.channel', ['d7-services.commons.baseChannel', 'd7-services.resources.views.channelConstant'])
 		   .factory('ViewsChannel', ViewsChannel);
 
 	/**

@@ -4,7 +4,7 @@
 	/**
 	 * Base Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.baseChannel', [])
+	angular.module('d7-services.commons.baseChannel', [])
 		   .factory('BaseChannel', BaseChannel);
 
 	/**

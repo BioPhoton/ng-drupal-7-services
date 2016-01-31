@@ -4,7 +4,7 @@
 	/**
 	 * Node Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.resources.node.channel', ['ngDrupal7Services-3_x.commons.baseChannel', 'ngDrupal7Services-3_x.resources.node.channelConstant'])
+	angular.module('d7-services.resources.node.channel', ['d7-services.commons.baseChannel', 'd7-services.resources.node.channelConstant'])
 		   .factory('NodeChannel', NodeChannel);
 
 	

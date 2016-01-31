@@ -4,9 +4,9 @@
 	/**
 	 * File modules bundle
 	**/
-	angular.module('ngDrupal7Services-3_x.resources.file', 
-			['ngDrupal7Services-3_x.resources.file.resourceConstant', 
-			 'ngDrupal7Services-3_x.resources.file.resource', 
-			 'ngDrupal7Services-3_x.resources.file.channelConstant', 
-			 'ngDrupal7Services-3_x.resources.file.channel']);
+	angular.module('d7-services.resources.file', 
+			['d7-services.resources.file.resourceConstant', 
+			 'd7-services.resources.file.resource', 
+			 'd7-services.resources.file.channelConstant', 
+			 'd7-services.resources.file.channel']);
 })();

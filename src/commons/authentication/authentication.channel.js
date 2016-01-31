@@ -4,7 +4,7 @@
 	/**
 	 * Authentication Channel Module
 	 */
-	angular.module('ngDrupal7Services-3_x.commons.authentication.channel', ['ngDrupal7Services-3_x.commons.baseChannel', 'ngDrupal7Services-3_x.commons.authentication.channelConstant'])
+	angular.module('d7-services.commons.authentication.channel', ['d7-services.commons.baseChannel', 'd7-services.commons.authentication.channelConstant'])
 		   .factory('AuthenticationChannel', AuthenticationChannel);
 
 	

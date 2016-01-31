@@ -35,7 +35,7 @@
 	 * Comment Channel Constant
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.resources.comment.channelConstant', [])
+	    .module('d7-services.resources.comment.channelConstant', [])
 	    .constant("CommentChannelConstant", CommentChannelConstant);
 
 })();

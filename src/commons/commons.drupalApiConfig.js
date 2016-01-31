@@ -57,7 +57,7 @@
 	 *  DrupalApiConstant Module
 	 */
 	angular
-	    .module('ngDrupal7Services-3_x.commons.configurations', [])
+	    .module('d7-services.commons.configurations', [])
 	    .constant("DrupalApiConstant", DrupalApiConstant);
 	
 
