@@ -6,9 +6,7 @@
     "Michael Hladky michael@hladky.at"
   ],
   "description": "An API client for a Drupal 7 and Services 3.x REST setup",
-   "main": [
-             "dist/ng-drupal-7-services.js"
-           ],
+   "main":  "dist/ng-drupal-7-services.js",
   "keywords": [
     "Drupal",
     "Angular",
