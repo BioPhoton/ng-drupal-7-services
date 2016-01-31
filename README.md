@@ -8,6 +8,7 @@ It optionally provides events next to the common used promise approach.
 
 A full set of Drupal's resources is available, and all basic workflow's depending to authentication or helpers for CRUD operations are also provided as a set of extra modules.
 
+##DEMOS
 Check out the [Drupal-API-Explorer](https://github.com/BioPhoton/ng-drupal-services-tests-with-ng) for a full demo  
 Or check out the sample implementation for [Ionic-Headless-Drupal](https://github.com/BioPhoton/Ionic-Angular-Headless-Drupal-Demo)
 
@@ -198,5 +199,7 @@ Following of Drupal's resources and their endpoint's are currently implemented:
 - install [CORS](https://www.drupal.org/project/cors) 
 - Go to admin/config/services/cors  and paste following into the textarea `api/v1*|<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|true`
 
+
 #Links
+Very useful for development is the [Services Tools](https://www.drupal.org/project/services_tools) module
 Testing resources on a test server => https://www.drupal.org/node/1447020
