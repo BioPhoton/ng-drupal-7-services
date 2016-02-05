@@ -8,7 +8,7 @@ It optionally provides events next to the common used promise approach.
 
 A full set of Drupal's resources is available, and all basic workflow's depending to authentication or helpers for CRUD operations are also provided as a set of extra modules.
 
-Check out the [Drupal-API-Explorer](https://github.com/BioPhoton/ng-drupal-services-tests-with-ng) for a full demo  
+Check out the [Drupal-API-Explorer](https://github.com/BioPhoton/ng-drupal-services-tests-with-ng) for a full demo.  
 Or check out the sample implementation for [Ionic-Headless-Drupal](https://github.com/BioPhoton/Ionic-Angular-Headless-Drupal-Demo)
 
 
