@@ -46,22 +46,29 @@ Same resources also hold additional modules like the view resource, that provide
 For example a node retrieve call look's like this:
 
 ```javascript
-angular
-    .module('myApp', ['d7-services'])
-    .controller('NodeController', ['NodeResource', 'NodeChannel', function(NodeResource, NodeChannel){
-    
-		//fire request
-		 var retrievePromis = NodeResource.retrieve({nid:1});
-		
-		//react over promise.then
-		retrievePromis.then(function(data) { ... },function(error) { ... });
-						    
-		//react over event 
-		//This could happen in another directive/controller too
-		NodeChannel.subRetrieveConfirmed($scope, function(data){ ... });
-		NodeChannel.subRetrieveFailed($scope, function(error){ ... });	    
-	    
-    }]);
+  angular
+    .module('myApp', ['d7-services.resources.comment'])
+    .controller('CommentController',CommentController)
+    .controller('OtherController',OtherController);
+
+  /////
+
+  CommentController.$inject = ['CommentResource'];
+  function CommentController(CommentResource){
+    var retrievePromis = CommentResource.retrieve({cid:1});
+
+    retrievePromis
+      .then(
+        function(data) { console.log(data);  },
+        function(error) { console.log(error); }
+      );
+  };
+
+  OtherController.$inject = ['CommentChannel'];
+  function OtherController(CommentChannel){
+    CommentChannel.subRetrieveConfirmed($scope, function(data){ console.log(data); });
+    CommentChannel.subRetrieveFailed($scope, function(error){ console.log(error); });
+  };
 ```
 
 ###Supported Drupal Modules
