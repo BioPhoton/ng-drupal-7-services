@@ -198,25 +198,28 @@
 		**/
 		function refreshConnection() {
 			var defer = $q.defer();
-			
+
 			//check token
 			refreshTokenFromServer()
-						.then(
-								function(response) {
-									//check connection
-									tryConnect()
-										.success(function(responseData, status, headers, config) { 
-											AuthenticationChannel.pubRefreshConnectionConfirmed(responseData);
-											return defer.resolve(responseData.data);
-										});
-								}
-						)
-						.catch(
-								function(responseError) {
-									AuthenticationChannel.pubRefreshConnectionFailed(responseError);
-									return defer.resolve(responseError);
-								}
-						);
+				.then(
+				function(response) {
+					//check connection
+					return tryConnect()
+						.success(function(responseData, status, headers, config) {
+							AuthenticationChannel.pubRefreshConnectionConfirmed(responseData);
+							defer.resolve(responseData.data);
+						})
+				}
+			)
+				.catch(
+				function(responseError) {
+					console.log('error', responseError);
+					AuthenticationChannel.pubRefreshConnectionFailed(responseError);
+					//offline fix
+					setLastConnectTime(1);
+					defer.resolve(responseError);
+				}
+			);
 			 
 			return defer.promise; 
 						
