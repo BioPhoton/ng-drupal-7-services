@@ -199,7 +199,5 @@ Following of Drupal's resources and their endpoint's are currently implemented:
 - install [CORS](https://www.drupal.org/project/cors) 
 - Go to admin/config/services/cors  and paste following into the textarea `api/v1*|<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|true`
 
-
 #Links
-Very useful for development is the [Services Tools](https://www.drupal.org/project/services_tools) module
 Testing resources on a test server => https://www.drupal.org/node/1447020
