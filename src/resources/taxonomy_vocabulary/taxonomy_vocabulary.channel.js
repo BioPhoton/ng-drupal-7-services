@@ -59,6 +59,13 @@
         	subGetTreeConfirmed			: subGetTreeConfirmed,
         	pubGetTreeFailed 			: pubGetTreeFailed,
         	subGetTreeFailed			: subGetTreeFailed,
+
+			//taxonomy_vocabulary retrieveByMachineNameConfirmed request
+			pubRetrieveByMachineNameConfirmedConfirmed 		: pubRetrieveByMachineNameConfirmedConfirmed,
+			subRetrieveByMachineNameConfirmedConfirmed		: subRetrieveByMachineNameConfirmedConfirmed,
+			pubRetrieveByMachineNameConfirmedFailed 		: pubRetrieveByMachineNameConfirmedFailed,
+			subRetrieveByMachineNameConfirmedFailed			: subRetrieveByMachineNameConfirmedFailed,
+
         	
         };
         
@@ -389,69 +396,134 @@
     	};
 
     	//________________________________________________________________________________________________________________________________________
-    	
-    	//TaxonomyVocabulary getTree request functions
 
-    	/**
-    	 * pubGetTreeConfirmed
-    	 * 
-    	 * Publish the TaxonomyVocabularyGetTreeConfirmed event with giver args 
-    	 *
-    	 * @param 	{Object} args The events arguments 
-    	 * 
-    	 * 
-    	**/
-    	function pubGetTreeConfirmed(args) {
-    		BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.getTreeConfirmed, args);
-    	};
+		//TaxonomyVocabulary getTree request functions
 
-    	/**
-    	 * subGetTreeConfirmed
-    	 * 
-    	 * subscribe for the TaxonomyVocabularyGetTreeConfirmed event
-    	 *
-    	 * @param 	{Object} _Scope The scope that calls the channels subGetTreeConfirmed function
-    	 * @param 	{function} scopeHandler The callback handler for TaxonomyVocabularyGetTreeConfirmed event
-    	 * 
-    	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
-    	 * 
-    	**/
-    	function subGetTreeConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.getTreeConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
-    	};
+		/**
+		 * pubGetTreeConfirmed
+		 *
+		 * Publish the TaxonomyVocabularyGetTreeConfirmed event with giver args
+		 *
+		 * @param 	{Object} args The events arguments
+		 *
+		 *
+		 **/
+		function pubGetTreeConfirmed(args) {
+			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.getTreeConfirmed, args);
+		};
 
-    	//###############
+		/**
+		 * subGetTreeConfirmed
+		 *
+		 * subscribe for the TaxonomyVocabularyGetTreeConfirmed event
+		 *
+		 * @param 	{Object} _Scope The scope that calls the channels subGetTreeConfirmed function
+		 * @param 	{function} scopeHandler The callback handler for TaxonomyVocabularyGetTreeConfirmed event
+		 *
+		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+		 *
+		 **/
+		function subGetTreeConfirmed(_Scope, scopeHandler) {
+			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.getTreeConfirmed, _Scope, scopeHandler);
+			return unsubsSopeHandler;
+		};
+
+		//###############
 
 
-    	/**
-    	 * pubGetTreeConfirmed
-    	 * 
-    	 * Publish the TaxonomyVocabularyGetTreeConfirmed event with giver args 
-    	 *
-    	 * @param 	{Object} args The events arguments 
-    	 * 
-    	 * 
-    	**/
-    	function pubGetTreeFailed(args) {
-    		BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.getTreeFailed, args);
-    	};
+		/**
+		 * pubGetTreeConfirmed
+		 *
+		 * Publish the TaxonomyVocabularyGetTreeConfirmed event with giver args
+		 *
+		 * @param 	{Object} args The events arguments
+		 *
+		 *
+		 **/
+		function pubGetTreeFailed(args) {
+			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.getTreeFailed, args);
+		};
 
-    	/**
-    	 * subGetTreeFailed
-    	 * 
-    	 * subscribe for the TaxonomyVocabularyGetTreeFailed event
-    	 *
-    	 * @param 	{Object} _Scope The scope that calls the channels subGetTreeFailed function
-    	 * @param 	{function} scopeHandler The callback handler for TaxonomyVocabularyGetTreeFailed event
-    	 * 
-    	 * @return 	{function} The unsubscribe function from the $rootScope.on() call
-    	 * 
-    	**/
-    	function subGetTreeFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.getTreeFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
-    	};
+		/**
+		 * subGetTreeFailed
+		 *
+		 * subscribe for the TaxonomyVocabularyGetTreeFailed event
+		 *
+		 * @param 	{Object} _Scope The scope that calls the channels subGetTreeFailed function
+		 * @param 	{function} scopeHandler The callback handler for TaxonomyVocabularyGetTreeFailed event
+		 *
+		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+		 *
+		 **/
+		function subGetTreeFailed(_Scope, scopeHandler) {
+			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.getTreeFailed, _Scope, scopeHandler);
+			return unsubsSopeHandler;
+		};
+
+		//________________________________________________________________________________________________________________________________________
+
+		//TaxonomyVocabulary retrieveByMachineNameConfirmed request functions
+
+		/**
+		 * pubRetrieveByMachineNameConfirmedConfirmed
+		 *
+		 * Publish the TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event with giver args
+		 *
+		 * @param 	{Object} args The events arguments
+		 *
+		 *
+		 **/
+		function pubRetrieveByMachineNameConfirmedConfirmed(args) {
+			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedConfirmed, args);
+		};
+
+		/**
+		 * subRetrieveByMachineNameConfirmedConfirmed
+		 *
+		 * subscribe for the TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event
+		 *
+		 * @param 	{Object} _Scope The scope that calls the channels subRetrieveByMachineNameConfirmedConfirmed function
+		 * @param 	{function} scopeHandler The callback handler for TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event
+		 *
+		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+		 *
+		 **/
+		function subRetrieveByMachineNameConfirmedConfirmed(_Scope, scopeHandler) {
+			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedConfirmed, _Scope, scopeHandler);
+			return unsubsSopeHandler;
+		};
+
+		//###############
+
+
+		/**
+		 * pubRetrieveByMachineNameConfirmedConfirmed
+		 *
+		 * Publish the TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event with giver args
+		 *
+		 * @param 	{Object} args The events arguments
+		 *
+		 *
+		 **/
+		function pubRetrieveByMachineNameConfirmedFailed(args) {
+			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedFailed, args);
+		};
+
+		/**
+		 * subRetrieveByMachineNameConfirmedFailed
+		 *
+		 * subscribe for the TaxonomyVocabularyRetrieveByMachineNameConfirmedFailed event
+		 *
+		 * @param 	{Object} _Scope The scope that calls the channels subRetrieveByMachineNameConfirmedFailed function
+		 * @param 	{function} scopeHandler The callback handler for TaxonomyVocabularyRetrieveByMachineNameConfirmedFailed event
+		 *
+		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
+		 *
+		 **/
+		function subRetrieveByMachineNameConfirmedFailed(_Scope, scopeHandler) {
+			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedFailed, _Scope, scopeHandler);
+			return unsubsSopeHandler;
+		};
     	
 	};
 

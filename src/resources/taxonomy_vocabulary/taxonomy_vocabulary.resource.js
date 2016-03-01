@@ -37,6 +37,7 @@
     	    index 		: index,
     	    //Actions
     	    getTree	: getTree,
+			retrieveByMachineName : retrieveByMachineName
         	
         };
         
@@ -163,30 +164,56 @@
 	    
 		/**
 		 * getTree
-		 * 
+		 *
 		 * Returns a full list of taxonomy terms.
-		 * 
+		 *
 		 * Method: POST
-		 * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary/getTree 
-		 * 
+		 * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary/getTree
+		 *
 		 * @params  {Object} data the requests data
 		 * 		@key 	{Integer} vid The vocabulary id to retrieve., separated by comma., required:true, source:post body
 		 * 		@key 	{Integer} parent The term ID under which to generate the tree. If 0, generate the tree for the entire vocabulary., required:false, source:post body
 		 * 		@key 	{Integer} maxdepth The number of levels of the tree to return. Leave NULL to return all levels., required:false, source:post body
 		 * 		@key 	{Integer} load_entities Whether the tree of terms should contain full term entity objects. If 1 (TRUE), a full entity load will occur on the term objects. Otherwise they are partial objects to save execution time and memory consumption. Defaults to 0 (FALSE)., required:false, source:post body
-		 * 
+		 *
 		 * @return 	{Promise}
-		 * 
-		**/
+		 *
+		 **/
 		function getTree(data) {
 			var  pathToGetTree = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyVocabularyResourceConstant.resourcePath + '/' + TaxonomyVocabularyResourceConstant.actions.getTree,
 				 requestConfig = {
-			     	url		: pathToGetTree,
-			     	method	: 'POST',
-			     	data : data
+					url		: pathToGetTree,
+					method	: 'POST',
+					data : data
 				};
-			
+
 			return BaseResource.request(requestConfig,TaxonomyVocabularyChannel.pubGetTreeConfirmed,  TaxonomyVocabularyChannel.pubGetTreeFailed);
+
+		};
+
+		/**
+		 * retrieveByMachineName
+		 *
+		 * Returns a vocabulary based on machine name.
+		 *
+		 * Method: POST
+		 * Url: http://drupal_instance/api_endpoint/taxonomy_vocabulary/retrieveByMachineName
+		 *
+		 * @params  {Object} data the requests data
+		 * 		@key 	{String} vid The vocabulary id to retrieve., required:true, source:post body
+		 *
+		 * @return 	{Promise}
+		 *
+		 **/
+		function retrieveByMachineName(data) {
+			var  pathToRetrieveByMachineName = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + TaxonomyVocabularyResourceConstant.resourcePath + '/' + TaxonomyVocabularyResourceConstant.actions.retrieveByMachineName,
+				requestConfig = {
+					url		: pathToRetrieveByMachineName,
+					method	: 'POST',
+					data : data
+				};
+
+			return BaseResource.request(requestConfig,TaxonomyVocabularyChannel.pubRetrieveByMachineNameConfirmed,  TaxonomyVocabularyChannel.pubRetrieveByMachineNameFailed);
 
 		};
 					

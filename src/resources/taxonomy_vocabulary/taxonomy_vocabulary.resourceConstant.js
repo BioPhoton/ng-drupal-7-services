@@ -19,7 +19,8 @@
 			//delete 				: 'delete',
 		    //index 				: 'index',
 			//
-			getTree 			: 'getTree',
+			getTree 				: 'getTree',
+			retrieveByMachineName 	: 'retrieveByMachineName'
 		}
 
 	};
