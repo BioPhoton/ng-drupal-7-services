@@ -52,13 +52,7 @@
 		 * 
 		**/
         function connect() {
-			
-			//undefined check
-	    	//data = (data)?data:{};
-	    	
-			//validation of params
-	    	var errors = [];
-	    	
+
 			var connectPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
 				requestConfig = {
 						method :'POST',
