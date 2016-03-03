@@ -61,12 +61,11 @@
         	subGetTreeFailed			: subGetTreeFailed,
 
 			//taxonomy_vocabulary retrieveByMachineNameConfirmed request
-			pubRetrieveByMachineNameConfirmedConfirmed 		: pubRetrieveByMachineNameConfirmedConfirmed,
-			subRetrieveByMachineNameConfirmedConfirmed		: subRetrieveByMachineNameConfirmedConfirmed,
-			pubRetrieveByMachineNameConfirmedFailed 		: pubRetrieveByMachineNameConfirmedFailed,
-			subRetrieveByMachineNameConfirmedFailed			: subRetrieveByMachineNameConfirmedFailed,
+			pubRetrieveByMachineNameConfirmed 		: pubRetrieveByMachineNameConfirmed,
+			subRetrieveByMachineNameConfirmed		: subRetrieveByMachineNameConfirmed,
+			pubRetrieveByMachineNameFailed 			: pubRetrieveByMachineNameFailed,
+			subRetrieveByMachineNameFailed			: subRetrieveByMachineNameFailed,
 
-        	
         };
         
         return taxonomy_vocabularyChannelService;
@@ -465,7 +464,7 @@
 		//TaxonomyVocabulary retrieveByMachineNameConfirmed request functions
 
 		/**
-		 * pubRetrieveByMachineNameConfirmedConfirmed
+		 * pubRetrieveByMachineNameConfirmed
 		 *
 		 * Publish the TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event with giver args
 		 *
@@ -473,23 +472,23 @@
 		 *
 		 *
 		 **/
-		function pubRetrieveByMachineNameConfirmedConfirmed(args) {
-			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedConfirmed, args);
+		function pubRetrieveByMachineNameConfirmed(args) {
+			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmed, args);
 		};
 
 		/**
-		 * subRetrieveByMachineNameConfirmedConfirmed
+		 * subRetrieveByMachineNameConfirmed
 		 *
 		 * subscribe for the TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event
 		 *
-		 * @param 	{Object} _Scope The scope that calls the channels subRetrieveByMachineNameConfirmedConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subRetrieveByMachineNameConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event
 		 *
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 *
 		 **/
-		function subRetrieveByMachineNameConfirmedConfirmed(_Scope, scopeHandler) {
-			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedConfirmed, _Scope, scopeHandler);
+		function subRetrieveByMachineNameConfirmed(_Scope, scopeHandler) {
+			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmed, _Scope, scopeHandler);
 			return unsubsSopeHandler;
 		};
 
@@ -497,7 +496,7 @@
 
 
 		/**
-		 * pubRetrieveByMachineNameConfirmedConfirmed
+		 * pubRetrieveByMachineNameConfirmed
 		 *
 		 * Publish the TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event with giver args
 		 *
@@ -505,12 +504,12 @@
 		 *
 		 *
 		 **/
-		function pubRetrieveByMachineNameConfirmedFailed(args) {
-			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedFailed, args);
+		function pubRetrieveByMachineNameFailed(args) {
+			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameFailed, args);
 		};
 
 		/**
-		 * subRetrieveByMachineNameConfirmedFailed
+		 * subRetrieveByMachineNameFailed
 		 *
 		 * subscribe for the TaxonomyVocabularyRetrieveByMachineNameConfirmedFailed event
 		 *
@@ -520,8 +519,8 @@
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 *
 		 **/
-		function subRetrieveByMachineNameConfirmedFailed(_Scope, scopeHandler) {
-			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedFailed, _Scope, scopeHandler);
+		function subRetrieveByMachineNameFailed(_Scope, scopeHandler) {
+			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameFailed, _Scope, scopeHandler);
 			return unsubsSopeHandler;
 		};
     	
