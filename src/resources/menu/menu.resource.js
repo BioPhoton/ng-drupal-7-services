@@ -43,7 +43,7 @@
 		 * Returns the details of currently logged in user.
 		 * 
 		 * Method: POST 
-		 * Url: http://drupal_instance/api_endpoint/menu/retrieve
+		 * Url: http://drupal_instance/api_endpoint/menu/{MENU_NAME}
 		 * 
 		 * @return 	{Promise} Object with session id, session name and a user object.
 		 * 
