@@ -12,7 +12,7 @@
 	 		resourcePath : 'menu',
 	 		//actions of menu resource
 	 		actions : {
-	 			retrieve 	 : 'retrieve'
+	 			//retrieve 	 : 'retrieve'
 	 		}
 
 	};

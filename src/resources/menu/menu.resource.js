@@ -4,7 +4,7 @@
 	/**
 	 * Menu Resource Modules
 	 * 
-	 * see sourcecode in services/resources/menu_resource.inc
+	 * see sourcecode in services_menu/resources/menu_resource.inc
 	 * 
 	**/
     angular.module('d7-services.resources.menu.resource', ['d7-services.commons.configurations', 'd7-services.commons.baseResource', 'd7-services.resources.menu.resourceConstant', 'd7-services.resources.menu.channel'])
@@ -42,18 +42,18 @@
 		 * 
 		 * Returns the details of currently logged in user.
 		 * 
-		 * Method: POST 
+		 * Method: GET
 		 * Url: http://drupal_instance/api_endpoint/menu/{MENU_NAME}
 		 * 
 		 * @return 	{Promise} Object with session id, session name and a user object.
 		 * 
 		**/
-        function retrieve() {
+        function retrieve(data) {
 	    	var errors = [];
 	    	
-			var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + MenuResourceConstant.resourcePath + '/' + MenuResourceConstant.actions.retrieve,
+			var retrievePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + MenuResourceConstant.resourcePath +'/'+data.menu_name,
 				requestConfig = {
-						method :'POST',
+						method :'GET',
 						url : retrievePath
 				};
 			
