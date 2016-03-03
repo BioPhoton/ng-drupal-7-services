@@ -69,9 +69,11 @@ angular
 Here is a list of supported Drupal services 3.x modules:
 - [x] [Services](https://www.drupal.org/project/services)
 - [x] [Services Views](https://www.drupal.org/project/services_view)
-- [ ] [Services Menu](https://www.drupal.org/project/services_menu)
+- [x] [Services Menu](https://www.drupal.org/project/services_menu)
 - [ ] [Services Search](https://www.drupal.org/project/services_search)
 - [ ] [Services Entity](https://www.drupal.org/project/services_entity)
+- [ ] [Services Definitions](https://www.drupal.org/project/services_tools)
+- [ ] [Geocoder](https://www.drupal.org/project/geocoder)
 
 ##Drupal Services
 Following of Drupal's resources and their endpoint's are currently implemented:
