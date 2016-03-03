@@ -60,8 +60,8 @@
 		 * 
 		**/
     	function subRetrieveConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( ViewsChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( ViewsChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -92,8 +92,8 @@
 		 * 
 		**/
     	function subRetrieveFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( ViewsChannelConstant.retrieveFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( ViewsChannelConstant.retrieveFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//__________________________________________________________________________________________________________________

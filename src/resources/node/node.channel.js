@@ -105,9 +105,9 @@
 		 * 
 		**/
     	function subRetrieveConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -138,9 +138,9 @@
 		 * 
 		**/
     	function subRetrieveFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.retrieveFailed, _Scope, scopeHandler);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.retrieveFailed, _Scope, scopeHandler);
 
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -172,8 +172,8 @@
     	 * 
     	**/
     	function subCreateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.createConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.createConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -204,8 +204,8 @@
     	 * 
     	**/
     	function subCreateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.createFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.createFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -237,8 +237,8 @@
     	 * 
     	**/
     	function subUpdateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.updateConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.updateConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -268,8 +268,8 @@
     	 * 
     	**/
     	function subUpdateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.updateFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.updateFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -301,8 +301,8 @@
     	 * 
     	**/
     	function subDeleteConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.deleteConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.deleteConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -333,8 +333,8 @@
     	 * 
     	**/
     	function subDeleteFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.deleteFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.deleteFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -366,8 +366,8 @@
     	 * 
     	**/
     	function subIndexConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.indexConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.indexConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -398,8 +398,8 @@
     	 * 
     	**/
     	function subIndexFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.indexFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.indexFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -431,8 +431,8 @@
     	 * 
     	**/
     	function subFilesConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.filesConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.filesConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -463,8 +463,8 @@
     	 * 
     	**/
     	function subFilesFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.filesFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.filesFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -497,8 +497,8 @@
     	 * 
     	**/
     	function subCommentsConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.commentsConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.commentsConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -529,8 +529,8 @@
     	 * 
     	**/
     	function subCommentsFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.commentsFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.commentsFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -564,8 +564,8 @@
     	* 
     	**/
     	function subAttachFileConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.attachFileConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.attachFileConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -596,8 +596,8 @@
     	* 
     	**/
     	function subAttachFileFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.attachFileFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( NodeChannelConstant.attachFileFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________

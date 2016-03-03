@@ -93,8 +93,8 @@
 		 * 
 		**/
     	function subRetrieveConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -125,8 +125,8 @@
 		 * 
 		**/
     	function subRetrieveFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.retrieveFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.retrieveFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -158,8 +158,8 @@
     	 * 
     	**/
     	function subCreateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.createConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.createConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -190,8 +190,8 @@
     	 * 
     	**/
     	function subCreateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.createFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.createFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -223,8 +223,8 @@
     	 * 
     	**/
     	function subUpdateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.updateConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.updateConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -254,8 +254,8 @@
     	 * 
     	**/
     	function subUpdateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.updateFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.updateFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -287,8 +287,8 @@
     	 * 
     	**/
     	function subDeleteConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.deleteConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.deleteConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -319,8 +319,8 @@
     	 * 
     	**/
     	function subDeleteFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.deleteFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.deleteFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -352,8 +352,8 @@
     	 * 
     	**/
     	function subIndexConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.indexConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.indexConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -384,8 +384,8 @@
     	 * 
     	**/
     	function subIndexFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.indexFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.indexFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -417,8 +417,8 @@
     	 * 
     	**/
     	function subSelectNodesConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.selectNodesConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.selectNodesConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -449,8 +449,8 @@
     	 * 
     	**/
     	function subSelectNodesFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.selectNodesFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyTermChannelConstant.selectNodesFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
 	};

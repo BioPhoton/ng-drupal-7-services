@@ -75,8 +75,8 @@
 		 * 
 		**/
     	function subConnectConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.connectConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.connectConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -107,8 +107,8 @@
 		 * 
 		**/
     	function subConnectFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.connectFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.connectFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//________________________________________________________________________________________________________________________________________
@@ -140,8 +140,8 @@
 		 * 
 		**/
     	function subGetVariableConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.getVariableConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.getVariableConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -172,8 +172,8 @@
 		 * 
 		**/
     	function subGetVariableFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.getVariableFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.getVariableFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//________________________________________________________________________________________________________________________________________
@@ -205,8 +205,8 @@
 		 * 
 		**/
     	function subSetVariableConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.setVariableConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.setVariableConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -237,8 +237,8 @@
 		 * 
 		**/
     	function subSetVariableFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.setVariableFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.setVariableFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//________________________________________________________________________________________________________________________________________
@@ -270,8 +270,8 @@
 		 * 
 		**/
     	function subDelVariableConfirmed(_Scope, scopeHandler) {	
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.delVariableConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.delVariableConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -302,8 +302,8 @@
 		 * 
 		**/
     	function subDelVariableFailed(_Scope, scopeHandler) {
-     		var unsubsSopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.delVariableFailed, _Scope, scopeHandler);	
-    		return unsubsSopeHandler;
+     		var unsubScopeHandler = BaseChannel.subRootEmit( SystemChannelConstant.delVariableFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//________________________________________________________________________________________________________________________________________

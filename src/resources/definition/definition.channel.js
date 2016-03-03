@@ -62,8 +62,8 @@
     	 * 
     	**/
     	function subIndexConfirmed(_Scope, scopeHandler) {
-    		var unsubSopeHandler = BaseChannel.subRootEmit( DefinitionChannelConstant.indexConfirmed, _Scope, scopeHandler);
-    		return unsubSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( DefinitionChannelConstant.indexConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -94,8 +94,8 @@
     	 * 
     	**/
     	function subIndexFailed(_Scope, scopeHandler) {
-    		var unsubSopeHandler = BaseChannel.subRootEmit( DefinitionChannelConstant.indexFailed, _Scope, scopeHandler);
-    		return unsubSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( DefinitionChannelConstant.indexFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________

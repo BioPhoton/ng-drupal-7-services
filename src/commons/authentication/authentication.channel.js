@@ -93,9 +93,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.loginConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.loginConfirmed, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -132,9 +132,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.loginFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.loginFailed, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -171,9 +171,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.logoutConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.logoutConfirmed, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -209,9 +209,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.logoutFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.logoutFailed, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
     	
     	//__________________________________________________________________________________________________________________________________________
@@ -250,9 +250,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.refreshConnectionConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.refreshConnectionConfirmed, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -289,9 +289,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.refreshConnectionFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.refreshConnectionFailed, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -330,9 +330,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.tryConnectConfirmed, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.tryConnectConfirmed, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -369,9 +369,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.tryConnectFailed, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.tryConnectFailed, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -408,9 +408,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.connectionStateUpdated, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.connectionStateUpdated, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -447,9 +447,9 @@
     			return args; 
     		};
     		
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.currentUserUpdated, _Scope, scopeHandler, prepArgs);
+    		var unsubScopeHandler = BaseChannel.subRootEmit( AuthenticationChannelConstant.currentUserUpdated, _Scope, scopeHandler, prepArgs);
     		
-    		return unsubsSopeHandler;
+    		return unsubScopeHandler;
     	};
     	
     	//________________________________________________________________________________________________________________________________________

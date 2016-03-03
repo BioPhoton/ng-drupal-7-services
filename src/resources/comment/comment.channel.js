@@ -99,8 +99,8 @@
 		 * 
 		**/
     	function subRetrieveConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -131,8 +131,8 @@
 		 * 
 		**/
     	function subRetrieveFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.retrieveFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.retrieveFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -164,8 +164,8 @@
     	 * 
     	**/
     	function subCreateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.createConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.createConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -196,8 +196,8 @@
     	 * 
     	**/
     	function subCreateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.createFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.createFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -229,8 +229,8 @@
     	 * 
     	**/
     	function subUpdateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.updateConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.updateConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -260,8 +260,8 @@
     	 * 
     	**/
     	function subUpdateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.updateFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.updateFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -293,8 +293,8 @@
     	 * 
     	**/
     	function subDeleteConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.deleteConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.deleteConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -325,8 +325,8 @@
     	 * 
     	**/
     	function subDeleteFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.deleteFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.deleteFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -358,8 +358,8 @@
     	 * 
     	**/
     	function subIndexConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.indexConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.indexConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -390,8 +390,8 @@
     	 * 
     	**/
     	function subIndexFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.indexFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.indexFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -423,8 +423,8 @@
     	 * 
     	**/
     	function subCountAllConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countAllConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countAllConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -455,8 +455,8 @@
     	 * 
     	**/
     	function subCountAllFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countAllFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countAllFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//________________________________________________________________________________________________________________________________________
@@ -488,8 +488,8 @@
     	 * 
     	**/
     	function subCountNewConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countNewConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countNewConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -520,8 +520,8 @@
     	 * 
     	**/
     	function subCountNewFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countNewFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( CommentChannelConstant.countNewFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	

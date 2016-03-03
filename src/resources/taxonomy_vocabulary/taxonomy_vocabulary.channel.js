@@ -99,8 +99,8 @@
 		 * 
 		**/
     	function subRetrieveConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
     	
     	//###############
@@ -131,8 +131,8 @@
 		 * 
 		**/
     	function subRetrieveFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -164,8 +164,8 @@
     	 * 
     	**/
     	function subCreateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.createConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.createConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -196,8 +196,8 @@
     	 * 
     	**/
     	function subCreateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.createFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.createFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -229,8 +229,8 @@
     	 * 
     	**/
     	function subUpdateConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.updateConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.updateConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -260,8 +260,8 @@
     	 * 
     	**/
     	function subUpdateFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.updateFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.updateFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -293,8 +293,8 @@
     	 * 
     	**/
     	function subDeleteConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.deleteConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.deleteConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -325,8 +325,8 @@
     	 * 
     	**/
     	function subDeleteFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.deleteFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.deleteFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -358,8 +358,8 @@
     	 * 
     	**/
     	function subIndexConfirmed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.indexConfirmed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.indexConfirmed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//###############
@@ -390,8 +390,8 @@
     	 * 
     	**/
     	function subIndexFailed(_Scope, scopeHandler) {
-    		var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.indexFailed, _Scope, scopeHandler);
-    		return unsubsSopeHandler;
+    		var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.indexFailed, _Scope, scopeHandler);
+    		return unsubScopeHandler;
     	};
 
     	//________________________________________________________________________________________________________________________________________
@@ -423,8 +423,8 @@
 		 *
 		 **/
 		function subGetTreeConfirmed(_Scope, scopeHandler) {
-			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.getTreeConfirmed, _Scope, scopeHandler);
-			return unsubsSopeHandler;
+			var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.getTreeConfirmed, _Scope, scopeHandler);
+			return unsubScopeHandler;
 		};
 
 		//###############
@@ -464,7 +464,7 @@
 		//TaxonomyVocabulary retrieveByMachineNameConfirmed request functions
 
 		/**
-		 * pubRetrieveByMachineNameConfirmed
+		 * pubRetrieveByMachineNameConfirmedConfirmed
 		 *
 		 * Publish the TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event with giver args
 		 *
@@ -472,31 +472,31 @@
 		 *
 		 *
 		 **/
-		function pubRetrieveByMachineNameConfirmed(args) {
-			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmed, args);
+		function pubRetrieveByMachineNameConfirmedConfirmed(args) {
+			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedConfirmed, args);
 		};
 
 		/**
-		 * subRetrieveByMachineNameConfirmed
+		 * subRetrieveByMachineNameConfirmedConfirmed
 		 *
 		 * subscribe for the TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event
 		 *
-		 * @param 	{Object} _Scope The scope that calls the channels subRetrieveByMachineNameConfirmed function
+		 * @param 	{Object} _Scope The scope that calls the channels subRetrieveByMachineNameConfirmedConfirmed function
 		 * @param 	{function} scopeHandler The callback handler for TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event
 		 *
 		 * @return 	{function} The unsubscribe function from the $rootScope.on() call
 		 *
 		 **/
 		function subRetrieveByMachineNameConfirmed(_Scope, scopeHandler) {
-			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmed, _Scope, scopeHandler);
-			return unsubsSopeHandler;
+			var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmed, _Scope, scopeHandler);
+			return unsubScopeHandler;
 		};
 
 		//###############
 
 
 		/**
-		 * pubRetrieveByMachineNameConfirmed
+		 * pubRetrieveByMachineNameConfirmedConfirmed
 		 *
 		 * Publish the TaxonomyVocabularyRetrieveByMachineNameConfirmedConfirmed event with giver args
 		 *
@@ -504,12 +504,12 @@
 		 *
 		 *
 		 **/
-		function pubRetrieveByMachineNameFailed(args) {
-			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameFailed, args);
+		function pubRetrieveByMachineNameConfirmedFailed(args) {
+			BaseChannel.pubRootEmit(TaxonomyVocabularyChannelConstant.retrieveByMachineNameConfirmedFailed, args);
 		};
 
 		/**
-		 * subRetrieveByMachineNameFailed
+		 * subRetrieveByMachineNameConfirmedFailed
 		 *
 		 * subscribe for the TaxonomyVocabularyRetrieveByMachineNameConfirmedFailed event
 		 *
@@ -520,8 +520,8 @@
 		 *
 		 **/
 		function subRetrieveByMachineNameFailed(_Scope, scopeHandler) {
-			var unsubsSopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameFailed, _Scope, scopeHandler);
-			return unsubsSopeHandler;
+			var unsubScopeHandler = BaseChannel.subRootEmit( TaxonomyVocabularyChannelConstant.retrieveByMachineNameFailed, _Scope, scopeHandler);
+			return unsubScopeHandler;
 		};
     	
 	};

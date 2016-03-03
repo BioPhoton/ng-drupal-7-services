@@ -45,7 +45,7 @@
      	function subRootEmit(eventName, _Scope, scopeHandler, mapArgs) {
      		
      		//subscribe with rootScope to event and cache unsubscribe function
-     		var unsubsSopeHandler = $rootScope.$on(eventName, function(event, args) {
+     		var unsubScopeHandler = $rootScope.$on(eventName, function(event, args) {
      				if(typeof mapArgs === 'function') {
      					scopeHandler(mapArgs(args));
      				} else {
@@ -56,11 +56,11 @@
      		 
      		//unsubscribe rootScope listener after scope destruction
      		_Scope.$on('$destroy', function() {
-     			unsubsSopeHandler();
+     			unsubScopeHandler();
      		});
      		
      		//return he unsubscribe function from the $rootScope.on() call
-     		return unsubsSopeHandler;
+     		return unsubScopeHandler;
      	};
      	
      	/**
