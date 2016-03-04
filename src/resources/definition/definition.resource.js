@@ -46,18 +46,14 @@
 		 * Url: http://drupal_instance/api_endpoint/definition
 		 * 
 		 * @params  {Object} data the requests data
-		 * 		@key 	{Integer} page The zero-based index of the page to get. defaults to 0., required:false, source:param
-		 * 		@key 	{Integer} pagesize Number of records to get per page., required:false, source:param
-		 * 		@key 	{String} fields The fields to get., required:false, source:param
-		 * 		@key 	{Array} parameters Parameters, required:false, source:param
-		 * 		
+		 *
 	     * 
 	     * @return 	{Promise}
 	     *
 	    **/
 	    function index(data) {
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + DefinitionResourceConstant.resourcePath + '/';
-	    	return BaseResource.index(data, indexPath, DefinitionChannel.pubIndexConfirmed, DefinitionChannel.pubIndexFailed);
+	    	return BaseResource.retrieve(data, indexPath, DefinitionChannel.pubIndexConfirmed, DefinitionChannel.pubIndexFailed);
 	    };
 
 	};
