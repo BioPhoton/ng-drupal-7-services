@@ -51,9 +51,9 @@
 	     * @return 	{Promise}
 	     *
 	    **/
-	    function index(data) {
+	    function index() {
 	    	var indexPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + DefinitionResourceConstant.resourcePath + '/';
-	    	return BaseResource.retrieve(data, indexPath, DefinitionChannel.pubIndexConfirmed, DefinitionChannel.pubIndexFailed);
+	    	return BaseResource.retrieve(indexPath, DefinitionChannel.pubIndexConfirmed, DefinitionChannel.pubIndexFailed);
 	    };
 
 	};
