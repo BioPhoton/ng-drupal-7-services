@@ -22,13 +22,10 @@
 			// Files action
 			filesConfirmed			: 'event:drupal-file-filesConfirmed',
 			filesFailed  			: 'event:drupal-file-filesFailed',
-			// Comments action
-			commentsConfirmed		: 'event:drupal-file-commentsConfirmed',
-			commentsFailed  		: 'event:drupal-file-commentsFailed',
+
 			// Create raw action
 			createRawConfirmed		: 'event:drupal-file-createRawConfirmed',
-			createRawFailed  		: 'event:drupal-file-createRawFailed',
- 			attachFileFailed  		: 'event:drupal-file-attachFileFailed'
+			createRawFailed  		: 'event:drupal-file-createRawFailed'
 	};
     
 	/**
