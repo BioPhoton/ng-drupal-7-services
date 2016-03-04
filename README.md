@@ -72,7 +72,7 @@ Here is a list of supported Drupal services 3.x modules:
 - [x] [Services Menu](https://www.drupal.org/project/services_menu)
 - [ ] [Services Search](https://www.drupal.org/project/services_search)
 - [ ] [Services Entity](https://www.drupal.org/project/services_entity)
-- [ ] [Services Definitions](https://www.drupal.org/project/services_tools)
+- [x] [Services Definitions](https://www.drupal.org/project/services_tools)
 - [ ] [Geocoder](https://www.drupal.org/project/geocoder)
 
 ##Drupal Services
@@ -149,6 +149,19 @@ Following of Drupal's resources and their endpoint's are currently implemented:
 ###Views Resource
 - Retrieve
 
+##Drupal Services Menu
+Following of Drupal's resources and their endpoint's are currently implemented:
+
+###Menu Resource
+- Retrieve
+
+##Drupal Services Definition
+Following of Drupal's resources and their endpoint's are currently implemented:
+
+###Definition Resource
+- Index
+
+
 ##Extra Modules
 
 ###Authentication service
@@ -160,7 +173,7 @@ Following of Drupal's resources and their endpoint's are currently implemented:
 - getConnectionState
 - setConnectionState
 - getCurrentUser
--	setCurrentUser
+- setCurrentUser
 - refreshConnection
 - getLastConnectTime
 
