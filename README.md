@@ -86,7 +86,6 @@ Here is a list of supported Drupal services 3.x modules:
     - CountAll
     - CountNew
     - Retrieve
-    - Retrieve
   - File Resource
     - Retrieve
     - Create
