@@ -75,8 +75,8 @@ Here is a list of supported Drupal services 3.x modules:
 - [x] [Services Definitions](https://www.drupal.org/project/services_tools)
 - [x] [Geocoder](https://www.drupal.org/project/geocoder)
 
-- Drupal Services
-Following of Drupal's resources and their endpoint's are currently implemented:
+- **Drupal Services**
+  Following of Drupal's resources and their endpoint's are currently implemented:
   - Comment Resource
     - Retrieve
     - Create
@@ -87,103 +87,83 @@ Following of Drupal's resources and their endpoint's are currently implemented:
     - CountNew
     - Retrieve
     - Retrieve
+  - File Resource
+    - Retrieve
+    - Create
+    - Delete
+    - Index
+    - Create_raw
+  - Node Resource
+    - Retrieve
+    - Create
+    - Update
+    - Delete
+    - Index
+    - Files
+    - Comments
+    - Attach_file
+  - System Resource
+    - Connect
+    - Get_variable
+    - Set_variable
+    - Del_variable
+  - TaxonomyTerm Resource
+    - Retrieve
+    - Create
+    - Update
+    - Delete
+    - Index
+    - SelectNodes
+  -TaxonomyVocabulary Resource
+    - Retrieve
+    - Create
+    - Update
+    - Delete
+    - Index
+    - GetTree
+  -User Resource 
+    - Retrieve
+    - Create
+    - Update
+    - Delete
+    - Index
+    - Login
+    - Logout
+    - Token 
+    - Request_new_password
+    - Register
+    - Cancel
+    - Password_reset
+    - Resend_welcome_email
+- **Drupal Services Views**
+  - Views Resource
+    - Retrieve
+- **Drupal Geocoder**
+  -Views Geocoder
+    - Retrieve
+    - Index
+- **Drupal Services Menu**
+  - Menu Resource
+    - Retrieve
+- **Drupal Services Definition**
+  - Definition Resource
+    - Index
+- **Extra Resources**
+  - Authentication service
+    - storeTokenData
+    - deleteTokenData
+    - refreshToken
+    - storeSessionData
+    - deleteSessionData
+    - getConnectionState
+    - setConnectionState
+    - getCurrentUser
+    - setCurrentUser
+    - refreshConnection
+    - getLastConnectTime
 
-###File Resource
-- Retrieve
-- Create
-- Delete
-- Index
-- Create_raw
-
-###Node Resource
-- Retrieve
-- Create
-- Update
-- Delete
-- Index
-- Files
-- Comments
-- Attach_file
-
-###System Resource
-- Connect
-- Get_variable
-- Set_variable
-- Del_variable
-
-###TaxonomyTerm Resource
-- Retrieve
-- Create
-- Update
-- Delete
-- Index
-- SelectNodes
-
-###TaxonomyVocabulary Resource
-- Retrieve
-- Create
-- Update
-- Delete
-- Index
-- GetTree
-
-###User Resource 
-- Retrieve
-- Create
-- Update
-- Delete
-- Index
-- Login
-- Logout
-- Token 
-- Request_new_password
-- Register
-- Cancel
-- Password_reset
-- Resend_welcome_email
-
-##Drupal Services Views
-Following of Drupal's resources and their endpoint's are currently implemented:
-
-###Views Resource
-- Retrieve
-
-##Drupal Geocoder
-Following of Drupal's resources and their endpoint's are currently implemented:
-
-###Views Geocoder
-- Retrieve
-- Index
-
-##Drupal Services Menu
-Following of Drupal's resources and their endpoint's are currently implemented:
-
-###Menu Resource
-- Retrieve
-
-##Drupal Services Definition
-Following of Drupal's resources and their endpoint's are currently implemented:
-
-###Definition Resource
-- Index
-
-
-##Extra Modules
-
-###Authentication service
-- storeTokenData
-- deleteTokenData
-- refreshToken
-- storeSessionData
-- deleteSessionData
-- getConnectionState
-- setConnectionState
-- getCurrentUser
-- setCurrentUser
-- refreshConnection
-- getLastConnectTime
-
-###AccessControl
+# Extra Servicdes**
+##AccessControl
 - roles
 - accessLevels 
 - authorize 
