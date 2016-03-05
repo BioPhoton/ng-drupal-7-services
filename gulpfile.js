@@ -1,14 +1,12 @@
 /*Gulp modules
  * */
 
-var gulp 		= require('gulp'),
+var gulp 	= require('gulp'),
 	bundle = require('gulp-bundle-assets');
 
-
-var bundleOptions = 
 /*Gulp Tasks*/
 
-/*This task creates a bundle of all js files*/
+/*This task creates a bundle of all js files and copy it ito the dist folder*/
 gulp.task('bundle', function() {
 	  return gulp.src('./bundle.config.js')
 	    .pipe(bundle())
