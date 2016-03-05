@@ -13,6 +13,9 @@
 	    		 'd7-services.resources.taxonomy_term', 
 	    		 'd7-services.resources.taxonomy_vocabulary', 
 	    		 'd7-services.resources.user', 
-	    		 'd7-services.resources.views' 
-	    		 ]);
+	    		 'd7-services.resources.views',
+				 'd7-services.resources.menu',
+				 'd7-services.resources.definition',
+				 'd7-services.resources.geocoder'
+				]);
 })();
