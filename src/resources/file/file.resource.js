@@ -48,7 +48,7 @@
 		 * Retrieve a file
 		 * 
 		 * Method: GET 
-		 * Url: http://www.drupalionic.org/drupal_test/api/v1/file/{FID}
+		 * Url: http://drupal_instance/api_endpoint/file/{FID}
 		 * 
 		 * @params  {Object} data The requests data
 		 * 			@key 	{Integer} fid FID of the file to be loaded, required:true, source:path
