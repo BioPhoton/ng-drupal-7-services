@@ -73,21 +73,20 @@ Here is a list of supported Drupal services 3.x modules:
 - [ ] [Services Search](https://www.drupal.org/project/services_search)
 - [ ] [Services Entity](https://www.drupal.org/project/services_entity)
 - [x] [Services Definitions](https://www.drupal.org/project/services_tools)
-- [ ] [Geocoder](https://www.drupal.org/project/geocoder)
+- [x] [Geocoder](https://www.drupal.org/project/geocoder)
 
-##Drupal Services
+- Drupal Services
 Following of Drupal's resources and their endpoint's are currently implemented:
-
-###Comment Resource
-- Retrieve
-- Create
-- Update
-- Delete 
-- Index
-- CountAll
-- CountNew
-- Retrieve
-- Retrieve
+  - Comment Resource
+    - Retrieve
+    - Create
+    - Update
+    - Delete
+    - Index
+    - CountAll
+    - CountNew
+    - Retrieve
+    - Retrieve
 
 ###File Resource
 - Retrieve
@@ -148,6 +147,13 @@ Following of Drupal's resources and their endpoint's are currently implemented:
 
 ###Views Resource
 - Retrieve
+
+##Drupal Geocoder
+Following of Drupal's resources and their endpoint's are currently implemented:
+
+###Views Geocoder
+- Retrieve
+- Index
 
 ##Drupal Services Menu
 Following of Drupal's resources and their endpoint's are currently implemented:
