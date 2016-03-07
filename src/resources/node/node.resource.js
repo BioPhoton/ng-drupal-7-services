@@ -74,19 +74,8 @@
 	     * Method: POST
 	     * Url: http://drupal_instance/api_endpoint/node
 	     * 
-	     * @params  {Object} data The accout of the node to create, required:true, source:post body
+	     * @params  {Object} data The data of the node to create, required:true, source:post body
 	     * 
-	     *  The $account object should contain, at minimum, the following properties:
-		 *     - {String} name  The node name
-		 *     - {String} mail  The email address
-		 *     - {String} pass  The plain text unencrypted password
-		 *
-		 *  These properties can be passed but are optional
-		 *     - {Integer} status Value 0 for blocked, otherwise will be active by default
-		 *     - {Integer} notify Value 1 to notify node of new account, will not notify by default
-		 *
-		 *  Roles can be passed in a roles property which is an associative
-		 *  array formatted with '<role id>' => '<role id>', not including the authenticated node role, which is given by default.
 	     * 
 	     * @return 	{Promise} The node object of the newly created node.
 	     *
