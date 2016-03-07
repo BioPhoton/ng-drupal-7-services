@@ -51,10 +51,10 @@
 		 * Retrieve a node
 		 * 
 		 * Method: GET 
-		 * Url: http://drupal_instance/api_endpoint/node/{UID}
+		 * Url: http://drupal_instance/api_endpoint/node/{NID}
 		 * 
 		 * @params  {Object} data The requests data
-		 * 			@key 	{Integer} nid UID of the node to be loaded, required:true, source:path
+		 * 			@key 	{Integer} nid NID of the node to be loaded, required:true, source:path
 		 * 
 		 * @return 	{Promise} A node object
 		 * 
@@ -108,7 +108,7 @@
 	     * Update a node
 	     * 
 	     * Method: PUT
-	     * Url: http://drupal_instance/api_endpoint/node/{UID}
+	     * Url: http://drupal_instance/api_endpoint/node/{NID}
 	     * 
 	     * @params  {Object} data The requests data
 	     * 			@key 	{Integer} nid Unique identifier for this node, required:true, source:path
@@ -135,7 +135,7 @@
 	     * Delete a node
 	     * 
 	     * Method: DELETE
-	     * Url: http://drupal_instance/api_endpoint/node/{UID}
+	     * Url: http://drupal_instance/api_endpoint/node/{NID}
 	     * 
 	     * @params  {Object} data the requests data
 	     * 			@key 	{Integer} nid The id of the node to delete, required:true, source:path
