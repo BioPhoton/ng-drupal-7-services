@@ -5,7 +5,7 @@
   "authors": [
     "Michael Hladky michael@hladky.at"
   ],
-  "description": "An API client for a Drupal 7 and Services 3.x REST setup",
+  "description": "Well structured angular modules mimic the architecture of Drupal Services 3.x. Angular Drupal7 Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints. Unlike the other project focusing on the same topic, Angular Drupal7 Services is precisely organized around the Drupal Services 3.x architecture and naming conventions.",
    "main": [
              "dist/ng-drupal-7-services.js"
            ],
