@@ -2,24 +2,29 @@
   "name": "ng-drupal-7-services",
   "version": "2.2.0",
   "homepage": "https://github.com/BioPhoton/ng-drupal-7-services",
+  "license": "MIT",
   "authors": [
-    "Michael Hladky michael@hladky.at"
+    "Michael Hladky <michael@hladky.at>"
   ],
-  "description": "An API client for a Drupal 7 and Services 3.x REST setup",
-   "main":  "dist/ng-drupal-7-services.js",
+  "description": "Well structured AngularJS modules mimic the architecture of Drupal Services 3.x. for your next AngularJS / Ionic Drupal Headless / Decoupled project",
   "keywords": [
     "Drupal",
+    "Headless",
+    "Decoupled",
     "Angular",
     "Angularjs",
     "ng",
+    "NG",
     "Ionic",
     "API",
     "REST",
     "http",
     "Services3",
-    "Client"
+    "Client",
+    "Resource",
+    "Endpoint"
   ],
-  "license": "MIT",
+  "main":  "dist/ng-drupal-7-services.js",
   "ignore": [
     "node_modules",
     "bower_components",
