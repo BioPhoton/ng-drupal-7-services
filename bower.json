@@ -5,19 +5,24 @@
   "authors": [
     "Michael Hladky michael@hladky.at"
   ],
-  "description": "Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services) Angular Drupal7 Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints. Unlike the other project focusing on the same topic, Angular Drupal7 Services is precisely organized around the [Drupal Services 3.x](https://www.drupal.org/project/services) architecture and naming conventions.",
+  "description": "Well structured angular modules mimic the architecture of Drupal Services 3.x. for your next AngularJS / Ionoc - Drupal Headless / Decoupled project",
    "main":  "dist/ng-drupal-7-services.js",
   "keywords": [
     "Drupal",
+    "Headless",
+    "Decoupled",
     "Angular",
     "Angularjs",
     "ng",
+    "NG",
     "Ionic",
     "API",
     "REST",
     "http",
     "Services3",
-    "Client"
+    "Client",
+    "Resource",
+    "Endpoint"
   ],
   "license": "MIT",
   "ignore": [

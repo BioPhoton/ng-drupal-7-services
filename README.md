@@ -1,6 +1,10 @@
 # Angular Drupal7 Services
 #### Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services)
 
+[![Bower version](https://badge.fury.io/bo/ng-drupal-7-services.svg)](https://badge.fury.io/bo/ng-drupal-7-services)
+[![npm version](https://badge.fury.io/js/ng-drupal-7-services.svg)](https://badge.fury.io/js/ng-drupal-7-services)
+
+
 Angular Drupal7 Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints.   
 Unlike the other project focusing on the same topic, Angular Drupal7 Services is precisely organized around the [Drupal Services 3.x](https://www.drupal.org/project/services) architecture and naming conventions.   
   
@@ -76,7 +80,6 @@ Here is a list of supported Drupal services 3.x modules:
 - [x] [Geocoder](https://www.drupal.org/project/geocoder)
 
 - **Drupal Services**
-  Following of Drupal's resources and their endpoint's are currently implemented:
   - Comment Resource
     - Retrieve
     - Create
