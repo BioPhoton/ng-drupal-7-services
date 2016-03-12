@@ -5,12 +5,15 @@
   "authors": [
     "Michael Hladky michael@hladky.at"
   ],
-  "description": "An API client for a Drupal 7 and Services 3.x REST setup",
+  "description": "An API client for a Drupal 7 and Services 3.x REST setup. Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services)",
    "main":  "dist/ng-drupal-7-services.js",
   "keywords": [
     "Drupal",
+    "Drupal7",
+    "Headless",
+    "Decoupled",
     "Angular",
-    "Angularjs",
+    "AngularJs",
     "ng",
     "Ionic",
     "API",

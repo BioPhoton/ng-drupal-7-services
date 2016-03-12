@@ -1,6 +1,8 @@
 # Angular Drupal7 Services
 #### Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services)
 
+[![Bower](https://img.shields.io/bower/v/bootstrap.svg)](https://github.com/BioPhoton/ng-drupal-7-services)
+
 Angular Drupal7 Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints.   
 Unlike the other project focusing on the same topic, Angular Drupal7 Services is precisely organized around the [Drupal Services 3.x](https://www.drupal.org/project/services) architecture and naming conventions.   
   
