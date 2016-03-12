@@ -3,7 +3,7 @@
   "repository" : "https://github.com/BioPhoton/ng-drupal-7-services",
   "version": "2.2.0",
   "license" : "MIT",
-  "description": "An angular api client for drupal7 services 3.x",
+  "description": "Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services) Angular Drupal7 Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints. Unlike the other project focusing on the same topic, Angular Drupal7 Services is precisely organized around the [Drupal Services 3.x](https://www.drupal.org/project/services) architecture and naming conventions.",
   "dependencies": {
     "gulp": "^3.9.0",
     "gulp-bundle-assets": "^2.23.0"
