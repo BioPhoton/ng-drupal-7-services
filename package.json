@@ -30,10 +30,10 @@
   },
   "dependencies": {
     "angular-cookies": "~1.4.5",
-    "gulp-ngdocs": "^0.2.13",
     "ngstorage": "~0.3.9"
   },
   "devDependencies": {
+    "gulp-ngdocs": "^0.2.13",
     "browser-sync": "^2.11.1",
     "del": "^2.2.0",
     "extendify": "^1.0.0",
