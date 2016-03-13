@@ -46,7 +46,6 @@
     "gulp-print": "^2.0.1",
     "gulp-util": "^3.0.7",
     "merge-stream": "^1.0.0",
-    "print": "0.0.0",
     "wrench": "^1.5.8",
     "yargs": "^4.2.0"
   }
