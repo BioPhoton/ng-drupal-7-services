@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/BioPhoton/ng-drupal-7-services"
   },
-  "version": "2.2.3",
+  "version": "2.2.4",
   "license": "MIT",
   "author": "Michael Hladky <michael@hladky.at>",
   "description": "Well structured AngularJS modules mimic the architecture of Drupal Services 3.x. for your next AngularJS / Ionic Drupal Headless / Decoupled project",
