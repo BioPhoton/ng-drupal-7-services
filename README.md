@@ -20,7 +20,7 @@ Or check out the sample implementation for [Ionic-Headless-Drupal](https://githu
 ## Get Started
 
 **(1)** Get Angular Drupal7 Services:
-Download or install via **[Bower](http://bower.io/)**: by running `$ bower install https://github.com/BioPhoton/ng-drupal-7-services` from your console
+Download or install via **[Bower](http://bower.io/)**: by running `$ bower install ng-drupal-7-services` from your console
 
 **(2)** Include `ng-drupal-7-services.js` in your `index.html`.
 

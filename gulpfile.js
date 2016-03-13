@@ -1,14 +1,44 @@
 /*Gulp modules
  * */
+/*
+var bundle = require('gulp-bundle-assets');
 
-var gulp 	= require('gulp'),
-	bundle = require('gulp-bundle-assets');
-
-/*Gulp Tasks*/
-
-/*This task creates a bundle of all js files and copy it ito the dist folder*/
+//This task creates a bundle of all js files and copy it ito the dist folder
 gulp.task('bundle', function() {
-	  return gulp.src('./bundle.config.js')
-	    .pipe(bundle())
-	    .pipe(gulp.dest('./dist'));
-	});
+	return gulp.src('./bundle.config.js')
+		.pipe(bundle())
+		.pipe(gulp.dest('./dist'));
+});
+*/
+
+/* jshint node: true */
+/**
+ *  Welcome to your gulpfile!
+ *  The gulp tasks are splitted in several files in the gulp directory
+ *  because putting all here was really too long
+ */
+
+'use strict';
+
+var gulp = require('gulp');
+
+
+
+var wrench = require('wrench');
+var $ = require('gulp-load-plugins')();
+
+/**
+ *  This will load all js or coffee files in the gulp directory
+ *  in order to load all gulp tasks
+ */
+wrench.readdirSyncRecursive('./gulp/tasks').filter(function(file) {
+	return (/\.(js|coffee)$/i).test(file);
+}).map(function(file) {
+	require('./gulp/tasks/' + file);
+});
+
+/**
+ * List the available gulp tasks
+ */
+gulp.task('help', $.taskListing);
+gulp.task('default', ['help']);

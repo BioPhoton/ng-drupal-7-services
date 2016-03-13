@@ -1,170 +1,188 @@
-;(function() {
-    'use strict';
+;(function () {
+  'use strict';
 
-	/**
-	 * System Resource Modules
-	 * 
-	 * see sourcecode in services/resources/system_resource.inc
-	 * 
-	**/
-    angular.module('d7-services.resources.system.resource', ['d7-services.commons.configurations', 'd7-services.commons.baseResource', 'd7-services.resources.system.resourceConstant', 'd7-services.resources.system.channel'])
-    
-
-    /**
-	 * SystemResource
-	 * 
-	 * This service mirrors the Drupal system resource of the services 3.x module.
-	 * To use this you have to set following line in your Drupal CORS module settings
-	 * 
-	**/
+  /**
+   * @ngdoc service
+   * @name d7-services.resources.system.resource:SystemResource
+   * @description
+   * This service mirrors the Drupal system resource of the services 3.x module.
+   * To use this you have to set following line in your Drupal CORS module settings
+   * @requires d7-services.resources.system.resourceConstant:SystemResourceConstant
+   * @requires d7-services.resources.system.channelConstant:SystemChannelConstant
+   * @requires d7-services.commons.baseResource:BaseResource
+   * @requires d7-services.commons.configurations:DrupalApiConstant
+   */
+  angular
+    .module('d7-services.resources.system.resource', ['d7-services.commons.configurations', 'd7-services.commons.baseResource', 'd7-services.resources.system.resourceConstant', 'd7-services.resources.system.channel'])
     .factory('SystemResource', SystemResource);
 
+
+  SystemResource.$inject = ['DrupalApiConstant', 'BaseResource', 'SystemResourceConstant', 'SystemChannel'];
+
+  /** @ngInject */
+  function SystemResource(DrupalApiConstant, BaseResource, SystemResourceConstant, SystemChannel) {
+
+    var systemResourceService = {
+      connect: connect,
+      get_variable: get_variable,
+      set_variable: set_variable,
+      del_variable: del_variable
+    };
+
+    return systemResourceService;
+
+    ////////////
+
     /**
-	 * Manually identify dependencies for minification-safe code
-	 * 
-	**/
-    SystemResource.$inject = ['$http', 'DrupalApiConstant', 'BaseResource', 'SystemResourceConstant', 'SystemChannel'];
-    
-	/** @ngInject */
-	function SystemResource($http, DrupalApiConstant, BaseResource, SystemResourceConstant, SystemChannel) { 
-		
-		//setup and return service            	
-        var systemResourceService = {
-			connect 		: connect,
-			get_variable 	: get_variable,
-			set_variable 	: set_variable,
-			del_variable 	: del_variable
+     * @ngdoc method
+     * @name connect
+     * @methodOf d7-services.resources.system.resource:SystemResource
+     * @description
+     * Returns the details of currently logged in user.
+     *
+     * Method: POST
+     * Url: http://drupal_instance/api_endpoint/system/connect
+     *
+     * @returns  {Promise} Object with session id, session name and a user object.
+     *
+     * @example
+     *
+     * performing a system connect request and handling data in promise callback
+     * <pre>
+     * angular
+     *  .module('myModule', ['d7-services.resources.system'])
+     *  .config(function (SystemResource) {
+     *    SystemResource.connect()
+     *      .then(
+     *        function(confirmData) {...},
+     *        function(failData) {...}
+     *      );
+     * }
+     * </pre>
+     *
+     * performing a system connect request and handling data in event callback
+     * <pre>
+     * angular
+     *  .module('myModule', ['d7-services.resources.system'])
+     *  .config(function ($scope, SystemResource, SystemChannel) {
+     *    SystemResource.connect();
+     *    //subscribe to confirm event
+     *    SystemChannel.subConnectConfirm($scope, function(confirmData) {...});
+     *    //subscribe to fail event
+     *    SystemChannel.subConnectConfirm($scope, function(failData) {...});
+     * });
+     * </pre>
+     *
+     */
+    function connect() {
+
+      var connectPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
+        requestConfig = {
+          method: 'POST',
+          url: connectPath
         };
-        
-        return systemResourceService;
 
-        ////////////
-        
-        /**
-		 * connect
-		 * 
-		 * Returns the details of currently logged in user.
-		 * 
-		 * Method: POST 
-		 * Url: http://drupal_instance/api_endpoint/system/connect
-		 * 
-		 * @return 	{Promise} Object with session id, session name and a user object.
-		 * 
-		**/
-        function connect() {
+      return BaseResource.request(requestConfig, SystemChannel.pubConnectConfirmed, SystemChannel.pubConnectFailed);
 
-			var connectPath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.connect,
-				requestConfig = {
-						method :'POST',
-						url : connectPath
-				};
-			
-			return BaseResource.request(requestConfig,SystemChannel.pubConnectConfirmed,  SystemChannel.pubConnectFailed);
-			
-		};
-		
-		/**
-		 * get_variable
-		 * 
-		 * Returns a persistent variable.
-		 * Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
-		 * 
-		 * Method: POST
-		 * Url: http://drupal_instance/api_endpoint/system/get_variable
-		 * 
-		 * @params  {Object} data the requests data
-		 * 			@key 	{String} name The name of the variable to return, required:true, source:post body
-		 * 			@key 	{String} _default The default value to use if this variable has never been set, required:false, source:post body
-		 * 
-		 * @return 	{Promise} The value of the variable. Unserialization is taken care of as necessary.
-		 *
-		**/
-		function get_variable(data){
-			
-			//undefined check
-	    	data = (data)?data:{};
-			
-			var getVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
-				requestConfig = {
-						method 	:'POST',
-						url 	: getVariablePath,
-						data 	: {
-							name : data.name,
-						}
-				};
-			
-			return BaseResource.request(requestConfig, SystemChannel.pubGetVariableConfirmed, SystemChannel.pubGetVariableFailed);
-			
-		};
-		
-		/**
-		 * set_variable
-		 * 
-		 * Sets a persistent variable.
-		 * Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
-		 * 
-		 * Method: POST
-		 * Url: http://drupal_instance/api_endpoint/system/set_variable
-		 * 
-		 * @params  {Object} data the requests data
-		 * 			@key 	{String} name The name of the variable to set, required:true, source:post body
-		 * 			@key 	{String} value The value to set. This can be any PHP data type; these functions take care of serialization as necessary, required:true, source:post body
-		 * 
-		 * @return 	{Promise} True if successful false if not
-		 * 
-		**/
-		function set_variable(data){
-			
-			//undefined check
-	    	data = (data)?data:{};
-	
-			var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
-				requestConfig = {
-						method 	:'POST',
-						url 	: setVariablePath,
-						data 	: {
-							name 	: data.name,
-							value 	: data.value
-						}
-				};
+    }
 
-			return BaseResource.request(requestConfig, SystemChannel.pubSetVariableConfirmed, SystemChannel.pubSetVariableFailed);
-			
-		};
-		
-		/**
-		 * del_variable
-		 * 
-		 * Unsets a persistent variable.
-		 * Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
-		 * 
-		 * Method: POST
-		 * Url: http://drupal_instance/api_endpoint/system/del_variable
-		 * 
-		 * @params  {Object} data the requests data
-		 * 			@key 	{String} name The name of the variable to undefine, required:true, source:post body
-		 * 
-		 * @return 	{Promise}
-		 * 
-		**/
-		function del_variable(data){
-			
-			//undefined check
-	    	data = (data)?data:{};
-	    	
-			var delVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
-				requestConfig = {
-						method 	:'POST',
-						url 	: delVariablePath,
-						data 	: {
-							name : data.name
-						}
-				};
-			
-			return BaseResource.request(requestConfig, SystemChannel.pubDelVariableConfirmed, SystemChannel.pubDelVariableFailed);
+    /**
+     * @ngdoc method
+     * @name get_variable
+     * @methodOf d7-services.resources.system.resource:SystemResource
+     * @description
+     * Returns a persistent variable.
+     * Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
+     *
+     * Method: POST
+     * Url: http://drupal_instance/api_endpoint/system/get_variable
+     *
+     * @param {Object} data - The requests data
+     * @param {String} data.name - The name of the variable to return, required:true, source:post body
+     * @param {String} data._default - The default value to use if this variable has never been set, required:false, source:post body
+     *
+     * @returns  {Promise} Object with session id, session name and a user object.
+     */
+    function get_variable(data) {
 
-		};
-	
-	};
+      var getVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.get_variable,
+        requestConfig = {
+          method: 'POST',
+          url: getVariablePath,
+          data: {
+            name: data.name
+          }
+        };
+
+      return BaseResource.request(requestConfig, SystemChannel.pubGetVariableConfirmed, SystemChannel.pubGetVariableFailed);
+
+    }
+
+    /**
+     * @ngdoc method
+     * @name set_variable
+     * @methodOf d7-services.resources.system.resource:SystemResource
+     * @description
+     * Sets a persistent variable.
+     * Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
+     *
+     * Method: POST
+     * Url: http://drupal_instance/api_endpoint/system/set_variable
+     *
+     * @param {Object} data - The requests data
+     * @param {String} data.name - The name of the variable to set, required:true, source:post body
+     * @param {String} data.value - The value to set. This can be any PHP data type; these functions take care of serialization as necessary, required:true, source:post body
+     *
+     * @returns  {Promise} True if successful false if not
+     */
+    function set_variable(data) {
+
+      var setVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.set_variable,
+        requestConfig = {
+          method: 'POST',
+          url: setVariablePath,
+          data: {
+            name: data.name,
+            value: data.value
+          }
+        };
+
+      return BaseResource.request(requestConfig, SystemChannel.pubSetVariableConfirmed, SystemChannel.pubSetVariableFailed);
+
+    }
+
+    /**
+     * @ngdoc method
+     * @name del_variable
+     * @methodOf d7-services.resources.system.resource:SystemResource
+     * @description
+     * Unsets a persistent variable.
+     * Case-sensitivity of the variable_* functions depends on the database collation used. To avoid problems, always use lower case for persistent variable names.
+     *
+     * Method: POST
+     * Url: http://drupal_instance/api_endpoint/system/del_variable
+     *
+     * @param {Object} data - The requests data
+     * @param {String} data.name - The name of the variable to undefine, required:true, source:post body
+     *
+     *
+     * @returns  {Promise} True if successful false if not
+     */
+    function del_variable(data) {
+
+      var delVariablePath = DrupalApiConstant.drupal_instance + DrupalApiConstant.api_endpoint + SystemResourceConstant.resourcePath + '/' + SystemResourceConstant.actions.del_variable,
+        requestConfig = {
+          method: 'POST',
+          url: delVariablePath,
+          data: {
+            name: data.name
+          }
+        };
+
+      return BaseResource.request(requestConfig, SystemChannel.pubDelVariableConfirmed, SystemChannel.pubDelVariableFailed);
+
+    }
+
+  }
 
 })();
