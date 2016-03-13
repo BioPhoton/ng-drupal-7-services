@@ -30,28 +30,9 @@ Or check out the sample implementation for [Ionic-Headless-Drupal](https://githu
 **(3)** Add `'d7-services'` to your main module's list of dependencies
 
 
+## [API Documentation](http://www.drupalionic.org/docs/api/d7-services.resources.system:System) (!!!in progress!!!)
 
-##Architecture
-Angular Drupal7 Services holds a resources and commons folder.
-The resources folder consists of resource modules each in a folder named as the corresponding Drupal resource.
-All other general modules, the authentication modules and the helper modules are located in the commons folder.
-
-A resource generally consists out of 4 components. 
-
-Two components that manages the events and communication:
-- [resourcename].channelConstant.js
-- [resourcename]ChannelConstant.js
-
-And Two components that manages the http requests and promise logic:
-- [resourcename].resourceConstant.js
-- [resourcename].resource.js
-
-The .constant modules hold the api paths, event names and other constants and the .resource and .channel modules manage the communication to server and inside the application.
-Same resources also hold additional modules like the view resource, that provides the Drupal views filter and sort operators and so on.
-
-## [API-Documentation](http://www.drupalionic.org/docs/api/d7-services.resources.system:System) (!!!in progress!!!)
-
-##Useage
+## Useage
 
 For example a node retrieve call look's like this:
 
