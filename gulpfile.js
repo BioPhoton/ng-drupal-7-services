@@ -1,15 +1,5 @@
 /*Gulp modules
  * */
-/*
-var bundle = require('gulp-bundle-assets');
-
-//This task creates a bundle of all js files and copy it ito the dist folder
-gulp.task('bundle', function() {
-	return gulp.src('./bundle.config.js')
-		.pipe(bundle())
-		.pipe(gulp.dest('./dist'));
-});
-*/
 
 /* jshint node: true */
 /**
