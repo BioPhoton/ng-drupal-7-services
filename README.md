@@ -30,6 +30,7 @@ Or check out the sample implementation for [Ionic-Headless-Drupal](https://githu
 **(3)** Add `'d7-services'` to your main module's list of dependencies
 
 
+
 ##Architecture
 Angular Drupal7 Services holds a resources and commons folder.
 The resources folder consists of resource modules each in a folder named as the corresponding Drupal resource.
@@ -48,6 +49,7 @@ And Two components that manages the http requests and promise logic:
 The .constant modules hold the api paths, event names and other constants and the .resource and .channel modules manage the communication to server and inside the application.
 Same resources also hold additional modules like the view resource, that provides the Drupal views filter and sort operators and so on.
 
+## [API-Documentation](http://www.drupalionic.org/docs/api/d7-services.resources.system:System) (!!!in progress!!!)
 
 ##Useage
 
@@ -118,8 +120,8 @@ Here is a list of supported Drupal services 3.x modules:
     - Update
     - Delete
     - Index
-    - SelectNodes
-  -TaxonomyVocabulary Resource
+    - SelectNodes  
+  - TaxonomyVocabulary Resource
     - Retrieve
     - Create
     - Update
