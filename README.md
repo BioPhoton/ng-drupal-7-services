@@ -30,7 +30,7 @@ Or check out the sample implementation for [Ionic-Headless-Drupal](https://githu
 **(3)** Add `'d7-services'` to your main module's list of dependencies
 
 
-## [API Documentation](http://www.drupalionic.org/docs/api) (!!!in progress!!!)
+## [API Documentation](http://www.drupalionic.org/docs) (!!!in progress!!!)
 
 ## Useage
 
