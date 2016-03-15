@@ -4,7 +4,7 @@
     "type": "git",
     "url": "https://github.com/BioPhoton/ng-drupal-7-services"
   },
-  "version": "2.2.5",
+  "version": "2.2.6",
   "license": "MIT",
   "author": "Michael Hladky <michael@hladky.at>",
   "description": "Well structured AngularJS modules mimic the architecture of Drupal Services 3.x. for your next AngularJS / Ionic Drupal Headless / Decoupled project",
@@ -33,7 +33,6 @@
     "ngstorage": "~0.3.9"
   },
   "devDependencies": {
-    "gulp-ngdocs": "^0.2.13",
     "browser-sync": "^2.11.1",
     "del": "^2.2.0",
     "extendify": "^1.0.0",
@@ -41,9 +40,13 @@
     "gulp-bump": "^1.0.0",
     "gulp-bundle-assets": "^2.23.0",
     "gulp-cheerio": "^0.6.2",
+    "gulp-concat": "^2.6.0",
     "gulp-load-plugins": "^1.2.0",
+    "gulp-ngdocs": "^0.2.13",
     "gulp-notify": "^2.2.0",
     "gulp-print": "^2.0.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.3",
     "gulp-util": "^3.0.7",
     "merge-stream": "^1.0.0",
     "wrench": "^1.5.8",
