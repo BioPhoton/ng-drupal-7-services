@@ -54,7 +54,7 @@
    * </pre>
    */
   angular
-    .module('d7-services.channels.system.channelConstant', [])
+    .module('d7-services.resources.system.channelConstant', [])
     .constant("SystemChannelConstant", SystemChannelConstant);
 
 })();
