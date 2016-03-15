@@ -1,6 +1,7 @@
 ;(function () {
 
   'use strict';
+
   /**
    * @ngdoc service
    * @name d7-services.commons.baseChannel:BaseChannel
@@ -8,7 +9,6 @@
    * An abstract notification channel.
    * This service enables you to publish and subscribe data over events in a very fast and efficient way.
    * @see {@link http://slides.com/michael_hladky/event-channel#/|Reacting to changes in AngularJS}
-   *
    */
   angular.module('d7-services.commons.baseChannel', [])
     .factory('BaseChannel', BaseChannel);
@@ -37,7 +37,7 @@
      * @param  {String} eventName - The events name
      * @param  {Object} _Scope - The scope that calls the channels subscribe function
      * @param  {function} scopeHandler - The callback handler normally defined in the $scopes controller or directive or service
-     * @param  {function} $mapArgs - A mapper function to customize the given event arguments
+     * @param  {function} mapArgs - A mapper function to customize the given event arguments
      *
      * @return  {function} The unsubscribe function from the $rootScope.on() call
      *
@@ -47,7 +47,7 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.commons.d7-services.commons.baseChannel'])
-     *  .config(function ($scope,BaseChannel) {
+     *  .controller('myController',function ($scope,BaseChannel) {
      *    var unsubscribeHandler = BaseChannel.subRootEmit('MY_EVENT', $scope, function(args) {...}, function(args){return args;});
      * }
      * </pre>
@@ -90,7 +90,7 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.commons.d7-services.commons.baseChannel'])
-     *  .config(function ($scope,BaseChannel) {
+     *  .controller('myController', function ($scope,BaseChannel) {
      *    BaseChannel.pubRootEmit('MY_EVENT', {my:'args'});
      * }
      * </pre>
@@ -98,8 +98,8 @@
      */
     function pubRootEmit(eventName, args) {
       $rootScope.$emit(eventName, args);
-    };
+    }
 
-  };
+  }
 
 })();

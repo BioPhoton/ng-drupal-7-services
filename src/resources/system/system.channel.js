@@ -38,10 +38,11 @@
       pubSetVariableFailed: pubSetVariableFailed,
       subSetVariableFailed: subSetVariableFailed,
 
-      pubDelVariableConfirmed: pubDelVariableConfirmed,
-      subDelVariableConfirmed: subDelVariableConfirmed,
-      pubDelVariableFailed: pubDelVariableFailed,
-      subDelVariableFailed: subDelVariableFailed
+      pubDelVariableConfirmed : pubDelVariableConfirmed,
+      subDelVariableConfirmed : subDelVariableConfirmed,
+      pubDelVariableFailed  : pubDelVariableFailed,
+      subDelVariableFailed  : subDelVariableFailed
+
     }
 
     return systemChannelService;
@@ -189,8 +190,8 @@
      * Publish the getVariableConfirmed event with given args
      *
      * @param  {Object} args - The events arguments
+     *
      */
-
     function pubGetVariableConfirmed(args) {
       BaseChannel.pubRootEmit(SystemChannelConstant.getVariableConfirmed, args);
     }

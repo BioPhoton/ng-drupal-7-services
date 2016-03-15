@@ -2,23 +2,20 @@
 	'use strict';
 
 	/**
-	 * System Channel Module
+	 * @ngdoc service
+	 * @name d7-services.commons.baseResource:BaseResource
+	 * @description
+	 * An abstract resource providing retrieve, create, update, delete and index functions.
+	 * This service is used to handle the resources basic get put pust delete operations.
+	 * @requires d7-services.commons.configurations:DrupalApiConstant
 	 */
 	angular.module('d7-services.commons.baseResource', ['d7-services.commons.configurations'])
 		   .factory('BaseResource', BaseResource);
 
-	/**
-	 * Manually identify dependencies for minification-safe code
-	 * 
-	 **/
-	BaseResource.$inject = ['$http', '$q', 'DrupalApiConstant'];
-	
-	/**
-	 * The resource basic functions
-	 * 
-	**/
+	BaseResource.$inject = ['$http', '$q'];
+
 	/** @ngInject */
-	function BaseResource($http, $q, DrupalApiConstant) {
+	function BaseResource($http, $q) {
 		
 		var BaseResourceService = {
 			prepareGetParams : prepareGetParams,	
@@ -37,17 +34,34 @@
         ////////////
         
         /**
-         * request
-         * 
-         * generic function for drupals retrieve request
-         * 
-         * @param {Object} data The requests data
-         * @param {Object} requestConfig The requests url
-         * @param {Function} pubError The requests error publish function
-         * @param {Function} pubSuccess The requests success publish function
+				 * @ngdoc method
+				 * @name request
+				 * @methodOf d7-services.commons.baseResource:BaseResource
+				 * @description
+         * generic function for http requests that emits events on success and on error
+         *
+         * @param {Object} requestConfig - The requests url
+         * @param {Function} pubError - The requests error publish function
+         * @param {Function} pubSuccess - The requests success publish function
          * 
          * @return {Promise} Promise of the retrieve request
-         * 
+         *
+				 * @example
+				 * subscriba to an event
+				 * <pre>
+				 * angular
+				 *  .module('myModule', ['d7-services.commons'])
+				 *  .controller('myController',function ($scope,BaseResource) {
+				 *    var requestConfig = {
+				 *    	url 	: 'path/to/resource?param=test',
+	    	 *			method 	:'GET'
+				 *    };
+				 *    var pubSuccess = function(success){...};
+				 *    var pubError = function(error){...};
+				 *
+         *    BaseResource.request().then(function(success){...}, function(error){...});
+         * }
+				 * </pre>
          */
         function request(requestConfig,  pubSuccess, pubError) {
 
@@ -74,13 +88,15 @@
         };
         
         /**
-         * retrieve
+				 * @ngdoc method
+				 * @name retrieve
+				 * @methodOf d7-services.commons.baseResource:BaseResource
+				 * @description
+				 * generic function for drupals retrieve request
          * 
-         * generic function for drupals retrieve request
-         * 
-         * @param {String} retrievePath The requests url
-         * @param {Function} pubError The requests error publish function
-         * @param {Function} pubSuccess The requests success publish function
+         * @param {String} retrievePath - The requests url
+         * @param {Function} pubError - The requests error publish function
+         * @param {Function} pubSuccess - The requests success publish function
          * 
          * @return {Promise} Promise of the retrieve request
          * 
@@ -97,14 +113,16 @@
         };
         
         /**
-         * create
-         * 
+				 * @ngdoc method
+				 * @name create
+				 * @methodOf d7-services.commons.baseResource:BaseResource
+				 * @description
          * generic function for drupals create request
          * 
-         * @param {Object} data The requests data
-         * @param {String} createPath The requests url
-         * @param {Function} pubError The requests error publish function
-         * @param {Function} pubSuccess The requests success publish function
+         * @param {Object} data - The requests data
+         * @param {String} createPath - The requests url
+         * @param {Function} pubError - The requests error publish function
+         * @param {Function} pubSuccess - The requests success publish function
          * 
          * @return {Promise} Promise of the create request
          * 
@@ -121,14 +139,16 @@
         };
         
         /**
-         * update
-         * 
+         * @ngdoc method
+				 * @name update
+				 * @methodOf d7-services.commons.baseResource:BaseResource
+				 * @description
          * generic function for drupals update request
          * 
-         * @param {Object} data The requests data
-         * @param {String} updatePath The requests url
-         * @param {Function} pubError The requests error publish function
-         * @param {Function} pubSuccess The requests success publish function
+         * @param {Object} data - The requests data
+         * @param {String} updatePath - The requests url
+         * @param {Function} pubError - The requests error publish function
+         * @param {Function} pubSuccess - The requests success publish function
          * 
          * @return {Promise} Promise of the update request
          * 
@@ -145,13 +165,15 @@
         };
         
         /**
-         * delete
-         * 
+				 * @ngdoc method
+				 * @name delete
+				 * @methodOf d7-services.commons.baseResource:BaseResource
+				 * @description
          * generic function for drupals delete request
          * 
-         * @param {String} deletePath The requests url
-         * @param {Function} pubError The requests error publish function
-         * @param {Function} pubSuccess The requests success publish function
+         * @param {String} deletePath - The requests url
+         * @param {Function} pubError - The requests error publish function
+         * @param {Function} pubSuccess - The requests success publish function
          * 
          * @return {Promise} Promise of the delete request
          * 
@@ -168,13 +190,16 @@
         
         
         /**
-         * index
-         * 
+				 * @ngdoc method
+				 * @name index
+				 * @methodOf d7-services.commons.baseResource:BaseResource
+				 * @description
          * generic function for drupals delete request
-         * 
-         * @param {String} deletePath The requests url
-         * @param {Function} pubError The requests error publish function
-         * @param {Function} pubSuccess The requests success publish function
+         *
+				 * @param {Object} data - The index retrieve data
+         * @param {String} indexPath - The requests url
+         * @param {Function} pubError - The requests error publish function
+         * @param {Function} pubSuccess - The requests success publish function
          * 
          * @return {Promise} Promise of the delete request
          * 
@@ -201,13 +226,20 @@
         };
  
         /**
-         * prepareIndexGetParams
-         * 
-         * @param {OBJECT} options The index options.
-         * 		  @key {Integer} page The pagenumber to start
-         * 		  @key {Integer} pagesize The number of entries per page
-         * 
-        **/
+         * @ngdoc method
+				 * @name prepareIndexGetParams
+				 * @methodOf d7-services.commons.baseResource:BaseResource
+				 * @description
+         * Prepares the options for an index request
+				 *
+         * @param {Object} options - The index options.
+         * @param {Integer} options.page - The pagenumber to start
+         * @param {Integer} options.pagesize - The number of entries per page
+				 * @param {object} options.fields - The fields to retrieve
+				 * @param {object} options.parameters - The parameters in fields to search
+         *
+				 * @return {String} formated params as string or empty string
+        */
         function prepareIndexGetParams(options) {
         	var type = '',
     			getParamsString = '',
@@ -219,27 +251,28 @@
     		angular.forEach(options, function(value , key) {
     			if(key === 'parameters') { type = 'array_key_value'; }
     			else if(key === 'fields') { type = 'array'; }
-    			
+
     			prepaeredParams = prepareGetParams(value, key, type)
-    		
+
     			getParamsString += (getParamsString == '')?prepaeredParams:'&'+prepaeredParams;
-    			
+
     			prepaeredParams = '';
     	        type = '';
     	    });
-    		
+
     		return getParamsString;
         };
-        
+
         /**
-         * 
-         * preparePostData
-         * 
+				 * @ngdoc method
+				 * @name preparePostData
+				 * @methodOf d7-services.commons.baseResource:BaseResource
+				 * @description
          * Formats the JSON depending on format param
-         * 
+         *
          * @param {Object} values The value to format
          * @param {String} format The new format of the value param
-         * 
+         *
          * @return {Array} formated data
          */
          function preparePostData(values, format) {
@@ -277,9 +310,10 @@
          }
         
         /**
-         * 
-         * prepareGetParam
-         * 
+				 * @ngdoc method
+				 * @name prepareGetParam
+				 * @methodOf d7-services.commons.baseResource:BaseResource
+				 * @description
          * Formats the JSON depending on formata and key param
          * 
          * @param {Object} values The value to format

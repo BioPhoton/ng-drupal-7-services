@@ -14,7 +14,6 @@
    * @requires d7-services.commons.baseResource:BaseResource
    * @requires d7-services.commons.configurations:DrupalApiConstant
    * @requires d7-services.helperService.http:DrupalHelperService
-   * @requires d7-services.commons.validationConstant:ValidationConstant
    */
   angular.module('d7-services.commons', [
     'd7-services.commons.authentication',
@@ -23,7 +22,6 @@
     'd7-services.commons.baseChannel',
     'd7-services.commons.baseResource',
     'd7-services.commons.configurations',
-    'd7-services.commons.helperService',
-    'd7-services.commons.validationConstant']);
+    'd7-services.commons.helperService']);
 
 })();
