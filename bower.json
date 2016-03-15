@@ -26,8 +26,11 @@
   ],
   "main": "dist/ng-drupal-7-services.js",
   "ignore": [
-    "node_modules",
-    "bower_components",
+    "node_modules/",
+    "bower_components/",
+    "gulp/",
+    "gulp.js",
+    "docs/",
     "test",
     "tests",
     "package.json",
