@@ -3,13 +3,13 @@
 var gulp = require('gulp');
 var args = require('yargs').argv;
 var fs = require('fs');
-var helper = require('../helper');
+var helper = require('helper');
 var gulpDocs = require('gulp-ngdocs');
 var $ = require('gulp-load-plugins')();
 
 
 var config = require('../config'),
-  srcFolder = config.client,
+  srcFolder = config.srcFolder,
   desFolder = './docs';
 
 var defaultConfig = {

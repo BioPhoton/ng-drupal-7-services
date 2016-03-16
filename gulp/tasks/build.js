@@ -1,13 +1,13 @@
 'use strict';
 
 var gulp = require('gulp');
-var helper = require('../helper');
+var helper = require('helper');
 var $ = require('gulp-load-plugins')();
 
 var config = require('../config');
 
 var defaultConfig = {
-  src : config.src,
+  srcFolder : config.srcFolder,
 };
 
 ////////////////
@@ -33,7 +33,7 @@ if('build' in config) {
 
 gulp.task('optimize:js',['clean-build'], function(done) {
 
-  return gulp.src(buildConfig.src+'**/*.js')
+  return gulp.src(buildConfig.srcFolder+'**/*.js')
     .pipe($.sourcemaps.init())
     // getBundleName creates a cache busting name
     .pipe($.concat(buildConfig.packageName))
