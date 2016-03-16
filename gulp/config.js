@@ -8,14 +8,19 @@ module.exports = (function() {
 
     //dir paths
     var root = './',
+        srcFolder = root+'src/',
+
         buildFolder = root+'dist/',
-        src = root+'src/',
-        packageName = 'ng-drupal-7-services.js'
-      ;
+        packageName = 'ng-drupal-7-services.js',
+
+        docsFolder = root+'docs/';
 
     var config = {
         root : root,
-        src : src,
+        srcFolder : srcFolder,
+        ngdoc : {
+            docsFolder : docsFolder
+        },
         build : {
             buildFolder: buildFolder,
             packageName : packageName

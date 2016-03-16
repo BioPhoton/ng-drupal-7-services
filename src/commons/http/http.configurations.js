@@ -6,11 +6,7 @@
 	 */
 	angular.module('d7-services.commons.http.configurations', ['d7-services.commons.http.intercepter.requestAccept', 'd7-services.commons.authentication.httpIntercepter'])
 		   .config(hTTPConfigurations);
-	
-	/**
-	 * Manually identify dependencies for minification-safe code
-	 * 
-	 **/
+
 	hTTPConfigurations.$inject = [ '$httpProvider' ];
 	
 	

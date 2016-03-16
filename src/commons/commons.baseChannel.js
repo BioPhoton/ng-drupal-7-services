@@ -43,7 +43,7 @@
      *
      * @example
      *
-     * subscriba to an event
+     * subscribe to an event
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.commons.d7-services.commons.baseChannel'])
@@ -72,7 +72,7 @@
 
       //return he unsubscribe function from the $rootScope.on() call
       return unsubScopeHandler;
-    };
+    }
 
     /**
      * @ngdoc method
