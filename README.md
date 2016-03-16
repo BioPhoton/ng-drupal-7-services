@@ -3,7 +3,7 @@
 
 [![Bower version](https://badge.fury.io/bo/ng-drupal-7-services.svg)](https://badge.fury.io/bo/ng-drupal-7-services)
 [![npm version](https://badge.fury.io/js/ng-drupal-7-services.svg)](https://badge.fury.io/js/ng-drupal-7-services)  
-![Package Quality](http://npm.packagequality.com/badge/ng-drupal-7-services.png)](http://packagequality.com/#?package=ng-drupal-7-services)
+[![Package Quality](http://npm.packagequality.com/shield/ng-drupal-7-services.svg)](http://packagequality.com/#?package=ng-drupal-7-services)
 
 Angular Drupal7 Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints.   
 Unlike the other project focusing on the same topic, Angular Drupal7 Services is precisely organized around the [Drupal Services 3.x](https://www.drupal.org/project/services) architecture and naming conventions.   
