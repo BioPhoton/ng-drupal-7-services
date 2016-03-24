@@ -99,7 +99,7 @@
 		 *  .module('myModule', ['d7-services.commons'])
 		 *  .controller('myController',function ($scope,DrupalHelperService) {
 		 *
-		 *    var imgPath = DrupalHelperService.getPathToImgByStyle()+'image_name_0.png';
+		 *    var imgPath = DrupalHelperService.getPathToImgByStyle(DrupalApiConstant.imageStyles.medium)+'image_name_0.png';
 		 * }
 		 * </pre>
 		 */
