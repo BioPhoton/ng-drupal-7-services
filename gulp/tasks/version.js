@@ -2,7 +2,7 @@
 
 var gulp = require('gulp'),
     args = require('yargs').argv,
-    helper = require('helper'),
+    helper = require('./helper'),
     $ = require('gulp-load-plugins')();
 
 var config = require('../config');
