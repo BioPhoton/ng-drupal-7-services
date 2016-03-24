@@ -69,7 +69,8 @@
 		 * angular
 		 *  .module('myModule', ['d7-services.commons'])
 		 *  .controller('myController',function ($scope,DrupalHelperService) {
-		 *    var drupalInstance = DrupalHelperService.getDrupalPath();
+		 *    var DrupalHelperService.getDrupalPath()+'resource?param=test';
+		 * }
 		 * </pre>
 		 */
         function getDrupalPath() {
@@ -84,11 +85,12 @@
 		 * @description
 		 * Helper to get full path to image style.
 		 *
-		 * @param {String} style - Path segment from you image style path with out the "/". "medium"
+		 * @param {String} style - Path segment from you image style path with out the "/". ("medium").
 		 *   Image styles are configurable in constant.
 		 *   @see (link:d7-services.commons.configurations:DrupalApiConstant)
+		 * @param {String} [isPrivate] - whether the image is in your public our private folder. Default is public.
 		 *
-		 * @return {String} Path to image style (http://your.drupal.server/sites/default/files/styles/medium/)
+		 * @return {String} Path to api
 		 *
 		 * @example
 		 * Create path to resource
@@ -96,12 +98,13 @@
 		 * angular
 		 *  .module('myModule', ['d7-services.commons'])
 		 *  .controller('myController',function ($scope,DrupalHelperService) {
+		 *
 		 *    var imgPath = DrupalHelperService.getPathToImgByStyle()+'image_name_0.png';
 		 * }
 		 * </pre>
 		 */
-        function getPathToImgByStyle(style) {
-        	return  getDrupalPath() + DrupalApiConstant.filesPath+DrupalApiConstant.imageStylesPath+style+'/';
+        function getPathToImgByStyle(style, isPrivate) {
+			return  getDrupalPath() + DrupalApiConstant.filesPath+DrupalApiConstant.imageStylesPath+style+'/'+ ( (isPrivate)?DrupalApiConstant.privateFilePath:DrupalApiConstant.publicFilePath );
         }
         
         
