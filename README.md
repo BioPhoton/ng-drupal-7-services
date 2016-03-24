@@ -205,7 +205,7 @@ Here is a list of supported Drupal services 3.x modules:
     - Delete
     - Index
     - GetTree
-  -User Resource
+  - User Resource
     - Retrieve
     - Create
     - Update
