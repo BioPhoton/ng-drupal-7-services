@@ -90,7 +90,7 @@
 		 *   @see (link:d7-services.commons.configurations:DrupalApiConstant)
 		 * @param {String} [isPrivate] - whether the image is in your public our private folder. Default is public.
 		 *
-		 * @return {String} Path to api
+		 * @return {String} Full path to image style.
 		 *
 		 * @example
 		 * Create path to resource
