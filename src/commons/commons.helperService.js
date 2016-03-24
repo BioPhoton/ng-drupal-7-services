@@ -21,7 +21,6 @@
         		getApiPath		: getApiPath,
         		getDrupalPath	: getDrupalPath,
         		getPathToImgByStyle : getPathToImgByStyle,
-        		mergeItems 		: mergeItems,
         		structureField 	: structureField
         };
         
