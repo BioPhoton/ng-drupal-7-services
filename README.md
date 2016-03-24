@@ -32,32 +32,128 @@ Or check out the sample implementation for [Ionic-Headless-Drupal](https://githu
 
 ## [API Documentation](http://www.drupalionic.org/docs) (!!!in progress!!!)
 
-## Useage
+## Quickstart
 
-For example a node retrieve call look's like this:
+**(1)** Insert the ```ng-drupal-7-services.js``` bundle into your ```index.html``` file.
 
-```javascript
+```
+<!doctype html>
+<html ng-app="myApp">
+<head>
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <!-- ng-drupal-7-services and it's dependencies-->
+    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.js"></script>
+    <script src="bower_components/ng-drupal-7-services/dist/ng-drupal-7-services.js"></script>
+
+    <script>
+        angular.module('myApp', ['d7-services'])
+        .config(function configFunction(DrupalApiConstant) {
+                		//configure your drupal instance
+                		DrupalApiConstant.drupal_instance = 'http://your.projects.domain/';
+                	});
+    </script>
+    ...
+</head>
+<body>
+    ...
+</body>
+</html>
+```
+
+**(2)** Using the services.
+
+```
 angular
-    .module('myApp', ['d7-services'])
+    angular.module('myApp')
     .controller('NodeController', ['NodeResource', 'NodeChannel', function(NodeResource, NodeChannel){
-    
-		//fire request
-		 var retrievePromis = NodeResource.retrieve({nid:1});
-		
-		//react over promise.then
-		retrievePromis.then(function(data) { ... },function(error) { ... });
-						    
-		//react over event 
-		//This could happen in another directive/controller too
-		NodeChannel.subRetrieveConfirmed($scope, function(data){ ... });
-		NodeChannel.subRetrieveFailed($scope, function(error){ ... });	    
-	    
+
+        //fire request
+         var retrievePromis = NodeResource.retrieve({nid:1});
+
+        //react over promise.then
+        retrievePromis.then(function(data) { ... },function(error) { ... });
+
+        //react over event
+        //This could happen in another directive/controller too
+        NodeChannel.subRetrieveConfirmed($scope, function(data){ ... });
+        NodeChannel.subRetrieveFailed($scope, function(error){ ... });
+
     }]);
+```
+
+##Configuration
+Basically all configurable options are wrapped in an angular constant.
+So if you want to change the defaults constant values do so in angulars config phase.
+```
+  angular.module('myApp', ['d7-services'])
+        .config(function configFunction(DrupalApiConstant) {
+           ...
+           //your changes here
+           ...
+        });
+```
+
+
+### API configuration options
+
+Define your drupal instance.
+
+```
+DrupalApiConstant.drupal_instance = 'http://your.projects.domain/';
+```
+
+Override the path to your api.
+This path is defined in "Edit Resource" under tab "Edit".
+
+```
+DrupalApiConstant.api_endpoint += 'v1/'; // results in "api/v1/";
+```
+
+Override the default response format. (json,jsonp,php,rss,xml,yaml,...)
+Find a list of profided fromats in "Edit Resource" under tab "Server".
+
+```
+DrupalApiConstant.responseFormat = "application/json";
+```
+
+Override the default public and private folders
+
+```
+DrupalApiConstant.publicFilePath = "new_public/";
+DrupalApiConstant.privateFilePath = "new_private/";
+```
+
+Override the Drupals default path to files.
+
+```
+DrupalApiConstant.filesPath = "sites/default/my_files/";
+```
+
+
+Override the Drupals default image styles path.
+
+```
+DrupalApiConstant.imageStylesPath = "my_styles/";
+```
+
+Override the default image styles and add custom once.
+
+```
+DrupalApiConstant.imageStyles.large = 'modified_large';
+DrupalApiConstant.imageStyles.new_style = 'new_style_name';
+```
+
+Override the default language.
+
+```
+DrupalApiConstant.LANGUAGE_NONE = 'und';
 ```
 
 ###Supported Drupal Modules
 Here is a list of supported Drupal services 3.x modules:
-- [x] [Services](https://www.drupal.org/project/services)
+- [x] [Services](https://www.drupal.org/project/services) (7 Resources, 50 Requests)
 - [x] [Services Views](https://www.drupal.org/project/services_view)
 - [x] [Services Menu](https://www.drupal.org/project/services_menu)
 - [ ] [Services Search](https://www.drupal.org/project/services_search)
@@ -109,7 +205,7 @@ Here is a list of supported Drupal services 3.x modules:
     - Delete
     - Index
     - GetTree
-  -User Resource 
+  -User Resource
     - Retrieve
     - Create
     - Update
