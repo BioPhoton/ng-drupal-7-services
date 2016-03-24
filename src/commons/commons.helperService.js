@@ -28,8 +28,7 @@
         return drupalHelperService;
 
         ////////////
-        
-        //
+
 		/**
 		 * @ngdoc method
 		 * @name getApiPath
@@ -55,7 +54,25 @@
         function getApiPath() {
         	return DrupalApiConstant.drupal_instance +  DrupalApiConstant.api_endpoint;
         }
-        
+
+		/**
+		 * @ngdoc method
+		 * @name getDrupalPath
+		 * @methodOf d7-services.commons.helperService:DrupalHelperService
+		 * @description
+		 * Helper to get path to drupal server
+		 *
+		 * @return {String} Path to drupal server
+		 *
+		 * @example
+		 * Create path to resource
+		 * <pre>
+		 * angular
+		 *  .module('myModule', ['d7-services.commons'])
+		 *  .controller('myController',function ($scope,DrupalHelperService) {
+		 *    var drupalInstance = DrupalHelperService.getDrupalPath();
+		 * </pre>
+		 */
         function getDrupalPath() {
         	return DrupalApiConstant.drupal_instance;
         }
@@ -66,13 +83,13 @@
 		 * @name getPathToImgByStyle
 		 * @methodOf d7-services.commons.helperService:DrupalHelperService
 		 * @description
-		 * Helper to get full path to image style
+		 * Helper to get full path to image style.
 		 *
-		 * @param {String} style - Path segment from you image style path with out the "/". ("medium").
-		 *   Image styles also exist as constant option.
-		 * @param {String} [isPrivate] - whether the image is in your public our private folder. Default is public.
+		 * @param {String} style - Path segment from you image style path with out the "/". "medium"
+		 *   Image styles are configurable in constant.
+		 *   @see (link:d7-services.commons.configurations:DrupalApiConstant)
 		 *
-		 * @return {String} Path to api
+		 * @return {String} Path to image style (http://your.drupal.server/sites/default/files/styles/medium/)
 		 *
 		 * @example
 		 * Create path to resource
@@ -80,13 +97,12 @@
 		 * angular
 		 *  .module('myModule', ['d7-services.commons'])
 		 *  .controller('myController',function ($scope,DrupalHelperService) {
-		 *
 		 *    var imgPath = DrupalHelperService.getPathToImgByStyle()+'image_name_0.png';
 		 * }
 		 * </pre>
 		 */
-        function getPathToImgByStyle(style, isPrivate) {
-        	return  getDrupalPath() + DrupalApiConstant.filesPath+DrupalApiConstant.imageStylesPath+style+'/'+ ( (isPrivate)?DrupalApiConstant.privateFilePath:DrupalApiConstant.publicFilePath );
+        function getPathToImgByStyle(style) {
+        	return  getDrupalPath() + DrupalApiConstant.filesPath+DrupalApiConstant.imageStylesPath+style+'/';
         }
         
         

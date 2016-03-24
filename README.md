@@ -153,13 +153,13 @@ DrupalApiConstant.LANGUAGE_NONE = 'und';
 
 ###Supported Drupal Modules
 Here is a list of supported Drupal services 3.x modules:
-- [x] [Services](https://www.drupal.org/project/services) (7 Resources, 50 Requests)
-- [x] [Services Views](https://www.drupal.org/project/services_view)
-- [x] [Services Menu](https://www.drupal.org/project/services_menu)
-- [ ] [Services Search](https://www.drupal.org/project/services_search)
-- [ ] [Services Entity](https://www.drupal.org/project/services_entity)
-- [x] [Services Definitions](https://www.drupal.org/project/services_tools)
-- [x] [Geocoder](https://www.drupal.org/project/geocoder)
+- [x] [Services](https://www.drupal.org/project/services) **7 Resources** | **51 Requests**
+- [x] [Services Views](https://www.drupal.org/project/services_view) **1 Resources** | **1 Requests**
+- [x] [Services Menu](https://www.drupal.org/project/services_menu) **1 Resources** | **1 Requests**
+- [ ] [Services Search](https://www.drupal.org/project/services_search) **2 Resources** | **2 Requests**
+- [ ] [Services Entity](https://www.drupal.org/project/services_entity) **6 Resources** | **47 Requests**
+- [x] [Services Definitions](https://www.drupal.org/project/services_tools) **1 Resources** | **1 Requests**
+- [x] [Geocoder](https://www.drupal.org/project/geocoder) **1 Resources** | **2 Requests**
 
 - **Drupal Services**
   - Comment Resource
@@ -219,19 +219,24 @@ Here is a list of supported Drupal services 3.x modules:
     - Cancel
     - Password_reset
     - Resend_welcome_email
+
 - **Drupal Services Views**
   - Views Resource
     - Retrieve
+
 - **Drupal Geocoder**
   -Views Geocoder
     - Retrieve
     - Index
+
 - **Drupal Services Menu**
   - Menu Resource
     - Retrieve
+
 - **Drupal Services Definition**
   - Definition Resource
     - Index
+
 - **Extra Resources**
   - Authentication service
     - storeTokenData
@@ -246,7 +251,7 @@ Here is a list of supported Drupal services 3.x modules:
     - refreshConnection
     - getLastConnectTime
 
-# Extra Servicdes**
+# Extra Services
 ##AccessControl
 - roles
 - accessLevels 

@@ -2,8 +2,7 @@
 
 var gulp = require('gulp');
 var args = require('yargs').argv;
-var fs = require('fs');
-var helper = require('helper');
+var helper = require('./helper');
 var gulpDocs = require('gulp-ngdocs');
 var $ = require('gulp-load-plugins')();
 
@@ -53,8 +52,6 @@ gulp.task('ngdocs', [], function () {
     .pipe(gulp.dest(jsDocConfig.desFolder));
 });
 
-gulp.task('serve-ngdocs', function (done) {
-
-  helper.startBrowserSync(jsDocConfig.desFolder);
-
+gulp.task('serve-ngdocs',['ngdocs'], function (done) {
+   helper.startBrowserSync(jsDocConfig.desFolder);
 });
