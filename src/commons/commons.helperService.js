@@ -47,7 +47,7 @@
 		 *  .controller('myController',function ($scope,DrupalHelperService) {
 		 *    var requestConfig = {
 		 *    	url 	: DrupalHelperService.getApiPath()+'resource?param=test',
-		 *			method 	:'GET'
+		 *		method 	:'GET'
 		 *    };
 		 * }
 		 * </pre>
@@ -59,15 +59,39 @@
         function getDrupalPath() {
         	return DrupalApiConstant.drupal_instance;
         }
-        
+
+		//
+		/**
+		 * @ngdoc method
+		 * @name getPathToImgByStyle
+		 * @methodOf d7-services.commons.helperService:DrupalHelperService
+		 * @description
+		 * Helper to get full path to image style
+		 *
+		 * @param {String} style - Path segment from you image style path with out the "/". ("medium").
+		 *   Image styles also exist as constant option.
+		 * @param {String} [isPrivate] - whether the image is in your public our private folder. Default is public.
+		 *
+		 * @return {String} Path to api
+		 *
+		 * @example
+		 * Create path to resource
+		 * <pre>
+		 * angular
+		 *  .module('myModule', ['d7-services.commons'])
+		 *  .controller('myController',function ($scope,DrupalHelperService) {
+		 *
+		 *    var imgPath = DrupalHelperService.getPathToImgByStyle()+'image_name_0.png';
+		 * }
+		 * </pre>
+		 */
         function getPathToImgByStyle(style, isPrivate) {
-        	return  getDrupalPath() + 'sites/default/files/styles/'+style+'/'+ ( (isPrivate)?DrupalApiConstant.privateFilePath:DrupalApiConstant.publicFilePath );
-            
+        	return  getDrupalPath() + DrupalApiConstant.filesPath+DrupalApiConstant.imageStylesPath+style+'/'+ ( (isPrivate)?DrupalApiConstant.privateFilePath:DrupalApiConstant.publicFilePath );
         }
         
         
        
-		  /**
+		/**
     	 * https://github.com/jbeuckm/drupal-client/blob/master/lib/field.js
     	 * Create the basic field structure for uploading a field.
     	 * 
