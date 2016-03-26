@@ -85,70 +85,16 @@ angular
 
 ##Configuration
 Basically all configurable options are wrapped in an angular constant.
-So if you want to change the defaults constant values do so in angulars config phase.
+IF you changed any of Drupal's default settings adopt the constants in DrupalApiConstant in Angular's config phase as shown above.
+Find all available options in the [API Documentation](http://www.drupalionic.org/docs) under Commons/DrupalApiConstant.
 ```
   angular.module('myApp', ['d7-services'])
         .config(function configFunction(DrupalApiConstant) {
            ...
            //your changes here
+           DrupalApiConstant.
            ...
         });
-```
-
-
-### API configuration options
-
-Define your drupal instance.
-
-```
-DrupalApiConstant.drupal_instance = 'http://your.projects.domain/';
-```
-
-Override the path to your api.
-This path is defined in "Edit Resource" under tab "Edit".
-
-```
-DrupalApiConstant.api_endpoint += 'v1/'; // results in "api/v1/";
-```
-
-Override the default response format. (json,jsonp,php,rss,xml,yaml,...)
-Find a list of profided fromats in "Edit Resource" under tab "Server".
-
-```
-DrupalApiConstant.responseFormat = "application/json";
-```
-
-Override the default public and private folders
-
-```
-DrupalApiConstant.publicFilePath = "new_public/";
-DrupalApiConstant.privateFilePath = "new_private/";
-```
-
-Override the Drupals default path to files.
-
-```
-DrupalApiConstant.filesPath = "sites/default/my_files/";
-```
-
-
-Override the Drupals default image styles path.
-
-```
-DrupalApiConstant.imageStylesPath = "my_styles/";
-```
-
-Override the default image styles and add custom once.
-
-```
-DrupalApiConstant.imageStyles.large = 'modified_large';
-DrupalApiConstant.imageStyles.new_style = 'new_style_name';
-```
-
-Override the default language.
-
-```
-DrupalApiConstant.LANGUAGE_NONE = 'und';
 ```
 
 ###Supported Drupal Modules
