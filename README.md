@@ -5,14 +5,15 @@ Angular Drupal Services
 <img src="https://github.com/BioPhoton/ng-drupal-7-services/blob/dev/resources/images/drupal-logos/drupal-8-logo-isolated/drupal%208%20logo%20isolated%20CMYK%20300.png" width="200">
 <br/>
 </h1>
-#### Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services) working also well with Ionic.
+#### Well structured angular modules mimic the architecture of [Drupal Services](https://www.drupal.org/project/services) working also well with Ionic.
 
 
 [![Bower version](https://badge.fury.io/bo/ng-drupal-7-services.svg)](https://badge.fury.io/bo/ng-drupal-7-services)
 [![npm version](https://badge.fury.io/js/ng-drupal-7-services.svg)](https://badge.fury.io/js/ng-drupal-7-services)  
 [![Package Quality](http://npm.packagequality.com/shield/ng-drupal-7-services.svg)](http://packagequality.com/#?package=ng-drupal-7-services)
 
-Angular Drupal7 Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints.   
+Angular Drupal Services is a REST client for AngularJS, which allows you to user predefined functions when communication with Drupal's api endpoints.   
+This library works with Drupal 7 as well as with Drupal 8.   
 Unlike the other project focusing on the same topic, Angular Drupal7 Services is precisely organized around the [Drupal Services 3.x](https://www.drupal.org/project/services) architecture and naming conventions.   
   
 It optionally provides events next to the common used promise approach.
