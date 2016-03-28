@@ -213,7 +213,6 @@
 			)
 				.catch(
 				function(responseError) {
-					console.log('error', responseError);
 					AuthenticationChannel.pubRefreshConnectionFailed(responseError);
 					//offline fix
 					setLastConnectTime(1);

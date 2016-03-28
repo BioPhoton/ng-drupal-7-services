@@ -10,10 +10,10 @@
    * @requires d7-services.resources.system.resourceConstant:SystemResourceConstant
    * @requires d7-services.resources.system.channelConstant:SystemChannelConstant
    * @requires d7-services.commons.baseResource:BaseResource
-   * @requires d7-services.commons.configurations:DrupalApiConstant
+   * @requires d7-services.commons.controllerurations:DrupalApiConstant
    */
   angular
-    .module('d7-services.resources.system.resource', ['d7-services.commons.configurations', 'd7-services.commons.baseResource', 'd7-services.resources.system.resourceConstant', 'd7-services.resources.system.channel'])
+    .module('d7-services.resources.system.resource', ['d7-services.commons.controllerurations', 'd7-services.commons.baseResource', 'd7-services.resources.system.resourceConstant', 'd7-services.resources.system.channel'])
     .factory('SystemResource', SystemResource);
 
 
@@ -51,7 +51,7 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.resources.system'])
-     *  .config(function (SystemResource) {
+     *  .controller(function (SystemResource) {
      *    SystemResource.connect()
      *      .then(
      *        function(confirmData) {...},
@@ -64,7 +64,7 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.resources.system'])
-     *  .config(function ($scope, SystemResource, SystemChannel) {
+     *  .controller(function ($scope, SystemResource, SystemChannel) {
      *    SystemResource.connect();
      *    //subscribe to confirm event
      *    SystemChannel.subConnectConfirmed($scope, function(confirmData) {...});
@@ -108,8 +108,14 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.resources.system'])
-     *  .config(function (SystemResource) {
-     *    SystemResource.get_variable()
+     *  .controller(function (SystemResource) {
+     *    var getVarData = {
+     *      name : "var_name",
+     *      //optional
+      *     default : "null"
+     *    };
+     *
+     *    SystemResource.get_variable(getVarData)
      *      .then(
      *        function(confirmData) {...},
      *        function(failData) {...}
@@ -121,8 +127,15 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.resources.system'])
-     *  .config(function ($scope, SystemResource, SystemChannel) {
-     *    SystemResource.get_variable();
+     *  .controller(function ($scope, SystemResource, SystemChannel) {
+     *
+     *    var getVarData = {
+     *      name : "var_name",
+     *      //optional
+     *      default : "null"
+     *    };
+     *
+     *    SystemResource.get_variable(getVarData);
      *
      *    //subscribe to confirm event
      *    SystemChannel.subGetVariableConfirmed($scope, function(confirmData) {...});
@@ -179,8 +192,14 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.resources.system'])
-     *  .config(function (SystemResource) {
-     *    SystemResource.set_variable()
+     *  .controller(function (SystemResource) {
+     *
+     *    var setVarData = {
+     *      name : "var_name",
+     *      value : "my value"
+     *    };
+     *
+     *    SystemResource.set_variable(setVarData)
      *      .then(
      *        function(confirmData) {...},
      *        function(failData) {...}
@@ -192,8 +211,13 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.resources.system'])
-     *  .config(function ($scope, SystemResource, SystemChannel) {
-     *    SystemResource.set_variable({});
+     *  .controller(function ($scope, SystemResource, SystemChannel) {
+     *    var setVarData = {
+     *      name : "var_name",
+     *      value : "my value"
+     *    };
+     *
+     *    SystemResource.set_variable(setVarData);
      *
      *    //subscribe to confirm event
      *    SystemChannel.subSetVariableConfirmed($scope, function(confirmData) {...});
@@ -242,8 +266,13 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.resources.system'])
-     *  .config(function (SystemResource) {
-     *    SystemResource.del_variable({})
+     *  .controller(function (SystemResource) {
+     *
+     *    var delVarData = {
+     *      name : "var_name"
+     *    };
+     *
+     *    SystemResource.del_variable(delVarData)
      *      .then(
      *        function(confirmData) {...},
      *        function(failData) {...}
@@ -255,8 +284,12 @@
      * <pre>
      * angular
      *  .module('myModule', ['d7-services.resources.system'])
-     *  .config(function ($scope, SystemResource, SystemChannel) {
-     *    SystemResource.del_variable({});
+     *  .controller(function ($scope, SystemResource, SystemChannel) {
+     *    var delVarData = {
+     *      name : "var_name"
+     *    };
+     *
+     *    SystemResource.del_variable(delVarData);
      *
      *    //subscribe to confirm event
      *    SystemChannel.subDelVariableConfirmed($scope, function(confirmData) {...});

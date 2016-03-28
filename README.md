@@ -1,5 +1,7 @@
-# Angular Drupal7 Services
-#### Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services)
+# Angular Drupal Services
+
+#### Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services) working also well with Ionic.
+
 
 [![Bower version](https://badge.fury.io/bo/ng-drupal-7-services.svg)](https://badge.fury.io/bo/ng-drupal-7-services)
 [![npm version](https://badge.fury.io/js/ng-drupal-7-services.svg)](https://badge.fury.io/js/ng-drupal-7-services)  
