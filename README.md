@@ -1,5 +1,7 @@
 # Angular Drupal Services
 
+<img src="https://github.com/BioPhoton/ng-drupal-7-services/blob/dev/resources/images/drupal-logos/druplicon-logos/druplicon-large.png"> 
+
 #### Well structured angular modules mimic the architecture of [Drupal Services 3.x](https://www.drupal.org/project/services) working also well with Ionic.
 
 
