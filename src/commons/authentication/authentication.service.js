@@ -149,7 +149,8 @@
         function login(loginData) {
 
             if (auth_provider == DrupalApiConstant.auth_providers.basic_auth) {
-
+							setAuthenticationHeaders(null, b64EncodeUnicode(loginData.username + ':' + loginData.password));
+							//@todo check connection here
             } else {
                 return UserResource
                     .login(loginData)
@@ -428,6 +429,29 @@
             //delete session cookies
             $cookies.remove(session_name, sessionCookieOptions.path);
         };
+		
+		/**
+		 * getLastConnectTime
+		 * 
+		 * Returns the time of last successful connection in ms
+		 * 
+		 * @return time in ms
+		 * 
+		**/
+		function getLastConnectTime() { return lastConnectTime; };
+		
+		/**
+		 * setLastConnectTime
+		 * 
+		 * Sets the time of last successful connection in ms
+		 * 
+		**/
+		function setLastConnectTime(newTimeInMs) {
+			var newTimeInMs = parseInt(newTimeInMs);
+			if(newTimeInMs === NaN || newTimeInMs < 0) return;
+			lastConnectTime = newTimeInMs;
+		};
+		
 
         /**
          * getLastConnectTime
@@ -451,7 +475,13 @@
             var newTimeInMs = parseInt(newTimeInMs);
             if (newTimeInMs === NaN || newTimeInMs < 0) return;
             lastConnectTime = newTimeInMs;
-        };
+        }
+
+			function b64EncodeUnicode(str) {
+				return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+					return String.fromCharCode('0x' + p1);
+				}));
+			}
 
 
     };
