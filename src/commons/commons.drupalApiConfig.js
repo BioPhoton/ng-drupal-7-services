@@ -14,6 +14,11 @@
         // - xml
         // - yaml
 
+        auth_providers :    {
+                                cookie:"cookie",
+                                basic_auth:"basic_auth"
+                            },
+
         // By default, Drupal is configured with a session expiration time of 2000000 seconds which is 23 day 3 hr. 33 min. 20 sec
         // To customize this install the session expire module => https://www.drupal.org/project/session_expire
         // And also set same value here

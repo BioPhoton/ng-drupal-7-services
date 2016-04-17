@@ -226,7 +226,7 @@ Here is a list of supported Drupal services 3.x modules:
   - debug: unchecked
   - session authentication: checked
 - Then click the edit resources link and open the resources tab.
-  Now every resource you like by check box. 
+  Now enable every resource you like over it's check box.
 - Then click Save
 - Click the Server tab
 - For Response formatters check following:
