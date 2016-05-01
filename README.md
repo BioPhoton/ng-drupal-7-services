@@ -96,7 +96,7 @@ Find all available options in the [API Documentation](http://www.drupalionic.org
         });
 ```
 
-###Supported Drupal Modules
+##Supported Drupal Modules
 Here is a list of supported Drupal services 3.x modules:
 - [x] [Services](https://www.drupal.org/project/services) **7 Resources** | **51 Requests**
 - [x] [Services Views](https://www.drupal.org/project/services_view) **1 Resources** | **1 Requests**
@@ -105,10 +105,10 @@ Here is a list of supported Drupal services 3.x modules:
 - [ ] [Services Entity](https://www.drupal.org/project/services_entity) **6 Resources** | **47 Requests**
 - [x] [Services Definitions](https://www.drupal.org/project/services_tools) **1 Resources** | **1 Requests**
 - [x] [Geocoder](https://www.drupal.org/project/geocoder) **1 Resources** | **2 Requests**
-- 
-###Extra Resources
+
+##Extra Resources
 Following extramodules are provided for simplifing authentication routing and viewcomposition 
-- [x] Authentication service **authenticaion workflows and helper functions**
+- [x] Authentication **authenticaion workflows and helper functions**
 - [x] AccessControl **handle access for routing and actions**
 - [x] Directives **show hide elements by role or accesslevel**
 
