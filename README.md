@@ -36,7 +36,7 @@ Or check out the sample implementation for [Ionic-Headless-Drupal](https://githu
 
 **(1)** Insert the ```ng-drupal-7-services.js``` bundle into your ```index.html``` file.
 
-```
+```html
 <!doctype html>
 <html ng-app="myApp">
 <head>
@@ -64,7 +64,7 @@ Or check out the sample implementation for [Ionic-Headless-Drupal](https://githu
 
 **(2)** Using the services.
 
-```
+```javascript
 angular
     angular.module('myApp')
     .controller('NodeController', ['NodeResource', 'NodeChannel', function(NodeResource, NodeChannel){
@@ -72,10 +72,10 @@ angular
         //fire request
          var retrievePromis = NodeResource.retrieve({nid:1});
 
-        //react over promise.then
+        //using promise.then callbacks
         retrievePromis.then(function(data) { ... },function(error) { ... });
 
-        //react over event
+        //subscribing to events
         //This could happen in another directive/controller too
         NodeChannel.subRetrieveConfirmed($scope, function(data){ ... });
         NodeChannel.subRetrieveFailed($scope, function(error){ ... });
@@ -87,12 +87,11 @@ angular
 Basically all configurable options are wrapped in an angular constant.
 IF you changed any of Drupal's default settings adopt the constants in DrupalApiConstant in Angular's config phase as shown above.
 Find all available options in the [API Documentation](http://www.drupalionic.org/docs) under Commons/DrupalApiConstant.
-```
+```javascript
   angular.module('myApp', ['d7-services'])
         .config(function configFunction(DrupalApiConstant) {
            ...
            //your changes here
-           DrupalApiConstant.
            ...
         });
 ```
@@ -106,6 +105,13 @@ Here is a list of supported Drupal services 3.x modules:
 - [ ] [Services Entity](https://www.drupal.org/project/services_entity) **6 Resources** | **47 Requests**
 - [x] [Services Definitions](https://www.drupal.org/project/services_tools) **1 Resources** | **1 Requests**
 - [x] [Geocoder](https://www.drupal.org/project/geocoder) **1 Resources** | **2 Requests**
+- 
+###Extra Resources
+Following extramodules are provided for simplifing authentication routing and viewcomposition 
+- [x] Authentication service **authenticaion workflows and helper functions**
+- [x] AccessControl **handle access for routing and actions**
+- [x] Directives **show hide elements by role or accesslevel**
+
 
 - **Drupal Services**
   - Comment Resource
