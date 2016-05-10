@@ -239,7 +239,7 @@ Following extramodules are provided for simplifing authentication routing and vi
 
 ###Setup for CORS
 - install [CORS](https://www.drupal.org/project/cors) 
-- Go to admin/config/services/cors  and paste following into the textarea `api/v1*|<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|true`
+- Go to admin/config/services/cors  and paste following into the textarea   `api/v1*|<mirror>|POST,PUT,GET,DELETE|Content-Type,Authorization,X-CSRF-TOKEN|true`
 
 #Links
 Testing resources on a test server => https://www.drupal.org/node/1447020
