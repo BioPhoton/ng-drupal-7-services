@@ -109,6 +109,10 @@
 				if(preparedParams) {
 					preparedParamsArray.push(preparedParams);
 				}
+				//used to place custom created params in url
+				if(key === 'custom_string') {
+					preparedParamsArray.push(value);
+				}
 				
 				format = undefined;
 		    });
