@@ -100,7 +100,14 @@
 					preparedParamsArray.push(BaseResource.prepareGetParams(value, key, 'array_key_value'));
 				}
 			});
-			
+
+			angular.forEach(_data.exposed_filters , function(value, key)  {
+				//used to place custom created params in url
+				if(key === 'custom_string') {
+					preparedParamsArray.push(value);
+					delete _data.exposed_filters[key];
+				}
+			});
 			
 			angular.forEach(_data, function(value , key) {
 				if(key === 'exposed_filters' || key === 'exposed_sorts') { format = 'json'; }
@@ -108,10 +115,6 @@
 				preparedParams = BaseResource.prepareGetParams(value, key, format);
 				if(preparedParams) {
 					preparedParamsArray.push(preparedParams);
-				}
-				//used to place custom created params in url
-				if(key === 'custom_string') {
-					preparedParamsArray.push(value);
 				}
 				
 				format = undefined;
