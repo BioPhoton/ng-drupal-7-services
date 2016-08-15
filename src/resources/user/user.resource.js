@@ -354,11 +354,7 @@
 				requestConfig = {
 						url : pathToLogin,
 						method :'POST',
-						data : {
-
-							username : data.username,
-							password : data.password
-						},
+						data : data
 				};
 	    	
 			return BaseResource.request(requestConfig, UserChannel.pubLoginConfirmed, UserChannel.pubLoginFailed);
